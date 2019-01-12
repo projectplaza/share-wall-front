@@ -32,7 +32,7 @@ export default {
         { code: "00000001", name: "ShareWall" },
         { code: "00000002", name: "SmartWork" },
         { code: "00000003", name: "UDC2018" },
-        { code: "00000003", name: "UDC2017" }
+        { code: "00000004", name: "UDC2017" }
       ]
     };
   }

@@ -23,14 +23,14 @@
       </div>
     </div>
     <div class="short-menu">
-      <div class="block">
+      <div class="block block-f">
         <div class="icon">
-          <img src="../../../assets/add.png">
+          <img src="../../../assets/memo-gray.png">
         </div>
       </div>
       <div class="block" @click="handleProfileClick">
         <div class="icon">
-          <img src="../../../assets/mypage.png">
+          <img src="../../../assets/user-gray.png">
         </div>
         <div class="list" v-if="profile.visible">
           <div class="list-item">Profile</div>
@@ -39,7 +39,7 @@
       </div>
       <div class="block">
         <div class="icon">
-          <img src="../../../assets/setting.png">
+          <img src="../../../assets/setting-gray.png">
         </div>
       </div>
     </div>
@@ -103,7 +103,7 @@
 
       .select-item {
         min-width: 299px;
-        padding: 10px;
+        padding: 10px 15px;
         background-color: #ffffff;
         &:hover {
           background-color: #f9f9f9;
@@ -125,15 +125,19 @@
         background-color: #f5f5f5;
       }
     }
+    .block-f {
+      &:hover {
+        background-color: #f3f9ff;
+      }
+    }
     .icon {
       display: inline-block;
-      padding: 5px;
-      background-color: #c4c4c4;
+      padding: 3px;
       border-radius: 50%;
       vertical-align: middle;
       img {
         display: block;
-        width: 15px;
+        width: 19px;
       }
     }
     .list {
@@ -145,7 +149,7 @@
 
       .list-item {
         min-width: 100px;
-        padding: 10px;
+        padding: 10px 15px;
         background-color: #ffffff;
         &:hover {
           background-color: #f9f9f9;
