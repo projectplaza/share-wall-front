@@ -7,7 +7,8 @@
       <div class="name">ProjectPlaza</div>
       <img class="dropdown-icon" src="../../../assets/dropdown-gray.png">
       <div class="select" v-if="teamSelect.visible">
-        <div class="select-item" v-for="t in teams" :key="t.code">▶︎&ensp;{{t.name}}</div>
+        <div class="select-item" v-for="t in teams" :key="t.code">-&ensp;{{t.name}}</div>
+        <div class="select-item">＋&emsp;Add</div>
       </div>
     </div>
     <div class="team move" @click="handleProjectClick">
@@ -17,10 +18,31 @@
       <div class="name">ShareWall</div>
       <img class="dropdown-icon" src="../../../assets/dropdown-gray.png">
       <div class="select" v-if="projectSelect.visible">
-        <div class="select-item" v-for="p in projects" :key="p.code">▶︎&ensp;{{p.name}}</div>
+        <div class="select-item" v-for="p in projects" :key="p.code">-&ensp;{{p.name}}</div>
+        <div class="select-item">＋&emsp;Add</div>
       </div>
     </div>
-    <div></div>
+    <div class="short-menu">
+      <div class="block">
+        <div class="icon">
+          <img src="../../../assets/add.png">
+        </div>
+      </div>
+      <div class="block" @click="handleProfileClick">
+        <div class="icon">
+          <img src="../../../assets/mypage.png">
+        </div>
+        <div class="list" v-if="profile.visible">
+          <div class="list-item">Profile</div>
+          <div class="list-item">Logout</div>
+        </div>
+      </div>
+      <div class="block">
+        <div class="icon">
+          <img src="../../../assets/setting.png">
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -76,12 +98,53 @@
       position: absolute;
       top: 38px;
       left: 0px;
-      // border: 1px solid #dddddd;
       box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
       transition: 0.2s;
 
       .select-item {
         min-width: 299px;
+        padding: 10px;
+        background-color: #ffffff;
+        &:hover {
+          background-color: #f9f9f9;
+        }
+      }
+    }
+  }
+
+  .short-menu {
+    float: right;
+    .block {
+      display: inline-block;
+      position: relative;
+      padding: 6px 10px 6px 10px;
+      color: #666666;
+      cursor: pointer;
+      transition: 0.2s;
+      &:hover {
+        background-color: #f5f5f5;
+      }
+    }
+    .icon {
+      display: inline-block;
+      padding: 5px;
+      background-color: #c4c4c4;
+      border-radius: 50%;
+      vertical-align: middle;
+      img {
+        display: block;
+        width: 15px;
+      }
+    }
+    .list {
+      position: absolute;
+      top: 38px;
+      right: 0px;
+      box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+      transition: 0.2s;
+
+      .list-item {
+        min-width: 100px;
         padding: 10px;
         background-color: #ffffff;
         &:hover {
@@ -102,16 +165,22 @@ export default {
     },
     projectSelect: {
       visible: false
+    },
+    profile: {
+      visible: false
     }
   }),
   methods: {
     handleTeamClick: function() {
-      this.$set(this.teamSelect, 'visible', !this.teamSelect.visible)
-      this.$set(this.projectSelect, 'visible', false)
+      this.$set(this.teamSelect, "visible", !this.teamSelect.visible);
+      this.$set(this.projectSelect, "visible", false);
     },
     handleProjectClick: function() {
-      this.$set(this.projectSelect, 'visible', !this.projectSelect.visible)
-      this.$set(this.teamSelect, 'visible', false)
+      this.$set(this.projectSelect, "visible", !this.projectSelect.visible);
+      this.$set(this.teamSelect, "visible", false);
+    },
+    handleProfileClick: function() {
+      this.$set(this.profile, "visible", !this.profile.visible);
     }
   },
   props: {
