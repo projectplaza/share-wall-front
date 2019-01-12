@@ -23,6 +23,11 @@
       </div>
     </div>
     <div class="short-menu">
+      <div class="block block-s">
+        <div class="search">
+          <input type="text" placeholder="Search" />
+        </div>
+      </div>
       <div class="block block-f">
         <div class="icon">
           <img src="../../../assets/memo-gray.png">
@@ -128,6 +133,29 @@
     .block-f {
       &:hover {
         background-color: #f3f9ff;
+      }
+    }
+    .block-s {
+      cursor: default;
+      &:hover {
+        background-color: #ffffff;
+      }
+      input[type="text"] {
+        width: 100px;
+        padding: 3px 10px;
+        color: #888888;
+        border: 1px solid #eeeeee;
+        border-radius: 10px;
+        transition: 0.3s;
+        &:focus {
+          width: 130px;
+          border: 1px solid #3498db;
+          color: #444444;
+        }
+        &:placeholder-shown,
+        &::-webkit-input-placeholder {
+          color: #888888;
+        }
       }
     }
     .icon {
