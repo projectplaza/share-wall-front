@@ -2,6 +2,9 @@
   <div>
     <Menu :menus="menus"/>
     <Header :teams="teams" :projects="projects"/>
+    <div class="content">
+      <router-view/>
+    </div>
   </div>
 </template>
 
@@ -47,10 +50,19 @@ export default {
 </script>
 
 <style lang="scss">
+body {
+  min-height: calc(100% - 38px) !important;
+}
 * {
   outline: none;
 }
 img {
   user-select: none;
+}
+.content {
+  width: calc(100% - 50px);
+  height: calc(100% - 38px);
+  margin-top: 38px;
+  margin-left: 50px;
 }
 </style>
