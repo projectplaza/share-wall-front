@@ -20,7 +20,14 @@ export default {
       menus: [
         { code: "0001", title: "home", icon: "home" },
         { code: "0002", title: "notification", icon: "notification" },
-        { code: "0003", title: "board", icon: "board" }
+        { code: "0008", title: "team", icon: "team" },
+        { code: "0009", title: "project", icon: "project" },
+        { code: "0006", title: "message", icon: "message" },
+        { code: "0007", title: "chat", icon: "chat" },
+        { code: "0003", title: "board", icon: "board" },
+        { code: "0004", title: "document", icon: "document" },
+        { code: "0005", title: "calendar", icon: "calendar" },
+        { code: "0010", title: "box", icon: "box" }
       ],
       teams: [
         { code: "00000001", name: "ProjectPlaza" },

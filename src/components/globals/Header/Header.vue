@@ -28,7 +28,12 @@
           <input type="text" placeholder="Search" />
         </div>
       </div>
-      <div class="block block-f">
+      <div class="block">
+        <div class="icon">
+          <img src="../../../assets/list-gray.png">
+        </div>
+      </div>
+      <div class="block">
         <div class="icon">
           <img src="../../../assets/memo-gray.png">
         </div>
