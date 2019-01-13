@@ -34,7 +34,7 @@ const state = {
   // ショートカットコンテンツ関連
   shortcutContent: {
     style: {
-      width: '0px',
+      right: '-300px',
       borderLeft: '0px'
     },
     current: '', // code
@@ -96,7 +96,7 @@ const mutations = {
       }
       state.shortcutContent = {
         style: {
-          width: '300px',
+          right: '0px',
           borderLeft: '1px solid #dddddd'
         },
         current: code,
@@ -109,7 +109,7 @@ const mutations = {
       }
       state.shortcutContent = {
         style: {
-          width: '0px',
+          right: '-300px',
           borderLeft: '0px'
         },
         current: '',

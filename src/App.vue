@@ -5,7 +5,9 @@
     <div class="content" :style="$store.state.common.content.style">
       <router-view/>
     </div>
-    <div class="shortcut-content" :style="$store.state.common.shortcutContent.style"></div>
+    <div class="shortcut-content" :style="$store.state.common.shortcutContent.style">
+      <h1>簡易機能</h1>
+    </div>
   </div>
 </template>
 
@@ -70,9 +72,9 @@ img {
 }
 .shortcut-content {
   position: fixed;
+  width: 300px;
   height: calc(100% - 38px);
   top: 38px;
-  right: 0px;
   background-color: #fafafa;
   overflow: auto;
   transition: 0.3s;
