@@ -53,8 +53,44 @@
         </div>
       </div>
     </div>
+    <md-progress-bar md-mode="indeterminate" v-if="showProgressBar"></md-progress-bar>
   </div>
 </template>
+
+<script>
+export default {
+  name: "Header",
+  data: () => ({
+    teamSelect: {
+      visible: false
+    },
+    projectSelect: {
+      visible: false
+    },
+    profile: {
+      visible: false
+    },
+    showProgressBar: false
+  }),
+  methods: {
+    handleTeamClick: function() {
+      this.$set(this.teamSelect, "visible", !this.teamSelect.visible);
+      this.$set(this.projectSelect, "visible", false);
+    },
+    handleProjectClick: function() {
+      this.$set(this.projectSelect, "visible", !this.projectSelect.visible);
+      this.$set(this.teamSelect, "visible", false);
+    },
+    handleProfileClick: function() {
+      this.$set(this.profile, "visible", !this.profile.visible);
+    }
+  },
+  props: {
+    teams: Array,
+    projects: Array
+  }
+};
+</script>
 
 <style lang="scss" scoped>
 .header {
@@ -65,7 +101,7 @@
   background-color: #ffffff;
   box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
   user-select: none;
-  z-index: 99;
+  z-index: 4;
 
   .move {
     display: inline-block;
@@ -194,36 +230,3 @@
 }
 </style>
 
-<script>
-export default {
-  name: "Header",
-  data: () => ({
-    teamSelect: {
-      visible: false
-    },
-    projectSelect: {
-      visible: false
-    },
-    profile: {
-      visible: false
-    }
-  }),
-  methods: {
-    handleTeamClick: function() {
-      this.$set(this.teamSelect, "visible", !this.teamSelect.visible);
-      this.$set(this.projectSelect, "visible", false);
-    },
-    handleProjectClick: function() {
-      this.$set(this.projectSelect, "visible", !this.projectSelect.visible);
-      this.$set(this.teamSelect, "visible", false);
-    },
-    handleProfileClick: function() {
-      this.$set(this.profile, "visible", !this.profile.visible);
-    }
-  },
-  props: {
-    teams: Array,
-    projects: Array
-  }
-};
-</script>
