@@ -31,7 +31,7 @@
         >
           <md-table-toolbar>
             <h1 class="md-title">
-              <span>メンバー</span>
+              <span>チームメンバー</span>
               <md-button
                 class="member-add-button md-icon-button md-primary"
                 @click="showDialog = true"

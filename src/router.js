@@ -11,6 +11,11 @@ export default new Router({
       path: '/team/setting/owner/create',
       name: 'team-create',
       component: () => import('./views/TeamCreate.vue')
+    },
+    {
+      path: '/project/setting/owner/create',
+      name: 'team-create',
+      component: () => import('./views/ProjectCreate.vue')
     }
   ]
 })
