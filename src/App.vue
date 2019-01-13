@@ -2,16 +2,17 @@
   <div>
     <Menu :menus="menus"/>
     <Header :teams="teams" :projects="projects"/>
-    <div class="content" :style="contentStyle">
+    <div class="content" :style="$store.state.common.content.style">
       <router-view/>
     </div>
-    <div class="shortcut-content" :style="shortcutContentStyle"></div>
+    <div class="shortcut-content" :style="$store.state.common.shortcutContent.style"></div>
   </div>
 </template>
 
 <script>
 import Menu from "./components/globals/Menu/Menu";
 import Header from "./components/globals/Header/Header";
+import { mapMutations } from 'vuex'
 
 export default {
   name: "App",
@@ -21,16 +22,6 @@ export default {
   },
   data() {
     return {
-      contentStyle: {
-        // width: "calc(100% - 350px)",
-        width: 'calc(100% - 50px)',
-      },
-      shortcutContentStyle: {
-        width: '0px',
-        // width: '300px',
-        borderLeft: '0px',
-        // borderLeft: '1px solid #dddddd'
-      },
       menus: [
         { code: "0001", title: "home", icon: "home" },
         { code: "0002", title: "notification", icon: "notification" },
@@ -55,18 +46,6 @@ export default {
         { code: "00000004", name: "UDC2017" }
       ]
     }
-  },
-  methods: {
-    showShortcutContent: function() {
-      this.$set(this.contentStyle, 'width', 'calc(100% - 450px)')
-      this.$set(this.shortcutContentStyle, 'width', '400px')
-      this.$set(this.shortcutContentStyle, 'borderLeft', '1px solid #dddddd')
-    },
-    hideShortcutContent: function() {
-      this.$set(this.contentStyle, 'width', 'calc(100% - 50px)')
-      this.$set(this.shortcutContentStyle, 'width', '0px')
-      this.$set(this.shortcutContentStyle, 'borderLeft', '0px')
-    }
   }
 }
 </script>
@@ -83,17 +62,19 @@ img {
 }
 .content {
   position: fixed;
-  min-width: 650px;
   height: calc(100% - 38px);
   top: 38px;
   left: 50px;
   overflow: auto;
+  transition: 0.3s;
 }
 .shortcut-content {
   position: fixed;
   height: calc(100% - 38px);
   top: 38px;
   right: 0px;
+  background-color: #fafafa;
   overflow: auto;
+  transition: 0.3s;
 }
 </style>

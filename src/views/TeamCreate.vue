@@ -7,14 +7,14 @@
     <div class="section">
       <md-field :class="messageClass">
         <label>新しいチーム名</label>
-        <md-input v-model="team.name" required :disabled="buttonActivate"></md-input>
+        <md-input v-model="team.name" required :disabled="button.diabled"></md-input>
         <span class="md-helper-text">全角30文字まで</span>
         <span class="md-error">There is an error</span>
       </md-field>
       <br>
       <md-field>
         <label>チームの説明</label>
-        <md-textarea v-model="team.abstract" md-autogrow :disabled="buttonActivate"></md-textarea>
+        <md-textarea v-model="team.abstract" md-autogrow :disabled="button.diabled"></md-textarea>
         <span class="md-helper-text">全角1,000文字まで</span>
         <span class="md-error">There is an error</span>
       </md-field>
@@ -35,7 +35,7 @@
               <md-button
                 class="member-add-button md-icon-button md-primary"
                 @click="showDialog = true"
-                :disabled="buttonActivate"
+                :disabled="button.activate"
               >
                 <md-icon>add</md-icon>
               </md-button>
@@ -53,7 +53,7 @@
                 v-model="item.auth"
                 value="1"
                 class="md-primary"
-                :disabled="buttonActivate"
+                :disabled="button.diabled"
               ></md-checkbox>
             </md-table-cell>
             <md-table-cell md-label="メンバー">
@@ -61,7 +61,7 @@
                 v-model="item.auth"
                 value="2"
                 class="md-primary"
-                :disabled="buttonActivate"
+                :disabled="button.diabled"
               ></md-checkbox>
             </md-table-cell>
             <md-table-cell md-label="管理者">
@@ -69,11 +69,11 @@
                 v-model="item.auth"
                 value="3"
                 class="md-primary"
-                :disabled="buttonActivate"
+                :disabled="button.diabled"
               ></md-checkbox>
             </md-table-cell>
             <md-table-cell md-label>
-              <md-button class="md-icon-button" :disabled="buttonActivate">
+              <md-button class="md-icon-button" :disabled="button.diabled">
                 <md-icon>remove</md-icon>
               </md-button>
             </md-table-cell>
@@ -83,11 +83,11 @@
     </div>
     <br>
     <div class="submit-button-box">
-      <md-button :md-ripple="false" :disabled="buttonActivate">キャンセル</md-button>
+      <md-button :md-ripple="false" :disabled="button.diabled">キャンセル</md-button>
       <md-button
         class="md-raised md-primary"
-        @click="buttonActivate = true"
-        :disabled="buttonActivate"
+        @click="create"
+        :disabled="button.diabled"
       >チームを作成</md-button>
     </div>
     <!-- ダイアログ -->
@@ -117,17 +117,17 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
+
 const toLower = text => {
   return text.toString().toLowerCase();
-};
-
+}
 const searchByName = (items, term) => {
   if (term) {
     return items.filter(item => toLower(item.name).includes(toLower(term)));
   }
-
   return items;
-};
+}
 
 export default {
   name: "TeamCreate",
@@ -137,7 +137,9 @@ export default {
       abstract: "",
       members: [{ name: "yumochi21", auth: ["1", "2", "3"] }]
     },
-    buttonActivate: false,
+    button: {
+      diabled: false
+    },
     showDialog: false,
     search: null,
     searched: [],
@@ -290,7 +292,15 @@ export default {
     },
     searchOnTable: function() {
       this.searched = searchByName(this.users, this.search);
-    }
+    },
+    create: function() {
+      this.$set(this.button, 'diabled', true)
+      this.showProgressBar()
+    },
+    ...mapMutations('common', [
+      'showProgressBar',
+      'hideProgressBar'
+    ])
   },
   created: function() {
     this.searched = this.users;
@@ -316,7 +326,6 @@ export default {
 
   .section {
     padding: 10px 0px 5px 0px;
-    // border-bottom: 1px solid #efefef;
   }
 
   p {

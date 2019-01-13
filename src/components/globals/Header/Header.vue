@@ -1,44 +1,61 @@
 <template>
   <div class="header">
+    <!-- チーム選択 -->
     <div class="team move" @click="handleTeamClick">
       <div class="icon">
         <img src="../../../assets/talent.png">
       </div>
-      <div class="name">ProjectPlaza</div>
+      <div class="name">{{currentTeam.name}}</div>
       <img class="dropdown-icon" src="../../../assets/dropdown-gray.png">
       <div class="select" v-if="teamSelect.visible">
-        <div class="select-item" v-for="t in teams" :key="t.code">-&ensp;{{t.name}}</div>
-        <div class="select-item">＋&emsp;Add</div>
+        <div
+          class="select-item"
+          v-for="t in $store.state.common.header.team.list"
+          :key="t.code"
+          @click="() => {changeCurrentTeam(t.code)}"
+        >
+          -&ensp;{{t.name}}
+        </div>
+        <router-link :to="baseURL + 'team/setting/owner/create'" class="select-item">＋&emsp;Add</router-link>
       </div>
     </div>
+    <!-- プロジェクト選択 -->
     <div class="team move" @click="handleProjectClick">
       <div class="icon">
         <img src="../../../assets/project.png">
       </div>
-      <div class="name">ShareWall</div>
+      <div class="name">{{currentProject.name}}</div>
       <img class="dropdown-icon" src="../../../assets/dropdown-gray.png">
       <div class="select" v-if="projectSelect.visible">
-        <div class="select-item" v-for="p in projects" :key="p.code">-&ensp;{{p.name}}</div>
-        <div class="select-item">＋&emsp;Add</div>
+        <div
+          class="select-item"
+          v-for="p in $store.state.common.header.project.list"
+          :key="p.code"
+          @click="() => {changeCurrentProject(p.code)}"
+        >
+          -&ensp;{{p.name}}
+        </div>
+        <router-link :to="baseURL + 'project/setting/owner/create'" class="select-item">＋&emsp;Add</router-link>
       </div>
     </div>
+    <!-- ショートカットメニュー -->
     <div class="short-menu">
       <div class="block block-s">
         <div class="search">
           <input type="text" placeholder="Search" />
         </div>
       </div>
-      <div class="block">
+      <div class="block" @click="() => {switchShortcutContent('00001')}">
         <div class="icon">
           <img src="../../../assets/message-gray.png">
         </div>
       </div>
-      <div class="block">
+      <div class="block" @click="() => {switchShortcutContent('00002')}">
         <div class="icon">
           <img src="../../../assets/list-gray.png">
         </div>
       </div>
-      <div class="block">
+      <div class="block" @click="() => {switchShortcutContent('00003')}">
         <div class="icon">
           <img src="../../../assets/memo-gray.png">
         </div>
@@ -58,14 +75,19 @@
         </div>
       </div>
     </div>
-    <md-progress-bar md-mode="indeterminate" v-if="showProgressBar"></md-progress-bar>
+    <!-- プログレスバー -->
+    <md-progress-bar md-mode="indeterminate" v-if="$store.state.common.header.progressBar.visible"></md-progress-bar>
   </div>
 </template>
 
 <script>
+import { mapGetters, mapMutations } from 'vuex'
+import { BASE_URL } from '../../../constants/constant.js'
+
 export default {
   name: "Header",
   data: () => ({
+    baseURL: BASE_URL,
     teamSelect: {
       visible: false
     },
@@ -74,21 +96,42 @@ export default {
     },
     profile: {
       visible: false
-    },
-    showProgressBar: false
+    }
   }),
+  computed: {
+    ...mapGetters('common', [
+      'currentTeam',
+      'currentProject',
+    ])
+  },
   methods: {
+    // チームメニューのクリックハンドラ
     handleTeamClick: function() {
       this.$set(this.teamSelect, "visible", !this.teamSelect.visible)
-      this.$set(this.projectSelect, "visible", false)
+      this.hideProjectSelect()
     },
+    // プロジェクトメニューのクリックハンドラ
     handleProjectClick: function() {
       this.$set(this.projectSelect, "visible", !this.projectSelect.visible)
+      this.hideTeamSelect()
+    },
+    // チーム一覧を隠す
+    hideTeamSelect: function() {
       this.$set(this.teamSelect, "visible", false)
     },
+    // プロジェクト一覧を隠す
+    hideProjectSelect: function() {
+      this.$set(this.projectSelect, "visible", false)
+    },
+    // ユーザーボタンのクリックハンドラ
     handleProfileClick: function() {
       this.$set(this.profile, "visible", !this.profile.visible)
-    }
+    },
+    ...mapMutations('common', [
+      'changeCurrentTeam',
+      'changeCurrentProject',
+      'switchShortcutContent'
+    ])
   },
   props: {
     teams: Array,
@@ -155,9 +198,12 @@ export default {
       transition: 0.2s;
 
       .select-item {
+        display: block;
         min-width: 299px;
         padding: 10px 15px;
+        color: #444444;
         background-color: #ffffff;
+        text-decoration: none;
         &:hover {
           background-color: #f9f9f9;
         }
