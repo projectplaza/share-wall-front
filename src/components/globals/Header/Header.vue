@@ -30,6 +30,11 @@
       </div>
       <div class="block">
         <div class="icon">
+          <img src="../../../assets/message-gray.png">
+        </div>
+      </div>
+      <div class="block">
+        <div class="icon">
           <img src="../../../assets/list-gray.png">
         </div>
       </div>
@@ -74,15 +79,15 @@ export default {
   }),
   methods: {
     handleTeamClick: function() {
-      this.$set(this.teamSelect, "visible", !this.teamSelect.visible);
-      this.$set(this.projectSelect, "visible", false);
+      this.$set(this.teamSelect, "visible", !this.teamSelect.visible)
+      this.$set(this.projectSelect, "visible", false)
     },
     handleProjectClick: function() {
-      this.$set(this.projectSelect, "visible", !this.projectSelect.visible);
-      this.$set(this.teamSelect, "visible", false);
+      this.$set(this.projectSelect, "visible", !this.projectSelect.visible)
+      this.$set(this.teamSelect, "visible", false)
     },
     handleProfileClick: function() {
-      this.$set(this.profile, "visible", !this.profile.visible);
+      this.$set(this.profile, "visible", !this.profile.visible)
     }
   },
   props: {
@@ -98,6 +103,7 @@ export default {
   top: 0px;
   left: 50px;
   width: calc(100% - 50px);
+  min-width: 950px;
   background-color: #ffffff;
   box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
   user-select: none;

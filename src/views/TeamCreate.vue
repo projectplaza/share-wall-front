@@ -311,7 +311,7 @@ export default {
   position: relative;
   padding-top: 15px;
   padding-bottom: 50px;
-  width: 700px;
+  width: 650px;
   margin: auto;
 
   .section {

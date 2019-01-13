@@ -2,9 +2,10 @@
   <div>
     <Menu :menus="menus"/>
     <Header :teams="teams" :projects="projects"/>
-    <div class="content">
+    <div class="content" :style="contentStyle">
       <router-view/>
     </div>
+    <div class="shortcut-content" :style="shortcutContentStyle"></div>
   </div>
 </template>
 
@@ -20,12 +21,21 @@ export default {
   },
   data() {
     return {
+      contentStyle: {
+        // width: "calc(100% - 350px)",
+        width: 'calc(100% - 50px)',
+      },
+      shortcutContentStyle: {
+        width: '0px',
+        // width: '300px',
+        borderLeft: '0px',
+        // borderLeft: '1px solid #dddddd'
+      },
       menus: [
         { code: "0001", title: "home", icon: "home" },
         { code: "0002", title: "notification", icon: "notification" },
         { code: "0008", title: "team", icon: "team" },
         { code: "0009", title: "project", icon: "project" },
-        { code: "0006", title: "message", icon: "message" },
         { code: "0007", title: "chat", icon: "chat" },
         { code: "0003", title: "board", icon: "board" },
         { code: "0004", title: "document", icon: "document" },
@@ -44,9 +54,21 @@ export default {
         { code: "00000003", name: "UDC2018" },
         { code: "00000004", name: "UDC2017" }
       ]
-    };
+    }
+  },
+  methods: {
+    showShortcutContent: function() {
+      this.$set(this.contentStyle, 'width', 'calc(100% - 450px)')
+      this.$set(this.shortcutContentStyle, 'width', '400px')
+      this.$set(this.shortcutContentStyle, 'borderLeft', '1px solid #dddddd')
+    },
+    hideShortcutContent: function() {
+      this.$set(this.contentStyle, 'width', 'calc(100% - 50px)')
+      this.$set(this.shortcutContentStyle, 'width', '0px')
+      this.$set(this.shortcutContentStyle, 'borderLeft', '0px')
+    }
   }
-};
+}
 </script>
 
 <style lang="scss">
@@ -60,9 +82,18 @@ img {
   user-select: none;
 }
 .content {
-  width: calc(100% - 50px);
+  position: fixed;
+  min-width: 650px;
   height: calc(100% - 38px);
-  margin-top: 38px;
-  margin-left: 50px;
+  top: 38px;
+  left: 50px;
+  overflow: auto;
+}
+.shortcut-content {
+  position: fixed;
+  height: calc(100% - 38px);
+  top: 38px;
+  right: 0px;
+  overflow: auto;
 }
 </style>
