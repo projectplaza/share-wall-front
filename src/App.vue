@@ -25,15 +25,15 @@ export default {
   data() {
     return {
       menus: [
-        { code: "0001", title: "home", icon: "home" },
-        { code: "0002", title: "notification", icon: "notification" },
-        { code: "0008", title: "team", icon: "team" },
-        { code: "0009", title: "project", icon: "project" },
-        { code: "0007", title: "chat", icon: "chat" },
-        { code: "0003", title: "board", icon: "board" },
-        { code: "0004", title: "document", icon: "document" },
-        { code: "0005", title: "calendar", icon: "calendar" },
-        { code: "0010", title: "box", icon: "box" }
+        { code: "0001", title: "home", name:'', icon: "home" },
+        { code: "0002", title: "notification", name:'', icon: "notification" },
+        { code: "0008", title: "team", name:'', icon: "team" },
+        { code: "0009", title: "project", name:'', icon: "project" },
+        { code: "0007", title: "chat", name:'', icon: "chat" },
+        { code: "0003", title: "ウォール", name:'wall', icon: "board" },
+        { code: "0004", title: "document", name:'', icon: "document" },
+        { code: "0005", title: "calendar", name:'', icon: "calendar" },
+        { code: "0010", title: "box", name:'', icon: "box" }
       ],
       teams: [
         { code: "00000001", name: "ProjectPlaza" },

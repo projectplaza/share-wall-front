@@ -1,7 +1,7 @@
 <template>
   <div class="menu">
     <img src="../../../assets/logo.png" class="logo">
-    <div v-for="m in menus" :key="m.code" class="f-icon">
+    <div v-for="m in menus" :key="m.code" class="f-icon" @click="() => {moveToFunction(m.name)}">
       <img :src="require('../../../assets/' + m.icon + '.png')">
     </div>
   </div>
@@ -44,7 +44,11 @@ export default {
   data: () => ({
     active: ""
   }),
-  methods: {},
+  methods: {
+    moveToFunction: function(name) {
+      this.$router.push({ name: name })
+    }
+  },
   components: {},
   props: {
     menus: Array
