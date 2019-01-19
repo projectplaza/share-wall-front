@@ -27,8 +27,6 @@ export default {
       menus: [
         { code: "0001", title: "home", name:'', icon: "home" },
         { code: "0002", title: "notification", name:'', icon: "notification" },
-        { code: "0008", title: "team", name:'', icon: "team" },
-        { code: "0009", title: "project", name:'', icon: "project" },
         { code: "0007", title: "chat", name:'', icon: "chat" },
         { code: "0003", title: "ウォール", name:'wall', icon: "board" },
         { code: "0004", title: "document", name:'', icon: "document" },

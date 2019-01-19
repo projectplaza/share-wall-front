@@ -20,9 +20,9 @@ export default new Router({
       component: () => import('./views/ProjectCreate.vue')
     },
     {
-      path: BASE_URL + 'common/wall',
+      path: BASE_URL + 'project/wall',
       name: 'wall',
-      component: () => import('./views/Wall.vue')
+      component: () => import('./views/ProjectWall.vue')
     }
   ]
 })
