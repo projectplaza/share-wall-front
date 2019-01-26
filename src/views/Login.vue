@@ -12,13 +12,15 @@
         <md-switch v-model="login.autoLogin" value="1" class="auto-check">Auto Login</md-switch>
       </div>
       <div>
-        <md-button class="md-dense md-raised md-primary">Login</md-button>
+        <md-button class="md-dense md-raised md-primary" @click="handleLoginClick">Login</md-button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
+
 const loginApp = {
   name: 'Login',
   data: () => ({
@@ -28,7 +30,14 @@ const loginApp = {
       autoLogin: []
     }
   }),
-  methods: {}
+  methods: {
+    handleLoginClick: function() {
+      this.setLoginState(true)
+    },
+    ...mapMutations('common', [
+      'setLoginState'
+    ])
+  }
 }
 
 export default loginApp

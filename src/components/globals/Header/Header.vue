@@ -66,7 +66,7 @@
         </div>
         <div class="list" v-if="profile.visible">
           <div class="list-item">Profile</div>
-          <div class="list-item">Logout</div>
+          <div class="list-item" @click="handleLogoutClick">Logout</div>
         </div>
       </div>
       <div class="block">
@@ -127,10 +127,14 @@ export default {
     handleProfileClick: function() {
       this.$set(this.profile, "visible", !this.profile.visible)
     },
+    handleLogoutClick: function() {
+      this.setLoginState(false)
+    },
     ...mapMutations('common', [
       'changeCurrentTeam',
       'changeCurrentProject',
-      'switchShortcutContent'
+      'switchShortcutContent',
+      'setLoginState'
     ])
   },
   props: {

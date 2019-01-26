@@ -55,6 +55,13 @@ const getters = {
 }
 
 const mutations = {
+  // ログイン
+  setLoginState: (state, flag) => {
+    state.auth = {
+      ...state.auth,
+      loggedIn: flag
+    }
+  },
   // トークンを設定
   setNewToken: (state, { token }) => {
     state.auth = {
