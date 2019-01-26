@@ -1,6 +1,7 @@
 const state = {
   // 認証関連
   auth: {
+    loggedIn: false,
     token: ''
   },
   // ヘッダー関連

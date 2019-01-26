@@ -96,7 +96,7 @@ const wallApp = {
   }
 };
 
-export default wallApp;
+export default wallApp
 </script>
 
 <style lang="scss" scoped>
