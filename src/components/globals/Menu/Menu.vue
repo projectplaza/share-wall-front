@@ -39,6 +39,8 @@
 </style>
 
 <script>
+import FUNCTION_NAMES from "../../../constants/menuConstant";
+
 export default {
   name: "Menu",
   data: () => ({
@@ -46,7 +48,28 @@ export default {
   }),
   methods: {
     moveToFunction: function(name) {
-      this.$router.push({ name: name })
+      const teamCode = this.$store.state.common.header.team.current;
+      const projectCode = this.$store.state.common.header.project.current;
+      switch (name) {
+        case FUNCTION_NAMES.WALL:
+          this.$router.push({
+            name: name,
+            params: {
+              teamCode: teamCode,
+              projectCode: projectCode
+            }
+          });
+        case FUNCTION_NAMES.DESIGN_DOCUMENT_HOME:
+          this.$router.push({
+            name: name,
+            params: {
+              teamCode: teamCode,
+              projectCode: projectCode
+            }
+          });
+        default:
+          this.$router.push({ name: name });
+      }
     }
   },
   components: {},

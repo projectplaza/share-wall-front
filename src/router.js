@@ -20,9 +20,19 @@ export default new Router({
       component: () => import('./views/ProjectCreate.vue')
     },
     {
-      path: BASE_URL + 'project/wall',
+      path: BASE_URL + 't/:teamCode/p/:projectCode/wall',
       name: 'wall',
       component: () => import('./views/ProjectWall.vue')
+    },
+    {
+      path: BASE_URL + 't/:teamCode/p/:projectCode/design-document',
+      name: 'design-document-home',
+      component: () => import('./views/DesignDocument.vue')
+    },
+    {
+      path: BASE_URL + 't/:teamCode/p/:projectCode/design-document/:documentCode',
+      name: 'design-document',
+      component: () => import('./views/DesignDocument.vue')
     }
   ]
 })

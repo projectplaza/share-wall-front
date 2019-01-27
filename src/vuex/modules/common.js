@@ -8,18 +8,18 @@ const state = {
   header: {
     // チーム
     team: {
-      current: '00000000002', // code
+      current: '123', // code
       list: [
-        { code: '00000000001', name: 'ProjectPlaza' },
-        { code: '00000000002', name: 'UDC2018' }
+        { code: '123', name: 'ProjectPlaza' },
+        { code: '124', name: 'UDC2018' }
       ]
     },
     // プロジェクト
     project: {
-      current: '0000000000002', // code
+      current: '1235', // code
       list: [
-        { code: '0000000000001', name: 'ShareWall' },
-        { code: '0000000000002', name: 'SmartWork' }
+        { code: '1235', name: 'ShareWall' },
+        { code: '1215215', name: 'SmartWork' }
       ]
     },
     progressBar: {
