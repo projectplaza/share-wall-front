@@ -13,9 +13,7 @@
           v-for="t in $store.state.common.header.team.list"
           :key="t.code"
           @click="() => {changeCurrentTeam(t.code)}"
-        >
-          -&ensp;{{t.name}}
-        </div>
+        >-&ensp;{{t.name}}</div>
         <router-link :to="baseURL + 'team/setting/owner/create'" class="select-item">＋&emsp;Add</router-link>
       </div>
     </div>
@@ -32,9 +30,7 @@
           v-for="p in $store.state.common.header.project.list"
           :key="p.code"
           @click="() => {changeCurrentProject(p.code)}"
-        >
-          -&ensp;{{p.name}}
-        </div>
+        >-&ensp;{{p.name}}</div>
         <router-link :to="baseURL + 'project/setting/owner/create'" class="select-item">＋&emsp;Add</router-link>
       </div>
     </div>
@@ -42,7 +38,7 @@
     <div class="short-menu">
       <div class="block block-s">
         <div class="search">
-          <input type="text" placeholder="Search" />
+          <input type="text" placeholder="Search">
         </div>
       </div>
       <div class="block" @click="() => {switchShortcutContent('00001')}">
@@ -81,8 +77,9 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex'
-import { BASE_URL } from '../../../constants/constant.js'
+import { mapGetters, mapMutations } from "vuex";
+import { BASE_URL } from "../../../constants/constant.js";
+import { setLoginInfo, getLoginInfo, setTempLoginInfo, getTempLoginInfo } from "../../../utils/storageUtil";
 
 export default {
   name: "Header",
@@ -99,42 +96,50 @@ export default {
     }
   }),
   computed: {
-    ...mapGetters('common', [
-      'currentTeam',
-      'currentProject',
-    ])
+    ...mapGetters("common", ["currentTeam", "currentProject"])
   },
   methods: {
     // チームメニューのクリックハンドラ
     handleTeamClick: function() {
-      this.$set(this.teamSelect, "visible", !this.teamSelect.visible)
-      this.hideProjectSelect()
+      this.$set(this.teamSelect, "visible", !this.teamSelect.visible);
+      this.hideProjectSelect();
     },
     // プロジェクトメニューのクリックハンドラ
     handleProjectClick: function() {
-      this.$set(this.projectSelect, "visible", !this.projectSelect.visible)
-      this.hideTeamSelect()
+      this.$set(this.projectSelect, "visible", !this.projectSelect.visible);
+      this.hideTeamSelect();
     },
     // チーム一覧を隠す
     hideTeamSelect: function() {
-      this.$set(this.teamSelect, "visible", false)
+      this.$set(this.teamSelect, "visible", false);
     },
     // プロジェクト一覧を隠す
     hideProjectSelect: function() {
-      this.$set(this.projectSelect, "visible", false)
+      this.$set(this.projectSelect, "visible", false);
     },
     // ユーザーボタンのクリックハンドラ
     handleProfileClick: function() {
-      this.$set(this.profile, "visible", !this.profile.visible)
+      this.$set(this.profile, "visible", !this.profile.visible);
     },
     handleLogoutClick: function() {
-      this.setLoginState(false)
+      // 自動ログイン情報を取得
+      const loginInfo = getLoginInfo();
+      if (loginInfo !== null) {
+        // 自動ログイン情報をクリア
+        loginInfo.token = null
+        setLoginInfo(loginInfo)
+      }
+
+      // セッション情報をクリア
+      setTempLoginInfo(null)
+
+      this.setLoginState(false);
     },
-    ...mapMutations('common', [
-      'changeCurrentTeam',
-      'changeCurrentProject',
-      'switchShortcutContent',
-      'setLoginState'
+    ...mapMutations("common", [
+      "changeCurrentTeam",
+      "changeCurrentProject",
+      "switchShortcutContent",
+      "setLoginState"
     ])
   },
   props: {
