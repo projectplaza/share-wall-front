@@ -7,8 +7,11 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "babel-runtime": "^6.26.0",
+    "highlight.js": "^9.13.1",
     "jquery": "^3.3.1",
     "vue": "^2.5.21",
+    "vue-markdown": "^2.2.4",
     "vue-material": "^1.0.0-beta-10.2",
     "vue-router": "^3.0.1",
     "vuedraggable": "^2.17.0",
@@ -23,6 +26,7 @@
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
     "vue-cli-plugin-vuetify": "^0.4.6",
+    "vue-markdown-highlight": "^1.0.5",
     "vue-template-compiler": "^2.5.21"
   },
   "postcss": {
