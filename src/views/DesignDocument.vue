@@ -24,7 +24,8 @@
     </div>
     <div class="right-content">
       <div class="box">
-        <div class="paper">
+        <folder-edit v-if="!$route.params.documentCode" />
+        <div class="paper" v-if="$route.params.documentCode">
           <div class="document">
             <vue-markdown
               :source="source"
@@ -43,6 +44,7 @@
 
 <script>
 import VueMarkdown from "vue-markdown";
+import FolderEdit from "../components/design-document/FolderEdit";
 
 const designDocumentApp = {
   name: "design-document",
@@ -87,8 +89,12 @@ const designDocumentApp = {
 
     `
   }),
+  created: function() {
+    console.log(this.$route.params.documentCode);
+  },
   components: {
-    VueMarkdown
+    VueMarkdown,
+    FolderEdit
   }
 };
 
