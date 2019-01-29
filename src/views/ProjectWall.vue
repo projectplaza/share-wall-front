@@ -160,6 +160,8 @@ export default wallApp
         border: 1px solid #dddddd;
         border-top: 2px solid #f1c40f;
         vertical-align: top;
+        box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+        border-radius: 4px;
 
         .title {
           padding: 10px 8px 8px 8px;

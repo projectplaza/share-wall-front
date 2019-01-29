@@ -16,7 +16,7 @@ export default new Router({
     },
     {
       path: BASE_URL + 'project/setting/owner/create',
-      name: 'team-create',
+      name: 'project-create',
       component: () => import('./views/ProjectCreate.vue')
     },
     {
