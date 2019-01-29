@@ -2,34 +2,39 @@
   <div class="design-document">
     <div class="left-content">
       <div class="folders">
-        <div class="row selected">▶︎ 画面設計書</div>
-        <div class="row">▶︎ 画面設計書</div>
-        <div class="row">▶︎ 画面設計書</div>
-        <div class="row">▶︎ 画面設計書</div>
-        <div class="row">▶︎ 画面設計書</div>
+        <div class="row-folder opened">
+          <span>▶︎ 画面設計書</span>
+          <div class="icon"></div>
+        </div>
+        <div class="row-folder">
+          <span>▶︎ 画面設計書</span>
+          <div class="icon"></div>
+        </div>
       </div>
       <div class="files">
-        <div class="row">- 画面設計書</div>
-        <div class="row selected">- 画面設計書</div>
-        <div class="row">- 画面設計書</div>
-        <div class="row">- 画面設計書</div>
-        <div class="row">- 画面設計書</div>
-        <div class="row">- 画面設計書</div>
-        <div class="row">- 画面設計書</div>
-        <div class="row">- 画面設計書</div>
+        <div class="row-file selected">
+          <span>　- 画面設計書</span>
+          <div class="icon"></div>
+        </div>
+        <div class="row-file">
+          <span>　- 画面設計書</span>
+          <div class="icon"></div>
+        </div>
       </div>
     </div>
     <div class="right-content">
       <div class="box">
-        <div class="document">
-          <vue-markdown
-            :source="source"
-            :html="false"
-            :toc="true"
-            :toc-first-level="1"
-            :toc-anchor-link="false"
-            v-highlight
-          ></vue-markdown>
+        <div class="paper">
+          <div class="document">
+            <vue-markdown
+              :source="source"
+              :html="false"
+              :toc="true"
+              :toc-first-level="1"
+              :toc-anchor-link="false"
+              v-highlight
+            ></vue-markdown>
+          </div>
         </div>
       </div>
     </div>
@@ -127,43 +132,107 @@ export default designDocumentApp;
       overflow: auto;
       font-size: 12px;
     }
-    .row {
+    .row-folder {
+      position: relative;
       padding: 3px 6px;
       margin-bottom: 2px;
       border-radius: 4px;
       font-weight: 700;
       cursor: pointer;
       transition: 0.1s;
+
+      span {
+        vertical-align: middle;
+      }
+
+      .icon {
+        display: none;
+        background-image: url('../assets/setting.png');
+        background-size: cover;
+        position: absolute;
+        top: 7px;
+        right: 8px;
+        width: 12px;
+        height: 12px;
+      }
+      &:hover > .icon {
+        display: block;
+      }
     }
-    .row:hover {
+    .opened {
+      color: #16a085;
+      background-color: #ffffff !important;
+
+      .icon {
+        background-image: url('../assets/setting-gray.png');
+      }
+    }
+    .row-folder:hover {
       background-color: #16a085;
+    }
+
+    .row-file {
+      position: relative;
+      padding: 3px 6px;
+      margin-bottom: 2px;
+      border-radius: 4px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.1s;
+
+      span {
+        vertical-align: middle;
+      }
+
+      .icon {
+        display: none;
+        background-image: url('../assets/pen.png');
+        background-size: cover;
+        position: absolute;
+        top: 7px;
+        right: 8px;
+        width: 12px;
+        height: 12px;
+      }
+      &:hover > .icon {
+        display: block;
+      }
     }
     .selected {
       color: #16a085;
       background-color: #ffffff !important;
+
+      .icon {
+        background-image: url('../assets/pen-gray.png');
+      }
+    }
+    .row-file:hover {
+      background-color: #16a085;
     }
   }
   .right-content {
     display: inline-block;
     width: calc(100% - 260px);
     height: 100%;
-    padding: 10px;
     vertical-align: top;
 
     .box {
       width: 100%;
       height: 100%;
-      border-radius: 4px;
-      background-color: #ffffff;
-      box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3);
-      padding: 2px 0px;
-      overflow: hidden;
+      padding: 10px;
+      overflow: auto;
 
-      .document {
-        overflow: auto;
+      .paper {
         width: 100%;
-        height: 100%;
         padding: 15px;
+        border-radius: 4px;
+        background-color: #ffffff;
+        box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3);
+        padding: 2px 0px;
+
+        .document {
+          padding: 15px;
+        }
       }
     }
   }
