@@ -1,0 +1,96 @@
+<div class="team-create-form">
+  <div class="section">
+    <h1>チーム作成</h1>
+    <p>新しいメンバーとチームを組んで仕事を始めましょう。</p>
+  </div>
+  <div class="section">
+
+    <!-- チーム名 -->
+    <md-field :class="teamNameClass">
+      <label>新しいチーム名</label>
+      <md-input v-model="team.name" required :disabled="button.diabled"></md-input>
+      <span class="md-helper-text">30文字まで</span>
+      <span class="md-error">チーム名は30文字までです。</span>
+    </md-field>
+    <br>
+
+    <!-- チームコード -->
+    <md-field :class="teamCodeClass">
+      <label>チームコード</label>
+      <md-input v-model="team.code" required :disabled="button.diabled"></md-input>
+      <span class="md-helper-text">半角20文字まで</span>
+      <span class="md-error">チームコードは半角20文字までです。</span>
+    </md-field>
+    <br>
+
+    <!-- チーム説明 -->
+    <md-field :class="teamAbstractClass">
+      <label>チームの説明</label>
+      <md-textarea v-model="team.abstract" md-autogrow :disabled="button.diabled"></md-textarea>
+      <span class="md-helper-text">1,000文字まで</span>
+      <span class="md-error">説明文は1,000文字までです。</span>
+    </md-field>
+    <br>
+    <br>
+
+    <!-- メンバー選択 -->
+    <div class="member-select">
+      <div class="title">
+        <span>Member</span>
+        <input type="button" value="＋" class="add-button" @click="showDialog = true">
+      </div>
+      <table class="member-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Member</th>
+            <th>Administrator</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="member in members">
+            <td>{{ member.userName }}</td>
+            <td class="button-cell">
+              <md-checkbox v-model="member.auth" value="1" class="md-primary" v-if="!member.isAuthor"></md-checkbox>
+            </td>
+            <td class="button-cell">
+              <md-checkbox v-model="member.auth" value="2" class="md-primary" v-if="!member.isAuthor"></md-checkbox>
+            </td>
+            <td class="button-cell"><input type="button" value="−" class="delete-button" v-if="!member.isAuthor" @click="()=> { handleRemoveClick(member.userId) }"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="member-auth-abstract">
+      Member&ensp;:&ensp;各種アプリケーションのデータを追加・編集・削除することができます。<br />
+      Administrator&ensp;:&ensp;チームの設定を変更することができます。
+    </p>
+  </div>
+  <br>
+
+  <!-- ボタン -->
+  <div class="submit-button-box">
+    <md-button :md-ripple="false" :disabled="button.diabled">キャンセル</md-button>
+    <md-button class="md-raised md-primary" @click="handleCreateButtonClick" :disabled="button.diabled">チームを作成</md-button>
+  </div>
+
+  <!-- ダイアログ -->
+  <md-dialog :md-active.sync="showDialog" class="friend-table">
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th>名前</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="friend in friends" :key="friend.userId">
+            <td v-if="!friend.disabled" @click="() => { handleFriendClick(friend.userId) }">{{ friend.userName }}</td>
+            <td v-if="friend.disabled" class="disabled">{{ friend.userName }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </md-dialog>
+</div>
