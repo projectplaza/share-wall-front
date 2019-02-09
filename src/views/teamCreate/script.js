@@ -1,6 +1,6 @@
 import { mapMutations } from "vuex";
-import { PATH_PROF, PATH_PROF_FRIEND } from "../../constants/apiConstant";
-import { getRequest } from "../../utils/apiUtil";
+import { PATH_PROF, PATH_PROF_FRIEND, PATH_TEAM, PATH_TEAM_USER } from "../../constants/apiConstant";
+import { getRequest, postRequest } from "../../utils/apiUtil";
 import { isSingleByte } from "../../utils/validUtil";
 
 /**
@@ -71,12 +71,51 @@ const app = {
 
     // 作成ボタンクリックイベントハンドラ
     handleCreateButtonClick: function () {
-      this.$set(this.button, "diabled", true);
+
+      // ボタンを非活性化
+      this.$set(this.button, "diabled", true)
+      // プログレスバーを表示
       this.showProgressBar();
+
+      const teamInfo = {
+        teamName: this.team.name,
+        content: this.team.abstract,
+        teamId: this.team.code
+      }
+
+      const members = new Array()
+      this.member.users.filter(user => user.isMember).map(member => {
+        members.push({
+          userId: member.userId,
+          administratorAuthority: (member.auth.indexOf('2') >= 0) ? true : false,
+          memberPermission: (member.auth.indexOf('1') >= 0) ? true : false,
+          leaderPermission: false
+        })
+      })
+
+      postRequest(PATH_TEAM, teamInfo).then(() => {
+        postRequest(PATH_TEAM_USER, members).then(() => {
+          this.hideProgressBar();
+          // ページ遷移
+          // TODO ダッシュボード画面へ遷移
+        }).catch(memberError => {
+          // TODO ERROR
+          // プログレスバーを非表示
+          this.hideProgressBar();
+          // ボタンを非活性化
+          this.$set(this.button, "diabled", false)
+        })
+      }).catch(teamError => {
+        // TODO ERROR
+        // プログレスバーを非表示
+        this.hideProgressBar()
+        // ボタンを非活性化
+        this.$set(this.button, "diabled", false)
+      })
     },
 
     // 友達リストのクリックイベントハンドラ
-    handleFriendClick: function(userId) {
+    handleFriendClick: function (userId) {
 
       const members = this.member.users.slice()
       for (let i = 0; i < members.length; i++) {
@@ -94,10 +133,10 @@ const app = {
     },
 
     // 削除ボタンのクリックイベントハンドラ
-    handleRemoveClick: function(userId) {
+    handleRemoveClick: function (userId) {
 
       const members = this.member.users.slice()
-      
+
       let index = 0
       for (let i = 0; i < members.length; i++) {
         if (members[i].userId === userId) {
@@ -128,7 +167,7 @@ const app = {
 
       // フレンド一覧を取得
       getRequest(PATH_PROF_FRIEND).then((data) => {
-      
+
         if (data !== null) {
 
           const users = new Array()
@@ -157,7 +196,7 @@ const app = {
         this.$set(this.member, 'users', [])
       })
     })
-    
+
   },
 
   computed: {

@@ -37,7 +37,7 @@
     <div class="member-select">
       <div class="title">
         <span>Member</span>
-        <input type="button" value="＋" class="add-button" @click="showDialog = true">
+        <input type="button" value="＋" class="add-button" @click="showDialog = true" :disabled="button.diabled">
       </div>
       <table class="member-table">
         <thead>
@@ -52,12 +52,12 @@
           <tr v-for="member in members">
             <td>{{ member.userName }}</td>
             <td class="button-cell">
-              <md-checkbox v-model="member.auth" value="1" class="md-primary" v-if="!member.isAuthor"></md-checkbox>
+              <md-checkbox v-model="member.auth" value="1" class="md-primary" v-if="!member.isAuthor" :disabled="button.diabled"></md-checkbox>
             </td>
             <td class="button-cell">
-              <md-checkbox v-model="member.auth" value="2" class="md-primary" v-if="!member.isAuthor"></md-checkbox>
+              <md-checkbox v-model="member.auth" value="2" class="md-primary" v-if="!member.isAuthor" :disabled="button.diabled"></md-checkbox>
             </td>
-            <td class="button-cell"><input type="button" value="−" class="delete-button" v-if="!member.isAuthor" @click="()=> { handleRemoveClick(member.userId) }"></td>
+            <td class="button-cell"><input type="button" value="−" class="delete-button" v-if="!member.isAuthor" @click="()=> { handleRemoveClick(member.userId) }" :disabled="button.diabled"></td>
           </tr>
         </tbody>
       </table>
