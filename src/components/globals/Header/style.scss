@@ -1,0 +1,139 @@
+.header {
+  position: fixed;
+  top: 0px;
+  left: 50px;
+  width: calc(100% - 50px);
+  min-width: 950px;
+  background-color: #ffffff;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
+  user-select: none;
+  z-index: 4;
+
+  .move {
+    display: inline-block;
+    position: relative;
+    width: 300px;
+    border-right: 1px solid #eeeeee;
+    padding: 6px 30px 6px 10px;
+    color: #666666;
+    cursor: pointer;
+    transition: 0.2s;
+    &:hover {
+      background-color: #f5f5f5;
+    }
+
+    .icon {
+      display: inline-block;
+      margin-right: 8px;
+      padding: 5px;
+      background-color: #bbbbbb;
+      border-radius: 50%;
+      vertical-align: middle;
+      img {
+        display: block;
+        width: 15px;
+      }
+    }
+
+    .name {
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    .dropdown-icon {
+      position: absolute;
+      top: 13px;
+      right: 10px;
+      width: 10px;
+    }
+
+    .select {
+      position: absolute;
+      top: 38px;
+      left: 0px;
+      box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+      transition: 0.2s;
+
+      .select-item {
+        display: block;
+        min-width: 299px;
+        padding: 10px 15px;
+        color: #444444;
+        background-color: #ffffff;
+        text-decoration: none;
+        &:hover {
+          background-color: #f9f9f9;
+        }
+      }
+    }
+  }
+
+  .short-menu {
+    float: right;
+    .block {
+      display: inline-block;
+      position: relative;
+      padding: 6px 10px 6px 10px;
+      color: #666666;
+      cursor: pointer;
+      transition: 0.2s;
+      &:hover {
+        background-color: #f5f5f5;
+      }
+    }
+    .block-f {
+      &:hover {
+        background-color: #f3f9ff;
+      }
+    }
+    .block-s {
+      cursor: default;
+      &:hover {
+        background-color: #ffffff;
+      }
+      input[type="text"] {
+        width: 100px;
+        padding: 3px 10px;
+        color: #888888;
+        border: 1px solid #eeeeee;
+        border-radius: 10px;
+        transition: 0.3s;
+        &:focus {
+          width: 130px;
+          border: 1px solid #3498db;
+          color: #444444;
+        }
+        &:placeholder-shown,
+        &::-webkit-input-placeholder {
+          color: #888888;
+        }
+      }
+    }
+    .icon {
+      display: inline-block;
+      padding: 3px;
+      border-radius: 50%;
+      vertical-align: middle;
+      img {
+        display: block;
+        width: 19px;
+      }
+    }
+    .list {
+      position: absolute;
+      top: 38px;
+      right: 0px;
+      box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+      transition: 0.2s;
+
+      .list-item {
+        min-width: 100px;
+        padding: 10px 15px;
+        background-color: #ffffff;
+        &:hover {
+          background-color: #f9f9f9;
+        }
+      }
+    }
+  }
+}
