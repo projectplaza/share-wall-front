@@ -17,49 +17,75 @@ const files = [
 const designDocumentApp = {
   name: "design-document",
   data: () => ({
+    display: {
+      mode: 'edit'
+    },
     leftMenu: {
       folders: folders,
       files: files,
     },
-    source: `
-# 画面設計書
-## UI設計書
-### aaaあいう
-#### aaaaあいう
-##### aaaaaaあいう
-###### aaaaaaaaaaあいう
+    dialog: {
+      folder: false,
+      folderCreate: false,
+      fileDelete: true
+    },
+    document: {
+      code: '',
+      source: `
+コンセプト
+=========
 
-* aaaa
-  * aaaa
-* aaaa
-  * aaaa
+目的
+----
+・**ターゲット**が欲しい**価値**を最小の形で素早く提供する
 
-<html></html>
+・製品を提供できるコストを賄えるだけの**利益**を出す
 
----
+ターゲット
+-----------
+・スタートアップ（Webサービス or Webシステム）
+　　→　事業を始めようとしている１〜３人グループ
 
-![Minion](https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/2016-06-14_Orange_and_white_tabby_cat_born_in_2016_%E8%8C%B6%E3%83%88%E3%83%A9%E7%99%BD%E3%81%AD%E3%81%93_DSCF6526%E2%98%86%E5%BD%A1.jpg/200px-2016-06-14_Orange_and_white_tabby_cat_born_in_2016_%E8%8C%B6%E3%83%88%E3%83%A9%E7%99%BD%E3%81%AD%E3%81%93_DSCF6526%E2%98%86%E5%BD%A1.jpg)
+・インターネット上での作業に慣れている30後半までの人
 
-> aa
-> aa
-> aa
->> aaa
->> aaa
+価値
+----
+・複数のサービスに登録する必要がない
+　　→　All in one
 
-\`\`\` json
-{
-  "aaa": "aaaaa"
-}
-\`\`\`
+・？？？
+　　→　１つにまとまっていることで、無駄な情報を入力する必要がなくなる
 
-| Option | Description |
-| ------ | ----------- |
-| data   | path to data files to supply the data that will be passed into templates. |
-| engine | engine to be used for processing templates. Handlebars is the default. |
-| ext    | extension to be used for dest files. |
+メモ
+----
+・最低限のやること、やりたいこと、作業の共有をする
 
+・作業を効率化できる
+　　→　オンライン上で作業を
+　　→　**記録が残る**
+　　→　検索ができる
+　　→　紙だと探すのが大変
 
-    `
+・**本来やらなきゃいけない作業に集中できる**
+　　→　スタートアップの作業
+
+・
+　　→　違う時間帯に作業している人と仕事ができる
+
+製品を提供できるコスト
+------------------------
+・**未定**
+
+競合の定義
+-----------
+・ターゲットが重複している
+・価格帯が同じ
+
+参考サイト
+-----------
+https://www.missiondrivenbrand.jp/entry/kaitai_3C
+`
+    }
   }),
 
   computed: {
@@ -67,11 +93,14 @@ const designDocumentApp = {
       animation: 70,
       group: 'description',
       dragClass: 'dragging'
-    })
+    }),
+    boxStyle: function() {
+      return (this.display.mode === 'edit') ? {width: '50%', display: 'inline-block'} : {width: '100%'}
+    }
   },
 
   created: function () {
-    console.log(this.$route.params.documentCode);
+    this.document.code = this.$route.params.documentCode
   },
   components: {
     VueMarkdown,

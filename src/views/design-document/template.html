@@ -1,23 +1,27 @@
 <div class="design-document">
   <div class="left-content">
+    <!-- フォルダ -->
     <div class="fields">
       <div class="title">
         <img src="../../assets/folder-close-gray.png" />
         <span>フォルダ</span>
+        <img class="icon" src="../../assets/setting-gray.png" @click="dialog.folder=true" />
+        <img class="icon folder-plus-icon" src="../../assets/folder-plus-gray.png" @click="dialog.folderCreate=true" />
       </div>
       <draggable element="div" :options="options" v-model="leftMenu.folders">
         <transition-group class="list-group">
           <div v-for="folder in leftMenu.folders" class="row" :key="'folder' + folder.code" :class="folder.className">
             <span>{{ folder.name }}</span>
-            <!-- <div class="icon"></div> -->
           </div>
         </transition-group>
       </draggable>
     </div>
+    <!-- ファイル -->
     <div class="fields">
       <div class="title">
         <img src="../../assets/file-gray.png" />
         <span>機能設計書</span>
+        <img class="icon" src="../../assets/pen-gray.png" />
       </div>
       <draggable element="div" :options="options" v-model="leftMenu.files">
         <transition-group class="list-group">
@@ -28,14 +32,93 @@
       </draggable>
     </div>
   </div>
+  <!-- 資料本文 -->
   <div class="right-content">
-    <div class="box">
+    <div class="box box-edit" v-if="display.mode === 'edit'" :style="boxStyle">
       <div class="paper">
         <div class="document">
-          <vue-markdown :source="source" :html="false" :toc="true" :toc-first-level="1" :toc-anchor-link="false"
-            v-highlight></vue-markdown>
+          <textarea v-model="document.source"></textarea>
+          <!-- ボタン -->
+          <div class="submit-button-box">
+            <md-button>キャンセル</md-button>
+            <md-button class="md-raised md-primary" @click="display.mode = 'view'">保存</md-button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="box" v-if="document.code !== null" :style="boxStyle">
+      <div class="paper">
+        <div class="document">
+          <vue-markdown :source="document.source" :html="false" :toc="true" :toc-first-level="1" :toc-anchor-link="false"
+            :anchorAttributes="{target: '_blank'}" v-highlight></vue-markdown>
+        </div>
+        <div class="document-edit" v-if="display.mode === 'view'" @click="display.mode = 'edit'">
+          <img src="../../assets/pen.png" />
+        </div>
+        <div class="document-delete" v-if="display.mode === 'view'" @click="dialog.fileDelete = true">
+          <img src="../../assets/delete.png" />
         </div>
       </div>
     </div>
   </div>
+  <!-- フォルダ設定ダイアログ -->
+  <md-dialog :md-active.sync="dialog.folder" class="dd-folder-setting">
+    <div class="title">
+      <img src="../../assets/folder-close-gray.png" class="title-icon" />
+      <span>フォルダ名変更</span>
+    </div>
+    <div class="inner">
+      <div class="form-box">
+        <table>
+          <tbody>
+            <tr v-for="folder in leftMenu.folders" :key="folder.code">
+              <td>
+                <img src="../../assets/folder-close-gray.png" class="folder-icon" />
+              </td>
+              <td>
+                <input type="text" class="folder-name" v-model="folder.name" />
+              </td>
+              <td>
+                <img src="../../assets/folder-minus-gray.png" class="folder-minus-icon" />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- ボタン -->
+      <div class="button-box">
+        <md-button>キャンセル</md-button>
+        <md-button class="md-raised md-primary">保存</md-button>
+      </div>
+    </div>
+  </md-dialog>
+
+  <!-- フォルダ作成ダイアログ -->
+  <md-dialog :md-active.sync="dialog.folderCreate" class="dd-folder-create">
+    <div class="title">
+      <img src="../../assets/folder-close-gray.png" class="title-icon" />
+      <span>フォルダ名を入力してください</span>
+    </div>
+    <div class="folder-name-box">
+      <input type="text" />
+    </div>
+    <!-- ボタン -->
+    <div class="button-box">
+      <md-button>キャンセル</md-button>
+      <md-button class="md-raised md-primary">作成</md-button>
+    </div>
+  </md-dialog>
+
+  <!-- ファイル削除確認ダイアログ -->
+  <md-dialog :md-active.sync="dialog.fileDelete" class="dd-folder-create">
+      <div class="title">
+        <img src="../../assets/folder-close-gray.png" class="title-icon" />
+        <span>本当に削除しますか？</span>
+      </div>
+      <!-- ボタン -->
+      <div class="button-box-center">
+        <md-button class="md-raised md-accent">削除</md-button>
+        <md-button>キャンセル</md-button>
+      </div>
+    </md-dialog>
 </div>
