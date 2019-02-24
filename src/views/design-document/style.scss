@@ -175,17 +175,37 @@
 
         .document {
           height: calc(100% - 20px);
-          
-          textarea {
+
+          input[type="text"] {
             width: 100%;
-            height: calc(100% - 30px);
             padding: 10px;
             border: 0px;
-            border: 1px solid #1abc9c;
+            border: 1px solid #bbbbbb;
             resize:  none;
             font-size: 14px;
             transition: 0.2s;
             border-radius: 5px;
+            margin-bottom: 10px;
+
+            &:focus {
+              border: 1px solid #1abc9c;
+            }
+          }
+          
+          textarea {
+            width: 100%;
+            height: calc(100% - 75px);
+            padding: 10px;
+            border: 0px;
+            border: 1px solid #bbbbbb;
+            resize:  none;
+            font-size: 14px;
+            transition: 0.2s;
+            border-radius: 5px;
+
+            &:focus {
+              border: 1px solid #1abc9c;
+            }
           }
           
           .submit-button-box {
