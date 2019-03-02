@@ -520,6 +520,7 @@ const initFolderList = (_this) => {
 
     if (folderList == null || folderList.length === 0) {
       _this.$set(_this.leftMenu, 'folders', [])
+      _this.hideProgressBar()
       return
     }
 
@@ -553,6 +554,7 @@ const initDocumentList = (_this) => {
 
     if (documentList == null || documentList.length === 0) {
       _this.$set(_this.leftMenu, 'documents', [])
+      _this.hideProgressBar()
       return
     }
 
@@ -586,6 +588,7 @@ const initDocument = (_this) => {
 
     if (doc == null) {
       // TODO NOT FOUNDエラー
+      _this.hideProgressBar()
       return
     }
 
