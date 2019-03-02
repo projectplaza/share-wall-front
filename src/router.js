@@ -9,7 +9,9 @@ export const ROUTE_NAME_TEAM_CREATE = 'team-create'
 export const ROUTE_NAME_PROJECT_CREATE = 'project-create'
 export const ROUTE_NAME_WALL = 'wall'
 export const ROUTE_NAME_DESIGN_DOCUMENT_HOME = 'design-document-home'
-export const ROUTE_NAME_DESIGN_DOCUMENT = 'design-document'
+export const ROUTE_NAME_DESIGN_DOCUMENT_FOLDER = 'design-document-folder'
+export const ROUTE_NAME_DESIGN_DOCUMENT_DOCUMENT = 'design-document-document'
+export const ROUTE_NAME_DESIGN_DOCUMENT_DOCUMENT_ACTION = 'design-document-document-action'
 
 export default new Router({
   mode: 'history',
@@ -36,8 +38,18 @@ export default new Router({
       component: () => import('./views/DesignDocument.vue')
     },
     {
-      path: BASE_URL + 't/:teamId/p/:projectId/design-document/:documentId',
-      name: ROUTE_NAME_DESIGN_DOCUMENT,
+      path: BASE_URL + 't/:teamId/p/:projectId/design-document/:folderId',
+      name: ROUTE_NAME_DESIGN_DOCUMENT_FOLDER,
+      component: () => import('./views/DesignDocument.vue')
+    },
+    {
+      path: BASE_URL + 't/:teamId/p/:projectId/design-document/:folderId/:documentId',
+      name: ROUTE_NAME_DESIGN_DOCUMENT_DOCUMENT,
+      component: () => import('./views/DesignDocument.vue')
+    },
+    {
+      path: BASE_URL + 't/:teamId/p/:projectId/design-document/:folderId/:documentId/:mode',
+      name: ROUTE_NAME_DESIGN_DOCUMENT_DOCUMENT_ACTION,
       component: () => import('./views/DesignDocument.vue')
     }
   ]

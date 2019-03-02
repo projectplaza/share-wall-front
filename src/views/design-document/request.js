@@ -205,12 +205,13 @@ const getDocumentListRequest = (teamId, projectId, folderId) => {
  * ドキュメント本文を取得する
  * @param {string} teamId チームID
  * @param {string} projectId プロジェクトID
+ * @param {string} folderId フォルダID
  * @param {string} documentId ドキュメントID
  * @returns {object} Promiseオブジェクト
  * @resolve {object} ドキュメント情報 
  * @reject {object} エラー情報
  */
-const getDocumentRequest = (teamId, projectId, documentId) => {
+const getDocumentRequest = (teamId, projectId, folderId, documentId) => {
   return new Promise((resolve, reject) => {
     getRequest(PATH_DESIGN_DOCUMENT_DOCUMENT, {
       teamId: teamId,
@@ -228,16 +229,18 @@ const getDocumentRequest = (teamId, projectId, documentId) => {
  * ドキュメントを登録する
  * @param {string} teamId チームID
  * @param {string} projectId プロジェクトID
+ * @param {string} folderId フォルダID
  * @param {string} documentName ドキュメント名
  * @returns {object} Promiseオブジェクト
  * @resolve {object} 実行結果
  * @reject {object} エラー情報
  */
-const postDocumentRequest = (teamId, projectId, documentName) => {
+const postDocumentRequest = (teamId, projectId, folderId, documentName) => {
   return new Promise((resolve, reject) => {
     postRequest(PATH_DESIGN_DOCUMENT_DOCUMENT, {
       teamId: teamId,
       projectId: projectId,
+      folderId: folderId,
       documentName: documentName,
       functionName: FUNCTION_CODE_DESIGN_DOCUMENT
     }).then((result) => {
@@ -262,9 +265,10 @@ const putDocumentRequest = (teamId, projectId, documentInfo) => {
     putRequest(PATH_DESIGN_DOCUMENT_DOCUMENT, {
       teamId: teamId,
       projectId: projectId,
+      folderId: documentInfo.folderId,
       documentId: documentInfo.documentId,
       documentName: documentInfo.documentName,
-      content: documentInfo.source,
+      content: documentInfo.content,
       functionName: FUNCTION_CODE_DESIGN_DOCUMENT
     }).then((result) => {
       resolve(result)
@@ -278,16 +282,18 @@ const putDocumentRequest = (teamId, projectId, documentInfo) => {
  * ドキュメントを削除する
  * @param {string} teamId チームID
  * @param {string} projectId プロジェクトID
+ * @param {string} folderId フォルダID
  * @param {string} documentId ドキュメントID
  * @returns {object} Promiseオブジェクト
  * @resolve {object} 実行結果
  * @reject {object} エラー情報
  */
-const deleteDocumentRequest = (teamId, projectId, documentId) => {
+const deleteDocumentRequest = (teamId, projectId, folderId, documentId) => {
   return new Promise((resolve, reject) => {
     deleteRequest(PATH_DESIGN_DOCUMENT_DOCUMENT, {
       teamId: teamId,
       projectId: projectId,
+      folderId: folderId,
       documentId: documentId,
       functionName: FUNCTION_CODE_DESIGN_DOCUMENT
     }).then((result) => {

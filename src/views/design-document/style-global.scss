@@ -124,6 +124,13 @@
       padding: 10px 20px;
       border-bottom: 1px solid #eeeeee;
 
+      .warning-message-box {
+        color: #f39c12;
+        font-weight: 700;
+        margin-top: 10px;
+        margin-bottom: 20px;
+      }
+
       table {
         margin: 0px auto;
         width: 350px;
@@ -191,6 +198,10 @@
     span {
       vertical-align: middle;
     }
+  }
+
+  .file-name {
+    color: #e67e22;
   }
   
   .folder-name-box {

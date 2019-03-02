@@ -10,22 +10,22 @@
       </div>
       <draggable element="div" :options="options" v-model="leftMenu.folders">
         <transition-group class="list-group">
-          <div v-for="folder in leftMenu.folders" class="row" :key="'folder' + folder.folderId" :class="folder.className">
+          <div v-for="folder in leftMenu.folders" class="row" :key="'folder' + folder.folderId" :class="folder.className" @click="() => { handleFolderClick(folder.folderId) }">
             <span>{{ folder.folderName }}</span>
           </div>
         </transition-group>
       </draggable>
     </div>
-    <!-- ファイル -->
+    <!-- ドキュメント -->
     <div class="fields">
       <div class="title">
         <img src="../../assets/file-gray.png" />
         <span>ドキュメント</span>
-        <img class="icon" src="../../assets/pen-gray.png" />
+        <img class="icon" src="../../assets/pen-gray.png" v-if="document.folderId != null" @click="handleDocumentCreateClick" />
       </div>
       <draggable element="div" :options="options" v-model="leftMenu.documents">
         <transition-group class="list-group">
-          <div v-for="document in leftMenu.documents" class="row" :key="'document' + document.documentId" :class="document.className">
+          <div v-for="document in leftMenu.documents" class="row" :key="'document' + document.documentId" :class="document.className" @click="() => { handleDocumentClick(document.documentId) }">
             <span>{{ document.documentName }}</span>
           </div>
         </transition-group>
@@ -33,16 +33,16 @@
     </div>
   </div>
   <!-- 資料本文 -->
-  <div class="right-content" v-if="document.documentId !== undefined && document.documentId !== ''">
+  <div class="right-content" v-if="document.documentId != undefined">
     <div class="box box-edit" v-if="display.mode === 'edit'" :style="boxStyle">
       <div class="paper">
         <div class="document">
           <input type="text" v-model="document.documentName">
-          <textarea v-model="document.content"></textarea>
+          <textarea v-model="document.content" id="document-content"></textarea>
           <!-- ボタン -->
           <div class="submit-button-box">
-            <md-button>キャンセル</md-button>
-            <md-button class="md-raised md-primary" @click="display.mode = 'view'">保存</md-button>
+            <md-button @click="handleDocumentEditCancelClick">キャンセル</md-button>
+            <md-button class="md-raised md-primary" @click="handleDocumentSaveClick">保存</md-button>
           </div>
         </div>
       </div>
@@ -53,10 +53,10 @@
           <vue-markdown :source="document.content" :html="false" :toc="true" :toc-first-level="1" :toc-anchor-link="false"
             :anchorAttributes="{target: '_blank'}" v-highlight></vue-markdown>
         </div>
-        <div class="document-edit" v-if="display.mode === 'view'" @click="display.mode = 'edit'">
-          <img src="../../assets/pen.png" />
+        <div class="document-edit" v-if="display.mode === 'view'" @click="handleDocumentEditClick">
+          <img src="../../assets/pen.png"  />
         </div>
-        <div class="document-delete" v-if="display.mode === 'view'">
+        <div class="document-delete" v-if="display.mode === 'view'" @click="handleShowDeleteDialogClick">
           <img src="../../assets/delete.png" />
         </div>
       </div>
@@ -70,9 +70,10 @@
     </div>
     <div class="inner">
       <div class="form-box">
+        <div class="warning-message-box">フォルダを削除すると配下のドキュメントも削除されますのでご注意ください。</div>
         <table>
           <tbody>
-            <tr v-for="folder in dialog.folder.folders" :key="folder.folderId">
+            <tr v-for="folder in dialog.folder.folders" :key="folder.folderId" v-if="!folder.deleted">
               <td>
                 <img src="../../assets/folder-close-gray.png" class="folder-icon" />
               </td>
@@ -80,7 +81,7 @@
                 <input type="text" class="folder-name" v-model="folder.folderName" />
               </td>
               <td>
-                <img src="../../assets/folder-minus-gray.png" class="folder-minus-icon" />
+                <img src="../../assets/folder-minus-gray.png" class="folder-minus-icon" @click="() => {handleDeleteFolderButtonClick(folder.folderId)}" />
               </td>
             </tr>
           </tbody>
@@ -88,8 +89,8 @@
       </div>
       <!-- ボタン -->
       <div class="button-box">
-        <md-button>キャンセル</md-button>
-        <md-button class="md-raised md-primary">保存</md-button>
+        <md-button @click="handleFolderSettingCancelButtonClick">キャンセル</md-button>
+        <md-button class="md-raised md-primary" @click="handleUpdateFolderSettingButtonClick">保存</md-button>
       </div>
     </div>
   </md-dialog>
@@ -101,11 +102,11 @@
       <span>フォルダ名を入力してください</span>
     </div>
     <div class="folder-name-box">
-      <input type="text" v-model="dialog.folderCreate.folderName" />
+      <input type="text" v-model="dialog.folderCreate.folderName" id="input-folder-create" @keydown.13="handleFolderCreateButtonClick" />
     </div>
     <!-- ボタン -->
     <div class="button-box">
-      <md-button>キャンセル</md-button>
+      <md-button @click="handleFolderCreateCancelButtonClick">キャンセル</md-button>
       <md-button class="md-raised md-primary" @click="handleFolderCreateButtonClick">作成</md-button>
     </div>
   </md-dialog>
@@ -114,12 +115,12 @@
   <md-dialog :md-active.sync="dialog.documentDelete.visible" class="dd-folder-create">
     <div class="title">
       <img src="../../assets/folder-close-gray.png" class="title-icon" />
-      <span>本当に削除しますか？</span>
+      <span><span class="file-name">{{document.documentName}}</span> を本当に削除しますか？</span>
     </div>
     <!-- ボタン -->
     <div class="button-box-center">
-      <md-button class="md-raised md-accent">削除</md-button>
-      <md-button>キャンセル</md-button>
+      <md-button class="md-raised md-accent" @click="handleDocumentDeleteButtonClick">削除</md-button>
+      <md-button @click="handleDocumentDeleteCancelClick">キャンセル</md-button>
     </div>
   </md-dialog>
 </div>
