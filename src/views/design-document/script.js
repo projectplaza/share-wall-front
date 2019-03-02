@@ -588,6 +588,7 @@ const initDocument = (_this) => {
 
     if (doc == null) {
       // TODO NOT FOUNDエラー
+      _this.hideProgressBar()
       return
     }
 
