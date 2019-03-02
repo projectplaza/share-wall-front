@@ -29,7 +29,7 @@ const getToken = () => {
  */
 const createQueryParam = (paramObj) => {
 
-  const query = "?";
+  let query = "?";
 
   if (paramObj == null) {
     return query;
@@ -44,7 +44,7 @@ const createQueryParam = (paramObj) => {
   }
 
   return query;
-};
+}
 
 // GETリクエストを送信するPromiseオブジェクトを返却する
 export const getRequest = (uri, data) => {
@@ -61,7 +61,7 @@ export const getRequest = (uri, data) => {
       reject(error)
     })
   })
-};
+}
 
 // POSTリクエストを送信するPromiseオブジェクトを返却する
 export const postRequest = (uri, data) => {
@@ -80,4 +80,42 @@ export const postRequest = (uri, data) => {
       reject(error)
     })
   })
-};
+}
+
+// PUTリクエストを送信するPromiseオブジェクトを返却する
+export const putRequest = (uri, data) => {
+  return new Promise((resolve, reject) => {
+    $.ajax({
+      url: createUri(uri),
+      type: HTTP_METHOD_PUT,
+      headers: {
+        'x-access-token': getToken()
+      },
+      contentType: CONTENT_TYPE_APPLICATION_JSON,
+      data: JSON.stringify(data),
+    }).done((data) => {
+      resolve(data)
+    }).fail((error) => {
+      reject(error)
+    })
+  })
+}
+
+// DELETEリクエストを送信するPromiseオブジェクトを返却する
+export const deleteRequest = (uri, data) => {
+  return new Promise((resolve, reject) => {
+    $.ajax({
+      url: createUri(uri),
+      type: HTTP_METHOD_DELETE,
+      headers: {
+        'x-access-token': getToken()
+      },
+      contentType: CONTENT_TYPE_APPLICATION_JSON,
+      data: JSON.stringify(data),
+    }).done((data) => {
+      resolve(data)
+    }).fail((error) => {
+      reject(error)
+    })
+  })
+}
