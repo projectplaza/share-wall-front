@@ -76,11 +76,25 @@ const mutations = {
       current: code
     }
   },
+  // 現在のチームリストを更新
+  setTeamList: (state, teamList) => {
+    state.header.team = {
+      ...state.header.team,
+      list: teamList
+    }
+  },
   // 現在のプロジェクトを変更
   changeCurrentProject: (state, code) => {
     state.header.project = {
       ...state.header.project,
       current: code
+    }
+  },
+  // 現在のチームリストを更新
+  changeProjectList: (state, projectList) => {
+    state.header.project = {
+      ...state.header.project,
+      list: projectList
     }
   },
   // プログレスバーを表示

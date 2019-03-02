@@ -13,7 +13,7 @@
         :key="t.code"
         @click="() => {changeCurrentTeam(t.code)}"
       >-&ensp;{{t.name}}</div>
-      <router-link :to="baseURL + 'team/setting/owner/create'" class="select-item">＋&emsp;Add</router-link>
+      <router-link :to="baseURL + 't/setting/owner/create'" class="select-item">＋&emsp;Add</router-link>
     </div>
   </div>
   <!-- プロジェクト選択 -->
@@ -30,7 +30,7 @@
         :key="p.code"
         @click="() => {changeCurrentProject(p.code)}"
       >-&ensp;{{p.name}}</div>
-      <router-link :to="baseURL + 'project/setting/owner/create'" class="select-item">＋&emsp;Add</router-link>
+      <router-link :to="baseURL + 't/' + $store.state.common.header.team.current + '/p/setting/owner/create'" class="select-item">＋&emsp;Add</router-link>
     </div>
   </div>
   <!-- ショートカットメニュー -->

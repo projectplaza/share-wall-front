@@ -13,6 +13,9 @@ export const PATH_PROF_FRIEND = '/v1/prof/friend'
 // PATH:チーム
 export const PATH_TEAM = '/v1/teams'
 
+// PATH:チーム一覧
+export const PATH_TEAM_LIST = '/v1/teams/list'
+
 // PATH:チームユーザー
 export const PATH_TEAM_USER = '/v1/teams/users'
 

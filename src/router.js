@@ -18,12 +18,12 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: BASE_URL + 'team/setting/owner/create',
+      path: BASE_URL + 't/setting/owner/create',
       name: ROUTE_NAME_TEAM_CREATE,
       component: () => import('./views/TeamCreate.vue')
     },
     {
-      path: BASE_URL + 'project/setting/owner/create',
+      path: BASE_URL + 't/:teamId/p/setting/owner/create',
       name: ROUTE_NAME_PROJECT_CREATE,
       component: () => import('./views/ProjectCreate.vue')
     },

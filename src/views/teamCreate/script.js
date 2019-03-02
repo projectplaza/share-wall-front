@@ -1,5 +1,6 @@
 import { mapMutations } from "vuex";
-import { PATH_PROF, PATH_PROF_FRIEND, PATH_TEAM, PATH_TEAM_USER } from "../../constants/apiConstant";
+import { PATH_PROF, PATH_PROF_FRIEND, PATH_TEAM, PATH_TEAM_LIST, PATH_TEAM_USER } from "../../constants/apiConstant";
+import { ROUTE_NAME_PROJECT_CREATE } from '../../router'
 import { getRequest, postRequest } from "../../utils/apiUtil";
 import { isSingleByte } from "../../utils/validUtil";
 
@@ -80,7 +81,8 @@ const app = {
       const teamInfo = {
         teamName: this.team.name,
         content: this.team.abstract,
-        teamId: this.team.code
+        teamId: this.team.code,
+        functionName: 'teamCreate'
       }
 
       const members = new Array()
@@ -88,18 +90,41 @@ const app = {
         members.push({
           userId: member.userId,
           administratorAuthority: (member.auth.indexOf('2') >= 0) ? true : false,
-          memberPermission: (member.auth.indexOf('1') >= 0) ? true : false,
-          leaderPermission: false
+          userAuthority: (member.auth.indexOf('1') >= 0) ? true : false
         })
       })
 
+      const memberObj = {
+        functionName: 'teamCreate',
+        teamId: this.team.code,
+        users: members
+      }
+
       postRequest(PATH_TEAM, teamInfo).then(() => {
-        postRequest(PATH_TEAM_USER, members).then(() => {
-          this.hideProgressBar();
-          // ページ遷移
-          
-          // TODO ダッシュボードへ
-          
+        this.changeCurrentTeam(teamInfo.teamId)
+
+        postRequest(PATH_TEAM_USER, memberObj).then(() => {
+          getRequest(PATH_TEAM_LIST).then(teamList => {
+
+            const list = teamList.map(team => {
+              return {
+                code: team.team_id,
+                name: team.team_name
+              }
+            })
+
+            this.setTeamList(list)
+
+            this.hideProgressBar()
+
+            // TODO ダッシュボードへ
+            this.$router.push({
+              name: ROUTE_NAME_PROJECT_CREATE,
+              params: {
+                teamId: this.$store.state.common.header.team.current
+              }
+            })
+          })
         }).catch(memberError => {
           // TODO ERROR
           // プログレスバーを非表示
@@ -151,7 +176,7 @@ const app = {
     },
 
     // Vuex mutations
-    ...mapMutations("common", ["showProgressBar", "hideProgressBar"])
+    ...mapMutations("common", ["showProgressBar", "hideProgressBar", "changeCurrentTeam", "setTeamList"])
   },
 
   created: function () {
