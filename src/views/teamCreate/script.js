@@ -97,7 +97,9 @@ const app = {
         postRequest(PATH_TEAM_USER, members).then(() => {
           this.hideProgressBar();
           // ページ遷移
-          // TODO ダッシュボード画面へ遷移
+          
+          // TODO ダッシュボードへ
+          
         }).catch(memberError => {
           // TODO ERROR
           // プログレスバーを非表示
