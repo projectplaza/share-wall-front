@@ -1,6 +1,6 @@
 import { mapMutations } from "vuex";
 import $ from 'jquery'
-import { ROUTE_NAME_DESIGN_DOCUMENT_FOLDER, ROUTE_NAME_DESIGN_DOCUMENT_DOCUMENT, ROUTE_NAME_DESIGN_DOCUMENT_DOCUMENT_ACTION } from '../../router'
+import { ROUTE_NAME } from '../../router'
 import VueMarkdown from "vue-markdown";
 import draggable from "vuedraggable";
 import ddRequest from './request'
@@ -139,7 +139,7 @@ const handleFolderClick = (_this, folderId) => {
     _this.$set(_this.leftMenu, 'documents', documents)
 
     _this.$router.push({
-      name: ROUTE_NAME_DESIGN_DOCUMENT_FOLDER,
+      name: ROUTE_NAME.DESIGN_DOCUMENT_FOLDER,
       params: {
         teamId: _this.common.teamId,
         projectId: _this.common.projectId,
@@ -185,7 +185,7 @@ const handleDocumentCreateClick = (_this) => {
     _this.hideProgressBar()
 
     _this.$router.push({
-      name: ROUTE_NAME_DESIGN_DOCUMENT_DOCUMENT_ACTION,
+      name: ROUTE_NAME.DESIGN_DOCUMENT_DOCUMENT_ACTION,
       params: {
         teamId: _this.common.teamId,
         projectId: _this.common.projectId,
@@ -340,7 +340,7 @@ const handleDocumentClick = (_this, documentId) => {
     _this.$set(_this.display, 'mode', 'view')
 
     _this.$router.push({
-      name: ROUTE_NAME_DESIGN_DOCUMENT_DOCUMENT,
+      name: ROUTE_NAME.DESIGN_DOCUMENT_DOCUMENT,
       params: {
         teamId: _this.common.teamId,
         projectId: _this.common.projectId,
@@ -361,7 +361,7 @@ const handleDocumentEditClick = (_this) => {
   _this.$set(_this.display, 'mode', 'edit')
   _this.$set(_this.document, 'backup', _this.document.content)
   _this.$router.push({
-    name: ROUTE_NAME_DESIGN_DOCUMENT_DOCUMENT_ACTION,
+    name: ROUTE_NAME.DESIGN_DOCUMENT_DOCUMENT_ACTION,
     params: {
       teamId: _this.common.teamId,
       projectId: _this.common.projectId,
@@ -382,7 +382,7 @@ const handleDocumentEditCancelClick = (_this) => {
   _this.$set(_this.display, 'mode', 'view')
 
   _this.$router.push({
-    name: ROUTE_NAME_DESIGN_DOCUMENT_DOCUMENT,
+    name: ROUTE_NAME.DESIGN_DOCUMENT_DOCUMENT,
     params: {
       teamId: _this.common.teamId,
       projectId: _this.common.projectId,
@@ -409,7 +409,7 @@ const handleDocumentSaveClick = (_this) => {
     _this.$set(_this.display, 'mode', 'view')
 
     _this.$router.push({
-      name: ROUTE_NAME_DESIGN_DOCUMENT_DOCUMENT,
+      name: ROUTE_NAME.DESIGN_DOCUMENT_DOCUMENT,
       params: {
         teamId: _this.common.teamId,
         projectId: _this.common.projectId,
@@ -463,7 +463,7 @@ const handleDocumentDeleteButtonClick = (_this) => {
     _this.$set(_this.dialog.documentDelete, 'visible', false)
 
     _this.$router.push({
-      name: ROUTE_NAME_DESIGN_DOCUMENT_FOLDER,
+      name: ROUTE_NAME.DESIGN_DOCUMENT_FOLDER,
       params: {
         teamId: _this.common.teamId,
         projectId: _this.common.projectId,

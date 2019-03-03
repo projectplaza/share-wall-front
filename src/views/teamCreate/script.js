@@ -1,6 +1,6 @@
 import { mapMutations } from "vuex";
 import { PATH_PROF, PATH_PROF_FRIEND, PATH_TEAM, PATH_TEAM_LIST, PATH_TEAM_USER } from "../../constants/apiConstant";
-import { ROUTE_NAME_PROJECT_CREATE } from '../../router'
+import { ROUTE_NAME } from '../../router'
 import { getRequest, postRequest } from "../../utils/apiUtil";
 import { isSingleByte } from "../../utils/validUtil";
 
@@ -119,7 +119,7 @@ const app = {
 
             // TODO ダッシュボードへ
             this.$router.push({
-              name: ROUTE_NAME_PROJECT_CREATE,
+              name: ROUTE_NAME.TEAM_DASHBOARD,
               params: {
                 teamId: this.$store.state.common.header.team.current
               }

@@ -1,0 +1,6 @@
+<div class="team-dashboard">
+  <ul>
+    <li v-for="pj in $store.state.common.header.project.list" :key="pj.code">{{ pj.name }}</li>
+  </ul>
+  <router-link :to="{ name: ROUTE_NAME.PROJECT_CREATE, params: { teamId: $store.state.common.header.team.current }}">プロジェクトを作成</router-link>
+</div>

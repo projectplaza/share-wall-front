@@ -5,13 +5,17 @@ import { BASE_URL } from './constants/constant'
 
 Vue.use(Router)
 
-export const ROUTE_NAME_TEAM_CREATE = 'team-create'
-export const ROUTE_NAME_PROJECT_CREATE = 'project-create'
-export const ROUTE_NAME_WALL = 'wall'
-export const ROUTE_NAME_DESIGN_DOCUMENT_HOME = 'design-document-home'
-export const ROUTE_NAME_DESIGN_DOCUMENT_FOLDER = 'design-document-folder'
-export const ROUTE_NAME_DESIGN_DOCUMENT_DOCUMENT = 'design-document-document'
-export const ROUTE_NAME_DESIGN_DOCUMENT_DOCUMENT_ACTION = 'design-document-document-action'
+export const ROUTE_NAME = {
+  TEAM_CREATE: 'team-create',
+  TEAM_DASHBOARD: 'team-dashboard',
+  PROJECT_CREATE: 'project-create',
+  PROJECT_DASHBOARD: 'project-dashboard',
+  WALL: 'wall',
+  DESIGN_DOCUMENT_HOME: 'design-document-home',
+  DESIGN_DOCUMENT_FOLDER: 'design-document-folder',
+  DESIGN_DOCUMENT_DOCUMENT: 'design-document-document',
+  DESIGN_DOCUMENT_DOCUMENT_ACTION: 'design-document-document-action'
+}
 
 export default new Router({
   mode: 'history',
@@ -19,37 +23,47 @@ export default new Router({
   routes: [
     {
       path: BASE_URL + 't/setting/owner/create',
-      name: ROUTE_NAME_TEAM_CREATE,
+      name: ROUTE_NAME.TEAM_CREATE,
       component: () => import('./views/TeamCreate.vue')
     },
     {
+      path: BASE_URL + 't/:teamId/dashboard',
+      name: ROUTE_NAME.TEAM_DASHBOARD,
+      component: () => import('./views/TeamDashboard.vue')
+    },
+    {
       path: BASE_URL + 't/:teamId/p/setting/owner/create',
-      name: ROUTE_NAME_PROJECT_CREATE,
+      name: ROUTE_NAME.PROJECT_CREATE,
       component: () => import('./views/ProjectCreate.vue')
     },
     {
+      path: BASE_URL + 't/:teamId/p/:projectId/dashboard',
+      name: ROUTE_NAME.PROJECT_DASHBOARD,
+      component: () => import('./views/ProjectDashboard.vue')
+    },
+    {
       path: BASE_URL + 't/:teamCode/p/:projectCode/wall',
-      name: ROUTE_NAME_WALL,
+      name: ROUTE_NAME.WALL,
       component: () => import('./views/ProjectWall.vue')
     },
     {
       path: BASE_URL + 't/:teamId/p/:projectId/design-document',
-      name: ROUTE_NAME_DESIGN_DOCUMENT_HOME,
+      name: ROUTE_NAME.DESIGN_DOCUMENT_HOME,
       component: () => import('./views/DesignDocument.vue')
     },
     {
       path: BASE_URL + 't/:teamId/p/:projectId/design-document/:folderId',
-      name: ROUTE_NAME_DESIGN_DOCUMENT_FOLDER,
+      name: ROUTE_NAME.DESIGN_DOCUMENT_FOLDER,
       component: () => import('./views/DesignDocument.vue')
     },
     {
       path: BASE_URL + 't/:teamId/p/:projectId/design-document/:folderId/:documentId',
-      name: ROUTE_NAME_DESIGN_DOCUMENT_DOCUMENT,
+      name: ROUTE_NAME.DESIGN_DOCUMENT_DOCUMENT,
       component: () => import('./views/DesignDocument.vue')
     },
     {
       path: BASE_URL + 't/:teamId/p/:projectId/design-document/:folderId/:documentId/:mode',
-      name: ROUTE_NAME_DESIGN_DOCUMENT_DOCUMENT_ACTION,
+      name: ROUTE_NAME.DESIGN_DOCUMENT_DOCUMENT_ACTION,
       component: () => import('./views/DesignDocument.vue')
     }
   ]

@@ -20,6 +20,11 @@ export const handleCreated = (_this) => {
 
 export const handleChangeCurrentTeam = (_this) => {
 
+  if (_this.currentTeam == null) {
+    _this.setProjectList([])
+    return
+  }
+
   getProjectListRequest(_this.currentTeam.code).then(list => {
     const projectList = list.map(l => {
       return {
