@@ -92,7 +92,7 @@ const designDocumentApp = {
     handleDocumentDeleteCancelClick: function() {handleDocumentDeleteCancelClick(this)},
 
     // Vuex mutations
-    ...mapMutations("common", ["showProgressBar", "hideProgressBar"])
+    ...mapMutations("common", ["showProgressBar", "hideProgressBar", 'changeCurrentTeam', 'changeCurrentProject'])
   },
 
   computed: {
@@ -497,6 +497,9 @@ const init = (_this) => {
   const folderId = _this.$route.params.folderId
   const documentId = _this.$route.params.documentId
   const mode = _this.$route.params.mode
+
+  _this.changeCurrentTeam(teamId)
+  _this.changeCurrentProject(projectId)
 
   // 取得したパラメタをVueデータに設定
   _this.common.teamId = teamId

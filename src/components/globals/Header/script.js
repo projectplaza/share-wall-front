@@ -1,6 +1,7 @@
-import { mapGetters, mapMutations } from "vuex";
-import { BASE_URL } from "../../../constants/constant.js";
-import { setLoginInfo, getLoginInfo, setTempLoginInfo, getTempLoginInfo } from "../../../utils/storageUtil";
+import { mapGetters, mapMutations } from "vuex"
+import { BASE_URL } from "../../../constants/constant.js"
+import { setLoginInfo, getLoginInfo, setTempLoginInfo, getTempLoginInfo } from "../../../utils/storageUtil"
+import handler from './handle'
 
 export default {
   name: "Header",
@@ -21,28 +22,28 @@ export default {
   },
   methods: {
     // チームメニューのクリックハンドラ
-    handleTeamClick: function() {
+    handleTeamClick: function () {
       this.$set(this.teamSelect, "visible", !this.teamSelect.visible);
       this.hideProjectSelect();
     },
     // プロジェクトメニューのクリックハンドラ
-    handleProjectClick: function() {
+    handleProjectClick: function () {
       this.$set(this.projectSelect, "visible", !this.projectSelect.visible);
       this.hideTeamSelect();
     },
     // チーム一覧を隠す
-    hideTeamSelect: function() {
+    hideTeamSelect: function () {
       this.$set(this.teamSelect, "visible", false);
     },
     // プロジェクト一覧を隠す
-    hideProjectSelect: function() {
+    hideProjectSelect: function () {
       this.$set(this.projectSelect, "visible", false);
     },
     // ユーザーボタンのクリックハンドラ
-    handleProfileClick: function() {
+    handleProfileClick: function () {
       this.$set(this.profile, "visible", !this.profile.visible);
     },
-    handleLogoutClick: function() {
+    handleLogoutClick: function () {
       // 自動ログイン情報を取得
       const loginInfo = getLoginInfo();
       if (loginInfo !== null) {
@@ -59,12 +60,15 @@ export default {
     ...mapMutations("common", [
       "changeCurrentTeam",
       "changeCurrentProject",
+      "setTeamList",
+      "setProjectList",
       "switchShortcutContent",
       "setLoginState"
     ])
   },
-  props: {
-    teams: Array,
-    projects: Array
-  }
+
+  watch: {
+    'currentTeam': function() { handler.handleChangeCurrentTeam(this) }
+  },
+  created: function () { handler.handleCreated(this) },
 };

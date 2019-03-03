@@ -8,19 +8,13 @@ const state = {
   header: {
     // チーム
     team: {
-      current: '123', // code
-      list: [
-        { code: '123', name: 'ProjectPlaza' },
-        { code: '124', name: 'UDC2018' }
-      ]
+      current: null, // code
+      list: []
     },
     // プロジェクト
     project: {
-      current: '1235', // code
-      list: [
-        { code: '1235', name: 'ShareWall' },
-        { code: '1215215', name: 'SmartWork' }
-      ]
+      current: null,
+      list: []
     },
     progressBar: {
       visible: false
@@ -76,7 +70,7 @@ const mutations = {
       current: code
     }
   },
-  // 現在のチームリストを更新
+  // チームリストを更新
   setTeamList: (state, teamList) => {
     state.header.team = {
       ...state.header.team,
@@ -92,6 +86,13 @@ const mutations = {
   },
   // 現在のチームリストを更新
   changeProjectList: (state, projectList) => {
+    state.header.project = {
+      ...state.header.project,
+      list: projectList
+    }
+  },
+  // チームリストを更新
+  setProjectList: (state, projectList) => {
     state.header.project = {
       ...state.header.project,
       list: projectList

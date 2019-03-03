@@ -4,7 +4,8 @@
     <div class="icon">
       <img src="../../../assets/talent.png">
     </div>
-    <div class="name">{{currentTeam.name}}</div>
+    <div class="name" v-if="!currentTeam">チームを選択してください</div>
+    <div class="name" v-if="currentTeam">{{currentTeam.name}}</div>
     <img class="dropdown-icon" src="../../../assets/dropdown-gray.png">
     <div class="select" v-if="teamSelect.visible">
       <div
@@ -12,7 +13,7 @@
         v-for="t in $store.state.common.header.team.list"
         :key="t.code"
         @click="() => {changeCurrentTeam(t.code)}"
-      >-&ensp;{{t.name}}</div>
+      ><img src="../../../assets/team-gray.png" class="select-item-icon" />{{t.name}}</div>
       <router-link :to="baseURL + 't/setting/owner/create'" class="select-item">＋&emsp;Add</router-link>
     </div>
   </div>
@@ -21,7 +22,8 @@
     <div class="icon">
       <img src="../../../assets/project.png">
     </div>
-    <div class="name">{{currentProject.name}}</div>
+    <div class="name" v-if="!currentProject">プロジェクトを選択してください</div>
+    <div class="name" v-if="currentProject">{{currentProject.name}}</div>
     <img class="dropdown-icon" src="../../../assets/dropdown-gray.png">
     <div class="select" v-if="projectSelect.visible">
       <div
@@ -30,7 +32,7 @@
         :key="p.code"
         @click="() => {changeCurrentProject(p.code)}"
       >-&ensp;{{p.name}}</div>
-      <router-link :to="baseURL + 't/' + $store.state.common.header.team.current + '/p/setting/owner/create'" class="select-item">＋&emsp;Add</router-link>
+      <router-link :to="baseURL + 't/' + $store.state.common.header.team.current + '/p/setting/owner/create'" class="select-item" v-if="currentTeam">＋&emsp;Add</router-link>
     </div>
   </div>
   <!-- ショートカットメニュー -->

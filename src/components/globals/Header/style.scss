@@ -63,8 +63,16 @@
         color: #444444;
         background-color: #ffffff;
         text-decoration: none;
+
         &:hover {
           background-color: #f9f9f9;
+        }
+
+        .select-item-icon {
+          width: 20px;
+          margin-top: -3px;
+          margin-right: 7px;
+          vertical-align: middle;
         }
       }
     }
