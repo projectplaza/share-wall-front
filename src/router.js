@@ -42,7 +42,7 @@ export default new Router({
       component: () => import('./views/ProjectDashboard.vue')
     },
     {
-      path: BASE_URL + 't/:teamCode/p/:projectCode/wall',
+      path: BASE_URL + 't/:teamId/p/:projectId/wall',
       name: ROUTE_NAME.WALL,
       component: () => import('./views/ProjectWall.vue')
     },

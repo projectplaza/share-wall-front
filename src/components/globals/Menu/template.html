@@ -1,0 +1,11 @@
+<div class="menu">
+  <img src="../../../assets/logo.png" class="logo">
+  <router-link
+    v-for="m in menus"
+    :to="{name: m.name, params: {teamId: $store.state.common.header.team.current, projectId: $store.state.common.header.project.current}}"
+    :key="m.code"
+    v-if="($store.state.common.header.project.current !== null || !m.isPjMenu)"
+    class="f-icon">
+    <img :src="require('../../../assets/' + m.icon + '.png')">
+  </router-link>
+</div>
