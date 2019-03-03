@@ -1,58 +1,6 @@
-import { mapMutations } from "vuex";
-import { PATH_PROF, PATH_PROF_FRIEND, PATH_TEAM, PATH_TEAM_USER } from "../../constants/apiConstant";
-import { getRequest, postRequest } from "../../utils/apiUtil";
-import { isSingleByte } from "../../utils/validUtil";
-
-/**
- * プロジェクト名のバリデーションを行う
- * @param {string} teamName プロジェクト名
- * @returns {boolean} 判定結果
- */
-const validPjName = pjName => {
-  if (pjName.length > 30) {
-    return false;
-  }
-  return true;
-};
-
-/**
- * プロジェクトコードのバリデーションを行う
- * @param {string} pjCode プロジェクトコード
- * @returns {boolean} 判定結果
- */
-const validPjCode = pjCode => {
-  if (pjCode.length > 20) {
-    return false;
-  }
-  for (var i = 0; i < pjCode.length; i++) {
-    if (!isSingleByte(pjCode.charAt(i))) {
-      return false;
-    }
-  }
-  return true;
-};
-
-/**
- * プロジェクト説明のバリデーションを行う
- * @param {string} pjAbstract チーム説明
- * @returns {boolean} 判定結果
- */
-const validPjAbstract = pjAbstract => {
-  if (pjAbstract.length > 1000) {
-    return false;
-  }
-  return true;
-};
-
-const toLower = text => {
-  return text.toString().toLowerCase();
-};
-const searchByName = (items, term) => {
-  if (term) {
-    return items.filter(item => toLower(item.name).includes(toLower(term)));
-  }
-  return items;
-};
+import { mapMutations } from "vuex"
+import handler from './handler'
+import validator from './validator'
 
 /**
  * Vueオブジェクト
@@ -64,62 +12,62 @@ const app = {
   data: () => ({
     project: {
       name: '',
-      abstract: '',
       code: '',
-      members: []
+      content: ''
     },
-    selected: [],
     button: {
       disabled: false
     },
     showDialog: false,
-    list: {
+    member: {
       users: []
-    },
-    people: [
-      {
-        id: 1,
-        name: "Shawna Dubbin",
-        auth: ['1', '2']
-      }
-    ]
+    }
   }),
 
-  computed: {
+  methods: {
+    // プロジェクトメンバー削除イベントハンドラ
+    handleProjectMemberRemoveClick(userId) { handler.handleProjectMemberRemoveClick(this, userId) },
+    // プロジェクトメンバー追加イベントハンドラ
+    handleProjectMemberAddClick(userId) { handler.handleProjectMemberAddClick(this, userId) },
+    // 作成ボタンクリックイベントハンドラ
+    handleCreateButtonClick() { handler.handleCreateButtonClick(this) },
+    // キャンセルボタンクリックイベントハンドラ
+    handleCancelClick() { handler.handleCancelClick(this) },
+    // 作成イベント
+    create() { handler.handleCreateButtonClick(this) },
+    // Mutations
+    ...mapMutations("common", ['changeCurrentTeam', 'changeCurrentProject', 'showProgressBar', 'hideProgressBar'])
+  },
 
+  created: function() { handler.handleCreated(this) },
+
+  computed: {
     // プロジェクト名（テキストボックス）のクラスバインダ
     pjNameClass() {
       return {
-        "md-invalid": !validPjName(this.project.name)
-      };
+        "md-invalid": !validator.validPjName(this.project.name)
+      }
     },
-
     // プロジェクトコード（テキストボックス）のクラスバインダ
     pjCodeClass() {
       return {
-        "md-invalid": !validPjCode(this.project.code)
-      };
+        "md-invalid": !validator.validPjCode(this.project.code)
+      }
     },
-
     // プロジェクト説明（テキストエリア）のクラスバインダ
     pjAbstractClass() {
       return {
-        "md-invalid": !validPjAbstract(this.project.abstract)
-      };
+        "md-invalid": !validator.validPjAbstract(this.project.content)
+      }
     },
-
-  },
-
-  methods: {
-
-    // 作成イベント
-    create() {
-      this.showProgressBar()
-      this.$set(this.button, 'disabled', true)
+    // プロジェクトメンバーリスト
+    members() {
+      return this.member.users.filter(user => user.isMember === true)
     },
-
-    // Mutations
-    ...mapMutations("common", ["showProgressBar", "hideProgressBar"])
+    // チームメンバーリスト
+    teamMembers() {
+      return this.member.users.filter(user => user.isMember === false)
+    }
   }
 };
 

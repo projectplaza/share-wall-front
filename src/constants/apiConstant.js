@@ -19,8 +19,14 @@ export const PATH_TEAM_LIST = '/v1/teams/list'
 // PATH:チームユーザー
 export const PATH_TEAM_USER = '/v1/teams/users'
 
-// PATH:チーム一覧
+// PATH:プロジェクト
+export const PATH_PROJECT = '/v1/projects'
+
+// PATH:プロジェクト一覧
 export const PATH_PROJECT_LIST = '/v1/projects/list'
+
+// PATH:プロジェクト
+export const PATH_PROJECT_USER = '/v1/projects/users'
 
 // PATH:フォルダ一覧
 export const PATH_DESIGN_DOCUMENT_FOLDER_LIST = '/v1/design_documents/folder/list'

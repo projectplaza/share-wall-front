@@ -26,7 +26,7 @@
     <!-- プロジェクト説明 -->
     <md-field :class="pjAbstractClass">
       <label>プロジェクトの説明</label>
-      <md-textarea v-model="project.abstract" md-autogrow :disabled="button.disabled"></md-textarea>
+      <md-textarea v-model="project.content" md-autogrow :disabled="button.disabled"></md-textarea>
       <span class="md-helper-text">1,000文字まで</span>
       <span class="md-error">説明文は1,000文字までです。</span>
     </md-field>
@@ -57,7 +57,7 @@
             <td class="button-cell">
               <md-checkbox v-model="member.auth" value="2" class="md-primary" v-if="!member.isAuthor" :disabled="button.diabled"></md-checkbox>
             </td>
-            <td class="button-cell"><input type="button" value="−" class="delete-button" v-if="!member.isAuthor" @click="()=> { handleRemoveClick(member.userId) }"
+            <td class="button-cell"><input type="button" value="−" class="delete-button" v-if="!member.isAuthor" @click="()=> { handleProjectMemberRemoveClick(member.userId) }"
                 :disabled="button.diabled"></td>
           </tr>
         </tbody>
@@ -68,12 +68,12 @@
 
   <!-- ボタン -->
   <div class="submit-button-box">
-    <md-button :md-ripple="false" :disabled="button.disabled">キャンセル</md-button>
-    <md-button class="md-raised md-primary" @click="create" :disabled="button.disabled">プロジェクトを作成</md-button>
+    <md-button :md-ripple="false" :disabled="button.disabled" @click="handleCancelClick">キャンセル</md-button>
+    <md-button class="md-raised md-primary" @click="handleCreateButtonClick" :disabled="button.disabled">プロジェクトを作成</md-button>
   </div>
 
   <!-- ダイアログ -->
-  <md-dialog :md-active.sync="showDialog" class="friend-table">
+  <md-dialog :md-active.sync="showDialog" class="team-member-table">
     <div>
       <table>
         <thead>
@@ -82,9 +82,9 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="friend in friends" :key="friend.userId">
-            <td v-if="!friend.disabled" @click="() => { handleFriendClick(friend.userId) }">{{ friend.userName }}</td>
-            <td v-if="friend.disabled" class="disabled">{{ friend.userName }}</td>
+          <tr v-for="teamMember in teamMembers" :key="teamMember.userId">
+            <td v-if="!teamMember.disabled" @click="() => { handleProjectMemberAddClick(teamMember.userId) }">{{ teamMember.userName }}</td>
+            <td v-if="teamMember.disabled" class="disabled">{{ teamMember.userName }}</td>
           </tr>
         </tbody>
       </table>
