@@ -381,6 +381,9 @@ const init = (_this) => {
 
   marked.setOptions({
     // langPrefix: '',
+    mangle: false,
+    sanitize: true,
+    breaks : true,
     highlight: function(code, lang) {
       if (lang == null || lang == '') {
         return hljs.highlightAuto(code).value
@@ -532,6 +535,7 @@ export default {
   handleDocumentSaveClick,
   handleShowDeleteDialogClick,
   handleDocumentDeleteCancelClick,
+  handleDocumentDeleteButtonClick,
   init,
   computedCompiledMarkdown
 }

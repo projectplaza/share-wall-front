@@ -9,8 +9,8 @@ export const handleCreated = (_this) => {
   getTeamListRequest().then(list => {
     const teamList = list.map(l => {
       return {
-        code: l.team_id,
-        name: l.team_name
+        code: l.teamId,
+        name: l.teamName
       }
     })
 
@@ -28,8 +28,8 @@ export const handleChangeCurrentTeam = (_this) => {
   getProjectListRequest(_this.currentTeam.code).then(list => {
     const projectList = list.map(l => {
       return {
-        code: l.project_id,
-        name: l.project_name
+        code: l.projectId,
+        name: l.projectName
       }
     })
 
