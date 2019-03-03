@@ -8,8 +8,13 @@
 
   .logo {
     display: block;
-    width: 20px;
-    margin: 20px auto 10px auto;
+    padding: 0px 15px;
+
+    img {
+      display: block;
+      width: 20px;
+    }
+    margin: 15px auto 10px auto;
   }
 
   .f-icon {
