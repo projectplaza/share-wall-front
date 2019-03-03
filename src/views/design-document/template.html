@@ -50,8 +50,9 @@
     <div class="box" :style="boxStyle">
       <div class="paper">
         <div class="document">
-          <vue-markdown :source="document.content" :html="false" :toc="true" :toc-first-level="1" :toc-anchor-link="false"
-            :anchorAttributes="{target: '_blank'}" v-highlight></vue-markdown>
+          <div v-html="compiledMarkdown"></div>
+          <!-- <vue-markdown :source="document.content" :html="false" :toc="true" :toc-first-level="1" :toc-anchor-link="false"
+            :anchorAttributes="{target: '_blank'}" v-highlight></vue-markdown> -->
         </div>
         <div class="document-edit" v-if="display.mode === 'view'" @click="handleDocumentEditClick">
           <img src="../../assets/pen.png"  />
