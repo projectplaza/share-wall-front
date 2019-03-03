@@ -1,6 +1,9 @@
 .document {
-  color: #000000;
-  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Yu Gothic", YuGothic, "ヒラギノ角ゴ ProN W3", Hiragino Kaku Gothic ProN, Arial, "メイリオ", Meiryo, sans-serif;
+  color: #444444;
+  font-family: "ヒラギノ角ゴ ProN W3", Hiragino Kaku Gothic ProN, Arial, "メイリオ", Meiryo, sans-serif;
+  font-size: 14px;
+  // font-family: Consolas, Monaco, monospace !important;
+  // font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Yu Gothic", YuGothic, "ヒラギノ角ゴ ProN W3", Hiragino Kaku Gothic ProN, Arial, "メイリオ", Meiryo, sans-serif;
   // font-family: 'Open Sans','Hiragino Sans','ヒラギノ角ゴシック','Hiragino Kaku Gothic ProN','ヒラギノ角ゴ ProN W3','Helvetica Neue',Helvetica,Arial,sans-serif;
 
   h1 {
@@ -57,8 +60,10 @@
     padding: 10px;
     background-color: #f5f5f5;
     font-size: 12px;
-    border: 1px solid #f5f5f5;
-    border-radius: 3px;
+    border: 0px solid #f3e5f5;
+    border-left: 2px solid #ab47bc;
+    border-right: 2px solid #dddddd;
+    // border-radius: 3px;
 
     code {
       background-color: #f5f5f5 !important;

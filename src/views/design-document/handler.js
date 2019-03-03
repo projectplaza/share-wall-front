@@ -527,6 +527,7 @@ export default {
   handleDeleteFolderButtonClick,
   handleUpdateFolderSettingButtonClick,
   handleFolderSettingCancelButtonClick,
+  handleShowFolderCreateDialogButtonClick,
   handleFolderCreateButtonClick,
   handleFolderCreateCancelButtonClick,
   handleDocumentClick,
