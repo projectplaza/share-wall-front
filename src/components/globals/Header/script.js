@@ -1,5 +1,5 @@
 import { mapGetters, mapMutations } from "vuex"
-import $ from 'jquery'
+import jQuery from 'jquery'
 import { BASE_URL } from "../../../constants/constant.js"
 import { setLoginInfo, getLoginInfo, setTempLoginInfo, getTempLoginInfo } from "../../../utils/storageUtil"
 import handler from './handle'
@@ -26,10 +26,10 @@ export default {
     handleTeamClick: function (e) {
       this.$set(this.teamSelect, "visible", !this.teamSelect.visible);
       const _this = this
-      $(document).on('click.team', function(event) {
-        if(!$(event.target).closest('.team-pulldown').length) {
+      jQuery(document).on('click.team', function(event) {
+        if(!jQuery(event.target).closest('.team-pulldown').length) {
           _this.$set(_this.teamSelect, 'visible', false)
-          $(document).off('click.team')
+          jQuery(document).off('click.team')
         }
       })
     },
@@ -37,10 +37,10 @@ export default {
     handleProjectClick: function (e) {
       this.$set(this.projectSelect, "visible", !this.projectSelect.visible);
       const _this = this
-      $(document).on('click.project', function(event) {
-        if(!$(event.target).closest('.project-pulldown').length) {
+      jQuery(document).on('click.project', function(event) {
+        if(!jQuery(event.target).closest('.project-pulldown').length) {
           _this.$set(_this.projectSelect, 'visible', false)
-          $(document).off('click.project')
+          jQuery(document).off('click.project')
         }
       })
     },
@@ -48,10 +48,10 @@ export default {
     handleProfileClick: function () {
       this.$set(this.profile, "visible", !this.profile.visible);
       const _this = this
-      $(document).on('click.profile', function(event) {
-        if(!$(event.target).closest('.user-pulldown').length) {
+      jQuery(document).on('click.profile', function(event) {
+        if(!jQuery(event.target).closest('.user-pulldown').length) {
           _this.$set(_this.profile, 'visible', false)
-          $(document).off('click.profile')
+          jQuery(document).off('click.profile')
         }
       })
     },

@@ -77,6 +77,13 @@ const mutations = {
       list: teamList
     }
   },
+  // チームリストを更新
+  setProjectList: (state, projectList) => {
+    state.header.project = {
+      ...state.header.project,
+      list: projectList
+    }
+  },
   // 現在のプロジェクトを変更
   changeCurrentProject: (state, code) => {
     state.header.project = {
@@ -86,13 +93,6 @@ const mutations = {
   },
   // 現在のチームリストを更新
   changeProjectList: (state, projectList) => {
-    state.header.project = {
-      ...state.header.project,
-      list: projectList
-    }
-  },
-  // チームリストを更新
-  setProjectList: (state, projectList) => {
     state.header.project = {
       ...state.header.project,
       list: projectList
