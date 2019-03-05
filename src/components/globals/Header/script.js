@@ -1,4 +1,5 @@
 import { mapGetters, mapMutations } from "vuex"
+import $ from 'jquery'
 import { BASE_URL } from "../../../constants/constant.js"
 import { setLoginInfo, getLoginInfo, setTempLoginInfo, getTempLoginInfo } from "../../../utils/storageUtil"
 import handler from './handle'
@@ -22,26 +23,37 @@ export default {
   },
   methods: {
     // チームメニューのクリックハンドラ
-    handleTeamClick: function () {
+    handleTeamClick: function (e) {
       this.$set(this.teamSelect, "visible", !this.teamSelect.visible);
-      this.hideProjectSelect();
+      const _this = this
+      $(document).on('click.team', function(event) {
+        if(!$(event.target).closest('.team-pulldown').length) {
+          _this.$set(_this.teamSelect, 'visible', false)
+          $(document).off('click.team')
+        }
+      })
     },
     // プロジェクトメニューのクリックハンドラ
-    handleProjectClick: function () {
+    handleProjectClick: function (e) {
       this.$set(this.projectSelect, "visible", !this.projectSelect.visible);
-      this.hideTeamSelect();
-    },
-    // チーム一覧を隠す
-    hideTeamSelect: function () {
-      this.$set(this.teamSelect, "visible", false);
-    },
-    // プロジェクト一覧を隠す
-    hideProjectSelect: function () {
-      this.$set(this.projectSelect, "visible", false);
+      const _this = this
+      $(document).on('click.project', function(event) {
+        if(!$(event.target).closest('.project-pulldown').length) {
+          _this.$set(_this.projectSelect, 'visible', false)
+          $(document).off('click.project')
+        }
+      })
     },
     // ユーザーボタンのクリックハンドラ
     handleProfileClick: function () {
       this.$set(this.profile, "visible", !this.profile.visible);
+      const _this = this
+      $(document).on('click.profile', function(event) {
+        if(!$(event.target).closest('.user-pulldown').length) {
+          _this.$set(_this.profile, 'visible', false)
+          $(document).off('click.profile')
+        }
+      })
     },
     handleLogoutClick: function () {
       // 自動ログイン情報を取得

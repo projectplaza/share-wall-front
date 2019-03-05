@@ -1,6 +1,6 @@
 <div class="header">
   <!-- チーム選択 -->
-  <div class="team move" @click="handleTeamClick">
+  <div class="team move team-pulldown" @click="handleTeamClick">
     <div class="icon">
       <img src="../../../assets/talent.png">
     </div>
@@ -18,7 +18,7 @@
     </div>
   </div>
   <!-- プロジェクト選択 -->
-  <div class="team move" @click="handleProjectClick">
+  <div class="team move project-pulldown" @click="handleProjectClick">
     <div class="icon">
       <img src="../../../assets/project.png">
     </div>
@@ -57,7 +57,7 @@
         <img src="../../../assets/memo-gray.png">
       </div>
     </div>
-    <div class="block" @click="handleProfileClick">
+    <div class="block user-pulldown" @click="handleProfileClick">
       <div class="icon">
         <img src="../../../assets/user-gray.png">
       </div>
