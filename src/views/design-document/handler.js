@@ -12,7 +12,7 @@ import ddRequest from './request'
 const handleFolderClick = (_this, folderId) => {
 
   _this.showProgressBar()
-  
+
   _this.leftMenu.folders.map(folder => {
     if (folder.folderId == folderId) {
       folder.className.opened = true
@@ -202,7 +202,7 @@ const handleFolderCreateCancelButtonClick = (_this) => {
  * @param {string} documentId ドキュメントID
  */
 const handleDocumentClick = (_this, documentId) => {
-  
+
   _this.showProgressBar()
 
   const documents = _this.leftMenu.documents.map(doc => {
@@ -287,7 +287,7 @@ const handleDocumentEditCancelClick = (_this) => {
  * @param {object} _this 
  */
 const handleDocumentSaveClick = (_this) => {
-  
+
   _this.showProgressBar()
 
   ddRequest.putDocumentRequest(_this.common.teamId, _this.common.projectId, _this.document).then(document => {
@@ -325,7 +325,7 @@ const handleShowDeleteDialogClick = (_this) => {
  * @param {object} _this 
  */
 const handleDocumentDeleteButtonClick = (_this) => {
-  
+
   _this.showProgressBar()
 
   ddRequest.deleteDocumentRequest(_this.common.teamId, _this.common.projectId, _this.document.folderId, _this.document.documentId).then(result => {
@@ -383,8 +383,8 @@ const init = (_this) => {
     // langPrefix: '',
     mangle: false,
     sanitize: true,
-    breaks : true,
-    highlight: function(code, lang) {
+    breaks: true,
+    highlight: function (code, lang) {
       if (lang == null || lang == '') {
         return hljs.highlightAuto(code).value
       }
@@ -506,7 +506,20 @@ const initDocument = (_this) => {
     }
 
     _this.hideProgressBar()
+
+    window.setTimeout(function () {
+      $("a[href^='http']:not([href*='" + location.hostname + "'])").attr('target', '_blank')
+    }, 200)
   })
+}
+
+/**
+ * コンパイル済みテキストが変更された際のイベントハンドラ
+ */
+const handleChangeCompiledMarkdown = () => {
+  window.setTimeout(function () {
+    $("a[href^='http']:not([href*='" + location.hostname + "'])").attr('target', '_blank')
+  }, 200)
 }
 
 /**
@@ -538,5 +551,6 @@ export default {
   handleDocumentDeleteCancelClick,
   handleDocumentDeleteButtonClick,
   init,
-  computedCompiledMarkdown
+  computedCompiledMarkdown,
+  handleChangeCompiledMarkdown
 }

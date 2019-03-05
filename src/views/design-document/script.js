@@ -1,4 +1,5 @@
 import { mapMutations } from "vuex";
+import jQuery from 'jquery'
 import VueMarkdown from "vue-markdown";
 import draggable from "vuedraggable";
 import { ROUTE_NAME } from '../../router'
@@ -106,6 +107,10 @@ const designDocumentApp = {
       return (this.display.mode === 'edit') ? { width: '50%', display: 'inline-block' } : { width: '100%' }
     },
     compiledMarkdown: function () { return handler.computedCompiledMarkdown(this) }
+  },
+
+  watch: {
+    compiledMarkdown: handler.handleChangeCompiledMarkdown
   },
 
   created: function () { handler.init(this) },
