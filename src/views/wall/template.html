@@ -1,0 +1,36 @@
+<div class="wall">
+  <div class="category">
+    <div class="item" v-for="c in categories" :class="{selected: c.selected}" :key="c.code">
+      <img v-if="!c.selected" src="../../assets/board-gray.png" />
+      <img v-if="c.selected" src="../../assets/board.png" />
+      {{c.name}}
+    </div>
+    <div class="item">＋&emsp;Add</div>
+  </div>
+  <div class="board">
+    <div class="header">
+      <div class="title">ボード開発グループ</div>
+    </div>
+    <div class="body">
+      <div class="tray" v-for="tray in trays" :key="tray.code">
+        <div class="title">
+          {{tray.name}}
+        </div>
+        <div class="inner">
+          <draggable element="div" :options="options" v-model="tray.list">
+            <transition-group class="list-group">
+              <div class="item" v-for="item in tray.list" :key="item.code">
+                <div class="task-name">{{item.name}}</div>
+                <div class="task-detail">
+                    <div class="priority">High</div>
+                  <div class="assign">yumochi21</div>
+                  <div class="limit">2019-03-30</div>
+                </div>
+              </div>
+            </transition-group>
+          </draggable>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

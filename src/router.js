@@ -44,7 +44,7 @@ export default new Router({
     {
       path: BASE_URL + 't/:teamId/p/:projectId/wall',
       name: ROUTE_NAME.WALL,
-      component: () => import('./views/ProjectWall.vue')
+      component: () => import('./views/Wall.vue')
     },
     {
       path: BASE_URL + 't/:teamId/p/:projectId/design-document',

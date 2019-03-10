@@ -1,0 +1,141 @@
+.wall {
+  height: 100%;
+  background-color: #f9f9f9;
+
+  .category {
+    display: inline-block;
+    width: 180px;
+    height: 100%;
+    background-color: #ffffff;
+    vertical-align: top;
+    user-select: none;
+    border-right: 1px solid #eeeeee;
+    color: #666666;
+
+    .item {
+      position: relative;
+      padding: 12px 12px;
+      font-size: 12px;
+      cursor: pointer;
+      margin: 6px 8px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      border-radius: 3px;
+
+      &:hover {
+        background-color: #f9f9f9;
+      }
+
+      img {
+        top: 17px;
+        right: 8px;
+        width: 17px;
+        vertical-align: middle;
+        margin-right: 7px;
+      }
+    }
+    .selected {
+      background-color: #64b5f6 !important;
+      color: #ffffff !important;
+      font-weight: 700;
+    }
+  }
+
+  .board {
+    display: inline-block;
+    width: calc(100% - 180px);
+    height: 100%;
+    vertical-align: top;
+
+    .header {
+      margin-bottom: 10px;
+      background-color: #ffffff;
+      border-bottom: 1px solid #dddddd;
+
+      .title {
+        padding: 9px 12px 9px 12px;
+        color: #666666;
+      }
+    }
+
+    .body {
+      height: calc(100% - 50px);
+      padding: 5px 12px;
+      overflow-x: auto;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+      
+      .tray {
+        display: inline-block;
+        height: calc(100% - 20px);
+        margin-right: 10px;
+        background-color: #ffffff;
+        vertical-align: top;
+        box-shadow: 0px 0px 3px rgba(0,0,0,0.2);
+
+        .title {
+          position: relative;
+          padding: 10px 8px 8px 8px;
+          font-size: 14px;
+          line-height: 16px;
+          color: #444444;
+          font-weight: 700;
+          background-color: #2980b9;
+          color: #ffffff;
+        }
+
+        .inner {
+          width: 300px;
+
+          & > div {
+            height: calc(100% - 25px);
+            padding: 10px;
+            overflow-y: auto;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+          }
+        }
+
+        .list-group {
+          display: block;
+          min-height: 300px;
+        }
+
+        .item {
+          padding: 8px 8px;
+          margin-bottom: 7px;
+          border: 1px solid #dddddd;
+          background-color: #ffffff;
+          color: #444444;
+          user-select: none;
+          cursor: pointer;
+
+          .task-name {
+            color: #666666;
+            font-size: 14px;
+          }
+          .task-detail {
+            text-align: right;
+
+            .limit, .assign, .priority {
+              display: inline-block;
+              color: #666666;
+              padding: 2px 6px;
+              margin-top: 10px;
+              margin-left: 5px;
+              border-radius: 3px;
+              background-color: #dddddd;
+              font-size: 12px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.sortable-ghost {
+  cursor:pointer;
+  border: 1px solid #f1c40f !important;
+}
