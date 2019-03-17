@@ -53,8 +53,8 @@
             <img src="../../assets/delete-gray.png" />
           </div>
           <div class="action">
-              <img src="../../assets/cross-gray.png" />
-            </div>
+            <img src="../../assets/cross-gray.png" />
+          </div>
         </div>
         <div class="task-name">ウォール機能作成</div>
         <div class="label">詳細</div>
@@ -155,17 +155,19 @@
 
   <!-- フォルダ作成ダイアログ -->
   <md-dialog :md-active.sync="dialog.taskEdit.visible" class="wl-dialog">
-    <div class="title">タスク編集</div>
+    <div class="title">トレイの設定</div>
     <div class="form">
-      <input type="text" value="sample" class="full" />
-      <input type="text" value="sample" class="full" />
-      <input type="text" value="sample" class="full" />
-      <input type="text" value="sample" class="full" />
-      <input type="text" value="sample" class="full" /><input type="text" value="sample" class="full" />
+      <draggable element="div" :options="trayOptions" v-model="trays">
+        <transition-group>
+          <div class="tray-group" v-for="tray in trays" :key="tray.code">
+            <img src="../../assets/switch-gray.png" />
+            <input type="text" v-model="tray.name" placeholder="名称" class="full" />
+          </div>
+        </transition-group>
+      </draggable>
     </div>
     <div class="button-box">
-      <md-button class="md-raised md-primary">保存</md-button>
-      <md-button>キャンセル</md-button>
+      <md-button>完了</md-button>
     </div>
   </md-dialog>
 </div>

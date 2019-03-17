@@ -21,6 +21,14 @@ const handleCreateButtonClick = _this => {
 
     request.postProjectUserRequest(_this.$route.params.teamId, _this.project.code, users).then(result => {
       _this.hideProgressBar()
+
+      _this.$router.push({
+        name: ROUTE_NAME.PROJECT_DASHBOARD,
+        params: {
+          teamId: _this.$route.params.teamId,
+          projectId: _this.project.code
+        }
+      })
     })
   })
 }

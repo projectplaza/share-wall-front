@@ -52,7 +52,7 @@ const wallApp = {
     categories: categorys,
     dialog: {
       taskEdit: {
-        visible: false
+        visible: true
       }
     }
   }),
@@ -61,6 +61,9 @@ const wallApp = {
       animation: 70,
       group: 'description',
       dragClass: 'dragging'
+    }),
+    trayOptions: () => ({
+      animation: 70,
     })
   },
   watch: {},
