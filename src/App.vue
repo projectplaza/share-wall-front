@@ -35,7 +35,7 @@ export default {
         // { code: "0001", title: "home", name: "", icon: "home", isPjMenu: false },
         // { code: "0002", title: "notification", name: "", icon: "notification", isPjMenu: false },
         // { code: "0007", title: "chat", name: "", icon: "chat", isPjMenu: true },
-        { code: "0003", title: "ウォール", name: "wall", icon: "board", isPjMenu: true },
+        { code: "0003", title: "ウォール", name: "wall-home", icon: "board", isPjMenu: true },
         { code: "0004", title: "document", name: "design-document-home", icon: "document", isPjMenu: true },
         // { code: "0005", title: "calendar", name: "", icon: "calendar", isPjMenu: true },
         // { code: "0010", title: "box", name: "", icon: "box", isPjMenu: true }

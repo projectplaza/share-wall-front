@@ -1,37 +1,40 @@
 <div class="wall">
-  <div class="category">
-    <div class="item" v-for="c in categories" :class="{selected: c.selected}" :key="c.code">
-      <img v-if="!c.selected" src="../../assets/board-gray.png" />
-      <img v-if="c.selected" src="../../assets/board.png" />
-      {{c.name}}
+  <div class="board">
+    <div class="item" v-for="board in list.boards" :class="{selected: board.selected}" :key="board.boardId">
+      <img v-if="!board.selected" src="../../assets/board-gray.png" />
+      <img v-if="board.selected" src="../../assets/board.png" />
+      {{board.boardName}}
     </div>
     <div class="item">＋&emsp;Add</div>
   </div>
-  <div class="board">
+  <div class="panels">
     <div class="header">
-      <div class="title">ボード開発グループ</div>
+      <div class="title">{{display.boardName}}</div>
       <div class="setting">
+        <img src="../../assets/plus-gray.png" />
+        <img src="../../assets/pen-gray.png" />
+        <img src="../../assets/delete-gray.png" />
         <img src="../../assets/setting-gray.png" />
       </div>
     </div>
-    <div class="body">
-      <div class="tray" v-for="tray in trays" :key="tray.code">
+    <div class="body" :style="boardWidth">
+      <div class="panel" v-for="panel in list.panels" :key="panel.panelId">
         <div class="title">
-          <div>{{tray.name}}</div>
+          <div>{{panel.panelName}}</div>
           <div class="plus">＋</div>
         </div>
         <div class="inner">
-          <div class="new-task">
+          <div class="new-task" v-if="panel.showCreateWindow">
             <input type="text" value="" placeholder="タスク名" class="task-name" />
             <div class="button-box">
               <input type="button" value="登録" />
               <input type="button" value="キャンセル" />
             </div>
           </div>
-          <draggable element="div" :options="options" v-model="tray.list">
+          <draggable element="div" :options="options" v-model="panel.tasks">
             <transition-group class="list-group">
-              <div class="item" v-for="item in tray.list" :key="item.code">
-                <div class="task-name">{{item.name}}</div>
+              <div class="item" v-for="task in panel.tasks" :key="task.taskId">
+                <div class="task-name">{{task.title}}</div>
                 <div class="task-detail">
                   <div class="priority">High</div>
                   <div class="assign">yumochi21</div>
@@ -43,7 +46,7 @@
         </div>
       </div>
     </div>
-    <div class="task">
+    <div class="task" v-if="mode.task.selected">
       <div class="inner detail" v-if="!mode.task.edit">
         <div class="tool-bar">
           <div class="action">
@@ -56,63 +59,35 @@
             <img src="../../assets/cross-gray.png" />
           </div>
         </div>
-        <div class="task-name">ウォール機能作成</div>
+        <div class="task-name">{{display.task.title}}</div>
         <div class="label">詳細</div>
-        <div class="value">ウォール機能を作成します。</div>
+        <div class="value">{{display.task.content}}</div>
         <div class="label separate">優先度</div>
         <div class="label separate">担当者</div>
-        <div class="value separate">High</div>
-        <div class="value separate">yumochi21</div>
+        <div class="value separate">{{display.task.priority}}</div>
+        <div class="value separate">{{display.task.assignUser}}</div>
         <div class="label separate">着手</div>
         <div class="label separate">期限</div>
-        <div class="value separate">2019-03-15</div>
-        <div class="value separate">2019-03-30</div>
+        <div class="value separate">{{display.task.startDate}}</div>
+        <div class="value separate">{{display.task.deadline}}</div>
         <div class="label">コメント</div>
         <div class="comment">
-          <div class="comment-box comment-post">
+          <div class="comment-box comment-post" v-if="!display.task.commentForm.visible">
             <div>コメントを投稿</div>
           </div>
-          <div class="comment-box">
-            <textarea placeholder="コメントを入力"></textarea>
+          <div class="comment-box" v-if="display.task.commentForm.visible">
+            <textarea placeholder="コメントを入力" v-model="display.task.commentForm.message"></textarea>
             <div class="button-box">
               <input type="button" value="投稿" />
               <input type="button" value="キャンセル" />
             </div>
           </div>
-          <div class="comment-box">
+          <div class="comment-box" v-for="comment in display.task.comments">
             <div class="info">
-              <div class="user">yumochi21</div>
-              <div class="post-date">2019-03-26 10:12:36</div>
+              <div class="user">{{comment.userName}}</div>
+              <div class="post-date">{{comment.postDatetime}}</div>
             </div>
-            <div class="message">このタスク大変そうですが、頑張っていきましょう！</div>
-          </div>
-          <div class="comment-box">
-            <div class="info">
-              <div class="user">yumochi21</div>
-              <div class="post-date">2019-03-26 10:12:36</div>
-            </div>
-            <div class="message">このタスク大変そうですが、頑張っていきましょう！</div>
-          </div>
-          <div class="comment-box">
-            <div class="info">
-              <div class="user">yumochi21</div>
-              <div class="post-date">2019-03-26 10:12:36</div>
-            </div>
-            <div class="message">このタスク大変そうですが、頑張っていきましょう！</div>
-          </div>
-          <div class="comment-box">
-            <div class="info">
-              <div class="user">yumochi21</div>
-              <div class="post-date">2019-03-26 10:12:36</div>
-            </div>
-            <div class="message">このタスク大変そうですが、頑張っていきましょう！</div>
-          </div>
-          <div class="comment-box">
-            <div class="info">
-              <div class="user">yumochi21</div>
-              <div class="post-date">2019-03-26 10:12:36</div>
-            </div>
-            <div class="message">このタスク大変そうですが、頑張っていきましょう！</div>
+            <div class="message">{{comment.message}}</div>
           </div>
         </div>
       </div>
@@ -158,14 +133,14 @@
   </div>
 
   <!-- フォルダ作成ダイアログ -->
-  <md-dialog :md-active.sync="dialog.traySetting.visible" class="wl-dialog">
+  <md-dialog :md-active.sync="dialog.panelSetting.visible" class="wl-dialog">
     <div class="title">トレイの設定</div>
     <div class="form">
-      <draggable element="div" :options="trayOptions" v-model="trays">
+      <draggable element="div" :options="panelOptions" v-model="list.panels">
         <transition-group>
-          <div class="tray-group" v-for="tray in trays" :key="tray.code">
+          <div class="panel-group" v-for="panel in list.panels" :key="panel.panelId">
             <img src="../../assets/switch-gray.png" />
-            <input type="text" v-model="tray.name" placeholder="名称" class="full" />
+            <input type="text" v-model="panel.name" placeholder="名称" class="full" />
           </div>
         </transition-group>
       </draggable>

@@ -2,7 +2,7 @@
   height: 100%;
   background-color: #f9f9f9;
 
-  .category {
+  .board {
     display: inline-block;
     width: 180px;
     height: 100%;
@@ -42,7 +42,7 @@
     }
   }
 
-  .board {
+  .panels {
     display: inline-block;
     width: calc(100% - 180px);
     height: 100%;
@@ -61,16 +61,25 @@
 
       .setting {
         position: absolute;
-        width: 20px;
-        top: 8px;
+        top: 10px;
         right: 15px;
         cursor: pointer;
+
+        img {
+          width: 20px;
+          margin-left: 15px;
+          vertical-align: top;
+        }
+        span {
+          font-size: 28px;
+          vertical-align: top;
+          color: rgb(192,192,192);
+        }
       }
     }
 
     .body {
       display: inline-block;
-      width: calc(100% - 300px);
       height: calc(100% - 50px);
       padding: 5px 12px;
       margin-top: 10px;
@@ -79,7 +88,7 @@
       -webkit-overflow-scrolling: touch;
       vertical-align: top;
       
-      .tray {
+      .panel {
         display: inline-block;
         height: calc(100% - 20px);
         margin-right: 10px;

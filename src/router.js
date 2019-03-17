@@ -10,7 +10,9 @@ export const ROUTE_NAME = {
   TEAM_DASHBOARD: 'team-dashboard',
   PROJECT_CREATE: 'project-create',
   PROJECT_DASHBOARD: 'project-dashboard',
-  WALL: 'wall',
+  WALL_HOME: 'wall-home',
+  WALL_BOARD: 'wall-board',
+  WALL_TASK: 'wall-task',
   DESIGN_DOCUMENT_HOME: 'design-document-home',
   DESIGN_DOCUMENT_FOLDER: 'design-document-folder',
   DESIGN_DOCUMENT_DOCUMENT: 'design-document-document',
@@ -43,7 +45,17 @@ export default new Router({
     },
     {
       path: BASE_URL + 't/:teamId/p/:projectId/wall',
-      name: ROUTE_NAME.WALL,
+      name: ROUTE_NAME.WALL_HOME,
+      component: () => import('./views/Wall.vue')
+    },
+    {
+      path: BASE_URL + 't/:teamId/p/:projectId/wall/:boardId',
+      name: ROUTE_NAME.WALL_BOARD,
+      component: () => import('./views/Wall.vue')
+    },
+    {
+      path: BASE_URL + 't/:teamId/p/:projectId/wall/:boardId/:taskId',
+      name: ROUTE_NAME.WALL_TASK,
       component: () => import('./views/Wall.vue')
     },
     {

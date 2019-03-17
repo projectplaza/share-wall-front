@@ -1,7 +1,6 @@
-import { mapMutations } from "vuex";
-import jQuery from 'jquery'
-import VueMarkdown from "vue-markdown";
-import draggable from "vuedraggable";
+import { mapMutations } from "vuex"
+import VueMarkdown from "vue-markdown"
+import draggable from "vuedraggable"
 import { ROUTE_NAME } from '../../router'
 
 import handler from './handler'
