@@ -7,7 +7,7 @@ const panels = [
   {
     panelId: "1",
     panelName: "新規",
-    tasks: [
+    task: [
       { taskId: "01", title: "開発" },
       { taskId: "02", title: "トーク" },
       { taskId: "03", title: "メッセージ" }
@@ -17,7 +17,7 @@ const panels = [
   {
     panelId: "2",
     panelName: "進行中",
-    tasks: [
+    task: [
       { taskId: "04", title: "ウォール" },
       { taskId: "05", title: "デザインドキュメント" }
     ],
@@ -38,7 +38,7 @@ const wallApp = {
       teamId: null,
       projectId: null,
       boardId: null,
-      boardName: '企画',
+      boardName: null,
       taskId: null,
       task: {
         title: 'タイトル',
@@ -47,16 +47,28 @@ const wallApp = {
         assignUser: '担当者ID',
         startDate: '2019-03-01',
         deadline: '2019-03-30',
-        comments: [{
-          userName: 'yumochi21',
-          postDatetime: '2019-03-16 10:11:12',
-          message: '頑張りましょー！'
-        }],
-        commentForm: {
-          visible: false,
-          message: '頑張りましょー'
-        }
-      }
+      },
+      taskComments: [{
+        userName: 'yumochi21',
+        postDatetime: '2019-03-16 10:11:12',
+        message: '頑張りましょー！'
+      }],
+      taskCommentForm: {
+        visible: false,
+        message: '頑張りましょー'
+      },
+      taskEdit: {
+        title: 'タイトル',
+        content: '内容',
+        priority: '2',
+        assignUser: 'yumochi21',
+        startDate: '2019-03-01',
+        deadline: '2019-03-30',
+      },
+      projectUsers: [
+        { userId: 'ishigami', userName: '石上' },
+        { userId: 'yumochi21', userName: '望月' }
+      ]
     },
     list: {
       boards: boards,
@@ -64,7 +76,7 @@ const wallApp = {
     },
     mode: {
       task: {
-        selected: true,
+        selected: false,
         edit: false
       }
     },
@@ -106,7 +118,12 @@ const wallApp = {
     }
   },
 
-  watch: {},
+  watch: {
+    '$route': function(to, from) {
+      handler.handleRouteChange(this, to, from)
+    }
+  },
+
   components: {
     draggable
   }

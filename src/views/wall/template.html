@@ -1,10 +1,12 @@
 <div class="wall">
   <div class="board">
-    <div class="item" v-for="board in list.boards" :class="{selected: board.selected}" :key="board.boardId">
+    <router-link
+      class="item" v-for="board in list.boards" :class="{selected: board.selected}" :key="board.boardId"
+      :to="{ name: 'wall-board', params: { teamId: display.teamId, projectId: display.projectId, boardId: board.boardId }}">
       <img v-if="!board.selected" src="../../assets/board-gray.png" />
       <img v-if="board.selected" src="../../assets/board.png" />
       {{board.boardName}}
-    </div>
+    </router-link>
     <div class="item">＋&emsp;Add</div>
   </div>
   <div class="panels">
@@ -31,16 +33,18 @@
               <input type="button" value="キャンセル" />
             </div>
           </div>
-          <draggable element="div" :options="options" v-model="panel.tasks">
+          <draggable element="div" :options="options" v-model="panel.task">
             <transition-group class="list-group">
-              <div class="item" v-for="task in panel.tasks" :key="task.taskId">
+              <router-link
+                class="item" v-for="task in panel.task" :key="task.taskId"
+                :to="{ name: 'wall-task', params: { teamId: display.teamId, projectId: display.projectId, boardId: display.boardId, taskId: task.taskId }}">
                 <div class="task-name">{{task.title}}</div>
                 <div class="task-detail">
                   <div class="priority">High</div>
                   <div class="assign">yumochi21</div>
                   <div class="limit">2019-03-30</div>
                 </div>
-              </div>
+              </router-link>
             </transition-group>
           </draggable>
         </div>
@@ -64,7 +68,10 @@
         <div class="value">{{display.task.content}}</div>
         <div class="label separate">優先度</div>
         <div class="label separate">担当者</div>
-        <div class="value separate">{{display.task.priority}}</div>
+        <div class="value separate" v-if="display.task.priority == '1'">高</div>
+        <div class="value separate" v-if="display.task.priority == '2'">中</div>
+        <div class="value separate" v-if="display.task.priority == '3'">低</div>
+        <div class="value separate" v-if="display.task.priority == '4'">保留</div>
         <div class="value separate">{{display.task.assignUser}}</div>
         <div class="label separate">着手</div>
         <div class="label separate">期限</div>
@@ -72,17 +79,17 @@
         <div class="value separate">{{display.task.deadline}}</div>
         <div class="label">コメント</div>
         <div class="comment">
-          <div class="comment-box comment-post" v-if="!display.task.commentForm.visible">
+          <div class="comment-box comment-post" v-if="!display.taskCommentForm.visible">
             <div>コメントを投稿</div>
           </div>
-          <div class="comment-box" v-if="display.task.commentForm.visible">
-            <textarea placeholder="コメントを入力" v-model="display.task.commentForm.message"></textarea>
+          <div class="comment-box" v-if="display.taskCommentForm.visible">
+            <textarea placeholder="コメントを入力" v-model="display.taskCommentForm.message"></textarea>
             <div class="button-box">
               <input type="button" value="投稿" />
               <input type="button" value="キャンセル" />
             </div>
           </div>
-          <div class="comment-box" v-for="comment in display.task.comments">
+          <div class="comment-box" v-for="comment in display.taskComments">
             <div class="info">
               <div class="user">{{comment.userName}}</div>
               <div class="post-date">{{comment.postDatetime}}</div>
@@ -94,35 +101,38 @@
       <div class="inner edit" v-if="mode.task.edit">
         <div class="label">タスク名</div>
         <div class="value">
-          <input type="text" />
+          <input type="text" v-model="display.taskEdit.title" />
         </div>
         <div class="label">詳細</div>
         <div class="value">
-          <textarea></textarea>
+          <textarea v-model="display.taskEdit.content"></textarea>
         </div>
         <div class="label">優先度</div>
         <div class="value">
-          <div class="priority">高</div>
+          <select v-model="display.taskEdit.priority">
+            <option :value="1">高</option>
+            <option :value="2">中</option>
+            <option :value="3">低</option>
+            <option :value="4">保留</option>
+          </select>
+          <!-- <div class="priority">高</div>
           <div class="priority">中</div>
           <div class="priority">低</div>
-          <div class="priority">保留</div>
+          <div class="priority">保留</div> -->
         </div>
         <div class="label">担当者</div>
         <div class="value">
-          <select>
-            <option>yumochi21</option>
-            <option>ishigami</option>
-            <option>user0</option>
-            <option>user1</option>
+          <select v-model="display.taskEdit.assignUser">
+            <option v-for="user in display.projectUsers" :value="user.userId">{{user.userName}}</option>
           </select>
         </div>
         <div class="label">着手</div>
         <div class="value">
-          <input type="text" placeholder="YYYY-MM-DD" />
+          <input type="text" placeholder="YYYY-MM-DD" v-model="display.taskEdit.startDate" />
         </div>
         <div class="label">期限</div>
         <div class="value">
-          <input type="text" placeholder="YYYY-MM-DD" />
+          <input type="text" placeholder="YYYY-MM-DD" v-model="display.taskEdit.deadline" />
         </div>
         <div class="button-box">
           <input type="button" value="保存" class="save" />

@@ -13,6 +13,7 @@
     color: #666666;
 
     .item {
+      display: block;
       position: relative;
       padding: 12px 12px;
       font-size: 12px;
@@ -22,6 +23,8 @@
       white-space: nowrap;
       text-overflow: ellipsis;
       border-radius: 3px;
+      color: #666666;
+      text-decoration: none;
 
       &:hover {
         background-color: #f9f9f9;
@@ -124,6 +127,11 @@
             overflow-y: auto;
             white-space: nowrap;
             -webkit-overflow-scrolling: touch;
+          }
+
+          a {
+            display: block;
+            text-decoration: none;
           }
 
           .new-task {

@@ -12,14 +12,28 @@ import { FUNCTION_CODE_WALL } from "../../constants/functionCodeConstant"
  */
 const getBoardListRequest = (teamId, projectId) => {
   return new Promise((resolve, reject) => {
-    getRequest(PATH_BOARD_LIST, {
-      teamId,
-      projectId
-    }).then(result => {
-      resolve(result)
-    }).catch(error => {
-      reject(error)
-    })
+    resolve([
+      {
+        "teamId": "project-plaza",
+        "projectId": "share-wall",
+        "boardId": "1",
+        "boardName": "開発"
+      },
+      {
+        "teamId": "project-plaza",
+        "projectId": "share-wall",
+        "boardId": "2",
+        "boardName": "企画"
+      }
+    ])
+    // getRequest(PATH_BOARD_LIST, {
+    //   teamId,
+    //   projectId
+    // }).then(result => {
+    //   resolve(result)
+    // }).catch(error => {
+    //   reject(error)
+    // })
   })
 }
 
@@ -106,15 +120,63 @@ const deleteBoardRequest = (teamId, projectId, boardId) => {
  */
 const getPanelTaskListRequest = (teamId, projectId, boardId) => {
   return new Promise((resolve, reject) => {
-    getRequest(PATH_PANEL_TASK_LIST, {
-      teamId,
-      projectId,
-      boardId
-    }).then(result => {
-      resolve(result)
-    }).catch(error => {
-      reject(error)
-    })
+    resolve([
+      {
+        "boardId": "1",
+        "panelId": "1",
+        "panelName": "新規",
+        "task": [
+          {
+            "taskId": "1",
+            "title": "タイトル",
+            "priority": "優先度",
+            "assignUser": "担当者",
+            "startDate": "開始日",
+            "deadline": "期限日",
+          },
+          {
+            "taskId": "2",
+            "title": "タイトル",
+            "priority": "優先度",
+            "assignUser": "担当者",
+            "startDate": "開始日",
+            "deadline": "期限日",
+          }
+        ]
+      },
+      {
+        "boardId": "1",
+        "panelId": "2",
+        "panelName": "進行中",
+        "task": [
+          {
+            "taskId": "3",
+            "title": "タイトル",
+            "priority": "優先度",
+            "assignUser": "担当者",
+            "startDate": "開始日",
+            "deadline": "期限日",
+          },
+          {
+            "taskId": "4",
+            "title": "タイトル",
+            "priority": "優先度",
+            "assignUser": "担当者",
+            "startDate": "開始日",
+            "deadline": "期限日",
+          }
+        ]
+      }
+    ])
+    // getRequest(PATH_PANEL_TASK_LIST, {
+    //   teamId,
+    //   projectId,
+    //   boardId
+    // }).then(result => {
+    //   resolve(result)
+    // }).catch(error => {
+    //   reject(error)
+    // })
   })
 }
 
@@ -230,16 +292,28 @@ const deletePanelRequest = (teamId, projectId, boardId, panelId) => {
  */
 const getTaskRequest = (teamId, projectId, boardId, taskId) => {
   return new Promise((resolve, reject) => {
-    getRequest(PATH_TASK, {
-      teamId,
-      projectId,
-      boardId,
-      taskId
-    }).then(result => {
-      resolve(result)
-    }).catch(error => {
-      reject(error)
+    resolve({
+      "teamId": "project-plaza",
+      "projectId": "share-wall",
+      "boardId": "1",
+      "panelId": "1",
+      "taskId": "1",
+      "title": "タイトル",
+      "priority": "1",
+      "assignUser": "yumochi21",
+      "startDate": "2019-03-01",
+      "deadline": "2019-03-31",
     })
+    // getRequest(PATH_TASK, {
+    //   teamId,
+    //   projectId,
+    //   boardId,
+    //   taskId
+    // }).then(result => {
+    //   resolve(result)
+    // }).catch(error => {
+    //   reject(error)
+    // })
   })
 }
 
