@@ -49,7 +49,12 @@ const wallApp = {
   name: "wall",
   data: () => ({
     trays: trays,
-    categories: categorys
+    categories: categorys,
+    dialog: {
+      taskEdit: {
+        visible: false
+      }
+    }
   }),
   computed: {
     options: () => ({

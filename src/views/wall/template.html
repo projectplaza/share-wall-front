@@ -10,19 +10,30 @@
   <div class="board">
     <div class="header">
       <div class="title">ボード開発グループ</div>
+      <div class="setting">
+        <img src="../../assets/setting-gray.png" />
+      </div>
     </div>
     <div class="body">
       <div class="tray" v-for="tray in trays" :key="tray.code">
         <div class="title">
-          {{tray.name}}
+          <div>{{tray.name}}</div>
+          <div class="plus">＋</div>
         </div>
         <div class="inner">
+          <div class="new-task">
+            <input type="text" value="" placeholder="タスク名" class="task-name" />
+            <div class="button-box">
+              <input type="button" value="登録" />
+              <input type="button" value="キャンセル" />
+            </div>
+          </div>
           <draggable element="div" :options="options" v-model="tray.list">
             <transition-group class="list-group">
               <div class="item" v-for="item in tray.list" :key="item.code">
                 <div class="task-name">{{item.name}}</div>
                 <div class="task-detail">
-                    <div class="priority">High</div>
+                  <div class="priority">High</div>
                   <div class="assign">yumochi21</div>
                   <div class="limit">2019-03-30</div>
                 </div>
@@ -32,5 +43,129 @@
         </div>
       </div>
     </div>
+    <div class="task">
+      <div class="inner detail">
+        <div class="tool-bar">
+          <div class="action">
+            <img src="../../assets/pen-gray.png" />
+          </div>
+          <div class="action">
+            <img src="../../assets/delete-gray.png" />
+          </div>
+          <div class="action">
+              <img src="../../assets/cross-gray.png" />
+            </div>
+        </div>
+        <div class="task-name">ウォール機能作成</div>
+        <div class="label">詳細</div>
+        <div class="value">ウォール機能を作成します。</div>
+        <div class="label separate">優先度</div>
+        <div class="label separate">担当者</div>
+        <div class="value separate">High</div>
+        <div class="value separate">yumochi21</div>
+        <div class="label separate">着手</div>
+        <div class="label separate">期限</div>
+        <div class="value separate">2019-03-15</div>
+        <div class="value separate">2019-03-30</div>
+        <div class="label">コメント</div>
+        <div class="comment">
+          <div class="comment-box comment-post">
+            <div>コメントを投稿</div>
+          </div>
+          <div class="comment-box">
+            <textarea placeholder="コメントを入力"></textarea>
+            <div class="button-box">
+              <input type="button" value="投稿" />
+              <input type="button" value="キャンセル" />
+            </div>
+          </div>
+          <div class="comment-box">
+            <div class="info">
+              <div class="user">yumochi21</div>
+              <div class="post-date">2019-03-26 10:12:36</div>
+            </div>
+            <div class="message">このタスク大変そうですが、頑張っていきましょう！</div>
+          </div>
+          <div class="comment-box">
+            <div class="info">
+              <div class="user">yumochi21</div>
+              <div class="post-date">2019-03-26 10:12:36</div>
+            </div>
+            <div class="message">このタスク大変そうですが、頑張っていきましょう！</div>
+          </div>
+          <div class="comment-box">
+            <div class="info">
+              <div class="user">yumochi21</div>
+              <div class="post-date">2019-03-26 10:12:36</div>
+            </div>
+            <div class="message">このタスク大変そうですが、頑張っていきましょう！</div>
+          </div>
+          <div class="comment-box">
+            <div class="info">
+              <div class="user">yumochi21</div>
+              <div class="post-date">2019-03-26 10:12:36</div>
+            </div>
+            <div class="message">このタスク大変そうですが、頑張っていきましょう！</div>
+          </div>
+          <div class="comment-box">
+            <div class="info">
+              <div class="user">yumochi21</div>
+              <div class="post-date">2019-03-26 10:12:36</div>
+            </div>
+            <div class="message">このタスク大変そうですが、頑張っていきましょう！</div>
+          </div>
+        </div>
+      </div>
+      <div class="inner edit">
+        <div class="label">タスク名</div>
+        <div class="value">
+          <input type="text" />
+        </div>
+        <div class="label">詳細</div>
+        <div class="value">
+          <textarea></textarea>
+        </div>
+        <div class="label">優先度</div>
+        <div class="value">
+          <div class="priority">高</div>
+          <div class="priority">中</div>
+          <div class="priority">低</div>
+          <div class="priority">保留</div>
+        </div>
+        <div class="label">担当者</div>
+        <div class="value">
+          <select>
+            <option>yumochi21</option>
+            <option>ishigami</option>
+            <option>user0</option>
+            <option>user1</option>
+          </select>
+        </div>
+        <div class="label">着手</div>
+        <div class="value">
+          <input type="text" />
+        </div>
+        <div class="label">期限</div>
+        <div class="value">
+          <input type="text" />
+        </div>
+      </div>
+    </div>
   </div>
+
+  <!-- フォルダ作成ダイアログ -->
+  <md-dialog :md-active.sync="dialog.taskEdit.visible" class="wl-dialog">
+    <div class="title">タスク編集</div>
+    <div class="form">
+      <input type="text" value="sample" class="full" />
+      <input type="text" value="sample" class="full" />
+      <input type="text" value="sample" class="full" />
+      <input type="text" value="sample" class="full" />
+      <input type="text" value="sample" class="full" /><input type="text" value="sample" class="full" />
+    </div>
+    <div class="button-box">
+      <md-button class="md-raised md-primary">保存</md-button>
+      <md-button>キャンセル</md-button>
+    </div>
+  </md-dialog>
 </div>

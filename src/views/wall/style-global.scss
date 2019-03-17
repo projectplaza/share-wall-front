@@ -1,0 +1,42 @@
+.wl-dialog {
+  min-width: 500px;
+  background-color: #f0f0f0;
+
+  .title {
+    padding: 10px;
+    font-weight: 700;
+    color: #666666;
+    background-color: #f0f0f0;
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  .form {
+    padding: 20px 15px;
+    background-color: #f0f0f0;
+
+    input[type="text"] {
+      padding: 8px 12px;
+      font-size: 14px;
+      border: 1px solid #bbbbbb;
+      transition: 0.3s;
+      color: #444444;
+      border-radius: 4px;
+      margin-bottom: 6px;
+  
+      &:focus {
+        border: 1px solid #3498db;
+      }
+    }
+
+    .full {
+      width: calc(100%);
+    }
+  }
+
+  .button-box {
+    text-align: right;
+    background-color: #f0f0f0;
+    padding: 10px;
+  }
+}
