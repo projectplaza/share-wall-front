@@ -1,13 +1,13 @@
 .wl-dialog {
-  min-width: 400px;
+  width: 350px;
   background-color: #ffffff;
 
   .title {
     padding: 10px;
     font-weight: 700;
     color: #666666;
-    background-color: #f0f0f0;
-    font-size: 16px;
+    background-color: #dddddd;
+    font-size: 14px;
     font-weight: 700;
   }
 
@@ -17,6 +17,8 @@
 
     .panel-group {
       padding: 3px 0px;
+      text-align: center;
+      boarder: 1px solid #ffffff;
     }
 
     img {
@@ -27,16 +29,35 @@
     }
 
     input[type="text"] {
-      width: calc(100% - 40px);
+      width: calc(100% - 80px);
       padding: 8px 12px;
       font-size: 14px;
       border: 1px solid #bbbbbb;
       transition: 0.3s;
       color: #444444;
       border-radius: 4px;
+      text-align: left;
   
       &:focus {
         border: 1px solid #3498db;
+      }
+    }
+
+    .delete {
+      width: 15px;
+      margin-left: 10px;
+    }
+
+    .full {
+      width: 100% !important;
+    }
+    .under {
+      border: 0px solid #bbbbbb !important;
+      border-bottom: 1px solid #bbbbbb !important;
+      border-radius: 0px !important;
+
+      &:focus {
+        border-bottom: 1px solid #3498db !important;
       }
     }
   }
@@ -46,4 +67,10 @@
     background-color: #ffffff;
     padding: 0px 10px 10px 10px;
   }
+  .center {
+    text-align: center;
+  }
+}
+.wl-dialog-small {
+  width: 250px !important;
 }

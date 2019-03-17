@@ -115,17 +115,14 @@ const handleRouteChange = (_this, to, from) => {
   _this.display.taskId = newParams.taskId
 
   if (newParams.teamId != oldParams.teamId || newParams.projectId != oldParams.projectId) {
-    console.log('all change')
     initBoardList(_this).then(() => { initPanelTask(_this).then(() => { initTask(_this).then(() => { initDisplay(_this) }) }) })
     return
   }
   else if (newParams.boardId != oldParams.boardId) {
-    console.log('board change')
     initPanelTask(_this).then(() => { initTask(_this).then(() => { initDisplay(_this) }) })
     return
   }
   else if (newParams.taskId != oldParams.taskId) {
-    console.log('task change')
     initTask(_this).then(() => { initDisplay(_this) })
     return
   }

@@ -81,7 +81,24 @@ const wallApp = {
       }
     },
     dialog: {
+      boardCreate: {
+        visible: false,
+        boardName: null,
+      },
+      boardDelete: {
+        visible: false,
+      },
+      panelCreate: {
+        visible: false,
+        panelName: null,
+      },
+      panelDelete: {
+        visible: false,
+      },
       panelSetting: {
+        visible: false
+      },
+      taskDelete: {
         visible: false
       }
     }

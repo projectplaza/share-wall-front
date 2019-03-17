@@ -1,7 +1,6 @@
 <div class="wall">
   <div class="board">
-    <router-link
-      class="item" v-for="board in list.boards" :class="{selected: board.selected}" :key="board.boardId"
+    <router-link class="item" v-for="board in list.boards" :class="{selected: board.selected}" :key="board.boardId"
       :to="{ name: 'wall-board', params: { teamId: display.teamId, projectId: display.projectId, boardId: board.boardId }}">
       <img v-if="!board.selected" src="../../assets/board-gray.png" />
       <img v-if="board.selected" src="../../assets/board.png" />
@@ -35,8 +34,7 @@
           </div>
           <draggable element="div" :options="options" v-model="panel.task">
             <transition-group class="list-group">
-              <router-link
-                class="item" v-for="task in panel.task" :key="task.taskId"
+              <router-link class="item" v-for="task in panel.task" :key="task.taskId"
                 :to="{ name: 'wall-task', params: { teamId: display.teamId, projectId: display.projectId, boardId: display.boardId, taskId: task.taskId }}">
                 <div class="task-name">{{task.title}}</div>
                 <div class="task-detail">
@@ -142,21 +140,68 @@
     </div>
   </div>
 
-  <!-- フォルダ作成ダイアログ -->
+  <!-- ボード作成ダイアログ -->
+  <md-dialog :md-active.sync="dialog.boardCreate.visible" class="wl-dialog">
+    <div class="title">ボード名を入力してください</div>
+    <div class="form">
+      <input v-model="dialog.boardCreate.boardName" type="text" placeholder="名称" class="full under" />
+    </div>
+    <div class="button-box">
+      <md-button>キャンセル</md-button>
+      <md-button class="md-primary md-raised">完了</md-button>
+    </div>
+  </md-dialog>
+  <!-- ボード削除ダイアログ -->
+  <md-dialog :md-active.sync="dialog.boardDelete.visible" class="wl-dialog wl-dialog-small">
+    <div class="title">本当に削除しますか？</div>
+    <div class="button-box center">
+      <md-button class="md-accent md-raised">削除</md-button>
+      <md-button>キャンセル</md-button>
+    </div>
+  </md-dialog>
+  <!-- パネル作成ダイアログ -->
+  <md-dialog :md-active.sync="dialog.panelCreate.visible" class="wl-dialog">
+    <div class="title">パネルの作成</div>
+    <div class="form">
+      <input v-model="dialog.panelCreate.panelName" type="text" placeholder="名称" class="full under" />
+    </div>
+    <div class="button-box">
+      <md-button>キャンセル</md-button>
+      <md-button class="md-primary md-raised">完了</md-button>
+    </div>
+  </md-dialog>
+  <!-- パネル設定ダイアログ -->
   <md-dialog :md-active.sync="dialog.panelSetting.visible" class="wl-dialog">
-    <div class="title">トレイの設定</div>
+    <div class="title">パネルの設定</div>
     <div class="form">
       <draggable element="div" :options="panelOptions" v-model="list.panels">
         <transition-group>
           <div class="panel-group" v-for="panel in list.panels" :key="panel.panelId">
             <img src="../../assets/switch-gray.png" />
-            <input type="text" v-model="panel.name" placeholder="名称" class="full" />
+            <input type="text" v-model="panel.panelName" placeholder="名称" />
+            <img src="../../assets/cross-gray.png" class="delete" />
           </div>
         </transition-group>
       </draggable>
     </div>
     <div class="button-box">
       <md-button>完了</md-button>
+    </div>
+  </md-dialog>
+  <!-- パネル削除ダイアログ -->
+  <md-dialog :md-active.sync="dialog.panelDelete.visible" class="wl-dialog wl-dialog-small">
+    <div class="title">本当に削除しますか？</div>
+    <div class="button-box center">
+      <md-button class="md-accent md-raised">削除</md-button>
+      <md-button>キャンセル</md-button>
+    </div>
+  </md-dialog>
+  <!-- タスク削除ダイアログ -->
+  <md-dialog :md-active.sync="dialog.taskDelete.visible" class="wl-dialog wl-dialog-small">
+    <div class="title">本当に削除しますか？</div>
+    <div class="button-box center">
+      <md-button class="md-accent md-raised">削除</md-button>
+      <md-button>キャンセル</md-button>
     </div>
   </md-dialog>
 </div>
