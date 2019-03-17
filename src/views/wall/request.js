@@ -48,16 +48,20 @@ const getBoardListRequest = (teamId, projectId) => {
  */
 const postBoardRequest = (teamId, projectId, boardName) => {
   return new Promise((resolve, reject) => {
-    postRequest(PATH_BOARD, {
-      teamId,
-      projectId,
-      boardName,
-      functionName: FUNCTION_CODE_WALL
-    }).then(result => {
-      resolve(result)
-    }).catch(error => {
-      reject(error)
+    resolve({
+      boardId: '3',
+      boardName: 'sample'
     })
+    // postRequest(PATH_BOARD, {
+    //   teamId,
+    //   projectId,
+    //   boardName,
+    //   functionName: FUNCTION_CODE_WALL
+    // }).then(result => {
+    //   resolve(result)
+    // }).catch(error => {
+    //   reject(error)
+    // })
   })
 }
 

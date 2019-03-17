@@ -6,7 +6,7 @@
       <img v-if="board.selected" src="../../assets/board.png" />
       {{board.boardName}}
     </router-link>
-    <div class="item">＋&emsp;Add</div>
+    <div class="item" @click="handleBoardAddClick">＋&emsp;Add</div>
   </div>
   <div class="panels">
     <div class="header">
@@ -144,11 +144,11 @@
   <md-dialog :md-active.sync="dialog.boardCreate.visible" class="wl-dialog">
     <div class="title">ボード名を入力してください</div>
     <div class="form">
-      <input v-model="dialog.boardCreate.boardName" type="text" placeholder="名称" class="full under" />
+      <input v-model="dialog.boardCreate.boardName" type="text" placeholder="名称" class="full under" id="board-create-name" />
     </div>
     <div class="button-box">
       <md-button>キャンセル</md-button>
-      <md-button class="md-primary md-raised">完了</md-button>
+      <md-button class="md-primary md-raised" @click="handleBoardCreateClick">作成</md-button>
     </div>
   </md-dialog>
   <!-- ボード削除ダイアログ -->

@@ -105,6 +105,12 @@ const wallApp = {
   }),
 
   methods: {
+
+    // ボード追加ボタンのクリックイベントハンドラ
+    handleBoardAddClick: function() { handler.handleBoardAddClick(this) },
+    // ボード追加ボタンのクリックイベントハンドラ
+    handleBoardCreateClick: function() { handler.handleBoardCreateClick(this) },
+
     // Vuex mutations
     ...mapMutations("common", ["showProgressBar", "hideProgressBar", 'changeCurrentTeam', 'changeCurrentProject'])
   },
