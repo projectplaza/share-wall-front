@@ -50,9 +50,14 @@ const wallApp = {
   data: () => ({
     trays: trays,
     categories: categorys,
+    mode: {
+      task: {
+        edit: true
+      }
+    },
     dialog: {
-      taskEdit: {
-        visible: true
+      traySetting: {
+        visible: false
       }
     }
   }),

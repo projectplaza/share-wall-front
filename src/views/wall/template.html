@@ -44,7 +44,7 @@
       </div>
     </div>
     <div class="task">
-      <div class="inner detail">
+      <div class="inner detail" v-if="!mode.task.edit">
         <div class="tool-bar">
           <div class="action">
             <img src="../../assets/pen-gray.png" />
@@ -116,7 +116,7 @@
           </div>
         </div>
       </div>
-      <div class="inner edit">
+      <div class="inner edit" v-if="mode.task.edit">
         <div class="label">タスク名</div>
         <div class="value">
           <input type="text" />
@@ -143,18 +143,22 @@
         </div>
         <div class="label">着手</div>
         <div class="value">
-          <input type="text" />
+          <input type="text" placeholder="YYYY-MM-DD" />
         </div>
         <div class="label">期限</div>
         <div class="value">
-          <input type="text" />
+          <input type="text" placeholder="YYYY-MM-DD" />
+        </div>
+        <div class="button-box">
+          <input type="button" value="保存" class="save" />
+          <input type="button" value="キャンセル" class="cancel" />
         </div>
       </div>
     </div>
   </div>
 
   <!-- フォルダ作成ダイアログ -->
-  <md-dialog :md-active.sync="dialog.taskEdit.visible" class="wl-dialog">
+  <md-dialog :md-active.sync="dialog.traySetting.visible" class="wl-dialog">
     <div class="title">トレイの設定</div>
     <div class="form">
       <draggable element="div" :options="trayOptions" v-model="trays">

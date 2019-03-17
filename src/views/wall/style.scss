@@ -308,7 +308,7 @@
       .edit {
         .label {
           margin-top: 10px;
-          font-size: 10px;
+          font-size: 12px;
           color: #666666;
         }
 
@@ -350,6 +350,35 @@
           border-radius: 8px;
           cursor: pointer;
           margin-right: 10px;
+        }
+
+        .button-box {
+          margin-top: 12px;
+          text-align: right;
+
+          input[type="button"] {
+            padding: 3px 6px;
+            cursor: pointer;
+            border-radius: 3px;
+            margin-left: 5px;
+            min-width: 40px;
+            font-size: 12px;
+          }
+          .save {
+            background-color: #2980b9;
+            color: #ffffff;
+            border: 1px solid #2980b9;
+            font-weight: 700;
+          }
+          .cancel {
+            border: 1px solid #ffffff;
+            transition: 0.2s;
+
+            &:hover {
+              background-color: #eeeeee;
+              border: 1px solid #eeeeee;
+            }
+          }
         }
       }
     }
