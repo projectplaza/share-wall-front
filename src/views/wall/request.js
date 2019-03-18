@@ -219,17 +219,26 @@ const getPanelListRequest = (teamId, projectId, boardId) => {
  */
 const postPanelRequest = (teamId, projectId, boardId, panelName) => {
   return new Promise((resolve, reject) => {
-    postRequest(PATH_PANEL, {
-      teamId,
-      projectId,
-      boardId,
-      panelName,
-      functionName: FUNCTION_CODE_WALL
-    }).then(result => {
-      resolve(result)
-    }).catch(error => {
-      reject(error)
+    resolve({
+      "message": "パネルの登録に成功しました。",
+      "teamId": "project-plaza",
+      "projectId": "share-wall",
+      "boardId" : boardId,
+      "panelId": "3",
+      "panelName": panelName,
+      "order": 0
     })
+    // postRequest(PATH_PANEL, {
+    //   teamId,
+    //   projectId,
+    //   boardId,
+    //   panelName,
+    //   functionName: FUNCTION_CODE_WALL
+    // }).then(result => {
+    //   resolve(result)
+    // }).catch(error => {
+    //   reject(error)
+    // })
   })
 }
 
@@ -245,17 +254,20 @@ const postPanelRequest = (teamId, projectId, boardId, panelName) => {
  */
 const putPanelRequest = (teamId, projectId, boardId, panels) => {
   return new Promise((resolve, reject) => {
-    putRequest(PATH_PANEL, {
-      teamId,
-      projectId,
-      boardId,
-      panels,
-      functionName: FUNCTION_CODE_WALL
-    }).then(result => {
-      resolve(result)
-    }).catch(error => {
-      reject(error)
-    })
+    console.log('panel update complete')
+    console.log(panels)
+    resolve()
+    // putRequest(PATH_PANEL, {
+    //   teamId,
+    //   projectId,
+    //   boardId,
+    //   panels,
+    //   functionName: FUNCTION_CODE_WALL
+    // }).then(result => {
+    //   resolve(result)
+    // }).catch(error => {
+    //   reject(error)
+    // })
   })
 }
 
@@ -271,16 +283,18 @@ const putPanelRequest = (teamId, projectId, boardId, panels) => {
  */
 const deletePanelRequest = (teamId, projectId, boardId, panelId) => {
   return new Promise((resolve, reject) => {
-    deleteRequest(PATH_PANEL, {
-      teamId,
-      projectId,
-      boardId,
-      panelId
-    }).then(result => {
-      resolve(result)
-    }).catch(error => {
-      reject(error)
-    })
+    console.log(panelId)
+    resolve()
+    // deleteRequest(PATH_PANEL, {
+    //   teamId,
+    //   projectId,
+    //   boardId,
+    //   panelId
+    // }).then(result => {
+    //   resolve(result)
+    // }).catch(error => {
+    //   reject(error)
+    // })
   })
 }
 
@@ -303,6 +317,7 @@ const getTaskRequest = (teamId, projectId, boardId, taskId) => {
       "panelId": "1",
       "taskId": "1",
       "title": "タイトル",
+      "content": "詳細です。",
       "priority": "1",
       "assignUser": "yumochi21",
       "startDate": "2019-03-01",

@@ -15,14 +15,14 @@
     .item {
       display: block;
       position: relative;
-      padding: 12px 12px;
+      padding: 8px 12px;
       font-size: 12px;
       cursor: pointer;
-      margin: 6px 8px;
+      margin: 8px 8px;
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
-      border-radius: 3px;
+      // border-radius: 3px;
       color: #666666;
       text-decoration: none;
 
@@ -39,9 +39,10 @@
       }
     }
     .selected {
-      background-color: #64b5f6 !important;
-      color: #ffffff !important;
-      font-weight: 700;
+      // background-color: #64b5f6 !important;
+      // color: #ffffff !important;
+      // font-weight: 700;
+      border-right: 2px solid #64b5f6 !important;
     }
   }
 
@@ -108,6 +109,7 @@
           font-weight: 700;
           background-color: #2980b9;
           color: #ffffff;
+          height: 36px;
 
           .plus {
             position: absolute;

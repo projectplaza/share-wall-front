@@ -48,6 +48,155 @@ const handleBoardCreateClick = _this => {
 }
 
 /**
+ * ボード作成キャンセルボタンクリックイベントハンドラ
+ * @param {object} _this 
+ */
+const handleBoardCreateCancelClick = _this => {
+  _this.$set(_this.dialog.boardCreate, 'visible', false)
+  _this.$set(_this.dialog.boardCreate, 'boardName', null)
+}
+
+/**
+ * パネル追加ボタンのクリックイベントハンドラ
+ * @param {object} _this 
+ */
+const handlePanelAddClick = _this => {
+  _this.$set(_this.dialog.panelCreate, 'visible', true)
+  window.setTimeout(() => {
+    $('#panel-create-name').focus()
+  }, 500)
+}
+
+/**
+ * パネル作成ボタンクリックイベントハンドラ
+ * @param {object} _this 
+ */
+const handlePanelCreateClick = _this => {
+  _this.showProgressBar()
+
+  request.postPanelRequest(_this.display.teamId, _this.display.projectId, _this.display.boardId, _this.dialog.panelCreate.panelName).then(result => {
+
+    const panels = _this.list.panels
+    panels.push({
+      boardId: result.boardId,
+      panelId: result.panelId,
+      panelName: result.panelName,
+      order: result.order,
+      task: [],
+      showCreateWindow: false
+    })
+
+    _this.$set(_this.list, 'panels', panels)
+
+    _this.$set(_this.dialog.panelCreate, 'visible', false)
+    _this.$set(_this.dialog.panelCreate, 'panelName', null)
+
+    let order = 0
+    const updatePanels = panels.map(panel => {
+      order++
+      return {
+        panelId: panel.panelId,
+        panelName: panel.panelName,
+        order: order
+      }
+    })
+
+    request.putPanelRequest(_this.display.teamId, _this.display.projectId, _this.display.boardId, updatePanels).then(result => {
+      _this.$set(_this.dialog.panelSetting, 'visible', false)
+      _this.hideProgressBar()
+    })
+  })
+}
+
+/**
+ * パネル作成キャンセルボタンクリックイベントハンドラ
+ * @param {object} _this 
+ */
+const handlePanelCreateCancelClick = _this => {
+  _this.$set(_this.dialog.panelCreate, 'visible', false)
+  _this.$set(_this.dialog.panelCreate, 'panelName', null)
+}
+
+/**
+ * パネル設定ボタンのクリックイベントハンドラ
+ * @param {object} _this 
+ */
+const handlePanelSettingClick = _this => {
+  _this.$set(_this.dialog.panelSetting, 'visible', true)
+}
+
+/**
+ * パネル設定完了ボタンクリックイベントハンドラ
+ * @param {object} _this 
+ */
+const handlePanelSettingCompleteClick = _this => {
+  _this.hideProgressBar()
+  _this.$set(_this.dialog.panelSetting, 'visible', false)
+}
+
+/**
+ * パネル削除ボタンクリックイベントハンドラ
+ * @param {object} _this 
+ * @param {string} panelId
+ */
+const handlePanelDeleteClick = (_this, panelId) => {
+  _this.$set(_this.dialog.panelDelete, 'visible', true)
+  _this.$set(_this.dialog.panelDelete, 'panelId', panelId)
+}
+
+/**
+ * パネル削除確定ボタンクリックイベントハンドラ
+ * @param {object} _this 
+ */
+const handlePanelDeleteConfirmClick = _this => {
+  _this.showProgressBar()
+
+  const panelId = _this.dialog.panelDelete.panelId
+
+  request.deletePanelRequest(_this.display.teamId, _this.display.projectId, _this.display.boardId, panelId).then(result => {
+    _this.hideProgressBar()
+    _this.$set(_this.dialog.panelDelete, 'visible', false)
+    _this.$set(_this.dialog.panelDelete, 'panelId', null)
+
+    const panels = _this.list.panels
+    panels.some((panel, index) => {
+      if (panel.panelId == panelId) panels.splice(index, 1)
+    })
+
+    _this.$set(_this.list, 'panels', panels)
+  })
+}
+
+/**
+ * パネル削除キャンセルボタンクリックイベントハンドラ
+ * @param {object} _this
+ */
+const handlePanelDeleteCancelClick = _this => {
+  _this.$set(_this.dialog.panelDelete, 'visible', false)
+  _this.$set(_this.dialog.panelDelete, 'panelId', null)
+}
+
+/**
+ * パネル一覧変更イベントハンドラ
+ * @param {object} _this 
+ */
+const handlePanelsChange = _this => {
+  let order = 0
+  const panels = _this.list.panels.map(panel => {
+    order++
+    return {
+      panelId: panel.panelId,
+      panelName: panel.panelName,
+      order: order
+    }
+  })
+
+  request.putPanelRequest(_this.display.teamId, _this.display.projectId, _this.display.boardId, panels).then(result => {
+    // nothing to do
+  })
+}
+
+/**
  * コンポーネント作成後のイベントハンドラ
  * @param {object} _this 
  */
@@ -108,15 +257,16 @@ const handleRouteChange = (_this, to, from) => {
   _this.display.boardId = newParams.boardId
   _this.display.taskId = newParams.taskId
 
-  if (newParams.teamId != oldParams.teamId || newParams.projectId != oldParams.projectId) {
+  if (newParams.taskId != oldParams.taskId) {
     initBoardList(_this).then(() => { initPanelTask(_this).then(() => { initTask(_this).then(() => { initDisplay(_this); _this.hideProgressBar() }) }) })
     return
   }
   else if (newParams.boardId != oldParams.boardId) {
+    initBoardSelected(_this)
     initPanelTask(_this).then(() => { initTask(_this).then(() => { initDisplay(_this); _this.hideProgressBar() }) })
     return
   }
-  else if (newParams.taskId != oldParams.taskId) {
+  else if (newParams.teamId != oldParams.teamId || newParams.projectId != oldParams.projectId) {
     initTask(_this).then(() => { initDisplay(_this); _this.hideProgressBar() })
     return
   }
@@ -158,10 +308,29 @@ const initBoardList = _this => {
 }
 
 /**
+ * ボードの選択状態を初期化する
+ * @param {object} _this 
+ */
+const initBoardSelected = _this => {
+  const boards = _this.list.boards.map(board => {
+    return {
+      ...board,
+      selected: (board.boardId == _this.display.boardId) ? true : false
+    }
+  })
+
+  _this.$set(_this.list, 'boards', boards)
+}
+
+/**
  * パネルとタスクの一覧を初期化する
  * @param {object} _this 
  */
 const initPanelTask = _this => {
+
+  const board = _this.list.boards.find(board => board.boardId == _this.display.boardId)
+  _this.$set(_this.display, 'boardName', board.boardName)
+
   return new Promise((resolve, reject) => {
     request.getPanelTaskListRequest(_this.display.teamId, _this.display.projectId, _this.display.boardId).then(result => {
       const panels = result.map(r => {
@@ -209,9 +378,63 @@ const initDisplay = _this => {
   _this.mode.edit = false
 }
 
+/**
+ * 表示用のタスク情報を追加する
+ * @param {array} panels パネル一覧
+ * @param {string} panelId パネルID
+ * @param {object} task タスク情報
+ */
+const addDisplayTask = (panels, panelId, task) => {
+  task = {
+    ...task,
+    panelId: panelId
+  }
+
+  const panel = panels.find(panel => panel.panelId == panelId)
+  panel.task.push(task)
+
+  return panels
+}
+
+/**
+ * 表示用のタスク情報を更新する
+ * @param {array} panels パネル一覧
+ * @param {object} task タスク情報
+ */
+const updateDisplayTask = (panels, task) => {
+  for (let panelIndex = 0; panelIndex < panels.length; panelIndex++) {
+    for (let taskIndex = 0; taskIndex < panels[panelIndex].task.length; taskIndex++) {
+      if (panels[panelIndex].task[taskIndex].taskId == task.taskId) {
+        panels[panelIndex].task[taskIndex] = {
+          taskId: task.taskId,
+          panelId: panels[panelIndex].panelId,
+          title: task.title,
+          content: task.content,
+          priority: task.priority,
+          assignUser: task.assignUser,
+          startDate: task.startDate,
+          deadline: task.deadline
+        }
+
+        return panels
+      }
+    }
+  }
+}
+
 export default {
   handleBoardAddClick,
   handleBoardCreateClick,
+  handleBoardCreateCancelClick,
+  handlePanelAddClick,
+  handlePanelCreateClick,
+  handlePanelCreateCancelClick,
+  handlePanelSettingClick,
+  handlePanelSettingCompleteClick,
+  handlePanelDeleteClick,
+  handlePanelDeleteConfirmClick,
+  handlePanelDeleteCancelClick,
+  handlePanelsChange,
   handleCreated,
   handleRouteChange
 }

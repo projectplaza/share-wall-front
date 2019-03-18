@@ -2,20 +2,20 @@
   <div class="board">
     <router-link class="item" v-for="board in list.boards" :class="{selected: board.selected}" :key="board.boardId"
       :to="{ name: 'wall-board', params: { teamId: display.teamId, projectId: display.projectId, boardId: board.boardId }}">
-      <img v-if="!board.selected" src="../../assets/board-gray.png" />
-      <img v-if="board.selected" src="../../assets/board.png" />
+      <img src="../../assets/board-gray.png" />
+      <!-- <img v-if="board.selected" src="../../assets/board.png" /> -->
       {{board.boardName}}
     </router-link>
     <div class="item" @click="handleBoardAddClick">＋&emsp;Add</div>
   </div>
-  <div class="panels">
+  <div class="panels" v-if="display.boardId != null">
     <div class="header">
       <div class="title">{{display.boardName}}</div>
       <div class="setting">
-        <img src="../../assets/plus-gray.png" />
+        <img src="../../assets/plus-gray.png" @click="handlePanelAddClick" />
+        <img src="../../assets/setting-gray.png" @click="handlePanelSettingClick" />
         <img src="../../assets/pen-gray.png" />
         <img src="../../assets/delete-gray.png" />
-        <img src="../../assets/setting-gray.png" />
       </div>
     </div>
     <div class="body" :style="boardWidth">
@@ -144,30 +144,24 @@
   <md-dialog :md-active.sync="dialog.boardCreate.visible" class="wl-dialog">
     <div class="title">ボード名を入力してください</div>
     <div class="form">
-      <input v-model="dialog.boardCreate.boardName" type="text" placeholder="名称" class="full under" id="board-create-name" />
+      <input v-model="dialog.boardCreate.boardName" type="text" placeholder="名称" class="full under"
+        id="board-create-name" @keydown.13="handleBoardCreateClick" />
     </div>
     <div class="button-box">
-      <md-button>キャンセル</md-button>
+      <md-button @click="handleBoardCreateCancelClick">キャンセル</md-button>
       <md-button class="md-primary md-raised" @click="handleBoardCreateClick">作成</md-button>
-    </div>
-  </md-dialog>
-  <!-- ボード削除ダイアログ -->
-  <md-dialog :md-active.sync="dialog.boardDelete.visible" class="wl-dialog wl-dialog-small">
-    <div class="title">本当に削除しますか？</div>
-    <div class="button-box center">
-      <md-button class="md-accent md-raised">削除</md-button>
-      <md-button>キャンセル</md-button>
     </div>
   </md-dialog>
   <!-- パネル作成ダイアログ -->
   <md-dialog :md-active.sync="dialog.panelCreate.visible" class="wl-dialog">
     <div class="title">パネルの作成</div>
     <div class="form">
-      <input v-model="dialog.panelCreate.panelName" type="text" placeholder="名称" class="full under" />
+      <input v-model="dialog.panelCreate.panelName" type="text" placeholder="名称" class="full under"
+        id="panel-create-name" @keydown.13="handlePanelCreateClick" />
     </div>
     <div class="button-box">
-      <md-button>キャンセル</md-button>
-      <md-button class="md-primary md-raised">完了</md-button>
+      <md-button @click="handlePanelCreateCancelClick">キャンセル</md-button>
+      <md-button class="md-primary md-raised" @click="handlePanelCreateClick">完了</md-button>
     </div>
   </md-dialog>
   <!-- パネル設定ダイアログ -->
@@ -179,17 +173,38 @@
           <div class="panel-group" v-for="panel in list.panels" :key="panel.panelId">
             <img src="../../assets/switch-gray.png" />
             <input type="text" v-model="panel.panelName" placeholder="名称" />
-            <img src="../../assets/cross-gray.png" class="delete" />
+            <img src="../../assets/cross-gray.png" class="delete"
+              @click="() => { handlePanelDeleteClick(panel.panelId) }" />
           </div>
         </transition-group>
       </draggable>
     </div>
     <div class="button-box">
-      <md-button>完了</md-button>
+      <md-button @click="handlePanelSettingCompleteClick">完了</md-button>
     </div>
   </md-dialog>
   <!-- パネル削除ダイアログ -->
   <md-dialog :md-active.sync="dialog.panelDelete.visible" class="wl-dialog wl-dialog-small">
+    <div class="title">本当に削除しますか？</div>
+    <div class="button-box center">
+        <md-button class="md-accent md-raised" @click="handlePanelDeleteConfirmClick">削除</md-button>
+        <md-button @click="handlePanelDeleteCancelClick">キャンセル</md-button>
+    </div>
+  </md-dialog>
+  <!-- ボード編集ダイアログ -->
+  <md-dialog :md-active.sync="dialog.boardEdit.visible" class="wl-dialog">
+    <div class="title">ボード名を入力してください</div>
+    <div class="form">
+      <input v-model="dialog.boardEdit.boardName" type="text" placeholder="名称" class="full under"
+        id="board-edit-name" />
+    </div>
+    <div class="button-box">
+      <md-button>キャンセル</md-button>
+      <md-button class="md-primary md-raised">作成</md-button>
+    </div>
+  </md-dialog>
+  <!-- ボード削除ダイアログ -->
+  <md-dialog :md-active.sync="dialog.boardDelete.visible" class="wl-dialog wl-dialog-small">
     <div class="title">本当に削除しますか？</div>
     <div class="button-box center">
       <md-button class="md-accent md-raised">削除</md-button>

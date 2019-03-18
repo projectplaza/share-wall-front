@@ -4,31 +4,31 @@ import { ROUTE_NAME } from '../../router'
 import handler from './handler'
 
 const panels = [
-  {
-    panelId: "1",
-    panelName: "新規",
-    task: [
-      { taskId: "01", title: "開発" },
-      { taskId: "02", title: "トーク" },
-      { taskId: "03", title: "メッセージ" }
-    ],
-    showCreateWindow: false
-  },
-  {
-    panelId: "2",
-    panelName: "進行中",
-    task: [
-      { taskId: "04", title: "ウォール" },
-      { taskId: "05", title: "デザインドキュメント" }
-    ],
-    showCreateWindow: true
-  }
+  // {
+  //   panelId: "1",
+  //   panelName: "新規",
+  //   task: [
+  //     { taskId: "01", title: "開発" },
+  //     { taskId: "02", title: "トーク" },
+  //     { taskId: "03", title: "メッセージ" }
+  //   ],
+  //   showCreateWindow: false
+  // },
+  // {
+  //   panelId: "2",
+  //   panelName: "進行中",
+  //   task: [
+  //     { taskId: "04", title: "ウォール" },
+  //     { taskId: "05", title: "デザインドキュメント" }
+  //   ],
+  //   showCreateWindow: false
+  // }
 ]
 
 const boards = [
-  { boardId: "0000001", boardName: "開発", selected: false },
-  { boardId: "0000002", boardName: "企画", selected: true },
-  { boardId: "0000003", boardName: "営業", selected: false }
+  // { boardId: "0000001", boardName: "開発", selected: false },
+  // { boardId: "0000002", boardName: "企画", selected: true },
+  // { boardId: "0000003", boardName: "営業", selected: false }
 ]
 
 const wallApp = {
@@ -85,8 +85,13 @@ const wallApp = {
         visible: false,
         boardName: null,
       },
+      boardEdit: {
+        visible: false,
+        boardName: null,
+      },
       boardDelete: {
         visible: false,
+        boardId: null,
       },
       panelCreate: {
         visible: false,
@@ -108,8 +113,29 @@ const wallApp = {
 
     // ボード追加ボタンのクリックイベントハンドラ
     handleBoardAddClick: function() { handler.handleBoardAddClick(this) },
-    // ボード追加ボタンのクリックイベントハンドラ
+    // ボード作成ボタンのクリックイベントハンドラ
     handleBoardCreateClick: function() { handler.handleBoardCreateClick(this) },
+    // ボード作成キャンセルボタンのクリックイベントハンドラ
+    handleBoardCreateCancelClick: function() { handler.handleBoardCreateCancelClick(this) },
+
+    // パネル追加ボタンのクリックイベントハンドラ
+    handlePanelAddClick: function() { handler.handlePanelAddClick(this) },
+    // パネル作成ボタンのクリックイベントハンドラ
+    handlePanelCreateClick: function() { handler.handlePanelCreateClick(this) },
+    // パネル作成キャンセルボタンのクリックイベントハンドラ
+    handlePanelCreateCancelClick: function() { handler.handlePanelCreateCancelClick(this) },
+
+    // パネル設定ボタンのクリックイベントハンドラ
+    handlePanelSettingClick: function() { handler.handlePanelSettingClick(this) },
+    // パネル設定完了ボタンのクリックイベントハンドラ
+    handlePanelSettingCompleteClick: function() { handler.handlePanelSettingCompleteClick(this) },
+
+    // パネル削除ボタンクリックイベントハンドラ
+    handlePanelDeleteClick: function(panelId) { handler.handlePanelDeleteClick(this, panelId) },
+    // パネル削除確定ボタンクリックイベントハンドラ
+    handlePanelDeleteConfirmClick: function() { handler.handlePanelDeleteConfirmClick(this) },
+    // パネル削除キャンセルボタンクリックイベントハンドラ
+    handlePanelDeleteCancelClick: function() { handler.handlePanelDeleteCancelClick(this) },
 
     // Vuex mutations
     ...mapMutations("common", ["showProgressBar", "hideProgressBar", 'changeCurrentTeam', 'changeCurrentProject'])
@@ -142,9 +168,20 @@ const wallApp = {
   },
 
   watch: {
-    '$route': function(to, from) {
-      handler.handleRouteChange(this, to, from)
-    }
+    '$route': function(to, from) { handler.handleRouteChange(this, to, from) },
+    'list.panels': function(to, from) {
+      if (to.length == from.length) {
+        for (let i = 0; i < to.length; i++) {
+          if (to[i].panelId != from[i].panelId) {
+            handler.handlePanelsChange(this)
+            return
+          }
+        }
+      } else {
+        handler.handlePanelsChange(this)
+      }
+    },
+    'dialog.panelSetting.visible': function(to, from) { if (!to) handler.handlePanelsChange(this) }
   },
 
   components: {
