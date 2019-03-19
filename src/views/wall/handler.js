@@ -279,6 +279,21 @@ const handleBoardDeleteCancelClick = _this => {
 }
 
 /**
+ * タスク閉じるクリックイベントハンドラ
+ * @param {object} _this 
+ */
+const handleTaskCloseClick = _this => {
+  _this.$router.push({
+    name: ROUTE_NAME.WALL_BOARD,
+    params: {
+      teamId: _this.display.teamId,
+      projectId: _this.display.projectId,
+      boardId: _this.display.boardId
+    }
+  })
+}
+
+/**
  * パネル一覧変更イベントハンドラ
  * @param {object} _this 
  */
@@ -568,6 +583,7 @@ export default {
   handleBoardDeleteClick,
   handleBoardDeleteConfirmClick,
   handleBoardDeleteCancelClick,
+  handleTaskCloseClick,
   handlePanelsChange,
   handleCreated,
   handleRouteChange

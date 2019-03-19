@@ -140,6 +140,9 @@ const wallApp = {
     // ボード削除キャンセルボタンクリックイベントハンドラ
     handleBoardDeleteCancelClick: function() { handler.handleBoardDeleteCancelClick(this) },
 
+    // タスク閉じるクリックイベントハンドラ
+    handleTaskCloseClick: function() { handler.handleTaskCloseClick(this) },
+
     // Vuex mutations
     ...mapMutations("common", ["showProgressBar", "hideProgressBar", 'changeCurrentTeam', 'changeCurrentProject'])
   },
