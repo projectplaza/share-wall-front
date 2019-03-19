@@ -111,16 +111,18 @@ const putBoardRequest = (teamId, projectId, boards) => {
  */
 const deleteBoardRequest = (teamId, projectId, boardId) => {
   return new Promise((resolve, reject) => {
-    deleteRequest(PATH_BOARD, {
-      teamId,
-      projectId,
-      boardId,
-      functionName: FUNCTION_CODE_WALL
-    }).then(result => {
-      resolve(result)
-    }).catch(error => {
-      reject(error)
-    })
+    console.log(boardId)
+    resolve()
+    // deleteRequest(PATH_BOARD, {
+    //   teamId,
+    //   projectId,
+    //   boardId,
+    //   functionName: FUNCTION_CODE_WALL
+    // }).then(result => {
+    //   resolve(result)
+    // }).catch(error => {
+    //   reject(error)
+    // })
   })
 }
 

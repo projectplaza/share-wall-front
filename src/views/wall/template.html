@@ -16,7 +16,7 @@
         <img src="../../assets/plus-gray.png" @click="handlePanelAddClick" />
         <img src="../../assets/setting-gray.png" @click="handlePanelSettingClick" />
         <img src="../../assets/pen-gray.png" @click="handleBoardEditClick" />
-        <img src="../../assets/delete-gray.png" />
+        <img src="../../assets/delete-gray.png" @click="handleBoardDeleteClick" />
       </div>
     </div>
     <div class="body" :style="boardWidth">
@@ -197,7 +197,7 @@
     <div class="title">ボード名を入力してください</div>
     <div class="form">
       <input v-model="dialog.boardEdit.boardName" type="text" placeholder="名称" class="full under"
-        id="board-edit-name" />
+        id="board-edit-name" @keydown.13="handleBoardEditSaveClick" />
     </div>
     <div class="button-box">
       <md-button @click="handleBoardEditCancelClick">キャンセル</md-button>
@@ -208,8 +208,8 @@
   <md-dialog :md-active.sync="dialog.boardDelete.visible" class="wl-dialog wl-dialog-small">
     <div class="title">本当に削除しますか？</div>
     <div class="button-box center">
-      <md-button class="md-accent md-raised">削除</md-button>
-      <md-button>キャンセル</md-button>
+      <md-button class="md-accent md-raised" @click="handleBoardDeleteConfirmClick">削除</md-button>
+      <md-button @click="handleBoardDeleteCancelClick">キャンセル</md-button>
     </div>
   </md-dialog>
   <!-- タスク削除ダイアログ -->

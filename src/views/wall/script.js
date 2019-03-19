@@ -133,6 +133,13 @@ const wallApp = {
     // ボード編集キャンセルボタンクリックイベントハンドラ
     handleBoardEditCancelClick: function() { handler.handleBoardEditCancelClick(this) },
 
+    // ボード削除ボタンクリックイベントハンドラ
+    handleBoardDeleteClick: function() { handler.handleBoardDeleteClick(this) },
+    // ボード削除確定ボタンクリックイベントハンドラ
+    handleBoardDeleteConfirmClick: function() { handler.handleBoardDeleteConfirmClick(this) },
+    // ボード削除キャンセルボタンクリックイベントハンドラ
+    handleBoardDeleteCancelClick: function() { handler.handleBoardDeleteCancelClick(this) },
+
     // Vuex mutations
     ...mapMutations("common", ["showProgressBar", "hideProgressBar", 'changeCurrentTeam', 'changeCurrentProject'])
   },

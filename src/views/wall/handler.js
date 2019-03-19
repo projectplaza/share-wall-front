@@ -230,6 +230,55 @@ const handleBoardEditCancelClick = _this => {
 }
 
 /**
+ * ボード削除ボタンクリックイベントハンドラ
+ * @param {object} _this 
+ */
+const handleBoardDeleteClick = _this => {
+  _this.$set(_this.dialog.boardDelete, 'visible', true)
+  _this.$set(_this.dialog.boardDelete, 'boardId', _this.display.boardId)
+}
+
+/**
+ * ボード削除確定ボタンクリックイベントハンドラ
+ * @param {object} _this 
+ */
+const handleBoardDeleteConfirmClick = _this => {
+  _this.showProgressBar()
+
+  const boardId = _this.dialog.boardDelete.boardId
+
+  request.deleteBoardRequest(_this.display.teamId, _this.display.projectId, boardId).then(result => {
+    _this.hideProgressBar()
+    _this.$set(_this.dialog.boardDelete, 'visible', false)
+    _this.$set(_this.dialog.boardDelete, 'boardId', null)
+
+    _this.$router.push({
+      name: ROUTE_NAME.WALL_HOME,
+      params: {
+        teamId: _this.display.teamId,
+        projectId: _this.display.projectId
+      }
+    })
+
+    const boards = _this.list.boards
+    boards.some((board, index) => {
+      if (board.boardId == boardId) boards.splice(index, 1)
+    })
+
+    _this.$set(_this.list, 'boards', boards)
+  })
+}
+
+/**
+ * ボード削除キャンセルボタンクリックイベントハンドラ
+ * @param {object} _this
+ */
+const handleBoardDeleteCancelClick = _this => {
+  _this.$set(_this.dialog.boardDelete, 'visible', false)
+  _this.$set(_this.dialog.boardDelete, 'boardId', null)
+}
+
+/**
  * パネル一覧変更イベントハンドラ
  * @param {object} _this 
  */
@@ -311,15 +360,18 @@ const handleRouteChange = (_this, to, from) => {
   _this.display.taskId = newParams.taskId
 
   if (newParams.teamId != oldParams.teamId || newParams.projectId != oldParams.projectId) {
+    console.log('wall-home')
     initBoardList(_this).then(() => { initPanelTask(_this).then(() => { initTask(_this).then(() => { initDisplay(_this); _this.hideProgressBar() }) }) })
     return
   }
-  else if (newParams.boardId != oldParams.boardId) {
+  else if (newParams.boardId != null && newParams.boardId != oldParams.boardId) {
+    console.log('wall-board')
     initBoardSelected(_this)
     initPanelTask(_this).then(() => { initTask(_this).then(() => { initDisplay(_this); _this.hideProgressBar() }) })
     return
   }
-  else if (newParams.taskId != oldParams.taskId) {
+  else if (newParams.taskId != null && newParams.taskId != oldParams.taskId) {
+    console.log('wall-task')
     initTask(_this).then(() => { initDisplay(_this); _this.hideProgressBar() })
     return
   }
@@ -490,6 +542,9 @@ export default {
   handleBoardEditClick,
   handleBoardEditSaveClick,
   handleBoardEditCancelClick,
+  handleBoardDeleteClick,
+  handleBoardDeleteConfirmClick,
+  handleBoardDeleteCancelClick,
   handlePanelsChange,
   handleCreated,
   handleRouteChange
