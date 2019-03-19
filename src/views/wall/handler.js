@@ -296,8 +296,41 @@ const handleTaskCloseClick = _this => {
 /**
  * パネル一覧変更イベントハンドラ
  * @param {object} _this 
+ * @param {array} to 新しいパネル一覧
+ * @param {array} from 古いパネル一覧
  */
-const handlePanelsChange = _this => {
+const handlePanelsChange = (_this, to, from) => {
+
+  if (to == null || from == null) {
+    updatePanel(_this)
+    return
+  }
+
+  let isPanelUpdated = false
+
+  if (to.length != from.length) {
+    isPanelUpdated = true
+  } else {
+    for (let i = 0; i < to.length; i++) {
+      if (to[i].panelId != from[i].panelId) {
+        isPanelUpdated = true
+        break
+      }
+    }
+  }
+
+  if (isPanelUpdated) {
+    updatePanel(_this)
+  } else {
+    updateTaskOrder(_this)
+  }
+}
+
+/**
+ * パネル情報を更新する
+ * @param {object} _this 
+ */
+const updatePanel = _this => {
   let order = 0
   const panels = _this.list.panels.map(panel => {
     order++
@@ -309,6 +342,32 @@ const handlePanelsChange = _this => {
   })
 
   request.putPanelRequest(_this.display.teamId, _this.display.projectId, _this.display.boardId, panels).then(result => {
+    // nothing to do
+  })
+}
+
+/**
+ * タスクの順序を更新する
+ * @param {object} _this 
+ */
+const updateTaskOrder = _this => {
+  let tasks = []
+
+  _this.list.panels.forEach(panel => {
+    const panelId = panel.panelId
+    let order = 0
+    const taskList = panel.task.map(task => {
+      order++
+      return {
+        taskId: task.taskId,
+        panelId: panelId,
+        order: order
+      }
+    })
+    tasks = tasks.concat(taskList)
+  })
+
+  request.putTaskRequest(_this.display.teamId, _this.display.projectId, _this.display.boardId, tasks).then(result => {
     // nothing to do
   })
 }

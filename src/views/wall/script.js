@@ -175,17 +175,9 @@ const wallApp = {
 
   watch: {
     '$route': function(to, from) { handler.handleRouteChange(this, to, from) },
-    'list.panels': function(to, from) {
-      if (to.length == from.length) {
-        for (let i = 0; i < to.length; i++) {
-          if (to[i].panelId != from[i].panelId) {
-            handler.handlePanelsChange(this)
-            return
-          }
-        }
-      } else {
-        handler.handlePanelsChange(this)
-      }
+    'list.panels': {
+      handler: function(to, from) { handler.handlePanelsChange(this, to, from) },
+      deep: true
     },
     'dialog.panelSetting.visible': function(to, from) { if (!to) handler.handlePanelsChange(this) }
   },

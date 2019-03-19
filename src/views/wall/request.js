@@ -386,16 +386,19 @@ const postTaskRequest = (teamId, projectId, boardId, task) => {
  */
 const putTaskRequest = (teamId, projectId, boardId, tasks) => {
   return new Promise((resolve, reject) => {
-    putRequest(PATH_TASK, {
-      teamId,
-      projectId,
-      boardId,
-      tasks
-    }).then(result => {
-      resolve(result)
-    }).catch(error => {
-      reject(error)
-    })
+    console.log('update task')
+    console.log(tasks)
+    resolve()
+    // putRequest(PATH_TASK, {
+    //   teamId,
+    //   projectId,
+    //   boardId,
+    //   tasks
+    // }).then(result => {
+    //   resolve(result)
+    // }).catch(error => {
+    //   reject(error)
+    // })
   })
 }
 
