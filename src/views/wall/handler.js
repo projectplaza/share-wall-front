@@ -257,7 +257,7 @@ const handleRouteChange = (_this, to, from) => {
   _this.display.boardId = newParams.boardId
   _this.display.taskId = newParams.taskId
 
-  if (newParams.taskId != oldParams.taskId) {
+  if (newParams.teamId != oldParams.teamId || newParams.projectId != oldParams.projectId) {
     initBoardList(_this).then(() => { initPanelTask(_this).then(() => { initTask(_this).then(() => { initDisplay(_this); _this.hideProgressBar() }) }) })
     return
   }
@@ -266,7 +266,7 @@ const handleRouteChange = (_this, to, from) => {
     initPanelTask(_this).then(() => { initTask(_this).then(() => { initDisplay(_this); _this.hideProgressBar() }) })
     return
   }
-  else if (newParams.teamId != oldParams.teamId || newParams.projectId != oldParams.projectId) {
+  else if (newParams.taskId != oldParams.taskId) {
     initTask(_this).then(() => { initDisplay(_this); _this.hideProgressBar() })
     return
   }

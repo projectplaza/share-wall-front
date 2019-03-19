@@ -1,5 +1,6 @@
 <div class="wall">
   <div class="board">
+    <div class="board-title">▽ ボード一覧 ▽</div>
     <router-link class="item" v-for="board in list.boards" :class="{selected: board.selected}" :key="board.boardId"
       :to="{ name: 'wall-board', params: { teamId: display.teamId, projectId: display.projectId, boardId: board.boardId }}">
       <img src="../../assets/board-gray.png" />
