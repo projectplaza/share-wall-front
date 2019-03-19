@@ -335,6 +335,18 @@ const handleCreated = _this => {
         }
       })
     } else {
+      if (_this.list.boards.length != 0) {
+        _this.$router.push({
+          name: ROUTE_NAME.WALL_BOARD,
+          params: {
+            teamId: _this.display.teamId,
+            projectId: _this.display.projectId,
+            boardId: _this.list.boards[0].boardId
+          }
+        })
+        return
+      }
+      
       initDisplay(_this)
       _this.hideProgressBar()
     }
@@ -373,6 +385,17 @@ const handleRouteChange = (_this, to, from) => {
   else if (newParams.taskId != null && newParams.taskId != oldParams.taskId) {
     console.log('wall-task')
     initTask(_this).then(() => { initDisplay(_this); _this.hideProgressBar() })
+    return
+  }
+  else if (_this.$route.name == ROUTE_NAME.WALL_HOME && _this.list.boards.length != 0) {
+    _this.$router.push({
+      name: ROUTE_NAME.WALL_BOARD,
+      params: {
+        teamId: _this.display.teamId,
+        projectId: _this.display.projectId,
+        boardId: _this.list.boards[0].boardId
+      }
+    })
     return
   }
 
