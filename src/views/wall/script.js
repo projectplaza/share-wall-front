@@ -13,22 +13,11 @@ const panels = [
   //     { taskId: "03", title: "メッセージ" }
   //   ],
   //   showCreateWindow: false
-  // },
-  // {
-  //   panelId: "2",
-  //   panelName: "進行中",
-  //   task: [
-  //     { taskId: "04", title: "ウォール" },
-  //     { taskId: "05", title: "デザインドキュメント" }
-  //   ],
-  //   showCreateWindow: false
   // }
 ]
 
 const boards = [
-  // { boardId: "0000001", boardName: "開発", selected: false },
-  // { boardId: "0000002", boardName: "企画", selected: true },
-  // { boardId: "0000003", boardName: "営業", selected: false }
+  // { boardId: "0000001", boardName: "開発", selected: false }
 ]
 
 const wallApp = {
@@ -136,6 +125,13 @@ const wallApp = {
     handlePanelDeleteConfirmClick: function() { handler.handlePanelDeleteConfirmClick(this) },
     // パネル削除キャンセルボタンクリックイベントハンドラ
     handlePanelDeleteCancelClick: function() { handler.handlePanelDeleteCancelClick(this) },
+    
+    // ボード編集ボタンクリックイベントハンドラ
+    handleBoardEditClick: function() { handler.handleBoardEditClick(this) },
+    // ボード編集保存ボタンクリックイベントハンドラ
+    handleBoardEditSaveClick: function() { handler.handleBoardEditSaveClick(this) },
+    // ボード編集キャンセルボタンクリックイベントハンドラ
+    handleBoardEditCancelClick: function() { handler.handleBoardEditCancelClick(this) },
 
     // Vuex mutations
     ...mapMutations("common", ["showProgressBar", "hideProgressBar", 'changeCurrentTeam', 'changeCurrentProject'])

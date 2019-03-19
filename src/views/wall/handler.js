@@ -177,6 +177,59 @@ const handlePanelDeleteCancelClick = _this => {
 }
 
 /**
+ * ボード編集ボタンクリックイベントハンドラ
+ * @param {object} _this 
+ */
+const handleBoardEditClick = _this => {
+  _this.$set(_this.dialog.boardEdit, 'boardName', _this.display.boardName)
+  _this.$set(_this.dialog.boardEdit, 'visible', true)
+  window.setTimeout(() => {
+    $('#board-edit-name').focus()
+  }, 500)
+}
+
+/**
+ * ボード編集保存ボタンクリックイベントハンドラ
+ * @param {object} _this 
+ */
+const handleBoardEditSaveClick = _this => {
+  _this.showProgressBar()
+
+  const boards = [{
+    boardId: _this.display.boardId,
+    boardName: _this.dialog.boardEdit.boardName
+  }]
+
+  request.putBoardRequest(_this.display.teamId, _this.display.projectId, boards).then(result => {
+    const updateBoards = _this.list.boards.map(board => {
+      if (board.boardId == _this.display.boardId) {
+        return {
+          ...board,
+          boardName: _this.dialog.boardEdit.boardName
+        }
+      }
+      return board
+    })
+
+    _this.$set(_this.display, 'boardName', _this.dialog.boardEdit.boardName)
+    _this.$set(_this.list, 'boards', updateBoards)
+    _this.$set(_this.dialog.boardEdit, 'boardName', null)
+    _this.$set(_this.dialog.boardEdit, 'visible', false)
+
+    _this.hideProgressBar()
+  })
+}
+
+/**
+ * ボード編集キャンセルボタンクリックイベントハンドラ
+ * @param {object} _this 
+ */
+const handleBoardEditCancelClick = _this => {
+  _this.$set(_this.dialog.boardEdit, 'boardName', null)
+  _this.$set(_this.dialog.boardEdit, 'visible', false)
+}
+
+/**
  * パネル一覧変更イベントハンドラ
  * @param {object} _this 
  */
@@ -434,6 +487,9 @@ export default {
   handlePanelDeleteClick,
   handlePanelDeleteConfirmClick,
   handlePanelDeleteCancelClick,
+  handleBoardEditClick,
+  handleBoardEditSaveClick,
+  handleBoardEditCancelClick,
   handlePanelsChange,
   handleCreated,
   handleRouteChange

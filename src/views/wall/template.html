@@ -15,7 +15,7 @@
       <div class="setting">
         <img src="../../assets/plus-gray.png" @click="handlePanelAddClick" />
         <img src="../../assets/setting-gray.png" @click="handlePanelSettingClick" />
-        <img src="../../assets/pen-gray.png" />
+        <img src="../../assets/pen-gray.png" @click="handleBoardEditClick" />
         <img src="../../assets/delete-gray.png" />
       </div>
     </div>
@@ -200,8 +200,8 @@
         id="board-edit-name" />
     </div>
     <div class="button-box">
-      <md-button>キャンセル</md-button>
-      <md-button class="md-primary md-raised">作成</md-button>
+      <md-button @click="handleBoardEditCancelClick">キャンセル</md-button>
+      <md-button class="md-primary md-raised" @click="handleBoardEditSaveClick">保存</md-button>
     </div>
   </md-dialog>
   <!-- ボード削除ダイアログ -->

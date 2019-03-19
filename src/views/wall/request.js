@@ -76,16 +76,27 @@ const postBoardRequest = (teamId, projectId, boardName) => {
  */
 const putBoardRequest = (teamId, projectId, boards) => {
   return new Promise((resolve, reject) => {
-    putRequest(PATH_BOARD, {
-      teamId,
-      projectId,
-      boards,
-      functionName: FUNCTION_CODE_WALL
-    }).then(result => {
-      resolve(result)
-    }).catch(error => {
-      reject(error)
+    console.log(boards)
+    resolve({
+      "message": "ボードの更新に成功しました。",
+      "teamId": "project-plaza",
+      "projectId": "share-wall",
+      "boards": [{
+        "boardId": '3',
+        "boardName": 'sample',
+        "order": 0
+      }]
     })
+    // putRequest(PATH_BOARD, {
+    //   teamId,
+    //   projectId,
+    //   boards,
+    //   functionName: FUNCTION_CODE_WALL
+    // }).then(result => {
+    //   resolve(result)
+    // }).catch(error => {
+    //   reject(error)
+    // })
   })
 }
 
@@ -223,7 +234,7 @@ const postPanelRequest = (teamId, projectId, boardId, panelName) => {
       "message": "パネルの登録に成功しました。",
       "teamId": "project-plaza",
       "projectId": "share-wall",
-      "boardId" : boardId,
+      "boardId": boardId,
       "panelId": "3",
       "panelName": panelName,
       "order": 0

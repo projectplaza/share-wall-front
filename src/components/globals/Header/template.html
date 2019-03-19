@@ -8,12 +8,9 @@
     <div class="name" v-if="currentTeam">{{currentTeam.name}}</div>
     <img class="dropdown-icon" src="../../../assets/dropdown-gray.png">
     <div class="select" v-if="teamSelect.visible">
-      <router-link 
-        class="select-item"
-        v-for="t in $store.state.common.header.team.list"
-        :to="baseURL + 't/' + t.code + '/dashboard'"
-        :key="t.code"
-      ><img src="../../../assets/team-gray.png" class="select-item-icon" />{{t.name}}</router-link>
+      <router-link class="select-item" v-for="t in $store.state.common.header.team.list"
+        :to="baseURL + 't/' + t.code + '/dashboard'" :key="t.code"><img src="../../../assets/team-gray.png"
+          class="select-item-icon" />{{t.name}}</router-link>
       <router-link :to="{path: baseURL + 't/setting/owner/create'}" class="select-item">＋&emsp;Add</router-link>
     </div>
   </div>
@@ -26,13 +23,11 @@
     <div class="name" v-if="currentProject">{{currentProject.name}}</div>
     <img class="dropdown-icon" src="../../../assets/dropdown-gray.png">
     <div class="select" v-if="projectSelect.visible">
-      <router-link
-        class="select-item"
-        v-for="p in $store.state.common.header.project.list"
-        :to="baseURL + 't/' + $store.state.common.header.team.current + '/p/' + p.code + '/dashboard'"
-        :key="p.code"
-      >-&ensp;{{p.name}}</router-link>
-      <router-link :to="baseURL + 't/' + $store.state.common.header.team.current + '/p/setting/owner/create'" class="select-item" v-if="currentTeam">＋&emsp;Add</router-link>
+      <router-link class="select-item" v-for="p in $store.state.common.header.project.list"
+        :to="baseURL + 't/' + $store.state.common.header.team.current + '/p/' + p.code + '/dashboard'" :key="p.code">
+        -&ensp;{{p.name}}</router-link>
+      <router-link :to="baseURL + 't/' + $store.state.common.header.team.current + '/p/setting/owner/create'"
+        class="select-item" v-if="currentTeam">＋&emsp;Add</router-link>
     </div>
   </div>
   <!-- ショートカットメニュー -->
@@ -73,5 +68,7 @@
     </div>
   </div>
   <!-- プログレスバー -->
-  <md-progress-bar md-mode="indeterminate" v-if="$store.state.common.header.progressBar.visible"></md-progress-bar>
+  <div v-if="$store.state.common.header.progressBar.visible" class="progress-bar">
+    <md-progress-bar md-mode="indeterminate"></md-progress-bar>
+  </div>
 </div>
