@@ -2,6 +2,7 @@ import { mapMutations } from "vuex"
 import draggable from "vuedraggable"
 import { ROUTE_NAME } from '../../router'
 import handler from './handler'
+import util from '../../utils'
 
 const panels = [
   // {
@@ -40,7 +41,7 @@ const wallApp = {
       taskComments: [{
         userName: 'yumochi21',
         postDatetime: '2019-03-16 10:11:12',
-        message: '頑張りましょー！'
+        message: '頑張りましょー！http://localhost:8080/'
       }],
       taskCommentForm: {
         visible: false,
@@ -142,6 +143,9 @@ const wallApp = {
 
     // タスク閉じるクリックイベントハンドラ
     handleTaskCloseClick: function() { handler.handleTaskCloseClick(this) },
+
+    // アンカー自動生成
+    anchorify: function(text) { return util.setAnchor(text) },
 
     // Vuex mutations
     ...mapMutations("common", ["showProgressBar", "hideProgressBar", 'changeCurrentTeam', 'changeCurrentProject'])

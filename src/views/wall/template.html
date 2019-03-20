@@ -64,7 +64,7 @@
         </div>
         <div class="task-name">{{display.task.title}}</div>
         <div class="label">詳細</div>
-        <div class="value">{{display.task.content}}</div>
+        <div class="value" v-html="anchorify(display.task.content)"></div>
         <div class="label separate">優先度</div>
         <div class="label separate">担当者</div>
         <div class="value separate" v-if="display.task.priority == '1'">高</div>
@@ -93,7 +93,7 @@
               <div class="user">{{comment.userName}}</div>
               <div class="post-date">{{comment.postDatetime}}</div>
             </div>
-            <div class="message">{{comment.message}}</div>
+            <div class="message" v-html="anchorify(comment.message)"></div>
           </div>
         </div>
       </div>
