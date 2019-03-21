@@ -141,7 +141,7 @@ const reorderFolderRequest = (teamId, projectId, folderList) => {
     let promiseArray = []
 
     for (let i = 0; i < folderList.length; i++) {
-      promiseArray.push(createFolderOrderPromise(teamId, projectId, folderList[i], i))
+      promiseArray.push(createFolderOrderPromise(teamId, projectId, folderList[i], i + 1))
     }
 
     Promise.all(promiseArray).then((resultList) => {
@@ -318,7 +318,7 @@ const reorderDocumentRequest = (teamId, projectId, documentList) => {
     let promiseArray = []
 
     for (let i = 0; i < documentList.length; i++) {
-      promiseArray.push(createDocumentOrderPromise(teamId, projectId, documentList[i], i))
+      promiseArray.push(createDocumentOrderPromise(teamId, projectId, documentList[i], i + 1))
     }
 
     Promise.all(promiseArray).then((resultList) => {

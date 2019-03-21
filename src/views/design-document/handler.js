@@ -374,6 +374,30 @@ const handleDocumentDeleteCancelClick = (_this) => {
 }
 
 /**
+ * フォルダ変更イベントハンドラ
+ * @param {object} _this 
+ * @param {array} to 変更後フォルダ一覧
+ * @param {array} from 変更前フォルダ一覧
+ */
+const handleFolderChange = (_this, to, from) => {
+  ddRequest.reorderFolderRequest(_this.common.teamId, _this.common.projectId, to).then(result => {
+    // nothing to do
+  })
+}
+
+/**
+ * ドキュメント変更イベントハンドラ
+ * @param {object} _this 
+ * @param {array} to 変更後ドキュメント一覧
+ * @param {array} from 変更前ドキュメント一覧
+ */
+const handleDocumentChange = (_this, to, from) => {
+  ddRequest.reorderDocumentRequest(_this.common.teamId, _this.common.projectId, to).then(result => {
+    // nothing to do
+  })
+}
+
+/**
  * 画面を初期化する
  * @param {object} _this 
  */
@@ -552,5 +576,7 @@ export default {
   handleDocumentDeleteButtonClick,
   init,
   computedCompiledMarkdown,
-  handleChangeCompiledMarkdown
+  handleChangeCompiledMarkdown,
+  handleFolderChange,
+  handleDocumentChange
 }

@@ -109,7 +109,12 @@ const designDocumentApp = {
   },
 
   watch: {
-    compiledMarkdown: handler.handleChangeCompiledMarkdown
+    compiledMarkdown: handler.handleChangeCompiledMarkdown,
+
+    // フォルダ変更イベント
+    'leftMenu.folders': function(to, from) { handler.handleFolderChange(this, to, from) },
+    // ドキュメント変更イベント
+    'leftMenu.documents': function(to, from) { handler.handleDocumentChange(this, to, from) }
   },
 
   created: function () { handler.init(this) },
