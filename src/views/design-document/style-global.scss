@@ -21,17 +21,18 @@
     margin-top: 8px;
     margin-bottom: 8px;
     padding: 10px 0px;
-    border-bottom: 1px solid #273c75;
+    // border-bottom: 1px solid #273c75;
+    border-bottom: 1px solid #bbbbbb;
     font-size: 21px;
-    /* 追加分 */
     font-weight: 100;
   }
   h3 {
-    margin-top: 14px;
-    margin-bottom: 14px;
-    padding: 0px 8px;
-    border-left: 3px solid #273c75;
-    font-size: 16px;
+    margin-top: 18px;
+    margin-bottom: 18px;
+    padding: 4px 8px;
+    // border-left: 3px solid #273c75;
+    border-left: 3px solid #888888;
+    font-size: 18px;
     /* 追加分 */
     font-weight: 100;
   }
@@ -63,6 +64,10 @@
   ul {
     margin: 0px;
     padding: 5px 23px;
+
+    li {
+      line-height: 24px;
+    }
   }
 
   hr {
@@ -70,10 +75,15 @@
     border-top: 1px solid #273c75;
   }
 
+  p {
+    line-height: 21px;
+    font-size: 13px;
+  }
+
   pre {
     padding: 10px;
     background-color: #f5f5f5;
-    font-size: 12px;
+    font-size: 11px !important;
     border: 0px solid #f3e5f5;
     border-left: 2px solid #ab47bc;
     border-right: 2px solid #dddddd;
@@ -81,7 +91,7 @@
 
     code {
       background-color: #f5f5f5 !important;
-      line-height: 16px;
+      line-height: 14px;
       font-family: Consolas, Monaco, monospace !important;
       font-weight: 700;
 

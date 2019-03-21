@@ -260,6 +260,9 @@ const handleDocumentEditClick = (_this) => {
       mode: 'edit'
     }
   })
+  window.setTimeout(() => {
+    $('#document-content').focus()
+  }, 200)
 }
 
 /**

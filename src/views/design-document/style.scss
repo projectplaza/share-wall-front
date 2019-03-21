@@ -139,6 +139,7 @@
           }
           
           img {
+            display: block;
             width: 20px;
           }
         }
@@ -148,7 +149,7 @@
           position: absolute;
           bottom: 15px;
           right: 18px;
-          padding: 5px 10px;
+          padding: 8px;
           border-radius: 50%;
           background-color: #e74c3c;
           box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3);
@@ -161,14 +162,40 @@
           }
           
           img {
-            width: 10px;
+            display: block;
+            width: 15px;
           }
         }
       }
     }
+
+    .document-separate {
+      display: block;
+      position: fixed;
+      top: 60px;
+      right: 30px;
+      padding: 10px;
+      border-radius: 50%;
+      background-color: #dddddd;
+      box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+      // transition: 0.2s;
+      cursor: pointer;
+
+      &:active {
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+        top: 62px;
+      }
+      
+      img {
+        display: block;
+        width: 20px;
+      }
+    }
+
     .box-edit {
       vertical-align: top;
       height: 100%;
+      // transition: 0.2s;
 
       .paper {
         height: calc(100% - 10px);
@@ -178,33 +205,38 @@
 
           input[type="text"] {
             width: 100%;
-            padding: 10px;
-            border: 0px;
-            border: 1px solid #bbbbbb;
+            margin-top: 10px;
+            padding: 5px 0px 5px 0px;
+            border: 1px solid #ffffff;
+            // border-bottom: 1px solid #cccccc;
             resize:  none;
-            font-size: 14px;
+            font-size: 18px;
             transition: 0.2s;
-            border-radius: 5px;
+            // border-radius: 5px;
             margin-bottom: 10px;
+            color: #666666;
 
             &:focus {
-              border: 1px solid #1abc9c;
+              // border-left: 1px solid #3498db;
+              // border-bottom: 1px solid #3498db;
             }
           }
           
           textarea {
             width: 100%;
             height: calc(100% - 75px);
-            padding: 10px;
-            border: 0px;
-            border: 1px solid #bbbbbb;
+            padding: 5px 0px 5px 0px;
+            border: 1px solid #ffffff;
+            // border-bottom: 1px solid #cccccc;
             resize:  none;
-            font-size: 14px;
+            font-size: 13px;
             transition: 0.2s;
-            border-radius: 5px;
+            // border-radius: 5px;
+            color: #444444;
 
             &:focus {
-              border: 1px solid #1abc9c;
+              // border-left: 1px solid #3498db;
+              // border-bottom: 1px solid #3498db;
             }
           }
           

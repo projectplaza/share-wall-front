@@ -23,7 +23,8 @@ const designDocumentApp = {
     ROUTE_NAME: ROUTE_NAME,
     display: {
       ready: false,
-      mode: 'view'
+      mode: 'view',
+      separate: true
     },
     common: {
       teamId: null,
@@ -104,6 +105,9 @@ const designDocumentApp = {
     }),
     boxStyle: function () {
       return (this.display.mode === 'edit') ? { width: '50%', display: 'inline-block' } : { width: '100%' }
+    },
+    editBoxStyle: function () {
+      return (this.display.separate) ? { width: '50%', display: 'inline-block' } : { width: '100%' }
     },
     compiledMarkdown: function () { return handler.computedCompiledMarkdown(this) }
   },
