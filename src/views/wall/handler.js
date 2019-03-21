@@ -358,7 +358,7 @@ const handleTaskAddSaveClick = (_this, panelId, isCloseForm) => {
   }
 
   request.postTaskRequest(_this.display.teamId, _this.display.projectId, _this.display.boardId, task).then(result => {
-    
+
     const newTask = {
       panelId: result.panelId,
       taskId: result.taskId,
@@ -374,7 +374,7 @@ const handleTaskAddSaveClick = (_this, panelId, isCloseForm) => {
         showCreateWindow: (panel.panelId == newTask.panelId && !isCloseForm) ? true : false
       }
     })
-  
+
     _this.$set(_this.list, 'panels', panels)
     _this.$set(_this.display.taskAdd, 'title', null)
   })
@@ -396,6 +396,90 @@ const handleTaskAddCancelClick = _this => {
 }
 
 /**
+ * タスク編集ボタンのクリックイベントハンドラ
+ * @param {object} _this 
+ */
+const handleTaskEditClick = _this => {
+  _this.$set(_this.display, 'taskEdit', _this.display.task)
+  _this.$set(_this.mode.task, 'edit', true)
+}
+
+/**
+ * タスク編集保存ボタンのクリックイベントハンドラ
+ * @param {object} _this 
+ */
+const handleTaskEditSaveClick = _this => {
+  const tasks = [_this.display.taskEdit]
+  request.putTaskRequest(_this.display.teamId, _this.display.projectId, _this.display.boardId, tasks).then(result => {
+    const panels = updateDisplayTask(_this.list.panels, _this.display.taskEdit)
+    _this.$set(_this.list, 'panels', panels)
+    _this.$set(_this.display, 'task', _this.display.taskEdit)
+    _this.$set(_this.mode.task, 'edit', false)
+  })
+}
+
+/**
+ * タスク編集ボタンのクリックイベントハンドラ
+ * @param {object} _this 
+ */
+const handleTaskEditCancelClick = _this => {
+  _this.$set(_this.mode.task, 'edit', false)
+}
+
+/**
+ * タスク削除ボタンのクリックイベントハンドラ
+ * @param {object} _this 
+ */
+const handleTaskDeleteClick = _this => {
+  _this.$set(_this.dialog.taskDelete, 'visible', true)
+  _this.$set(_this.dialog.taskDelete, 'taskId', _this.display.task.taskId)
+  console.log(_this.display.task.taskId)
+}
+
+/**
+ * タスク削除確定ボタンのクリックイベントハンドラ
+ * @param {object} _this 
+ */
+const handleTaskDeleteConfirmClick = _this => {
+  request.deleteTaskRequest(_this.display.teamId, _this.display.projectId, _this.display.boardId, _this.dialog.taskDelete.taskId).then(result => {
+    const panels = _this.list.panels
+    panels.some((panel, index) => {
+      panel.task.some((task, index) => {
+        if (task.taskId == _this.dialog.taskDelete.taskId) {
+          console.log('delete')
+          panel.task.splice(index, 1)
+        }
+      })
+    })
+
+    console.log(panels)
+
+    _this.$set(_this.list, 'panels', panels)
+
+    _this.$set(_this.dialog.taskDelete, 'visible', false)
+    _this.$set(_this.dialog.taskDelete, 'taskId', null)
+
+    _this.$router.push({
+      name: ROUTE_NAME.WALL_BOARD,
+      params: {
+        teamId: _this.display.teamId,
+        projectId: _this.display.projectId,
+        boardId: _this.display.boardId
+      }
+    })
+  })
+}
+
+/**
+ * タスク削除キャンセルボタンのクリックイベントハンドラ
+ * @param {object} _this 
+ */
+const handleTaskDeleteCancelClick = _this => {
+  _this.$set(_this.dialog.taskDelete, 'visible', false)
+  _this.$set(_this.dialog.taskDelete, 'taskId', null)
+}
+
+/**
  * パネル情報を更新する
  * @param {object} _this 
  */
@@ -413,6 +497,47 @@ const updatePanel = _this => {
   request.putPanelRequest(_this.display.teamId, _this.display.projectId, _this.display.boardId, panels).then(result => {
     // nothing to do
   })
+}
+
+/**
+ * コメント投稿ボタンのクリックイベントハンドラ
+ * @param {object} _this 
+ */
+const handleCommentPostClick = _this => {
+  _this.$set(_this.display.taskCommentForm, 'visible', true)
+  _this.$set(_this.display.taskCommentForm, 'message', '')
+
+  window.setTimeout(() => {
+    $('#task-comment').focus()
+  }, 200)
+}
+
+/**
+ * コメント投稿確定ボタンのクリックイベントハンドラ
+ * @param {object} _this 
+ */
+const handleCommentPostConfirmClick = _this => {
+  // TODO コメント投稿処理
+  const comments = _this.display.taskComments
+  comments.unshift({
+    userName: 'yumochi21',
+    postDatetime: '2019-03-16 10:11:12',
+    message: _this.display.taskCommentForm.message
+  })
+
+  _this.$set(_this.display, 'taskComments', comments)
+
+  _this.$set(_this.display.taskCommentForm, 'visible', false)
+  _this.$set(_this.display.taskCommentForm, 'message', '')
+}
+
+/**
+ * コメント投稿キャンセルボタンのクリックイベントハンドラ
+ * @param {object} _this 
+ */
+const handleCommentPostCancelClick = _this => {
+  _this.$set(_this.display.taskCommentForm, 'visible', false)
+  _this.$set(_this.display.taskCommentForm, 'message', '')
 }
 
 /**
@@ -489,7 +614,7 @@ const handleCreated = _this => {
         })
         return
       }
-      
+
       initDisplay(_this)
       _this.hideProgressBar()
     }
@@ -628,6 +753,9 @@ const initTask = _this => {
   return new Promise((resolve, reject) => {
     request.getTaskRequest(_this.display.teamId, _this.display.projectId, _this.display.boardId, _this.display.taskId).then(result => {
       _this.$set(_this.display, 'task', result)
+      _this.$set(_this.display.taskCommentForm, 'visible', false)
+      _this.$set(_this.display.taskCommentForm, 'message', '')
+      _this.$set(_this.display, 'taskComments', [])
     })
     resolve()
   }).catch(error => {
@@ -716,6 +844,15 @@ export default {
   handleTaskAddClick,
   handleTaskAddSaveClick,
   handleTaskAddCancelClick,
+  handleTaskEditClick,
+  handleTaskEditSaveClick,
+  handleTaskEditCancelClick,
+  handleTaskDeleteClick,
+  handleTaskDeleteConfirmClick,
+  handleTaskDeleteCancelClick,
+  handleCommentPostClick,
+  handleCommentPostConfirmClick,
+  handleCommentPostCancelClick,
   handleCreated,
   handleRouteChange
 }

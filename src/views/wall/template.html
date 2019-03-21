@@ -57,10 +57,10 @@
       <div class="inner detail" v-if="!mode.task.edit">
         <div class="tool-bar">
           <div class="action">
-            <img src="../../assets/pen-gray.png" />
+            <img src="../../assets/pen-gray.png" @click="handleTaskEditClick" />
           </div>
           <div class="action">
-            <img src="../../assets/delete-gray.png" />
+            <img src="../../assets/delete-gray.png" @click="handleTaskDeleteClick" />
           </div>
           <div class="action">
             <img src="../../assets/cross-gray.png" @click="handleTaskCloseClick" />
@@ -83,13 +83,14 @@
         <div class="label">コメント</div>
         <div class="comment">
           <div class="comment-box comment-post" v-if="!display.taskCommentForm.visible">
-            <div>コメントを投稿</div>
+            <div @click="handleCommentPostClick">コメントを投稿</div>
           </div>
           <div class="comment-box" v-if="display.taskCommentForm.visible">
-            <textarea placeholder="コメントを入力" v-model="display.taskCommentForm.message"></textarea>
+            <textarea placeholder="コメントを入力" v-model="display.taskCommentForm.message"
+              id="task-comment" @keydown.enter.ctrl="handleCommentPostConfirmClick"></textarea>
             <div class="button-box">
-              <input type="button" value="投稿" />
-              <input type="button" value="キャンセル" />
+              <input type="button" value="投稿" @click="handleCommentPostConfirmClick" />
+              <input type="button" value="キャンセル" @click="handleCommentPostCancelClick" />
             </div>
           </div>
           <div class="comment-box" v-for="comment in display.taskComments">
@@ -138,8 +139,8 @@
           <input type="text" placeholder="YYYY-MM-DD" v-model="display.taskEdit.deadline" />
         </div>
         <div class="button-box">
-          <input type="button" value="保存" class="save" />
-          <input type="button" value="キャンセル" class="cancel" />
+          <input type="button" value="保存" class="save" @click="handleTaskEditSaveClick" />
+          <input type="button" value="キャンセル" class="cancel" @click="handleTaskEditCancelClick" />
         </div>
       </div>
     </div>
@@ -220,8 +221,8 @@
   <md-dialog :md-active.sync="dialog.taskDelete.visible" class="wl-dialog wl-dialog-small">
     <div class="title">本当に削除しますか？</div>
     <div class="button-box center">
-      <md-button class="md-accent md-raised">削除</md-button>
-      <md-button>キャンセル</md-button>
+      <md-button class="md-accent md-raised" @click="handleTaskDeleteConfirmClick">削除</md-button>
+      <md-button @click="handleTaskDeleteCancelClick">キャンセル</md-button>
     </div>
   </md-dialog>
 </div>

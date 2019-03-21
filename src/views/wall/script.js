@@ -48,6 +48,8 @@ const wallApp = {
         message: '頑張りましょー'
       },
       taskEdit: {
+        taskId: '',
+        panelId: '',
         title: 'タイトル',
         content: '内容',
         priority: '2',
@@ -97,7 +99,8 @@ const wallApp = {
         visible: false
       },
       taskDelete: {
-        visible: false
+        visible: false,
+        taskId: null
       }
     }
   }),
@@ -151,8 +154,29 @@ const wallApp = {
     // タスク追加キャンセルボタンのクリックイベントハンドラ
     handleTaskAddCancelClick: function() { handler.handleTaskAddCancelClick(this) },
 
+    // タスク編集ボタンクリックイベントハンドラ
+    handleTaskEditClick: function() { handler.handleTaskEditClick(this) },
+    // タスク編集保存ボタンクリックイベントハンドラ
+    handleTaskEditSaveClick: function() { handler.handleTaskEditSaveClick(this) },
+    // タスク編集キャンセルボタンクリックイベントハンドラ
+    handleTaskEditCancelClick: function() { handler.handleTaskEditCancelClick(this) },
+
+    // タスク削除ボタンクリックイベントハンドラ
+    handleTaskDeleteClick: function() { handler.handleTaskDeleteClick(this) },
+    // タスク削除ボタン確定クリックイベントハンドラ
+    handleTaskDeleteConfirmClick: function() { handler.handleTaskDeleteConfirmClick(this) },
+    // タスク削除キャンセルボタンクリックイベントハンドラ
+    handleTaskDeleteCancelClick: function() { handler.handleTaskDeleteCancelClick(this) },
+
     // タスク閉じるクリックイベントハンドラ
     handleTaskCloseClick: function() { handler.handleTaskCloseClick(this) },
+
+    // コメント投稿ボタンクリックイベントハンドラ
+    handleCommentPostClick: function() { handler.handleCommentPostClick(this) },
+    // コメント投稿確定ボタンクリックイベントハンドラ
+    handleCommentPostConfirmClick: function() { handler.handleCommentPostConfirmClick(this) },
+    // コメント投稿キャンセルボタンクリックイベントハンドラ
+    handleCommentPostCancelClick: function() { handler.handleCommentPostCancelClick(this) },
 
     // アンカー自動生成
     anchorify: function(text) { return util.setAnchor(text) },

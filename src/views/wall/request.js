@@ -442,16 +442,18 @@ const putTaskRequest = (teamId, projectId, boardId, tasks) => {
  */
 const deleteTaskRequest = (teamId, projectId, boardId, taskId) => {
   return new Promise((resolve, reject) => {
-    deleteRequest(PATH_TASK, {
-      teamId,
-      projectId,
-      boardId,
-      taskId
-    }).then(result => {
-      resolve(result)
-    }).catch(error => {
-      reject(error)
-    })
+    console.log(taskId)
+    resolve()
+    // deleteRequest(PATH_TASK, {
+    //   teamId,
+    //   projectId,
+    //   boardId,
+    //   taskId
+    // }).then(result => {
+    //   resolve(result)
+    // }).catch(error => {
+    //   reject(error)
+    // })
   })
 }
 
