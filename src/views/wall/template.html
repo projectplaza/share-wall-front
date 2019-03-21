@@ -23,25 +23,29 @@
       <div class="panel" v-for="panel in list.panels" :key="panel.panelId">
         <div class="title">
           <div>{{panel.panelName}}</div>
-          <div class="plus">＋</div>
+          <div class="plus" @click="() => { handleTaskAddClick(panel.panelId) }">＋</div>
         </div>
         <div class="inner">
           <div class="new-task" v-if="panel.showCreateWindow">
-            <input type="text" value="" placeholder="タスク名" class="task-name" />
+            <input type="text" value="" placeholder="タスク名" class="task-name" v-model="display.taskAdd.title"
+              id="task-add-title" @keydown.13="() => { handleTaskAddSaveClick(panel.panelId, false) }" />
             <div class="button-box">
-              <input type="button" value="登録" />
-              <input type="button" value="キャンセル" />
+              <input type="button" value="登録" @click="() => { handleTaskAddSaveClick(panel.panelId, true) }" />
+              <input type="button" value="キャンセル" @click="handleTaskAddCancelClick" />
             </div>
           </div>
           <draggable element="div" :options="options" v-model="panel.task">
             <transition-group class="list-group">
               <router-link class="item" v-for="task in panel.task" :key="task.taskId"
                 :to="{ name: 'wall-task', params: { teamId: display.teamId, projectId: display.projectId, boardId: display.boardId, taskId: task.taskId }}">
-                <div class="task-name">{{task.title}}</div>
+                <div class="task-name"><span class="task-id">#{{task.taskId}}</span>&ensp;{{task.title}}</div>
                 <div class="task-detail">
-                  <div class="priority">High</div>
-                  <div class="assign">yumochi21</div>
-                  <div class="limit">2019-03-30</div>
+                  <div class="priority" v-if="task.priority == '1'">High</div>
+                  <div class="priority" v-if="task.priority == '2'">High</div>
+                  <div class="priority" v-if="task.priority == '3'">High</div>
+                  <div class="priority" v-if="task.priority == '4'">High</div>
+                  <div class="assign" v-if="task.assignUser != null && task.assignUser != ''">yumochi21</div>
+                  <div class="limit" v-if="task.deadline != null">2019-03-30</div>
                 </div>
               </router-link>
             </transition-group>
@@ -62,7 +66,7 @@
             <img src="../../assets/cross-gray.png" @click="handleTaskCloseClick" />
           </div>
         </div>
-        <div class="task-name">{{display.task.title}}</div>
+        <div class="task-name"><span class="task-id">#{{display.task.taskId}}</span>&ensp;{{display.task.title}}</div>
         <div class="label">詳細</div>
         <div class="value" v-html="anchorify(display.task.content)"></div>
         <div class="label separate">優先度</div>

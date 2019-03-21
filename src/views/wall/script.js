@@ -55,6 +55,9 @@ const wallApp = {
         startDate: '2019-03-01',
         deadline: '2019-03-30',
       },
+      taskAdd: {
+        title: null
+      },
       projectUsers: [
         { userId: 'ishigami', userName: '石上' },
         { userId: 'yumochi21', userName: '望月' }
@@ -140,6 +143,13 @@ const wallApp = {
     handleBoardDeleteConfirmClick: function() { handler.handleBoardDeleteConfirmClick(this) },
     // ボード削除キャンセルボタンクリックイベントハンドラ
     handleBoardDeleteCancelClick: function() { handler.handleBoardDeleteCancelClick(this) },
+
+    // タスク追加ボタンクリックイベントハンドラ
+    handleTaskAddClick: function(panelId) { handler.handleTaskAddClick(this, panelId) },
+    // タスク追加保存ボタンクリックイベントハンドラ
+    handleTaskAddSaveClick: function(panelId, isCloseForm) { handler.handleTaskAddSaveClick(this, panelId, isCloseForm) },
+    // タスク追加キャンセルボタンのクリックイベントハンドラ
+    handleTaskAddCancelClick: function() { handler.handleTaskAddCancelClick(this) },
 
     // タスク閉じるクリックイベントハンドラ
     handleTaskCloseClick: function() { handler.handleTaskCloseClick(this) },

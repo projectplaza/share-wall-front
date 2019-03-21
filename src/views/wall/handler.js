@@ -327,6 +327,75 @@ const handlePanelsChange = (_this, to, from) => {
 }
 
 /**
+ * タスク追加ボタンのクリックイベントハンドラ
+ * @param {object} _this 
+ * @param {string} panelId パネルID
+ */
+const handleTaskAddClick = (_this, panelId) => {
+  const panels = _this.list.panels.map(panel => {
+    return {
+      ...panel,
+      showCreateWindow: (panel.panelId == panelId) ? true : false
+    }
+  })
+
+  _this.$set(_this.list, 'panels', panels)
+
+  window.setTimeout(() => {
+    $('#task-add-title').focus()
+  }, 200)
+}
+
+/**
+ * タスク追加保存ボタンのクリックイベントハンドラ
+ * @param {object} _this 
+ * @param {string} panelId パネルID
+ */
+const handleTaskAddSaveClick = (_this, panelId, isCloseForm) => {
+  const task = {
+    panelId: panelId,
+    title: _this.display.taskAdd.title,
+  }
+
+  request.postTaskRequest(_this.display.teamId, _this.display.projectId, _this.display.boardId, task).then(result => {
+    
+    const newTask = {
+      panelId: result.panelId,
+      taskId: result.taskId,
+      title: result.title
+    }
+
+    const panels = _this.list.panels.map(panel => {
+      if (panel.panelId == result.panelId) {
+        panel.task.unshift(newTask)
+      }
+      return {
+        ...panel,
+        showCreateWindow: (panel.panelId == newTask.panelId && !isCloseForm) ? true : false
+      }
+    })
+  
+    _this.$set(_this.list, 'panels', panels)
+    _this.$set(_this.display.taskAdd, 'title', null)
+  })
+}
+
+/**
+ * タスク追加キャンセルボタンのクリックイベントハンドラ
+ * @param {object} _this 
+ */
+const handleTaskAddCancelClick = _this => {
+  const panels = _this.list.panels.map(panel => {
+    return {
+      ...panel,
+      showCreateWindow: false
+    }
+  })
+
+  _this.$set(_this.list, 'panels', panels)
+}
+
+/**
  * パネル情報を更新する
  * @param {object} _this 
  */
@@ -644,6 +713,9 @@ export default {
   handleBoardDeleteCancelClick,
   handleTaskCloseClick,
   handlePanelsChange,
+  handleTaskAddClick,
+  handleTaskAddSaveClick,
+  handleTaskAddCancelClick,
   handleCreated,
   handleRouteChange
 }

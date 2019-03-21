@@ -150,10 +150,10 @@
             border-bottom: 1px solid #dddddd;
 
             .task-name {
-              color: #666666;
+              color: #444444;
               font-size: 14px;
               padding: 4px 0px;
-              border: 0px;
+              border: 1px solid #ffffff;
               width: 100%;
             }
             
@@ -182,6 +182,7 @@
         }
 
         .item {
+          width: 100%;
           padding: 8px 8px;
           margin-bottom: 7px;
           border: 1px solid #ffffff;
@@ -192,8 +193,15 @@
           cursor: pointer;
 
           .task-name {
-            color: #666666;
+            width: 100%;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+            color: #444444;
             font-size: 14px;
+
+            .task-id {
+              color: #888888;
+            }
           }
           .task-detail {
             text-align: right;
@@ -243,8 +251,12 @@
         }
         .task-name {
           font-size: 18px;
-          color: #666666;
+          color: #444444;
           margin-bottom: 15px;
+
+          .task-id {
+            color: #888888;
+          }
         }
         .label {
           margin-top: 10px;

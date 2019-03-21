@@ -366,16 +366,39 @@ const getTaskRequest = (teamId, projectId, boardId, taskId) => {
  */
 const postTaskRequest = (teamId, projectId, boardId, task) => {
   return new Promise((resolve, reject) => {
-    postRequest(PATH_TASK, {
-      teamId,
-      projectId,
-      boardId,
-      task
-    }).then(result => {
-      resolve(result)
-    }).catch(error => {
-      reject(error)
+    console.log(task)
+    resolve({
+      "message": "タスクの登録に成功しました。",
+      "teamId": "project-plaza",
+      "projectId": "share-wall",
+      "boardId": boardId,
+      "panelId": task.panelId,
+      "taskId": '5',
+      "title": task.title,
+      "content": task.content,
+      "priority": task.priority,
+      "assignUser": task.assignUser,
+      "startDate": task.startDate,
+      "deadline": task.deadline,
+      "order": 0
     })
+    // postRequest(PATH_TASK, {
+    //   teamId,
+    //   projectId,
+    //   boardId,
+    //   panelId: task.panelId,
+    //   title: task.title,
+    //   content: task.content,
+    //   priority: task.priority,
+    //   assignUser: task.assignUser,
+    //   startDate: task.startDate,
+    //   deadline: task.deadline,
+    //   functionName: FUNCTION_CODE_WALL
+    // }).then(result => {
+    //   resolve(result)
+    // }).catch(error => {
+    //   reject(error)
+    // })
   })
 }
 
