@@ -2,6 +2,24 @@ import request from './request'
 import $ from 'jquery'
 import { ROUTE_NAME } from '../../router'
 
+/**
+ * ボード一覧の変更イベントハンドラ
+ * @param {object} _this 
+ * @param {array} to 
+ * @param {array} from 
+ */
+const handleBoardChange = (_this, to, from) => {
+  const boards = to.map((board, index) => {
+    return {
+      boardId: board.boardId,
+      order: (index + 1)
+    }
+  })
+
+  request.putBoardRequest(_this.display.teamId, _this.display.projectId, boards).then(result => {
+    // nothing to do
+  })
+}
 
 /**
  * ボード追加ボタンのクリックイベントハンドラ
@@ -822,6 +840,7 @@ const updateDisplayTask = (panels, task) => {
 }
 
 export default {
+  handleBoardChange,
   handleBoardAddClick,
   handleBoardCreateClick,
   handleBoardCreateCancelClick,

@@ -99,6 +99,11 @@
       white-space: nowrap;
       -webkit-overflow-scrolling: touch;
       vertical-align: top;
+
+      .item.sortable-ghost {
+        cursor: pointer;
+        border: 1px solid #f1c40f !important;
+      }
       
       .panel {
         display: inline-block;
@@ -429,9 +434,4 @@
       }
     }
   }
-}
-
-.sortable-ghost {
-  cursor:pointer;
-  border: 1px solid #f1c40f !important;
 }

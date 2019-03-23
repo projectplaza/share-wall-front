@@ -213,6 +213,10 @@ const wallApp = {
 
   watch: {
     '$route': function(to, from) { handler.handleRouteChange(this, to, from) },
+    'list.boards': {
+      handler: function(to, from) { handler.handleBoardChange(this, to, from) },
+      deep: false
+    },
     'list.panels': {
       handler: function(to, from) { handler.handlePanelsChange(this, to, from) },
       deep: true

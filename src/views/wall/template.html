@@ -1,12 +1,16 @@
 <div class="wall">
   <div class="board">
     <div class="board-title">▽ ボード一覧 ▽</div>
-    <router-link class="item" v-for="board in list.boards" :class="{selected: board.selected}" :key="board.boardId"
-      :to="{ name: 'wall-board', params: { teamId: display.teamId, projectId: display.projectId, boardId: board.boardId }}">
-      <img src="../../assets/board-gray.png" />
-      <!-- <img v-if="board.selected" src="../../assets/board.png" /> -->
-      {{board.boardName}}
-    </router-link>
+    <draggable element="div" :options="options" v-model="list.boards">
+      <transition-group class="list-group">
+        <router-link class="item" v-for="board in list.boards" :class="{selected: board.selected}" :key="board.boardId"
+          :to="{ name: 'wall-board', params: { teamId: display.teamId, projectId: display.projectId, boardId: board.boardId }}">
+          <img src="../../assets/board-gray.png" />
+          <!-- <img v-if="board.selected" src="../../assets/board.png" /> -->
+          {{board.boardName}}
+        </router-link>
+      </transition-group>
+    </draggable>
     <div class="item" @click="handleBoardAddClick">＋&emsp;Add</div>
   </div>
   <div class="panels" v-if="display.boardId != null">
@@ -86,8 +90,8 @@
             <div @click="handleCommentPostClick">コメントを投稿</div>
           </div>
           <div class="comment-box" v-if="display.taskCommentForm.visible">
-            <textarea placeholder="コメントを入力" v-model="display.taskCommentForm.message"
-              id="task-comment" @keydown.enter.ctrl="handleCommentPostConfirmClick"></textarea>
+            <textarea placeholder="コメントを入力" v-model="display.taskCommentForm.message" id="task-comment"
+              @keydown.enter.ctrl="handleCommentPostConfirmClick"></textarea>
             <div class="button-box">
               <input type="button" value="投稿" @click="handleCommentPostConfirmClick" />
               <input type="button" value="キャンセル" @click="handleCommentPostCancelClick" />
@@ -193,16 +197,16 @@
   <md-dialog :md-active.sync="dialog.panelDelete.visible" class="wl-dialog wl-dialog-small">
     <div class="title">本当に削除しますか？</div>
     <div class="button-box center">
-        <md-button class="md-accent md-raised" @click="handlePanelDeleteConfirmClick">削除</md-button>
-        <md-button @click="handlePanelDeleteCancelClick">キャンセル</md-button>
+      <md-button class="md-accent md-raised" @click="handlePanelDeleteConfirmClick">削除</md-button>
+      <md-button @click="handlePanelDeleteCancelClick">キャンセル</md-button>
     </div>
   </md-dialog>
   <!-- ボード編集ダイアログ -->
   <md-dialog :md-active.sync="dialog.boardEdit.visible" class="wl-dialog">
     <div class="title">ボード名を入力してください</div>
     <div class="form">
-      <input v-model="dialog.boardEdit.boardName" type="text" placeholder="名称" class="full under"
-        id="board-edit-name" @keydown.13="handleBoardEditSaveClick" />
+      <input v-model="dialog.boardEdit.boardName" type="text" placeholder="名称" class="full under" id="board-edit-name"
+        @keydown.13="handleBoardEditSaveClick" />
     </div>
     <div class="button-box">
       <md-button @click="handleBoardEditCancelClick">キャンセル</md-button>
