@@ -242,7 +242,7 @@
       .detail {
         .tool-bar {
           text-align: right;
-          margin-bottom: 3px;
+          margin-bottom: 10px;
 
           .action {
             display: inline-block;
@@ -270,6 +270,7 @@
         }
         .value {
           font-size: 14px;
+          min-height: 20px;
           color: #666666;
         }
         .separate {

@@ -79,6 +79,8 @@
         <div class="value separate" v-if="display.task.priority == '2'">中</div>
         <div class="value separate" v-if="display.task.priority == '3'">低</div>
         <div class="value separate" v-if="display.task.priority == '4'">保留</div>
+        <div class="value separate" v-if="display.task.priority == null"></div>
+        <div class="value separate" v-if="display.task.priority == ''"></div>
         <div class="value separate">{{display.task.assignUser}}</div>
         <div class="label separate">着手</div>
         <div class="label separate">期限</div>

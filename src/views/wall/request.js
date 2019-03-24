@@ -1,5 +1,5 @@
 import { getRequest, postRequest, putRequest, deleteRequest } from "../../utils/apiUtil"
-import { PATH_BOARD_LIST, PATH_BOARD, PATH_PANEL_TASK_LIST, PATH_PANEL_LIST, PATH_TASK_LIST, PATH_TASK } from "../../constants/apiConstant"
+import { PATH_BOARD_LIST, PATH_BOARD, PATH_PANEL_TASK_LIST, PATH_PANEL_LIST, PATH_TASK_LIST, PATH_PANEL, PATH_TASK } from "../../constants/apiConstant"
 import { FUNCTION_CODE_WALL } from "../../constants/functionCodeConstant"
 
 /**
@@ -12,28 +12,14 @@ import { FUNCTION_CODE_WALL } from "../../constants/functionCodeConstant"
  */
 const getBoardListRequest = (teamId, projectId) => {
   return new Promise((resolve, reject) => {
-    resolve([
-      {
-        "teamId": "project-plaza",
-        "projectId": "share-wall",
-        "boardId": "1",
-        "boardName": "開発"
-      },
-      {
-        "teamId": "project-plaza",
-        "projectId": "share-wall",
-        "boardId": "2",
-        "boardName": "企画"
-      }
-    ])
-    // getRequest(PATH_BOARD_LIST, {
-    //   teamId,
-    //   projectId
-    // }).then(result => {
-    //   resolve(result)
-    // }).catch(error => {
-    //   reject(error)
-    // })
+    getRequest(PATH_BOARD_LIST, {
+      teamId,
+      projectId
+    }).then(result => {
+      resolve(result)
+    }).catch(error => {
+      reject(error)
+    })
   })
 }
 
@@ -48,20 +34,16 @@ const getBoardListRequest = (teamId, projectId) => {
  */
 const postBoardRequest = (teamId, projectId, boardName) => {
   return new Promise((resolve, reject) => {
-    resolve({
-      boardId: '3',
-      boardName: 'sample'
+    postRequest(PATH_BOARD, {
+      teamId,
+      projectId,
+      boardName,
+      functionName: FUNCTION_CODE_WALL
+    }).then(result => {
+      resolve(result)
+    }).catch(error => {
+      reject(error)
     })
-    // postRequest(PATH_BOARD, {
-    //   teamId,
-    //   projectId,
-    //   boardName,
-    //   functionName: FUNCTION_CODE_WALL
-    // }).then(result => {
-    //   resolve(result)
-    // }).catch(error => {
-    //   reject(error)
-    // })
   })
 }
 
@@ -76,27 +58,20 @@ const postBoardRequest = (teamId, projectId, boardName) => {
  */
 const putBoardRequest = (teamId, projectId, boards) => {
   return new Promise((resolve, reject) => {
-    console.log(boards)
-    resolve({
-      "message": "ボードの更新に成功しました。",
-      "teamId": "project-plaza",
-      "projectId": "share-wall",
-      "boards": [{
-        "boardId": '3',
-        "boardName": 'sample',
-        "order": 0
-      }]
+    if (boards == null || boards.length == 0) {
+      resolve()
+      return
+    }
+    putRequest(PATH_BOARD, {
+      teamId,
+      projectId,
+      boards,
+      functionName: FUNCTION_CODE_WALL
+    }).then(result => {
+      resolve(result)
+    }).catch(error => {
+      reject(error)
     })
-    // putRequest(PATH_BOARD, {
-    //   teamId,
-    //   projectId,
-    //   boards,
-    //   functionName: FUNCTION_CODE_WALL
-    // }).then(result => {
-    //   resolve(result)
-    // }).catch(error => {
-    //   reject(error)
-    // })
   })
 }
 
@@ -137,63 +112,15 @@ const deleteBoardRequest = (teamId, projectId, boardId) => {
  */
 const getPanelTaskListRequest = (teamId, projectId, boardId) => {
   return new Promise((resolve, reject) => {
-    resolve([
-      {
-        "boardId": "1",
-        "panelId": "1",
-        "panelName": "新規",
-        "task": [
-          {
-            "taskId": "1",
-            "title": "タイトル",
-            "priority": "優先度",
-            "assignUser": "担当者",
-            "startDate": "開始日",
-            "deadline": "期限日",
-          },
-          {
-            "taskId": "2",
-            "title": "タイトル",
-            "priority": "優先度",
-            "assignUser": "担当者",
-            "startDate": "開始日",
-            "deadline": "期限日",
-          }
-        ]
-      },
-      {
-        "boardId": "1",
-        "panelId": "2",
-        "panelName": "進行中",
-        "task": [
-          {
-            "taskId": "3",
-            "title": "タイトル",
-            "priority": "優先度",
-            "assignUser": "担当者",
-            "startDate": "開始日",
-            "deadline": "期限日",
-          },
-          {
-            "taskId": "4",
-            "title": "タイトル",
-            "priority": "優先度",
-            "assignUser": "担当者",
-            "startDate": "開始日",
-            "deadline": "期限日",
-          }
-        ]
-      }
-    ])
-    // getRequest(PATH_PANEL_TASK_LIST, {
-    //   teamId,
-    //   projectId,
-    //   boardId
-    // }).then(result => {
-    //   resolve(result)
-    // }).catch(error => {
-    //   reject(error)
-    // })
+    getRequest(PATH_PANEL_TASK_LIST, {
+      teamId,
+      projectId,
+      boardId
+    }).then(result => {
+      resolve(result)
+    }).catch(error => {
+      reject(error)
+    })
   })
 }
 
@@ -232,26 +159,17 @@ const getPanelListRequest = (teamId, projectId, boardId) => {
  */
 const postPanelRequest = (teamId, projectId, boardId, panelName) => {
   return new Promise((resolve, reject) => {
-    resolve({
-      "message": "パネルの登録に成功しました。",
-      "teamId": "project-plaza",
-      "projectId": "share-wall",
-      "boardId": boardId,
-      "panelId": "3",
-      "panelName": panelName,
-      "order": 0
+    postRequest(PATH_PANEL, {
+      teamId,
+      projectId,
+      boardId,
+      panelName,
+      functionName: FUNCTION_CODE_WALL
+    }).then(result => {
+      resolve(result)
+    }).catch(error => {
+      reject(error)
     })
-    // postRequest(PATH_PANEL, {
-    //   teamId,
-    //   projectId,
-    //   boardId,
-    //   panelName,
-    //   functionName: FUNCTION_CODE_WALL
-    // }).then(result => {
-    //   resolve(result)
-    // }).catch(error => {
-    //   reject(error)
-    // })
   })
 }
 
@@ -323,34 +241,16 @@ const deletePanelRequest = (teamId, projectId, boardId, panelId) => {
  */
 const getTaskRequest = (teamId, projectId, boardId, taskId) => {
   return new Promise((resolve, reject) => {
-    resolve({
-      "teamId": "project-plaza",
-      "projectId": "share-wall",
-      "boardId": "1",
-      "panelId": "1",
-      "taskId": "1",
-      "title": "タイトル",
-      "content": `あ
-      http://localhost:8080/
-      yumochi21@gmail.com
-      あ
-      <script>alert('aaaaa')</script>
-      `,
-      "priority": "1",
-      "assignUser": "yumochi21",
-      "startDate": "2019-03-01",
-      "deadline": "2019-03-31",
+    getRequest(PATH_TASK, {
+      teamId,
+      projectId,
+      boardId,
+      taskId
+    }).then(result => {
+      resolve(result)
+    }).catch(error => {
+      reject(error)
     })
-    // getRequest(PATH_TASK, {
-    //   teamId,
-    //   projectId,
-    //   boardId,
-    //   taskId
-    // }).then(result => {
-    //   resolve(result)
-    // }).catch(error => {
-    //   reject(error)
-    // })
   })
 }
 
@@ -366,39 +266,23 @@ const getTaskRequest = (teamId, projectId, boardId, taskId) => {
  */
 const postTaskRequest = (teamId, projectId, boardId, task) => {
   return new Promise((resolve, reject) => {
-    console.log(task)
-    resolve({
-      "message": "タスクの登録に成功しました。",
-      "teamId": "project-plaza",
-      "projectId": "share-wall",
-      "boardId": boardId,
-      "panelId": task.panelId,
-      "taskId": '5',
-      "title": task.title,
-      "content": task.content,
-      "priority": task.priority,
-      "assignUser": task.assignUser,
-      "startDate": task.startDate,
-      "deadline": task.deadline,
-      "order": 0
+    postRequest(PATH_TASK, {
+      teamId,
+      projectId,
+      boardId,
+      panelId: task.panelId,
+      title: task.title,
+      content: task.content,
+      priority: task.priority,
+      assignUser: task.assignUser,
+      startDate: task.startDate,
+      deadline: task.deadline,
+      functionName: FUNCTION_CODE_WALL
+    }).then(result => {
+      resolve(result)
+    }).catch(error => {
+      reject(error)
     })
-    // postRequest(PATH_TASK, {
-    //   teamId,
-    //   projectId,
-    //   boardId,
-    //   panelId: task.panelId,
-    //   title: task.title,
-    //   content: task.content,
-    //   priority: task.priority,
-    //   assignUser: task.assignUser,
-    //   startDate: task.startDate,
-    //   deadline: task.deadline,
-    //   functionName: FUNCTION_CODE_WALL
-    // }).then(result => {
-    //   resolve(result)
-    // }).catch(error => {
-    //   reject(error)
-    // })
   })
 }
 

@@ -6,6 +6,9 @@ import anchorify from 'anchorify'
  * @returns {string} 変換後文字列
  */
 const setAnchor = text => {
+  if (text == null) {
+    return null
+  }
   return anchorify(encodeLineSeparator(escapeHtml(text)), { target: '_blank' } )
 }
 
