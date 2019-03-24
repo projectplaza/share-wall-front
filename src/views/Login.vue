@@ -9,9 +9,9 @@
       <div>
         <input class="input-text" type="password" v-model="login.password" placeholder="PS">
       </div>
-      <div>
+      <!-- <div>
         <md-switch v-model="login.autoLogin" value="1" class="auto-check">Auto Login</md-switch>
-      </div>
+      </div> -->
       <div>
         <md-button class="md-dense md-raised md-primary" @click="handleLoginClick">Login</md-button>
       </div>
@@ -38,7 +38,7 @@ const loginApp = {
     login: {
       userId: "",
       password: "",
-      autoLogin: []
+      autoLogin: ['1']
     },
     message: {
       error: ""
