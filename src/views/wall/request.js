@@ -86,18 +86,16 @@ const putBoardRequest = (teamId, projectId, boards) => {
  */
 const deleteBoardRequest = (teamId, projectId, boardId) => {
   return new Promise((resolve, reject) => {
-    console.log(boardId)
-    resolve()
-    // deleteRequest(PATH_BOARD, {
-    //   teamId,
-    //   projectId,
-    //   boardId,
-    //   functionName: FUNCTION_CODE_WALL
-    // }).then(result => {
-    //   resolve(result)
-    // }).catch(error => {
-    //   reject(error)
-    // })
+    deleteRequest(PATH_BOARD, {
+      teamId,
+      projectId,
+      boardId,
+      functionName: FUNCTION_CODE_WALL
+    }).then(result => {
+      resolve(result)
+    }).catch(error => {
+      reject(error)
+    })
   })
 }
 
@@ -185,20 +183,17 @@ const postPanelRequest = (teamId, projectId, boardId, panelName) => {
  */
 const putPanelRequest = (teamId, projectId, boardId, panels) => {
   return new Promise((resolve, reject) => {
-    console.log('panel update complete')
-    console.log(panels)
-    resolve()
-    // putRequest(PATH_PANEL, {
-    //   teamId,
-    //   projectId,
-    //   boardId,
-    //   panels,
-    //   functionName: FUNCTION_CODE_WALL
-    // }).then(result => {
-    //   resolve(result)
-    // }).catch(error => {
-    //   reject(error)
-    // })
+    putRequest(PATH_PANEL, {
+      teamId,
+      projectId,
+      boardId,
+      panels,
+      functionName: FUNCTION_CODE_WALL
+    }).then(result => {
+      resolve(result)
+    }).catch(error => {
+      reject(error)
+    })
   })
 }
 
@@ -214,18 +209,17 @@ const putPanelRequest = (teamId, projectId, boardId, panels) => {
  */
 const deletePanelRequest = (teamId, projectId, boardId, panelId) => {
   return new Promise((resolve, reject) => {
-    console.log(panelId)
-    resolve()
-    // deleteRequest(PATH_PANEL, {
-    //   teamId,
-    //   projectId,
-    //   boardId,
-    //   panelId
-    // }).then(result => {
-    //   resolve(result)
-    // }).catch(error => {
-    //   reject(error)
-    // })
+    deleteRequest(PATH_PANEL, {
+      teamId,
+      projectId,
+      boardId,
+      panelId,
+      functionName: FUNCTION_CODE_WALL
+    }).then(result => {
+      resolve(result)
+    }).catch(error => {
+      reject(error)
+    })
   })
 }
 
@@ -298,19 +292,17 @@ const postTaskRequest = (teamId, projectId, boardId, task) => {
  */
 const putTaskRequest = (teamId, projectId, boardId, tasks) => {
   return new Promise((resolve, reject) => {
-    console.log('update task')
-    console.log(tasks)
-    resolve()
-    // putRequest(PATH_TASK, {
-    //   teamId,
-    //   projectId,
-    //   boardId,
-    //   tasks
-    // }).then(result => {
-    //   resolve(result)
-    // }).catch(error => {
-    //   reject(error)
-    // })
+    putRequest(PATH_TASK, {
+      teamId,
+      projectId,
+      boardId,
+      tasks,
+      functionName: FUNCTION_CODE_WALL
+    }).then(result => {
+      resolve(result)
+    }).catch(error => {
+      reject(error)
+    })
   })
 }
 
@@ -326,18 +318,17 @@ const putTaskRequest = (teamId, projectId, boardId, tasks) => {
  */
 const deleteTaskRequest = (teamId, projectId, boardId, taskId) => {
   return new Promise((resolve, reject) => {
-    console.log(taskId)
-    resolve()
-    // deleteRequest(PATH_TASK, {
-    //   teamId,
-    //   projectId,
-    //   boardId,
-    //   taskId
-    // }).then(result => {
-    //   resolve(result)
-    // }).catch(error => {
-    //   reject(error)
-    // })
+    deleteRequest(PATH_TASK, {
+      teamId,
+      projectId,
+      boardId,
+      taskId,
+      functionName: FUNCTION_CODE_WALL
+    }).then(result => {
+      resolve(result)
+    }).catch(error => {
+      reject(error)
+    })
   })
 }
 
