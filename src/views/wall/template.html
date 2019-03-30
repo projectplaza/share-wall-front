@@ -44,12 +44,12 @@
                 :to="{ name: 'wall-task', params: { teamId: display.teamId, projectId: display.projectId, boardId: display.boardId, taskId: task.taskId }}">
                 <div class="task-name"><span class="task-id">#{{task.taskId}}</span>&ensp;{{task.title}}</div>
                 <div class="task-detail">
-                  <div class="priority" v-if="task.priority == '1'">High</div>
-                  <div class="priority" v-if="task.priority == '2'">High</div>
-                  <div class="priority" v-if="task.priority == '3'">High</div>
-                  <div class="priority" v-if="task.priority == '4'">High</div>
-                  <div class="assign" v-if="task.assignUser != null && task.assignUser != ''">yumochi21</div>
-                  <div class="limit" v-if="task.deadline != null">2019-03-30</div>
+                  <div class="priority" v-if="task.priority == '1'">高</div>
+                  <div class="priority" v-if="task.priority == '2'">中</div>
+                  <div class="priority" v-if="task.priority == '3'">低</div>
+                  <div class="priority" v-if="task.priority == '4'">保留</div>
+                  <div class="assign" v-if="task.assignUser != null && task.assignUser != ''">{{getUserName(task.assignUser)}}</div>
+                  <div class="limit" v-if="task.deadline != null">{{task.deadline}}</div>
                 </div>
               </router-link>
             </transition-group>
@@ -70,24 +70,25 @@
             <img src="../../assets/cross-gray.png" @click="handleTaskCloseClick" />
           </div>
         </div>
-        <div class="task-name"><span class="task-id">#{{display.task.taskId}}</span>&ensp;{{display.task.title}}</div>
-        <div class="label">詳細</div>
-        <div class="value" v-html="anchorify(display.task.content)"></div>
-        <div class="label separate">優先度</div>
-        <div class="label separate">担当者</div>
+        <div class="task-name" v-if="display.task.taskId"><span class="task-id">#{{display.task.taskId}}</span>&ensp;{{display.task.title}}</div>
+        <div class="label" v-if="display.task.content">詳細</div>
+        <div class="value" v-if="display.task.content" v-html="anchorify(display.task.content)"></div>
+        <div class="label separate" v-if="display.task.priority">優先度</div>
+        <div class="label separate" v-if="display.task.assignUser">担当者</div>
+        <br v-if="display.task.priority || display.task.assignUser">
         <div class="value separate" v-if="display.task.priority == '1'">高</div>
         <div class="value separate" v-if="display.task.priority == '2'">中</div>
         <div class="value separate" v-if="display.task.priority == '3'">低</div>
         <div class="value separate" v-if="display.task.priority == '4'">保留</div>
-        <div class="value separate" v-if="display.task.priority == null"></div>
-        <div class="value separate" v-if="display.task.priority == ''"></div>
-        <div class="value separate">{{display.task.assignUser}}</div>
-        <div class="label separate">着手</div>
-        <div class="label separate">期限</div>
-        <div class="value separate">{{display.task.startDate}}</div>
-        <div class="value separate">{{display.task.deadline}}</div>
-        <div class="label">コメント</div>
-        <div class="comment">
+        <div class="value separate" v-if="display.task.assignUser">{{getUserName(display.task.assignUser)}}</div>
+        <br v-if="display.task.priority || display.task.assignUser">
+        <div class="label separate" v-if="display.task.startDate">着手</div>
+        <div class="label separate" v-if="display.task.deadline">期限</div>
+        <br v-if="display.task.startDate || display.task.deadline">
+        <div class="value separate" v-if="display.task.startDate">{{display.task.startDate}}</div>
+        <div class="value separate" v-if="display.task.deadline">{{display.task.deadline}}</div>
+        <div class="label" v-if="display.task.taskId">コメント</div>
+        <div class="comment" v-if="display.task.taskId">
           <div class="comment-box comment-post" v-if="!display.taskCommentForm.visible">
             <div @click="handleCommentPostClick">コメントを投稿</div>
           </div>
@@ -125,10 +126,6 @@
             <option :value="3">低</option>
             <option :value="4">保留</option>
           </select>
-          <!-- <div class="priority">高</div>
-          <div class="priority">中</div>
-          <div class="priority">低</div>
-          <div class="priority">保留</div> -->
         </div>
         <div class="label">担当者</div>
         <div class="value">

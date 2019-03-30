@@ -38,6 +38,7 @@ const handleBoardAddClick = _this => {
  */
 const handleBoardCreateClick = _this => {
   _this.showProgressBar()
+  _this.$set(_this.dialog.boardCreate, 'visible', false)
 
   request.postBoardRequest(_this.display.teamId, _this.display.projectId, _this.dialog.boardCreate.boardName).then(result => {
     const boards = _this.list.boards.map(board => {
@@ -57,8 +58,6 @@ const handleBoardCreateClick = _this => {
         boardId: result.boardId
       }
     })
-
-    _this.$set(_this.dialog.boardCreate, 'visible', false)
     _this.$set(_this.dialog.boardCreate, 'boardName', null)
 
     _this.hideProgressBar()
@@ -91,6 +90,7 @@ const handlePanelAddClick = _this => {
  */
 const handlePanelCreateClick = _this => {
   _this.showProgressBar()
+  _this.$set(_this.dialog.panelCreate, 'visible', false)
 
   request.postPanelRequest(_this.display.teamId, _this.display.projectId, _this.display.boardId, _this.dialog.panelCreate.panelName).then(result => {
 
@@ -105,8 +105,6 @@ const handlePanelCreateClick = _this => {
     })
 
     _this.$set(_this.list, 'panels', panels)
-
-    _this.$set(_this.dialog.panelCreate, 'visible', false)
     _this.$set(_this.dialog.panelCreate, 'panelName', null)
 
     let order = 0
@@ -168,12 +166,12 @@ const handlePanelDeleteClick = (_this, panelId) => {
  */
 const handlePanelDeleteConfirmClick = _this => {
   _this.showProgressBar()
+  _this.$set(_this.dialog.panelDelete, 'visible', false)
 
   const panelId = _this.dialog.panelDelete.panelId
 
   request.deletePanelRequest(_this.display.teamId, _this.display.projectId, _this.display.boardId, panelId).then(result => {
     _this.hideProgressBar()
-    _this.$set(_this.dialog.panelDelete, 'visible', false)
     _this.$set(_this.dialog.panelDelete, 'panelId', null)
 
     const panels = _this.list.panels
@@ -212,6 +210,7 @@ const handleBoardEditClick = _this => {
  */
 const handleBoardEditSaveClick = _this => {
   _this.showProgressBar()
+  _this.$set(_this.dialog.boardEdit, 'visible', false)
 
   const boards = [{
     boardId: _this.display.boardId,
@@ -232,7 +231,6 @@ const handleBoardEditSaveClick = _this => {
     _this.$set(_this.display, 'boardName', _this.dialog.boardEdit.boardName)
     _this.$set(_this.list, 'boards', updateBoards)
     _this.$set(_this.dialog.boardEdit, 'boardName', null)
-    _this.$set(_this.dialog.boardEdit, 'visible', false)
 
     _this.hideProgressBar()
   })
@@ -262,12 +260,11 @@ const handleBoardDeleteClick = _this => {
  */
 const handleBoardDeleteConfirmClick = _this => {
   _this.showProgressBar()
+  _this.$set(_this.dialog.boardDelete, 'visible', false)
 
   const boardId = _this.dialog.boardDelete.boardId
 
   request.deleteBoardRequest(_this.display.teamId, _this.display.projectId, boardId).then(result => {
-    _this.hideProgressBar()
-    _this.$set(_this.dialog.boardDelete, 'visible', false)
     _this.$set(_this.dialog.boardDelete, 'boardId', null)
 
     _this.$router.push({
@@ -284,6 +281,8 @@ const handleBoardDeleteConfirmClick = _this => {
     })
 
     _this.$set(_this.list, 'boards', boards)
+
+    _this.hideProgressBar()
   })
 }
 
@@ -370,10 +369,14 @@ const handleTaskAddClick = (_this, panelId) => {
  * @param {string} panelId パネルID
  */
 const handleTaskAddSaveClick = (_this, panelId, isCloseForm) => {
+  _this.showProgressBar()
+
   const task = {
     panelId: panelId,
     title: _this.display.taskAdd.title,
   }
+
+  _this.$set(_this.display.taskAdd, 'title', null)
 
   request.postTaskRequest(_this.display.teamId, _this.display.projectId, _this.display.boardId, task).then(result => {
 
@@ -394,7 +397,7 @@ const handleTaskAddSaveClick = (_this, panelId, isCloseForm) => {
     })
 
     _this.$set(_this.list, 'panels', panels)
-    _this.$set(_this.display.taskAdd, 'title', null)
+    _this.hideProgressBar()
   })
 }
 
@@ -427,12 +430,14 @@ const handleTaskEditClick = _this => {
  * @param {object} _this 
  */
 const handleTaskEditSaveClick = _this => {
+  _this.showProgressBar()
   const tasks = [_this.display.taskEdit]
+  const panels = updateDisplayTask(_this.list.panels, _this.display.taskEdit)
+  _this.$set(_this.list, 'panels', panels)
+  _this.$set(_this.display, 'task', _this.display.taskEdit)
+  _this.$set(_this.mode.task, 'edit', false)
   request.putTaskRequest(_this.display.teamId, _this.display.projectId, _this.display.boardId, tasks).then(result => {
-    const panels = updateDisplayTask(_this.list.panels, _this.display.taskEdit)
-    _this.$set(_this.list, 'panels', panels)
-    _this.$set(_this.display, 'task', _this.display.taskEdit)
-    _this.$set(_this.mode.task, 'edit', false)
+    _this.hideProgressBar()
   })
 }
 
@@ -459,22 +464,20 @@ const handleTaskDeleteClick = _this => {
  * @param {object} _this 
  */
 const handleTaskDeleteConfirmClick = _this => {
+  _this.showProgressBar()
+  _this.$set(_this.dialog.taskDelete, 'visible', false)
+
   request.deleteTaskRequest(_this.display.teamId, _this.display.projectId, _this.display.boardId, _this.dialog.taskDelete.taskId).then(result => {
     const panels = _this.list.panels
     panels.some((panel, index) => {
       panel.task.some((task, index) => {
         if (task.taskId == _this.dialog.taskDelete.taskId) {
-          console.log('delete')
           panel.task.splice(index, 1)
         }
       })
     })
 
-    console.log(panels)
-
     _this.$set(_this.list, 'panels', panels)
-
-    _this.$set(_this.dialog.taskDelete, 'visible', false)
     _this.$set(_this.dialog.taskDelete, 'taskId', null)
 
     _this.$router.push({
@@ -485,6 +488,8 @@ const handleTaskDeleteConfirmClick = _this => {
         boardId: _this.display.boardId
       }
     })
+
+    _this.hideProgressBar()
   })
 }
 
@@ -511,6 +516,10 @@ const updatePanel = _this => {
       order: order
     }
   })
+
+  if (panels == null || panels.length == 0) {
+    return
+  }
 
   request.putPanelRequest(_this.display.teamId, _this.display.projectId, _this.display.boardId, panels).then(result => {
     // nothing to do
@@ -579,6 +588,10 @@ const updateTaskOrder = _this => {
     tasks = tasks.concat(taskList)
   })
 
+  if (tasks == null || tasks.length == 0) {
+    return
+  }
+
   request.putTaskRequest(_this.display.teamId, _this.display.projectId, _this.display.boardId, tasks).then(result => {
     // nothing to do
   })
@@ -637,6 +650,11 @@ const handleCreated = _this => {
       _this.hideProgressBar()
     }
   })
+
+  request.getProjectRequest(_this.display.teamId, _this.display.projectId).then(result => {
+    const members = result.members
+    _this.$set(_this.display, 'projectUsers', members)
+  })
 }
 
 /**
@@ -658,18 +676,18 @@ const handleRouteChange = (_this, to, from) => {
   _this.display.taskId = newParams.taskId
 
   if (newParams.teamId != oldParams.teamId || newParams.projectId != oldParams.projectId) {
-    console.log('wall-home')
+    // console.log('wall-home')
     initBoardList(_this).then(() => { initPanelTask(_this).then(() => { initTask(_this).then(() => { initDisplay(_this); _this.hideProgressBar() }) }) })
     return
   }
   else if (newParams.boardId != null && newParams.boardId != oldParams.boardId) {
-    console.log('wall-board')
+    // console.log('wall-board')
     initBoardSelected(_this)
-    initPanelTask(_this).then(() => { initTask(_this).then(() => { initDisplay(_this); _this.hideProgressBar() }) })
+    initPanelTask(_this).then(() => { initDisplay(_this); _this.hideProgressBar() })
     return
   }
   else if (newParams.taskId != null && newParams.taskId != oldParams.taskId) {
-    console.log('wall-task')
+    // console.log('wall-task')
     initTask(_this).then(() => { initDisplay(_this); _this.hideProgressBar() })
     return
   }
@@ -741,9 +759,9 @@ const initBoardSelected = _this => {
  * @param {object} _this 
  */
 const initPanelTask = _this => {
-
   const board = _this.list.boards.find(board => board.boardId == _this.display.boardId)
   _this.$set(_this.display, 'boardName', board.boardName)
+  _this.$set(_this.list, 'panels', [])
 
   return new Promise((resolve, reject) => {
     request.getPanelTaskListRequest(_this.display.teamId, _this.display.projectId, _this.display.boardId).then(result => {
@@ -756,6 +774,9 @@ const initPanelTask = _this => {
 
       _this.$set(_this.list, 'panels', panels)
     })
+
+    _this.hideProgressBar()
+
     resolve()
   }).catch(error => {
     console.log(error)
@@ -768,12 +789,31 @@ const initPanelTask = _this => {
  * @param {object} _this 
  */
 const initTask = _this => {
+
+  _this.$set(_this.display, 'task', {})
+  _this.$set(_this.mode.task, 'selected', false)
+  _this.$set(_this.display.taskCommentForm, 'visible', false)
+
   return new Promise((resolve, reject) => {
-    request.getTaskRequest(_this.display.teamId, _this.display.projectId, _this.display.boardId, _this.display.taskId).then(result => {
-      _this.$set(_this.display, 'task', result)
-      _this.$set(_this.display.taskCommentForm, 'visible', false)
+    const task = getTaskDetail(_this, _this.display.taskId)
+    if (task) {
+      _this.$set(_this.mode.task, 'selected', true)
+      _this.$set(_this.display, 'task', task)
       _this.$set(_this.display.taskCommentForm, 'message', '')
       _this.$set(_this.display, 'taskComments', [])
+      resolve()
+      return
+    }
+
+    _this.showProgressBar()
+
+    request.getTaskRequest(_this.display.teamId, _this.display.projectId, _this.display.boardId, _this.display.taskId).then(result => {
+      _this.$set(_this.mode.task, 'selected', true)
+      _this.$set(_this.display, 'task', result)
+      _this.$set(_this.display.taskCommentForm, 'message', '')
+      _this.$set(_this.display, 'taskComments', [])
+
+      _this.hideProgressBar()
     })
     resolve()
   }).catch(error => {
@@ -837,6 +877,28 @@ const updateDisplayTask = (panels, task) => {
       }
     }
   }
+}
+
+/**
+ * パネル一覧からタスクを取得する
+ * @param {string} taskId タスクID
+ * @returns {object} タスク
+ */
+const getTaskDetail = (_this, taskId) => {
+  const panels = _this.list.panels
+  if (panels) {
+    let targetTask = null
+    panels.forEach(panel => {
+      if (targetTask) return
+      if (panel == null || panel.task == null) return
+      panel.task.forEach(task => {
+        if (targetTask) return
+        if (task != null && task.taskId == taskId) targetTask = task
+      })
+    })
+    return targetTask
+  }
+  return null
 }
 
 export default {

@@ -3,6 +3,7 @@ import draggable from "vuedraggable"
 import { ROUTE_NAME } from '../../router'
 import handler from './handler'
 import util from '../../utils'
+import { nfapply } from "q";
 
 const panels = [
   // {
@@ -31,12 +32,12 @@ const wallApp = {
       boardName: null,
       taskId: null,
       task: {
-        title: 'タイトル',
-        content: '内容',
-        priority: '優先度',
-        assignUser: '担当者ID',
-        startDate: '2019-03-01',
-        deadline: '2019-03-30',
+        title: null,
+        content: null,
+        priority: null,
+        assignUser: null,
+        startDate: null,
+        deadline: null,
       },
       taskComments: [{
         userName: 'yumochi21',
@@ -45,29 +46,26 @@ const wallApp = {
       }],
       taskCommentForm: {
         visible: false,
-        message: '頑張りましょー'
+        message: ''
       },
       taskEdit: {
-        taskId: '',
-        panelId: '',
-        title: 'タイトル',
-        content: '内容',
-        priority: '2',
-        assignUser: 'yumochi21',
-        startDate: '2019-03-01',
-        deadline: '2019-03-30',
+        taskId: null,
+        panelId: null,
+        title: null,
+        content: null,
+        priority: null,
+        assignUser: null,
+        startDate: null,
+        deadline: null,
       },
       taskAdd: {
         title: null
       },
-      projectUsers: [
-        { userId: 'ishigami', userName: '石上' },
-        { userId: 'yumochi21', userName: '望月' }
-      ]
+      projectUsers: []
     },
     list: {
-      boards: boards,
-      panels: panels
+      boards: [],
+      panels: []
     },
     mode: {
       task: {
@@ -180,6 +178,12 @@ const wallApp = {
 
     // アンカー自動生成
     anchorify: function(text) { return util.setAnchor(text) },
+
+    // ユーザー名を取得
+    getUserName: function(userId) {
+      const user = this.display.projectUsers.find(user => user.userId == userId)
+      return (user != null) ? user.userName : null
+    },
 
     // Vuex mutations
     ...mapMutations("common", ["showProgressBar", "hideProgressBar", 'changeCurrentTeam', 'changeCurrentProject'])
