@@ -789,13 +789,25 @@ const initPanelTask = _this => {
  * @param {object} _this 
  */
 const initTask = _this => {
-  _this.showProgressBar()
+
   _this.$set(_this.display, 'task', {})
   _this.$set(_this.mode.task, 'selected', false)
   _this.$set(_this.display.taskCommentForm, 'visible', false)
+
   return new Promise((resolve, reject) => {
+    const task = getTaskDetail(_this, _this.display.taskId)
+    if (task) {
+      _this.$set(_this.mode.task, 'selected', true)
+      _this.$set(_this.display, 'task', task)
+      _this.$set(_this.display.taskCommentForm, 'message', '')
+      _this.$set(_this.display, 'taskComments', [])
+      resolve()
+      return
+    }
+
+    _this.showProgressBar()
+
     request.getTaskRequest(_this.display.teamId, _this.display.projectId, _this.display.boardId, _this.display.taskId).then(result => {
-      console.log('task get complete')
       _this.$set(_this.mode.task, 'selected', true)
       _this.$set(_this.display, 'task', result)
       _this.$set(_this.display.taskCommentForm, 'message', '')
@@ -865,6 +877,28 @@ const updateDisplayTask = (panels, task) => {
       }
     }
   }
+}
+
+/**
+ * パネル一覧からタスクを取得する
+ * @param {string} taskId タスクID
+ * @returns {object} タスク
+ */
+const getTaskDetail = (_this, taskId) => {
+  const panels = _this.list.panels
+  if (panels) {
+    let targetTask = null
+    panels.forEach(panel => {
+      if (targetTask) return
+      if (panel == null || panel.task == null) return
+      panel.task.forEach(task => {
+        if (targetTask) return
+        if (task != null && task.taskId == taskId) targetTask = task
+      })
+    })
+    return targetTask
+  }
+  return null
 }
 
 export default {

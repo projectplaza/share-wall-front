@@ -64,8 +64,8 @@ const wallApp = {
       projectUsers: []
     },
     list: {
-      boards: boards,
-      panels: panels
+      boards: [],
+      panels: []
     },
     mode: {
       task: {
