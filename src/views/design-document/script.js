@@ -24,7 +24,7 @@ const designDocumentApp = {
     display: {
       ready: false,
       mode: 'view',
-      separate: true
+      separate: false
     },
     common: {
       teamId: null,

@@ -650,6 +650,11 @@ const handleCreated = _this => {
       _this.hideProgressBar()
     }
   })
+
+  request.getProjectRequest(_this.display.teamId, _this.display.projectId).then(result => {
+    const members = result.members
+    _this.$set(_this.display, 'projectUsers', members)
+  })
 }
 
 /**

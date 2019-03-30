@@ -3,6 +3,7 @@ import draggable from "vuedraggable"
 import { ROUTE_NAME } from '../../router'
 import handler from './handler'
 import util from '../../utils'
+import { nfapply } from "q";
 
 const panels = [
   // {
@@ -177,6 +178,12 @@ const wallApp = {
 
     // アンカー自動生成
     anchorify: function(text) { return util.setAnchor(text) },
+
+    // ユーザー名を取得
+    getUserName: function(userId) {
+      const user = this.display.projectUsers.find(user => user.userId == userId)
+      return (user != null) ? user.userName : null
+    },
 
     // Vuex mutations
     ...mapMutations("common", ["showProgressBar", "hideProgressBar", 'changeCurrentTeam', 'changeCurrentProject'])
