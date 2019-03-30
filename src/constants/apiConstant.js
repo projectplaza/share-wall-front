@@ -1,5 +1,5 @@
 // APIのベースURI
-export const URI_BASE = 'http://localhost:3000/api'
+export const URI_BASE = '/api'
 
 // PATH:ログインAPI
 export const PATH_LOGIN = '/v1/login'
