@@ -42,9 +42,12 @@
             <transition-group class="list-group">
               <router-link class="item" v-for="task in panel.task" :key="task.taskId"
                 :to="{ name: 'wall-task', params: { teamId: display.teamId, projectId: display.projectId, boardId: display.boardId, taskId: task.taskId }}">
-                <div class="task-name"><span class="task-id">#{{task.taskId}}</span>&ensp;{{task.title}}</div>
+                <div class="task-name">
+                  <div class="task-id">#{{task.taskId}}</div>
+                  <div class="task-title">{{task.title}}</div>
+                </div>
                 <div class="task-detail">
-                  <div class="priority" v-if="task.priority == '1'">高</div>
+                  <div class="priority heigh-priority" v-if="task.priority == '1'">高</div>
                   <div class="priority" v-if="task.priority == '2'">中</div>
                   <div class="priority" v-if="task.priority == '3'">低</div>
                   <div class="priority" v-if="task.priority == '4'">保留</div>
@@ -70,7 +73,10 @@
             <img src="../../assets/cross-gray.png" @click="handleTaskCloseClick" />
           </div>
         </div>
-        <div class="task-name" v-if="display.task.taskId"><span class="task-id">#{{display.task.taskId}}</span>&ensp;{{display.task.title}}</div>
+        <div class="task-name" v-if="display.task.taskId">
+          <div class="task-id">#{{display.task.taskId}}</div>
+          <div class="task-title">{{display.task.title}}</div>
+        </div>
         <div class="label" v-if="display.task.content">詳細</div>
         <div class="value" v-if="display.task.content" v-html="anchorify(display.task.content)"></div>
         <div class="label separate" v-if="display.task.priority">優先度</div>
@@ -121,10 +127,7 @@
         <div class="label">優先度</div>
         <div class="value">
           <select v-model="display.taskEdit.priority">
-            <option :value="1">高</option>
-            <option :value="2">中</option>
-            <option :value="3">低</option>
-            <option :value="4">保留</option>
+            <option v-for="priority in display.priolities" :value="priority.code">{{priority.value}}</option>
           </select>
         </div>
         <div class="label">担当者</div>

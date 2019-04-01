@@ -1,6 +1,7 @@
 import request from './request'
 import $ from 'jquery'
 import { ROUTE_NAME } from '../../router'
+import moment from 'moment'
 
 /**
  * ボード一覧の変更イベントハンドラ
@@ -653,6 +654,10 @@ const handleCreated = _this => {
 
   request.getProjectRequest(_this.display.teamId, _this.display.projectId).then(result => {
     const members = result.members
+    members.unshift({
+      userId: '',
+      userName: '---'
+    })
     _this.$set(_this.display, 'projectUsers', members)
   })
 }
@@ -766,8 +771,16 @@ const initPanelTask = _this => {
   return new Promise((resolve, reject) => {
     request.getPanelTaskListRequest(_this.display.teamId, _this.display.projectId, _this.display.boardId).then(result => {
       const panels = result.map(r => {
+        const task = r.task.map(t => {
+          return {
+            ...t,
+            startDate: (t.startDate != null && t.startDate != '') ? moment(t.startDate).format("YYYY-MM-DD") : null,
+            deadline: (t.deadline != null && t.deadline != '') ? moment(t.deadline).format("YYYY-MM-DD") : null
+          }
+        })
         return {
           ...r,
+          task: task,
           showCreateWindow: false
         }
       })
@@ -796,7 +809,7 @@ const initTask = _this => {
 
   return new Promise((resolve, reject) => {
     const task = getTaskDetail(_this, _this.display.taskId)
-    if (task) {
+    if (task != null && task.taskId != null) {
       _this.$set(_this.mode.task, 'selected', true)
       _this.$set(_this.display, 'task', task)
       _this.$set(_this.display.taskCommentForm, 'message', '')
@@ -808,8 +821,14 @@ const initTask = _this => {
     _this.showProgressBar()
 
     request.getTaskRequest(_this.display.teamId, _this.display.projectId, _this.display.boardId, _this.display.taskId).then(result => {
+      const resultTask = {
+        ...result,
+        startDate: (result.startDate != null && result.startDate != '') ? moment(result.startDate).format("YYYY-MM-DD") : null,
+        deadline: (result.deadline != null && result.deadline != '') ? moment(result.deadline).format("YYYY-MM-DD") : null
+      }
+
       _this.$set(_this.mode.task, 'selected', true)
-      _this.$set(_this.display, 'task', result)
+      _this.$set(_this.display, 'task', resultTask)
       _this.$set(_this.display.taskCommentForm, 'message', '')
       _this.$set(_this.display, 'taskComments', [])
 

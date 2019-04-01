@@ -61,7 +61,14 @@ const wallApp = {
       taskAdd: {
         title: null
       },
-      projectUsers: []
+      projectUsers: [],
+      priolities: [
+        { code: '', value: '---' },
+        { code: '1', value: '高' },
+        { code: '2', value: '中' },
+        { code: '3', value: '低' },
+        { code: '4', value: '保留' }
+      ]
     },
     list: {
       boards: [],
