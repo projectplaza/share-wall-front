@@ -52,7 +52,7 @@
                   <div class="priority" v-if="task.priority == '3'">低</div>
                   <div class="priority" v-if="task.priority == '4'">保留</div>
                   <div class="assign" v-if="task.assignUser != null && task.assignUser != ''">{{getUserName(task.assignUser)}}</div>
-                  <div class="limit" v-if="task.deadline != null">{{task.deadline}}</div>
+                  <div class="limit" v-if="task.deadline != null && task.deadline != ''">{{task.deadline}}</div>
                 </div>
               </router-link>
             </transition-group>

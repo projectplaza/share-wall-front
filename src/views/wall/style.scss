@@ -282,16 +282,17 @@
           white-space: pre-wrap;
           color: #666666;
           font-size: 14px;
+          font-weight: 700;
 
           .task-id {
-            min-width: 40px;
+            width: 100%;
             display: inline-block;
             color: #888888;
             vertical-align: top;
           }
 
           .task-title {
-            width: calc(100% - 40px);
+            width: 100%;
             display: inline-block;
             color: #666666;
             vertical-align: top;
@@ -301,11 +302,16 @@
           margin-top: 10px;
           font-size: 10px;
           color: #666666;
+          margin-bottom: 2px;
         }
         .value {
           font-size: 13px;
           min-height: 20px;
           color: #666666;
+          width: 100%;
+          word-wrap: break-word;
+          // white-space: pre-wrap;
+          margin-bottom: 5px;
         }
         .separate {
           display: inline-block;
