@@ -1,5 +1,7 @@
+import { API_BASE_URL } from './constant'
+
 // APIのベースURI
-export const URI_BASE = '/api'
+export const URI_BASE = API_BASE_URL + '/api'
 
 // PATH:ログインAPI
 export const PATH_LOGIN = '/v1/login'
