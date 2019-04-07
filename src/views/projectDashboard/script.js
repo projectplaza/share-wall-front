@@ -9,7 +9,13 @@ const app = {
   name: "ProjectDashboard",
 
   data: () => ({
-    ROUTE_NAME: ROUTE_NAME
+    ROUTE_NAME: ROUTE_NAME,
+    display: {
+
+    },
+    list: {
+      
+    }
   }),
 
   created: function () {
