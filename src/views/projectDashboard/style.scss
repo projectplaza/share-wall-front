@@ -1,16 +1,16 @@
 .project-dashboard {
 
   .dashboard-header {
-    margin: 16px 16px 0px 16px;
+    padding: 16px 16px 0px 16px;
     
     .project-name {
-      color: #888888;
+      color: #666666;
       font-size: 18px;
     }
 
     .abstract {
-      margin-top: 5px;
-      font-size: 13px;
+      margin-top: 6px;
+      font-size: 14px;
       color: #666666;
     }
   }
@@ -40,20 +40,99 @@
 
   .card {
     margin-bottom: 15px;
-    border: 1px solid #f5f5f5;
     background-color: #ffffff;
-    box-shadow: 2px 2px 2px rgba(90,90,90,0.2);
+    box-shadow: 0px 2px 4px rgba(90,90,90,0.2);
 
     .card-title {
-      padding: 15px;
-      font-size: 13px;
+      padding: 12px 15px;
+      font-size: 14px;
       color: #666666;
       vertical-align: middle;
+      font-weight: 700;
 
       img {
         width: 18px;
-        margin-top: -3px;
         margin-right: 10px;
+      }
+    }
+  }
+
+  .task-table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 12px;
+
+    tr {
+      cursor: pointer;
+      &:hover > td {
+        background-color: #f9f9f9;
+      }
+    }
+
+    th {
+      // border: 1px solid #2980b9;
+      border-bottom: 1px solid #2980b9;
+      background-color: #2980b9;
+      color: #ffffff;
+      text-align: left;
+      padding: 6px 6px;
+      cursor: default;
+
+      &:first-of-type {
+        border-left: 0px;
+      }
+      &:last-of-type {
+        border-right: 0px;
+      }
+    }
+    td {
+      // border: 1px solid #dddddd;
+      border-bottom: 1px solid #dddddd;
+      background-color: #ffffff;
+      color: #333333;
+      text-align: left;
+      padding: 6px 6px;
+
+      &:first-of-type {
+        border-left: 0px;
+      }
+      &:last-of-type {
+        border-right: 0px;
+      }
+    }
+  }
+
+  .members {
+    .item {
+      position: relative;
+      padding: 6px 12px;
+      color: #444444;
+      font-size: 14px;
+      cursor: pointer;
+      text-decoration: none;
+
+      &:hover {
+        background-color: #fbfbfb;
+      }
+
+      .icon {
+        display: inline-block;
+        background-color: #fbfbfb;
+        border: 1px solid rgb(192,192,192);
+        padding: 6px;
+        border-radius: 3px;
+        vertical-align: middle;
+        margin-right: 12px;
+      
+        img {
+          display: block;
+          width: 18px;
+        }
+      }
+
+      span {
+        line-height: 30px;
+        vertical-align: middle;
       }
     }
   }
@@ -61,36 +140,230 @@
   .functions {
     .item {
       position: relative;
-      padding: 12px 16px 12px 30px;
-      color: #888888;
+      padding: 6px 12px;
+      color: #444444;
       font-size: 14px;
       cursor: pointer;
       text-decoration: none;
 
       &:hover {
-        background-color: #f9f9f9;
+        background-color: #fbfbfb;
       }
 
-      .move {
-        display: block;
-        width: 0px;
-        height: 20px;
-        position: absolute;
-        top: 16px;
-        right: 5px;
-        color: #888888;
-        font-size: 26px;
-      }
+      .icon {
+        display: inline-block;
+        background-color: #34495e;
+        border: 1px solid #34495e;
+        padding: 6px;
+        border-radius: 3px;
+        vertical-align: middle;
+        margin-right: 12px;
       
-      img {
-        width: 20px;
-        margin-right: 15px;
-        margin-top: -3px;
+        img {
+          display: block;
+          width: 18px;
+        }
+      }
+
+      span {
+        line-height: 30px;
+        vertical-align: middle;
       }
     }
+  }
+}
 
-    .item:hover > .move {
-      width: 20px;
+.document {
+  padding: 15px;
+  color: #444444;
+  font-family: "ヒラギノ角ゴ ProN W3", Hiragino Kaku Gothic ProN, Arial, "メイリオ", Meiryo, sans-serif;
+  font-size: 12px;
+
+  h1 {
+    margin-top: 10px;
+    margin-bottom: 15px;
+    padding: 12px 0px;
+    border-bottom: 3px solid #273c75;
+    font-size: 24px;
+    /* 追加分 */
+    border-bottom: 0px solid #273c75;
+    color: #888888;
+    font-weight: 100;
+  }
+  h2 {
+    margin-top: 8px;
+    margin-bottom: 8px;
+    padding: 10px 0px;
+    // border-bottom: 1px solid #273c75;
+    border-bottom: 1px solid #bbbbbb;
+    font-size: 21px;
+    font-weight: 100;
+  }
+  h3 {
+    margin-top: 18px;
+    margin-bottom: 18px;
+    padding: 4px 8px;
+    // border-left: 3px solid #273c75;
+    border-left: 3px solid #888888;
+    font-size: 18px;
+    /* 追加分 */
+    font-weight: 100;
+  }
+  h4 {
+    margin-top: 14px;
+    margin-bottom: 14px;
+    padding: 0px 0px;
+    font-size: 14px;
+    /* 追加分 */
+    font-weight: 100;
+  }
+  h5 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 0px 0px;
+    font-size: 12px;
+    /* 追加分 */
+    font-weight: 100;
+  }
+  h6 {
+    margin-top: 8px;
+    margin-bottom: 8px;
+    padding: 0px 0px;
+    font-size: 10px;
+    /* 追加分 */
+    font-weight: 100;
+  }
+
+  ul {
+    margin: 0px;
+    padding: 5px 23px;
+
+    li {
+      line-height: 24px;
+    }
+  }
+
+  hr {
+    border: 0px;
+    border-top: 1px solid #273c75;
+  }
+
+  p {
+    line-height: 21px;
+    font-size: 13px;
+  }
+
+  pre {
+    padding: 10px;
+    background-color: #f5f5f5;
+    font-size: 11px !important;
+    border: 0px solid #f3e5f5;
+    border-left: 2px solid #ab47bc;
+    border-right: 2px solid #dddddd;
+    // border-radius: 3px;
+
+    code {
+      background-color: #f5f5f5 !important;
+      line-height: 14px;
+      font-family: Consolas, Monaco, monospace !important;
+      font-weight: 700;
+
+      .hljs {
+        display: block;
+        background: white;
+        padding: 0.5em;
+        color: #333333;
+        overflow-x: auto;
+      }
+      
+      .hljs-comment,
+      .hljs-meta {
+        color: #969896;
+      }
+      
+      .hljs-string,
+      .hljs-variable,
+      .hljs-template-variable,
+      .hljs-strong,
+      .hljs-emphasis,
+      .hljs-quote {
+        color: #df5000;
+      }
+      
+      .hljs-keyword,
+      .hljs-selector-tag,
+      .hljs-type {
+        color: #a71d5d;
+      }
+      
+      .hljs-literal,
+      .hljs-symbol,
+      .hljs-bullet,
+      .hljs-attribute {
+        color: #0086b3;
+      }
+      
+      .hljs-section,
+      .hljs-name {
+        color: #63a35c;
+      }
+      
+      .hljs-tag {
+        color: #333333;
+      }
+      
+      .hljs-title,
+      .hljs-attr,
+      .hljs-selector-id,
+      .hljs-selector-class,
+      .hljs-selector-attr,
+      .hljs-selector-pseudo {
+        color: #795da3;
+      }
+      
+      .hljs-addition {
+        color: #55a532;
+        background-color: #eaffea;
+      }
+      
+      .hljs-deletion {
+        color: #bd2c00;
+        background-color: #ffecec;
+      }
+      
+      .hljs-link {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  blockquote {
+    margin: 0px 0px 0px 8px;
+    border-left: 3px solid #dddddd;
+    background-color: #f5f5f5;
+    /* 追加分 */
+    color: #666666;
+    p {
+      padding: 4px 8px 4px 8px;
+    } 
+  }
+
+  .toc-anchor-link {
+    color: #273c75;
+  }
+
+  table {
+    border: 1px solid #dddddd;
+    border-collapse: collapse;
+    th,
+    td {
+      padding: 6px 16px;
+      border: 1px solid #dddddd;
+      /* 追加分 */
+      font-weight: 100;
+    }
+    th {
+      background-color: #f5f5f5;
     }
   }
 }
