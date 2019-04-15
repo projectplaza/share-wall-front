@@ -202,12 +202,14 @@ const wallApp = {
 
   computed: {
     options: () => ({
-      animation: 70,
+      animation: 100,
       group: 'description',
-      dragClass: 'dragging'
+      dragClass: 'dragging',
+      fallbackClass: "chosen"
     }),
     panelOptions: () => ({
       animation: 70,
+      handle: '.switch-icon'
     }),
     boardWidth: function() {
       if (this.mode.task.selected) {

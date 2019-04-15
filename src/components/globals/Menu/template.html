@@ -1,7 +1,7 @@
 <div class="menu">
-  <div class="logo">
+  <!-- <div class="logo">
     <img src="../../../assets/f-clef.svg">
-  </div>
+  </div> -->
   <router-link
     v-for="m in menus"
     :to="{name: m.name, params: {teamId: $store.state.common.header.team.current, projectId: $store.state.common.header.project.current}}"

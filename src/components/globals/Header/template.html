@@ -1,17 +1,24 @@
 <div class="header">
   <!-- チーム選択 -->
+  <div class="logo">
+    <img src="../../../assets/menu_ffffff.svg">
+  </div>
   <div class="team move team-pulldown" @click="handleTeamClick">
     <div class="icon">
       <img src="../../../assets/talent.png">
     </div>
-    <div class="name" v-if="!currentTeam">チームを選択してください</div>
+    <div class="name" v-if="!currentTeam">---</div>
     <div class="name" v-if="currentTeam">{{currentTeam.name}}</div>
-    <img class="dropdown-icon" src="../../../assets/dropdown-gray.png">
+    <img class="dropdown-icon" src="../../../assets/dropdown.png">
     <div class="select" v-if="teamSelect.visible">
       <router-link class="select-item" v-for="t in $store.state.common.header.team.list"
-        :to="baseURL + 't/' + t.code + '/dashboard'" :key="t.code"><img src="../../../assets/team-gray.png"
-          class="select-item-icon" />{{t.name}}</router-link>
-      <router-link :to="{path: baseURL + 't/setting/owner/create'}" class="select-item">＋&emsp;Add</router-link>
+        :to="baseURL + 't/' + t.code + '/dashboard'" :key="t.code">
+        <div class="move-icon"><img src="../../../assets/team.png" class="select-item-icon" /></div>{{t.name}}
+      </router-link>
+      <router-link :to="{path: baseURL + 't/setting/owner/create'}" class="select-item">
+        <div class="move-icon"><div class="move-icon-plus">＋</div></div>
+        <span>チームを追加</span>
+      </router-link>
     </div>
   </div>
   <!-- プロジェクト選択 -->
@@ -19,20 +26,24 @@
     <div class="icon">
       <img src="../../../assets/project.png">
     </div>
-    <div class="name" v-if="!currentProject">プロジェクトを選択してください</div>
+    <div class="name" v-if="!currentProject">---</div>
     <div class="name" v-if="currentProject">{{currentProject.name}}</div>
-    <img class="dropdown-icon" src="../../../assets/dropdown-gray.png">
+    <img class="dropdown-icon" src="../../../assets/dropdown.png">
     <div class="select" v-if="projectSelect.visible">
       <router-link class="select-item" v-for="p in $store.state.common.header.project.list"
         :to="baseURL + 't/' + $store.state.common.header.team.current + '/p/' + p.code + '/dashboard'" :key="p.code">
-        -&ensp;{{p.name}}</router-link>
+        <div class="move-icon"><img src="../../../assets/project.png" class="select-item-icon" /></div>{{p.name}}
+      </router-link>
       <router-link :to="baseURL + 't/' + $store.state.common.header.team.current + '/p/setting/owner/create'"
-        class="select-item" v-if="currentTeam">＋&emsp;Add</router-link>
+        class="select-item" v-if="currentTeam">
+        <div class="move-icon"><div class="move-icon-plus">＋</div></div>
+        <span>プロジェクトを追加</span>
+      </router-link>
     </div>
   </div>
   <!-- ショートカットメニュー -->
   <div class="short-menu">
-    <div class="block block-s">
+    <!-- <div class="block block-s">
       <div class="search">
         <input type="text" placeholder="Search">
       </div>
@@ -51,21 +62,22 @@
       <div class="icon">
         <img src="../../../assets/memo-gray.png">
       </div>
-    </div>
+    </div> -->
     <div class="block user-pulldown" @click="handleProfileClick">
       <div class="icon">
-        <img src="../../../assets/user-gray.png">
+        <img src="../../../assets/user_666666.png">
+        <span>望月由登</span>
       </div>
       <div class="list" v-if="profile.visible">
         <div class="list-item">Profile</div>
         <div class="list-item" @click="handleLogoutClick">Logout</div>
       </div>
     </div>
-    <div class="block">
+    <!-- <div class="block">
       <div class="icon">
         <img src="../../../assets/setting-gray.png">
       </div>
-    </div>
+    </div> -->
   </div>
   <!-- プログレスバー -->
   <div v-if="$store.state.common.header.progressBar.visible" class="progress-bar">

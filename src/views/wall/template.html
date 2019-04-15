@@ -38,24 +38,23 @@
               <input type="button" value="キャンセル" @click="handleTaskAddCancelClick" />
             </div>
           </div>
-          <draggable element="div" :options="options" v-model="panel.task">
-            <transition-group class="list-group">
-              <router-link class="item" v-for="task in panel.task" :key="task.taskId"
-                :to="{ name: 'wall-task', params: { teamId: display.teamId, projectId: display.projectId, boardId: display.boardId, taskId: task.taskId }}">
-                <div class="task-name">
-                  <div class="task-id">#{{task.taskId}}</div>
-                  <div class="task-title">{{task.title}}</div>
-                </div>
-                <div class="task-detail">
-                  <div class="priority heigh-priority" v-if="task.priority == '1'">高</div>
-                  <div class="priority" v-if="task.priority == '2'">中</div>
-                  <div class="priority" v-if="task.priority == '3'">低</div>
-                  <div class="priority" v-if="task.priority == '4'">保留</div>
-                  <div class="assign" v-if="task.assignUser != null && task.assignUser != ''">{{getUserName(task.assignUser)}}</div>
-                  <div class="limit" v-if="task.deadline != null && task.deadline != ''">{{task.deadline}}</div>
-                </div>
-              </router-link>
-            </transition-group>
+          <draggable element="div" :options="options" v-model="panel.task" class="list-group">
+            <router-link class="item" v-for="task in panel.task" :key="task.taskId"
+              :to="{ name: 'wall-task', params: { teamId: display.teamId, projectId: display.projectId, boardId: display.boardId, taskId: task.taskId }}">
+              <div class="task-name">
+                <div class="task-id">#{{task.taskId}}</div>
+                <div class="task-title">{{task.title}}</div>
+              </div>
+              <div class="task-detail">
+                <div class="priority heigh-priority" v-if="task.priority == '1'">高</div>
+                <div class="priority" v-if="task.priority == '2'">中</div>
+                <div class="priority" v-if="task.priority == '3'">低</div>
+                <div class="priority" v-if="task.priority == '4'">保留</div>
+                <div class="assign" v-if="task.assignUser != null && task.assignUser != ''">
+                  {{getUserName(task.assignUser)}}</div>
+                <div class="limit" v-if="task.deadline != null && task.deadline != ''">{{task.deadline}}</div>
+              </div>
+            </router-link>
           </draggable>
         </div>
       </div>
@@ -183,7 +182,7 @@
       <draggable element="div" :options="panelOptions" v-model="list.panels">
         <transition-group>
           <div class="panel-group" v-for="panel in list.panels" :key="panel.panelId">
-            <img src="../../assets/switch-gray.png" />
+            <img src="../../assets/switch-gray.png" class="switch-icon" />
             <input type="text" v-model="panel.panelName" placeholder="名称" />
             <img src="../../assets/cross-gray.png" class="delete"
               @click="() => { handlePanelDeleteClick(panel.panelId) }" />

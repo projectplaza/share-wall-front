@@ -1,33 +1,52 @@
 .header {
   position: fixed;
   top: 0px;
-  left: 50px;
-  width: calc(100% - 50px);
+  left: 0px;
+  width: 100%;
   min-width: 950px;
   background-color: #ffffff;
-  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1);
   user-select: none;
   z-index: 4;
+  background-color: #2980b9;
+  height: 37px;
+
+  .logo {
+    display: inline-block;
+    padding: 6px 10px 6px 10px;
+    height: 37px;
+    width: 50px;
+    vertical-align: top;
+    text-align: center;
+    background-color: #216897;
+    cursor: pointer;
+    img {
+      display: inline-block;
+      margin: auto;
+      width: 15px;
+    }
+  }
 
   .move {
     display: inline-block;
     position: relative;
     width: 300px;
-    border-right: 1px solid #eeeeee;
     padding: 6px 30px 6px 10px;
     color: #666666;
+    font-weight: 700;
     cursor: pointer;
     transition: 0.2s;
+    background-color: #2980b9;
+    color: #ffffff;
+
     &:hover {
-      background-color: #f5f5f5;
+      background-color: #3094d6;
     }
 
     .icon {
       display: inline-block;
       margin-right: 8px;
       padding: 5px;
-      background-color: #bbbbbb;
-      border-radius: 50%;
+      border-radius: 2px;
       vertical-align: middle;
       img {
         display: block;
@@ -38,6 +57,7 @@
     .name {
       display: inline-block;
       vertical-align: middle;
+      font-weight: 700;
     }
 
     .dropdown-icon {
@@ -49,29 +69,49 @@
 
     .select {
       position: absolute;
-      top: 38px;
+      top: 37px;
       left: 0px;
-      box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+      // border: 1px solid #3498db;
+      border-top: 0px;
+      border-bottom: 0px;
       transition: 0.2s;
       max-height: 500px;
       overflow: auto;
+      box-shadow: 0px 3px 3px rgba(0,0,0,0.2);
 
       .select-item {
         display: block;
-        min-width: 299px;
-        padding: 10px 15px;
-        color: #444444;
+        min-width: 300px;
+        padding: 10px 30px 10px 10px;
+        color: #666666;
         background-color: #ffffff;
         text-decoration: none;
+        border-bottom: 1px solid #eeeeee;
 
-        &:hover {
-          background-color: #f9f9f9;
+        &:last-of-type {
+          border-bottom: 0px;
         }
 
-        .select-item-icon {
-          width: 20px;
-          margin-top: -3px;
-          margin-right: 7px;
+        .move-icon {
+          display: inline-block;
+          margin-right: 8px;
+          padding: 5px;
+          background-color: #2980b9;
+          border-radius: 2px;
+          vertical-align: middle;
+          img {
+            display: block;
+            width: 15px;
+          }
+          .move-icon-plus {
+            display: block;
+            color: #ffffff;
+            font-size: 15px;
+            line-height: 15px;
+          }
+        }
+
+        span {
           vertical-align: middle;
         }
       }
@@ -87,8 +127,9 @@
       color: #666666;
       cursor: pointer;
       transition: 0.2s;
+      // border-left: 1px solid #eeeeee;
       &:hover {
-        background-color: #f5f5f5;
+        // background-color: #f0f0f0;
       }
     }
     .block-f {
@@ -102,7 +143,7 @@
         background-color: #ffffff;
       }
       input[type="text"] {
-        width: 100px;
+        min-width: 100px;
         padding: 3px 10px;
         color: #888888;
         border: 1px solid #eeeeee;
@@ -121,13 +162,28 @@
     }
     .icon {
       display: inline-block;
-      padding: 3px;
-      border-radius: 50%;
+      padding: 2px;
       vertical-align: middle;
       img {
-        display: block;
+        display: inline-block;
         width: 19px;
+        vertical-align: middle;
+        border: 1px solid #ffffff;
+        border-radius: 50%;
+        background-color: #ffffff;
       }
+      span {
+        margin-left: 10px;
+        vertical-align: middle;
+        font-weight: 700;
+      }
+    }
+    .user-pulldown {
+      min-width: 140px;
+      color: #ffffff;
+      // &:hover {
+      //   color: #666666;
+      // }
     }
     .list {
       position: absolute;

@@ -18,7 +18,7 @@
     .panel-group {
       padding: 3px 0px;
       text-align: center;
-      boarder: 1px solid #ffffff;
+      border: 1px solid #ffffff;
     }
 
     img {
@@ -73,4 +73,8 @@
 }
 .wl-dialog-small {
   width: 250px !important;
+}
+.chosen {
+  transform: rotate(5deg) !important;
+  background-color: #dddddd;
 }

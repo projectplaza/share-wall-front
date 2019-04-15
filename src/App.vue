@@ -47,7 +47,9 @@ export default {
 
 <style lang="scss">
 body {
-  min-height: calc(100% - 38px) !important;
+  margin-top: 38px;
+  // min-height: calc(100% - 38px) !important;
+  background-color: #ebebeb;
 }
 * {
   outline: none;
@@ -58,8 +60,8 @@ img {
 }
 .content {
   position: fixed;
-  height: calc(100% - 38px);
-  top: 38px;
+  height: calc(100% - 37px);
+  top: 37px;
   left: 50px;
   overflow: auto;
   transition: 0.3s;
