@@ -83,4 +83,7 @@ export default {
     'currentTeam': function() { handler.handleChangeCurrentTeam(this) }
   },
   created: function () { handler.handleCreated(this) },
+  props: {
+    menus: Array
+  }
 };

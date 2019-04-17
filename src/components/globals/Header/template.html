@@ -1,11 +1,22 @@
 <div class="header">
   <!-- チーム選択 -->
-  <div class="logo">
-    <img src="../../../assets/menu_ffffff.svg">
+  <div class="menu">
+    <img src="../../../assets/home_ffffff.svg">
   </div>
+  <!-- <div class="menu">
+    <img src="../../../assets/card_ffffff.svg">
+  </div>
+  <div class="menu">
+    <img src="../../../assets/document_ffffff.svg">
+  </div> -->
+  <router-link v-for="m in menus"
+    :to="{name: m.name, params: {teamId: $store.state.common.header.team.current, projectId: $store.state.common.header.project.current}}"
+    :key="m.code" v-if="($store.state.common.header.project.current !== null || !m.isPjMenu)" class="menu">
+    <img :src="require('../../../assets/' + m.icon + '.svg')">
+  </router-link>
   <div class="team move team-pulldown" @click="handleTeamClick">
     <div class="icon">
-      <img src="../../../assets/talent.png">
+      <img src="../../../assets/team_ffffff.svg">
     </div>
     <div class="name" v-if="!currentTeam">---</div>
     <div class="name" v-if="currentTeam">{{currentTeam.name}}</div>
@@ -16,7 +27,9 @@
         <div class="move-icon"><img src="../../../assets/team.png" class="select-item-icon" /></div>{{t.name}}
       </router-link>
       <router-link :to="{path: baseURL + 't/setting/owner/create'}" class="select-item">
-        <div class="move-icon"><div class="move-icon-plus">＋</div></div>
+        <div class="move-icon">
+          <div class="move-icon-plus">＋</div>
+        </div>
         <span>チームを追加</span>
       </router-link>
     </div>
@@ -36,49 +49,28 @@
       </router-link>
       <router-link :to="baseURL + 't/' + $store.state.common.header.team.current + '/p/setting/owner/create'"
         class="select-item" v-if="currentTeam">
-        <div class="move-icon"><div class="move-icon-plus">＋</div></div>
+        <div class="move-icon">
+          <div class="move-icon-plus">＋</div>
+        </div>
         <span>プロジェクトを追加</span>
       </router-link>
     </div>
   </div>
+
   <!-- ショートカットメニュー -->
   <div class="short-menu">
-    <!-- <div class="block block-s">
-      <div class="search">
-        <input type="text" placeholder="Search">
-      </div>
-    </div>
-    <div class="block" @click="() => {switchShortcutContent('00001')}">
-      <div class="icon">
-        <img src="../../../assets/message-gray.png">
-      </div>
-    </div>
-    <div class="block" @click="() => {switchShortcutContent('00002')}">
-      <div class="icon">
-        <img src="../../../assets/list-gray.png">
-      </div>
-    </div>
-    <div class="block" @click="() => {switchShortcutContent('00003')}">
-      <div class="icon">
-        <img src="../../../assets/memo-gray.png">
-      </div>
-    </div> -->
     <div class="block user-pulldown" @click="handleProfileClick">
       <div class="icon">
         <img src="../../../assets/user_666666.png">
-        <span>望月由登</span>
       </div>
+      <span>望月由登</span>
       <div class="list" v-if="profile.visible">
         <div class="list-item">Profile</div>
         <div class="list-item" @click="handleLogoutClick">Logout</div>
       </div>
     </div>
-    <!-- <div class="block">
-      <div class="icon">
-        <img src="../../../assets/setting-gray.png">
-      </div>
-    </div> -->
   </div>
+
   <!-- プログレスバー -->
   <div v-if="$store.state.common.header.progressBar.visible" class="progress-bar">
     <md-progress-bar md-mode="indeterminate"></md-progress-bar>

@@ -1,12 +1,11 @@
 .design-document {
-  height: 100%;
+  display: flex;
+  align-items: flex-start;
 
   .left-content {
-    display: inline-block;
     width: 250px;
     height: 100%;
     padding: 10px;
-    vertical-align: top;
     color: #666666;
 
     .title {
@@ -51,7 +50,9 @@
       // box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3);
       overflow: auto;
       font-size: 12px;
-      background-color: #f9f9f9;
+      background-color: #ffffff;
+      border: 1px solid #d7dfe3;
+      border-radius: 4px;
     }
 
     .row {
@@ -96,7 +97,6 @@
   }
 
   .right-content {
-    display: inline-block;
     width: calc(100% - 260px);
     height: 100%;
     vertical-align: top;
@@ -114,6 +114,8 @@
         background-color: #ffffff;
         padding: 2px 0px;
         margin-bottom: 10px;
+        border: 1px solid #d7dfe3;
+        border-radius: 4px;
 
         .document {
           position: relative;

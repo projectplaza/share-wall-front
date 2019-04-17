@@ -1,9 +1,8 @@
 <template>
   <div>
-    <div v-if="$store.state.common.auth.loggedIn">
-      <Menu :menus="menus"/>
-      <Header />
-      <div class="content" :style="$store.state.common.content.style">
+    <div v-if="$store.state.common.auth.loggedIn" class="top-content">
+      <Header :menus="menus" />
+      <div class="content">
         <router-view/>
       </div>
       <div class="shortcut-content" :style="$store.state.common.shortcutContent.style">
@@ -26,19 +25,13 @@ export default {
   name: "App",
   components: {
     Login,
-    Header,
-    Menu
+    Header
   },
   data() {
     return {
       menus: [
-        // { code: "0001", title: "home", name: "", icon: "home", isPjMenu: false },
-        // { code: "0002", title: "notification", name: "", icon: "notification", isPjMenu: false },
-        // { code: "0007", title: "chat", name: "", icon: "chat", isPjMenu: true },
-        { code: "0003", title: "ウォール", name: "wall-home", icon: "board", isPjMenu: true },
-        { code: "0004", title: "document", name: "design-document-home", icon: "document", isPjMenu: true },
-        // { code: "0005", title: "calendar", name: "", icon: "calendar", isPjMenu: true },
-        // { code: "0010", title: "box", name: "", icon: "box", isPjMenu: true }
+        { code: "0003", title: "ウォール", name: "wall-home", icon: "card_ffffff", isPjMenu: true },
+        { code: "0004", title: "document", name: "design-document-home", icon: "document_ffffff", isPjMenu: true },
       ]
     };
   }
@@ -47,10 +40,9 @@ export default {
 
 <style lang="scss">
 body {
-  margin-top: 38px;
-  // min-height: calc(100% - 38px) !important;
-  background-color: #ebebeb;
+  background-color: #efefef;
 }
+
 * {
   outline: none;
   font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", Hiragino Kaku Gothic ProN, "ヒラギノ角ゴ ProN W3", Arial, "メイリオ", Meiryo, sans-serif !important;
@@ -59,12 +51,9 @@ img {
   user-select: none;
 }
 .content {
-  position: fixed;
-  height: calc(100% - 37px);
-  top: 37px;
-  left: 50px;
   overflow: auto;
   transition: 0.3s;
+  min-height: calc(100% - 40px);
 }
 .shortcut-content {
   position: fixed;

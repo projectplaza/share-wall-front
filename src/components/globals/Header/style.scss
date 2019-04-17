@@ -1,28 +1,29 @@
 .header {
-  position: fixed;
-  top: 0px;
-  left: 0px;
+  position: sticky;
+  top: 0;
   width: 100%;
-  min-width: 950px;
-  background-color: #ffffff;
+  background-color: #2c3e50;
   user-select: none;
   z-index: 4;
-  background-color: #2980b9;
-  height: 37px;
 
-  .logo {
+  .menu {
     display: inline-block;
-    padding: 6px 10px 6px 10px;
-    height: 37px;
-    width: 50px;
+    width: 45px;
+    height: 40px;
+    padding: 10px;
     vertical-align: top;
     text-align: center;
-    background-color: #216897;
     cursor: pointer;
+    vertical-align: top;
+
+    &:hover {
+      background-color: #34495e;
+    }
+
     img {
-      display: inline-block;
+      display: block;
       margin: auto;
-      width: 15px;
+      width: 20px;
     }
   }
 
@@ -30,54 +31,52 @@
     display: inline-block;
     position: relative;
     width: 300px;
-    padding: 6px 30px 6px 10px;
-    color: #666666;
-    font-weight: 700;
-    cursor: pointer;
-    transition: 0.2s;
-    background-color: #2980b9;
+    height: 40px;
+    padding: 9px 15px;
     color: #ffffff;
+    vertical-align: middle;
+    font-weight: 700;
+    transition: 0.2s;
+    cursor: pointer;
 
     &:hover {
-      background-color: #3094d6;
+      background-color: #34495e;
     }
 
     .icon {
       display: inline-block;
-      margin-right: 8px;
-      padding: 5px;
-      border-radius: 2px;
+      margin-right: 15px;
       vertical-align: middle;
       img {
         display: block;
-        width: 15px;
+        width: 18px;
       }
     }
 
     .name {
       display: inline-block;
       vertical-align: middle;
+      font-size: 14px;
       font-weight: 700;
     }
 
     .dropdown-icon {
       position: absolute;
-      top: 13px;
+      top: 15px;
       right: 10px;
       width: 10px;
     }
 
     .select {
       position: absolute;
-      top: 37px;
+      top: 40px;
       left: 0px;
-      // border: 1px solid #3498db;
       border-top: 0px;
       border-bottom: 0px;
       transition: 0.2s;
-      max-height: 500px;
+      max-height: 300px;
       overflow: auto;
-      box-shadow: 0px 3px 3px rgba(0,0,0,0.2);
+      box-shadow: 0px 0px 4px rgba(0,0,0,0.3);
 
       .select-item {
         display: block;
@@ -96,7 +95,7 @@
           display: inline-block;
           margin-right: 8px;
           padding: 5px;
-          background-color: #2980b9;
+          background-color: #2c3e50;
           border-radius: 2px;
           vertical-align: middle;
           img {
@@ -118,73 +117,54 @@
     }
   }
 
+  .team-pulldown {
+    margin-left: 20px;
+  }
+
   .short-menu {
-    float: right;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+
     .block {
       display: inline-block;
       position: relative;
-      padding: 6px 10px 6px 10px;
+      height: 40px;
+      padding: 9px 15px 9px 15px;
       color: #666666;
       cursor: pointer;
       transition: 0.2s;
-      // border-left: 1px solid #eeeeee;
-      &:hover {
-        // background-color: #f0f0f0;
-      }
-    }
-    .block-f {
-      &:hover {
-        background-color: #f3f9ff;
-      }
-    }
-    .block-s {
-      cursor: default;
-      &:hover {
-        background-color: #ffffff;
-      }
-      input[type="text"] {
-        min-width: 100px;
-        padding: 3px 10px;
-        color: #888888;
-        border: 1px solid #eeeeee;
-        border-radius: 10px;
-        transition: 0.3s;
-        &:focus {
-          width: 130px;
-          border: 1px solid #3498db;
-          color: #444444;
-        }
-        &:placeholder-shown,
-        &::-webkit-input-placeholder {
-          color: #888888;
-        }
-      }
-    }
-    .icon {
-      display: inline-block;
-      padding: 2px;
-      vertical-align: middle;
-      img {
+      font-size: 14px;
+
+      .icon {
         display: inline-block;
-        width: 19px;
         vertical-align: middle;
-        border: 1px solid #ffffff;
-        border-radius: 50%;
-        background-color: #ffffff;
+        
+        img {
+          display: block;
+          width: 18px;
+          border-radius: 50%;
+          border: 1px solid #ffffff;
+          background-color: #ffffff;
+        }
       }
+
       span {
         margin-left: 10px;
         vertical-align: middle;
         font-weight: 700;
       }
     }
+
     .user-pulldown {
       min-width: 140px;
       color: #ffffff;
-      // &:hover {
-      //   color: #666666;
-      // }
+
+      &:hover {
+        background-color: #34495e;
+      }
     }
+
     .list {
       position: absolute;
       top: 38px;
