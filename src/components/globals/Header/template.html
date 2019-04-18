@@ -65,8 +65,10 @@
       </div>
       <span>望月由登</span>
       <div class="list" v-if="profile.visible">
-        <div class="list-item">Profile</div>
-        <div class="list-item" @click="handleLogoutClick">Logout</div>
+        <div class="list-item" @click="handleLogoutClick">
+          <div class="menu-icon"><img src="../../../assets/logout_ffffff.png"></div>
+          <span>ログアウト</span>
+        </div>
       </div>
     </div>
   </div>

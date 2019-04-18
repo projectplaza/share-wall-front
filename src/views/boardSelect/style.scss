@@ -1,0 +1,145 @@
+.board-select {
+  padding: 15px 20px;
+
+  .board-header {
+    position: relative;
+    padding: 10px 10px 15px 10px;
+
+    .title {
+      font-size: 24px;
+      font-weight: 700;
+      color: #333333;
+      vertical-align: middle;
+    }
+
+    .flat-button {
+      display: inline-block;
+      padding: 5px 10px;
+      border: 2px solid #2980b9;
+      border-radius: 4px;
+      background-color: #ffffff;
+      font-weight: 700;
+      color: #2980b9;
+      transition: 0.2s;
+      user-select: none;
+      cursor: pointer;
+
+      &:hover {
+        color: #ffffff;
+        background-color: #2980b9;
+      }
+
+      .text-icon {
+        display: inline;
+        margin-right: 5px;
+      }
+
+      .label {
+        display: inline;
+      }
+    }
+
+    .add-button {
+      position: absolute;
+      top: 0px;
+      right: 10px;
+    }
+  }
+
+  .board-list {
+    display: flex;
+    flex-wrap: wrap;
+
+    .board {
+      display: inline-block;
+      width: 25%;
+      padding: 10px;
+
+      .inner {
+        cursor: pointer;
+        transition: 0.3s;
+
+        &:hover {
+          box-shadow: 0px 3px 3px rgba(0,0,0,0.1);
+        }
+
+        .header {
+          font-size: 14px;
+          font-weight: 700;
+          word-wrap: none;
+          white-space: nowrap;
+          color: #ffffff;
+          background-color: #3498db;
+          border: 1px solid #2980b9;
+          border-bottom: 0px;
+    
+          .icon-box {
+            display: inline-block;
+            margin-right: 15px;
+            vertical-align: middle;
+            user-select: none;
+    
+            .icon {
+              display: block;
+              padding: 10px;
+              background-color: #2980b9;
+      
+              img {
+                display: block;
+                width: 25px;
+              }
+            }
+          }
+    
+          .title-box {
+            display: inline-block;
+            width: calc(100% - 120px);
+            vertical-align: middle;
+            overflow: hidden;
+    
+            .title {
+              text-overflow: ellipsis;
+              white-space: nowrap;
+              overflow: hidden;
+            }
+          }
+        }
+    
+        .body {
+          height: 120px;
+          padding: 15px;
+          border: 1px solid #2980b9;
+          border-top: 0px;
+          font-size: 14px;
+          font-weight: 700;
+          color: #333333;
+          background-color: #ffffff;
+        }
+      }
+    }
+
+    .board-add {
+      height: 166px;
+      padding: 20px;
+      border: 1px solid #2980b9;
+      color: #2980b9;
+      background-color: #ffffff;
+      font-weight: 700;
+      transition: 0.3s;
+      cursor: pointer;
+
+      &:hover {
+        box-shadow: 0px 3px 3px rgba(0,0,0,0.1);
+      }
+
+      .text-icon {
+        display: inline;
+        margin-right: 5px;
+      }
+
+      .label {
+        display: inline;
+      }
+    }
+  }
+}
