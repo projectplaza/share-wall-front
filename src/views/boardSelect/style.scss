@@ -308,10 +308,10 @@
             margin-right: 8px;
             vertical-align: middle;
           }
+        }
 
-          &:last-of-type {
-            border-bottom: 0px;
-          }
+        .selected {
+          background-color: #cbd0f1;
         }
       }
 
