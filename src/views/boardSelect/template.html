@@ -8,26 +8,26 @@
       </div>
     </div>
   </div>
-  <div class="board-kind">あなたのボード</div>
+  <div class="board-kind">あなたが参加しているボード</div>
   <div class="board-list">
-    <div class="board">
-      <div class="inner">
-        <div class="header">
+    <div class="board" v-for="board in list.yourBoard">
+      <div class="inner" :style="{border:themeColor[board.themeColor].border}">
+        <div class="header" :style="{backgroundColor:themeColor[board.themeColor].backgroundColor}">
           <div class="icon-box">
-            <div class="icon">
+            <div class="icon" :style="{backgroundColor:themeColor[board.themeColor].icon.backgroundColor}">
               <img src="../../assets/card_detail_ffffff.svg" />
             </div>
           </div>
           <div class="title-box">
-            <div class="title">開発バックログ</div>
+            <div class="title">{{board.title}}</div>
           </div>
-          <div class="button-box">
-            <div class="icon" @click="handleBoardClick">
+          <div class="button-box" @click="handleBoardClick">
+            <div class="icon">
               <img src="../../assets/option_ffffff.svg" />
             </div>
           </div>
         </div>
-        <div class="body">ここに説明を記載する。</div>
+        <div class="body">{{board.description}}</div>
       </div>
     </div>
     <div class="board" @click="handleBoardClick">
@@ -39,27 +39,22 @@
   </div>
   <div class="board-kind">その他のボード</div>
   <div class="board-list">
-    <!-- <div class="board">
-      <div class="inner">
-        <div class="header">
+    <div class="board" v-for="board in list.otherBoard">
+      <div class="inner" :style="{border:themeColor[board.themeColor].border}">
+        <div class="header" :style="{backgroundColor:themeColor[board.themeColor].backgroundColor}">
           <div class="icon-box">
-            <div class="icon">
+            <div class="icon" :style="{backgroundColor:themeColor[board.themeColor].icon.backgroundColor}">
               <img src="../../assets/card_detail_ffffff.svg" />
             </div>
           </div>
           <div class="title-box">
-            <div class="title">開発バックログ</div>
-          </div>
-          <div class="button-box">
-            <div class="icon" @click="handleBoardClick">
-              <img src="../../assets/option_ffffff.svg" />
-            </div>
+            <div class="title">{{board.title}}</div>
           </div>
         </div>
-        <div class="body">ここに説明を記載する。</div>
+        <div class="body">{{board.description}}</div>
       </div>
-    </div> -->
-    <div class="board board-empty">
+    </div>
+    <div class="board board-empty" v-if="list.otherBoard.length == 0">
       <div class="board-empty-inner">
         <div class="label">ボードはありません</div>
       </div>
