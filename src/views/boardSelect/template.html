@@ -1,11 +1,14 @@
 <div class="board-select">
   <div class="board-header">
     <div class="title">Board</div>
-    <div class="flat-button add-button">
-      <div class="text-icon">＋</div>
-      <div class="label">ボードを作成</div>
+    <div class="button-box">
+      <div class="flat-button">
+        <div class="text-icon">＋</div>
+        <div class="label">ボードを作成</div>
+      </div>
     </div>
   </div>
+  <div class="board-kind">あなたのボード</div>
   <div class="board-list">
     <div class="board">
       <div class="inner">
@@ -18,299 +21,13 @@
           <div class="title-box">
             <div class="title">開発バックログ</div>
           </div>
-        </div>
-        <div class="body">
-          <span>開発バックログ</span>
-        </div>
-      </div>
-    </div>
-    <div class="board">
-      <div class="inner">
-        <div class="header">
-          <div class="icon-box">
-            <div class="icon">
-              <img src="../../assets/card_detail_ffffff.svg" />
+          <div class="button-box">
+            <div class="icon" @click="handleBoardClick">
+              <img src="../../assets/option_ffffff.svg" />
             </div>
           </div>
-          <div class="title-box">
-            <div class="title">開発バックログ</div>
-          </div>
         </div>
-        <div class="body">
-          <span>開発バックログ</span>
-        </div>
-      </div>
-    </div>
-    <div class="board">
-      <div class="inner">
-        <div class="header">
-          <div class="icon-box">
-            <div class="icon">
-              <img src="../../assets/card_detail_ffffff.svg" />
-            </div>
-          </div>
-          <div class="title-box">
-            <div class="title">開発バックログ</div>
-          </div>
-        </div>
-        <div class="body">
-          <span>開発バックログ</span>
-        </div>
-      </div>
-    </div>
-    <div class="board">
-      <div class="inner">
-        <div class="header">
-          <div class="icon-box">
-            <div class="icon">
-              <img src="../../assets/card_detail_ffffff.svg" />
-            </div>
-          </div>
-          <div class="title-box">
-            <div class="title">開発バックログ</div>
-          </div>
-        </div>
-        <div class="body">
-          <span>開発バックログ</span>
-        </div>
-      </div>
-    </div>
-    <div class="board">
-      <div class="inner">
-        <div class="header">
-          <div class="icon-box">
-            <div class="icon">
-              <img src="../../assets/card_detail_ffffff.svg" />
-            </div>
-          </div>
-          <div class="title-box">
-            <div class="title">開発バックログ</div>
-          </div>
-        </div>
-        <div class="body">
-          <span>開発バックログ</span>
-        </div>
-      </div>
-    </div>
-    <div class="board">
-      <div class="inner">
-        <div class="header">
-          <div class="icon-box">
-            <div class="icon">
-              <img src="../../assets/card_detail_ffffff.svg" />
-            </div>
-          </div>
-          <div class="title-box">
-            <div class="title">開発バックログ</div>
-          </div>
-        </div>
-        <div class="body">
-          <span>開発バックログ</span>
-        </div>
-      </div>
-    </div>
-    <div class="board">
-      <div class="inner">
-        <div class="header">
-          <div class="icon-box">
-            <div class="icon">
-              <img src="../../assets/card_detail_ffffff.svg" />
-            </div>
-          </div>
-          <div class="title-box">
-            <div class="title">開発バックログ</div>
-          </div>
-        </div>
-        <div class="body">
-          <span>開発バックログ</span>
-        </div>
-      </div>
-    </div>
-    <div class="board">
-      <div class="inner">
-        <div class="header">
-          <div class="icon-box">
-            <div class="icon">
-              <img src="../../assets/card_detail_ffffff.svg" />
-            </div>
-          </div>
-          <div class="title-box">
-            <div class="title">開発バックログ</div>
-          </div>
-        </div>
-        <div class="body">
-          <span>開発バックログ</span>
-        </div>
-      </div>
-    </div>
-    <div class="board">
-      <div class="inner">
-        <div class="header">
-          <div class="icon-box">
-            <div class="icon">
-              <img src="../../assets/card_detail_ffffff.svg" />
-            </div>
-          </div>
-          <div class="title-box">
-            <div class="title">開発バックログ</div>
-          </div>
-        </div>
-        <div class="body">
-          <span>開発バックログ</span>
-        </div>
-      </div>
-    </div>
-    <div class="board">
-      <div class="inner">
-        <div class="header">
-          <div class="icon-box">
-            <div class="icon">
-              <img src="../../assets/card_detail_ffffff.svg" />
-            </div>
-          </div>
-          <div class="title-box">
-            <div class="title">開発バックログ</div>
-          </div>
-        </div>
-        <div class="body">
-          <span>開発バックログ</span>
-        </div>
-      </div>
-    </div>
-    <div class="board">
-      <div class="inner">
-        <div class="header">
-          <div class="icon-box">
-            <div class="icon">
-              <img src="../../assets/card_detail_ffffff.svg" />
-            </div>
-          </div>
-          <div class="title-box">
-            <div class="title">開発バックログ</div>
-          </div>
-        </div>
-        <div class="body">
-          <span>開発バックログ</span>
-        </div>
-      </div>
-    </div>
-    <div class="board">
-      <div class="inner">
-        <div class="header">
-          <div class="icon-box">
-            <div class="icon">
-              <img src="../../assets/card_detail_ffffff.svg" />
-            </div>
-          </div>
-          <div class="title-box">
-            <div class="title">開発バックログ</div>
-          </div>
-        </div>
-        <div class="body">
-          <span>開発バックログ</span>
-        </div>
-      </div>
-    </div>
-    <div class="board">
-      <div class="inner">
-        <div class="header">
-          <div class="icon-box">
-            <div class="icon">
-              <img src="../../assets/card_detail_ffffff.svg" />
-            </div>
-          </div>
-          <div class="title-box">
-            <div class="title">開発バックログ</div>
-          </div>
-        </div>
-        <div class="body">
-          <span>開発バックログ</span>
-        </div>
-      </div>
-    </div>
-    <div class="board">
-      <div class="inner">
-        <div class="header">
-          <div class="icon-box">
-            <div class="icon">
-              <img src="../../assets/card_detail_ffffff.svg" />
-            </div>
-          </div>
-          <div class="title-box">
-            <div class="title">開発バックログ</div>
-          </div>
-        </div>
-        <div class="body">
-          <span>開発バックログ</span>
-        </div>
-      </div>
-    </div>
-    <div class="board">
-      <div class="inner">
-        <div class="header">
-          <div class="icon-box">
-            <div class="icon">
-              <img src="../../assets/card_detail_ffffff.svg" />
-            </div>
-          </div>
-          <div class="title-box">
-            <div class="title">開発バックログ</div>
-          </div>
-        </div>
-        <div class="body">
-          <span>開発バックログ</span>
-        </div>
-      </div>
-    </div>
-    <div class="board">
-      <div class="inner">
-        <div class="header">
-          <div class="icon-box">
-            <div class="icon">
-              <img src="../../assets/card_detail_ffffff.svg" />
-            </div>
-          </div>
-          <div class="title-box">
-            <div class="title">開発バックログ</div>
-          </div>
-        </div>
-        <div class="body">
-          <span>開発バックログ</span>
-        </div>
-      </div>
-    </div>
-    <div class="board">
-      <div class="inner">
-        <div class="header">
-          <div class="icon-box">
-            <div class="icon">
-              <img src="../../assets/card_detail_ffffff.svg" />
-            </div>
-          </div>
-          <div class="title-box">
-            <div class="title">開発バックログ</div>
-          </div>
-        </div>
-        <div class="body">
-          <span>開発バックログ</span>
-        </div>
-      </div>
-    </div>
-    <div class="board">
-      <div class="inner">
-        <div class="header">
-          <div class="icon-box">
-            <div class="icon">
-              <img src="../../assets/card_detail_ffffff.svg" />
-            </div>
-          </div>
-          <div class="title-box">
-            <div class="title">開発バックログ</div>
-          </div>
-        </div>
-        <div class="body">
-          <span>開発バックログ</span>
-        </div>
+        <div class="body">ここに説明を記載する。</div>
       </div>
     </div>
     <div class="board">
@@ -320,4 +37,186 @@
       </div>
     </div>
   </div>
+  <div class="board-kind">その他のボード</div>
+  <div class="board-list">
+    <!-- <div class="board">
+      <div class="inner">
+        <div class="header">
+          <div class="icon-box">
+            <div class="icon">
+              <img src="../../assets/card_detail_ffffff.svg" />
+            </div>
+          </div>
+          <div class="title-box">
+            <div class="title">開発バックログ</div>
+          </div>
+          <div class="button-box">
+            <div class="icon" @click="handleBoardClick">
+              <img src="../../assets/option_ffffff.svg" />
+            </div>
+          </div>
+        </div>
+        <div class="body">ここに説明を記載する。</div>
+      </div>
+    </div> -->
+    <div class="board board-empty">
+      <div class="board-empty-inner">
+        <div class="label">ボードはありません</div>
+      </div>
+    </div>
+  </div>
+  <md-dialog :md-active.sync="dialog.setting.visible" class="setting-dialog">
+    <div class="title">
+      <span>Setting</span>
+      <div class="close-icon">
+        <img src="../../assets/close_bbbbbb.svg" />
+      </div>
+    </div>
+    <div class="form">
+      <div class="label">ボード名</div>
+      <input type="text" class="board-name" />
+      <div class="label">説明</div>
+      <textarea class="description"></textarea>
+      <div class="label">テーマカラー</div>
+      <div class="theme-color">
+        <div class="color-box" :style="themeColor.blue" @click="dialog.setting.themeColor = 'blue'">
+          <span class="selected" v-if="dialog.setting.themeColor == 'blue'">◉</span>
+          <span class="selected" v-if="dialog.setting.themeColor != 'blue'">◯</span>
+          <span>Blue</span>
+        </div>
+        <div class="color-box" :style="themeColor.green" @click="dialog.setting.themeColor = 'green'">
+          <span class="selected" v-if="dialog.setting.themeColor == 'green'">◉</span>
+          <span class="selected" v-if="dialog.setting.themeColor != 'green'">◯</span>
+          <span>Green</span>
+        </div>
+        <div class="color-box" :style="themeColor.purple" @click="dialog.setting.themeColor = 'purple'">
+          <span class="selected" v-if="dialog.setting.themeColor == 'purple'">◉</span>
+          <span class="selected" v-if="dialog.setting.themeColor != 'purple'">◯</span>
+          <span>Purple</span>
+        </div>
+        <div class="color-box" :style="themeColor.darkBlue" @click="dialog.setting.themeColor = 'darkBlue'">
+          <span class="selected" v-if="dialog.setting.themeColor == 'darkBlue'">◉</span>
+          <span class="selected" v-if="dialog.setting.themeColor != 'darkBlue'">◯</span>
+          <span>Dark Blue</span>
+        </div>
+      </div>
+      <div class="theme-color">
+        <div class="color-box" :style="themeColor.yellow" @click="dialog.setting.themeColor = 'yellow'">
+          <span class="selected" v-if="dialog.setting.themeColor == 'yellow'">◉</span>
+          <span class="selected" v-if="dialog.setting.themeColor != 'yellow'">◯</span>
+          <span>Yellow</span>
+        </div>
+        <div class="color-box" :style="themeColor.orange" @click="dialog.setting.themeColor = 'orange'">
+          <span class="selected" v-if="dialog.setting.themeColor == 'orange'">◉</span>
+          <span class="selected" v-if="dialog.setting.themeColor != 'orange'">◯</span>
+          <span>Orange</span>
+        </div>
+        <div class="color-box" :style="themeColor.red" @click="dialog.setting.themeColor = 'red'">
+          <span class="selected" v-if="dialog.setting.themeColor == 'red'">◉</span>
+          <span class="selected" v-if="dialog.setting.themeColor != 'red'">◯</span>
+          <span>Red</span>
+        </div>
+        <div class="color-box" :style="themeColor.grey" @click="dialog.setting.themeColor = 'grey'">
+          <span class="selected" v-if="dialog.setting.themeColor == 'grey'">◉</span>
+          <span class="selected" v-if="dialog.setting.themeColor != 'grey'">◯</span>
+          <span>Grey</span>
+        </div>
+      </div>
+      <div class="label">ボードメンバー</div>
+      <div class="board-member">
+        <div class="member-select">
+          <div class="member">
+            <img src="../../assets/user_666666.png" />
+            <span>望月由登</span>
+          </div>
+          <div class="member">
+            <img src="../../assets/user_666666.png" />
+            <span>望月由登</span>
+          </div>
+          <div class="member">
+            <img src="../../assets/user_666666.png" />
+            <span>望月由登</span>
+          </div>
+          <div class="member">
+            <img src="../../assets/user_666666.png" />
+            <span>望月由登</span>
+          </div>
+          <div class="member">
+            <img src="../../assets/user_666666.png" />
+            <span>望月由登</span>
+          </div>
+          <div class="member">
+            <img src="../../assets/user_666666.png" />
+            <span>望月由登</span>
+          </div>
+          <div class="member">
+            <img src="../../assets/user_666666.png" />
+            <span>望月由登</span>
+          </div>
+        </div>
+        <div class="control">
+          <div class="button">＜ 追加</div>
+          <div class="button">除去 ＞</div>
+        </div>
+        <div class="member-select">
+          <div class="member">
+            <img src="../../assets/user_666666.png" />
+            <span>望月由登</span>
+          </div>
+          <div class="member">
+            <img src="../../assets/user_666666.png" />
+            <span>望月由登</span>
+          </div>
+          <div class="member">
+            <img src="../../assets/user_666666.png" />
+            <span>望月由登</span>
+          </div>
+          <div class="member">
+            <img src="../../assets/user_666666.png" />
+            <span>望月由登</span>
+          </div>
+          <div class="member">
+            <img src="../../assets/user_666666.png" />
+            <span>望月由登</span>
+          </div>
+          <div class="member">
+            <img src="../../assets/user_666666.png" />
+            <span>望月由登</span>
+          </div>
+          <div class="member">
+            <img src="../../assets/user_666666.png" />
+            <span>望月由登</span>
+          </div>
+        </div>
+      </div>
+      <div class="label">非公開</div>
+      <div class="private-check">
+        <input type="radio" name="private" value="公開" checked id="public" />
+        <label for="public" class="radio">公開</label>
+        <input type="radio" name="private" value="非公開" id="private" />
+        <label for="private" class="radio">非公開</label>
+      </div>
+      <div class="delete-box" v-if="!dialog.setting.isCreate">
+        <div class="box-title" v-if="!dialog.setting.isOpenDelete" @click="dialog.setting.isOpenDelete = true">
+          ▶&ensp;ボードを削除</div>
+        <div class="box-title box-title-opened" v-if="dialog.setting.isOpenDelete"
+          @click="dialog.setting.isOpenDelete = false">▼&ensp;ボードを削除</div>
+        <div class="flat-button" v-if="dialog.setting.isOpenDelete">
+          <img src="../../assets/cross_ffffff.svg" />
+          <span>ボードを削除</span>
+        </div>
+      </div>
+      <div class="button-box">
+        <div class="flat-button">
+          <img src="../../assets/save_ffffff.svg" />
+          <span v-if="dialog.setting.isCreate">作成</span>
+          <span v-if="!dialog.setting.isCreate">更新</span>
+        </div>
+        <div class="flat-button cancel-button">
+          <img src="../../assets/return_ffffff.svg" />
+          <span>取消</span>
+        </div>
+      </div>
+    </div>
+  </md-dialog>
 </div>
