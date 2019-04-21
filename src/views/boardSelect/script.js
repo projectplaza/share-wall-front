@@ -72,47 +72,56 @@ const boardSelectApp = {
         {
           themeColor: 'blue',
           title: '開発バックログ',
-          description: 'ここに説明を記載する'
+          description: 'ここに説明を記載する',
+          private: false
         },
         {
           themeColor: 'green',
           title: '開発バックログ',
-          description: 'ここに説明を記載する'
+          description: 'ここに説明を記載する',
+          private: true
         },
         {
           themeColor: 'purple',
           title: '開発バックログ',
-          description: 'ここに説明を記載する'
+          description: 'ここに説明を記載する',
+          private: false
         },
         {
           themeColor: 'darkBlue',
           title: '開発バックログ',
-          description: 'ここに説明を記載する'
+          description: 'ここに説明を記載する',
+          private: false
         },
         {
           themeColor: 'yellow',
           title: '開発バックログ',
-          description: 'ここに説明を記載する'
+          description: 'ここに説明を記載する',
+          private: false
         },
         {
           themeColor: 'orange',
           title: '開発バックログ',
-          description: 'ここに説明を記載する'
+          description: 'ここに説明を記載する',
+          private: false
         },
         {
           themeColor: 'red',
           title: '開発バックログ',
-          description: 'ここに説明を記載する'
+          description: 'ここに説明を記載する',
+          private: false
         },
         {
           themeColor: 'grey',
           title: '開発バックログ',
-          description: 'ここに説明を記載する'
+          description: 'ここに説明を記載する',
+          private: false
         },
         {
           themeColor: 'blue',
           title: '開発バックログ',
-          description: 'ここに説明を記載する'
+          description: 'ここに説明を記載する',
+          private: false
         }
       ],
       otherBoard: [

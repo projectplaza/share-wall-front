@@ -15,7 +15,8 @@
         <div class="header" :style="{backgroundColor:themeColor[board.themeColor].backgroundColor}">
           <div class="icon-box">
             <div class="icon" :style="{backgroundColor:themeColor[board.themeColor].icon.backgroundColor}">
-              <img src="../../assets/card_detail_ffffff.svg" />
+              <img src="../../assets/card_detail_ffffff.svg" v-if="!board.private" />
+              <img src="../../assets/lock_ffffff.svg" v-if="board.private" />
             </div>
           </div>
           <div class="title-box">
@@ -49,6 +50,11 @@
           </div>
           <div class="title-box">
             <div class="title">{{board.title}}</div>
+          </div>
+          <div class="button-box" @click="handleBoardClick">
+            <div class="icon">
+              <img src="../../assets/option_ffffff.svg" />
+            </div>
           </div>
         </div>
         <div class="body">{{board.description}}</div>
