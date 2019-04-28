@@ -11,6 +11,7 @@ export const ROUTE_NAME = {
   PROJECT_CREATE: 'project-create',
   PROJECT_DASHBOARD: 'project-dashboard',
   BOARD_SELECT: 'board-select',
+  BOARD: 'board',
   WALL_HOME: 'wall-home',
   WALL_BOARD: 'wall-board',
   WALL_TASK: 'wall-task',
@@ -45,9 +46,14 @@ export default new Router({
       component: () => import('./views/ProjectDashboard.vue')
     },
     {
-      path: BASE_URL + 't/:teamId/p/:projectId/board/select',
+      path: BASE_URL + 't/:teamId/p/:projectId/board/-/select',
       name: ROUTE_NAME.BOARD_SELECT,
       component: () => import('./views/BoardSelect.vue')
+    },
+    {
+      path: BASE_URL + 't/:teamId/p/:projectId/board/:boardId',
+      name: ROUTE_NAME.BOARD,
+      component: () => import('./views/Board.vue')
     },
     {
       path: BASE_URL + 't/:teamId/p/:projectId/wall',
