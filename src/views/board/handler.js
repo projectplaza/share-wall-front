@@ -26,6 +26,20 @@ const handlePanelSettingCloseClick = _this => {
   _this.dialog.panelSetting.visible = false
 }
 
+const handleTaskClick = _this => {
+  _this.dialog.taskSetting.visible = true
+}
+
+const handleDetailTabClick = _this => {
+  _this.dialog.taskSetting.view.detail = true
+  _this.dialog.taskSetting.view.comment = false
+}
+
+const handleCommentTabClick = _this => {
+  _this.dialog.taskSetting.view.detail = false
+  _this.dialog.taskSetting.view.comment = true
+}
+
 /**
  * TODO 削除
  */
@@ -40,5 +54,8 @@ export default {
   handleHeaderSettingClick,
   handleBoardSettingCloseClick,
   handlePanelSettingCloseClick,
+  handleTaskClick,
+  handleDetailTabClick,
+  handleCommentTabClick,
   showPanelSetting
 }

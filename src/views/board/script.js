@@ -91,8 +91,11 @@ const boardSelectApp = {
         isCreate: false
       },
       taskSetting: {
-        visible: true,
-        isCreate: false
+        visible: false,
+        view: {
+          detail: true,
+          comment: false
+        }
       }
     },
     themeColor
@@ -116,6 +119,15 @@ const boardSelectApp = {
     },
     handlePanelSettingCloseClick: function() {
       handler.handlePanelSettingCloseClick(this)
+    },
+    handleTaskClick: function() {
+      handler.handleTaskClick(this)
+    },
+    handleDetailTabClick: function() {
+      handler.handleDetailTabClick(this)
+    },
+    handleCommentTabClick: function() {
+      handler.handleCommentTabClick(this)
     },
     showPanelSetting: function() {
       handler.showPanelSetting(this)

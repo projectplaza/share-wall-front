@@ -296,6 +296,58 @@
               }
             }
           }
+
+          .task-add-box {
+            cursor: default;
+
+            .task-inner {
+              .task-name-label {
+                font-size: 10px;
+                font-weight: 700;
+                color: #666666;
+              }
+
+              .task-name-input {
+                display: block;
+                width: 100%;
+                padding: 4px 0px;
+                border: 0px;
+                border-bottom: 1px solid #bbbbbb;
+                font-size: 14px;
+                font-weight: 700;
+                transition: 0.2s;
+
+                &:focus {
+                  border-bottom: 1px solid #2980b9;
+                }
+              }
+
+              .submit-box {
+                margin-top: 6px;
+                margin-bottom: 4px;
+                text-align: right;
+
+                input[type="button"] {
+                  width: 50px;
+                  margin-left: 4px;
+                  padding: 4px 8px;
+                  font-size: 12px;
+                  font-weight: 700;
+                  color: #ffffff;
+                  border: 0px;
+                  border-radius: 4px;
+                  cursor: pointer;
+                }
+                
+                .save {
+                  background-color: #2980b9;
+                }
+                .cancel {
+                  background-color: #95a5a6;
+                }
+              }
+            }
+          }
         }
 
         .panel-add {
@@ -741,7 +793,8 @@
     }
 
     .task-detail-textarea,
-    .task-period-input {
+    .task-period-input,
+    .task-attachement-url-input {
       display: block;
       width: 100%;
       padding: 10px 10px;
@@ -1123,6 +1176,123 @@
         position: absolute;
         top: 20px;
         left: 0px;
+      }
+    }
+  }
+
+  .comment {
+    padding: 20px 20px 20px 20px;
+    overflow: auto;
+
+    .comment-form {
+      margin-bottom: 10px;
+
+      .comment-add-button {
+        display: inline-block;
+        width: 100%;
+        padding: 7px 15px;
+        font-weight: 700;
+        font-size: 12px;
+        border-radius: 4px;
+        text-align: center;
+        background-color: #eeeeee;
+        border: 1px solid #eeeeee;
+        color: #666666;
+        transition: 0.2s;
+        cursor: pointer;
+
+        img {
+          width: 14px;
+          margin-right: 5px;
+        }
+  
+        &:hover {
+          border: 1px solid #3498db;
+        }
+      }
+
+      textarea {
+        display: block;
+        width: 100%;
+        padding: 10px 10px;
+        border: 1px solid #bbbbbb;
+        border-radius: 4px;
+        color: #333333;
+        font-size: 12px;
+        transition: 0.2s;
+        height: 100px;
+        resize: vertical;
+    
+        &:focus {
+          border: 1px solid #3498db;
+        }
+      }
+      
+      .comment-submit-box {
+        padding-top: 6px;
+        text-align: right;
+
+        input[type="button"] {
+          width: 50px;
+          margin-left: 4px;
+          padding: 6px 12px;
+          font-size: 12px;
+          font-weight: 700;
+          color: #ffffff;
+          border: 0px;
+          border-radius: 4px;
+          cursor: pointer;
+        }
+        
+        .save {
+          background-color: #2980b9;
+        }
+        .cancel {
+          background-color: #95a5a6;
+        }
+      }
+    }
+
+    .comments {
+      .comment-item {
+        margin-top: 10px;
+        padding: 6px 12px;
+        border: 1px solid #aaaaaa;
+        border-radius: 4px;
+
+        .user {
+          font-weight: 700;
+          font-size: 12px;
+          color: #666666;
+
+          img {
+            width: 14px;
+            margin-right: 4px;
+          }
+        }
+
+        .text {
+          padding: 4px 10px 0px 10px;
+          font-weight: 700;
+          font-size: 12px;
+          color: #666666;
+          margin-bottom: 4px;
+        }
+
+        .control {
+          font-size: 12px;
+          color: #888888;
+          text-align: right;
+
+          .delete {
+            margin-left: 10px;
+            cursor: pointer;
+            
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
       }
     }
   }

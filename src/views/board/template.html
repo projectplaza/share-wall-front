@@ -62,7 +62,7 @@
           </div>
         </div>
         <div class="task-list">
-          <div class="task">
+          <div class="task" @click="handleTaskClick">
             <div class="thumbnail">
               <img src="../../assets/test/test_screen.png" />
             </div>
@@ -94,6 +94,16 @@
               </div>
             </div>
           </div>
+          <div class="task task-add-box">
+            <div class="task-inner">
+              <div class="task-name-label">タスク名</div>
+              <input type="text" class="task-name-input" />
+              <div class="submit-box">
+                  <input type="button" value="追加" class="save" />
+                  <input type="button" value="取消" class="cancel" />
+              </div>
+            </div>
+          </div>
         </div>
         <div class="panel-add">＋ タスクを追加</div>
       </div>
@@ -105,7 +115,7 @@
           </div>
         </div>
         <div class="task-list">
-          <div class="task">
+          <div class="task" @click="handleTaskClick">
             <div class="task-inner">
               <div class="id">#100</div>
               <div class="name">UI改善</div>
@@ -289,16 +299,16 @@
         </div>
       </div>
       <div class="tab-box">
-        <div class="tab selected">
+        <div class="tab" :class="{'selected': dialog.taskSetting.view.detail}" @click="handleDetailTabClick">
           <span>詳細情報</span>
         </div>
-        <div class="tab">
+        <div class="tab" :class="{'selected': dialog.taskSetting.view.comment}" @click="handleCommentTabClick">
           <div class="count">4</div>
           <span>コメント</span>
         </div>
       </div>
     </div>
-    <div class="form">
+    <div class="form" v-if="dialog.taskSetting.view.detail">
       <input type="text" class="task-name" value="UI改善" />
       <div class="data-group">
         <div class="label">
@@ -434,7 +444,7 @@
           <span>ファイルを選択</span>
           <input type="file" id="attachement" />
         </label>
-        <input type="text" placeholder="https://xxx.xx.xx/" class="task-period-input" />
+        <input type="text" placeholder="https://xxx.xx.xx/" class="task-attachement-url-input" />
         <div class="section-button-box">
           <input type="button" value="追加" class="save" />
           <input type="button" value="取消" class="cancel" />
@@ -445,6 +455,38 @@
           <img src="../../assets/cross_ffffff.svg" />
           <span>削除</span>
         </div>
+      </div>
+    </div>
+    <div class="comment" v-if="dialog.taskSetting.view.comment">
+      <div class="comment-form">
+        <div class="comment-add-button">
+          <img src="../../assets/pen_666666.svg" />
+          <span>コメントを投稿</span>
+        </div>
+        <!-- <textarea></textarea>
+        <div class="comment-submit-box">
+            <input type="button" value="投稿" class="save" />
+            <input type="button" value="取消" class="cancel" />
+        </div> -->
+      </div>
+
+      <div class="comments">
+        <div class="comment-item">
+          <div class="user"><img src="../../assets/comment_666666.svg" />望月由登</div>
+          <div class="text">ここにコメントを投稿する。<br/>ここにコメントが表示されます。</div>
+          <div class="control">
+            <span>2019-12-20</span>
+            <span class="delete">削除</span>
+          </div>
+        </div>
+        <div class="comment-item">
+            <div class="user"><img src="../../assets/comment_666666.svg" />望月由登</div>
+            <div class="text">ここにコメントを投稿する。ここにコメントを投稿する。ここにコメントを投稿する。ここにコメントを投稿する。ここにコメントを投稿する。ここにコメントを投稿する</div>
+            <div class="control">
+              <span>2019-12-20</span>
+              <span class="delete">削除</span>
+            </div>
+          </div>
       </div>
     </div>
   </md-dialog>
