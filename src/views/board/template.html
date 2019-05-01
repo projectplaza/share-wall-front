@@ -281,44 +281,171 @@
 
 
   <md-dialog :md-active.sync="dialog.taskSetting.visible" class="task-setting-dialog">
-      <div class="title">
-        <div class="top">
-          <span>#100</span>
-          <div class="close-icon" @click="handlePanelSettingCloseClick">
-            <img src="../../assets/close_bbbbbb.svg" />
-          </div>
-        </div>
-        <div class="tab-box">
-            <div class="tab">
-              <span>詳細情報</span>
-            </div>
-            <div class="tab">
-                <span>コメント</span>
-              </div>
-          </div>
-      </div>
-      <div class="form">
-        <div class="label">タスク概要</div>
-        <input type="text" class="task-name" />
-        <div class="label">説明</div>
-        <textarea></textarea>
-        <div class="button-box">
-          <div class="flat-button delete-button">
-            <img src="../../assets/cross_ffffff.svg" />
-            <span>削除</span>
-          </div>
-          <div class="left-button-box" v-if="!dialog.panelSetting.isCreate">
-            <div class="flat-button">
-              <img src="../../assets/save_ffffff.svg" />
-              <span v-if="dialog.panelSetting.isCreate">作成</span>
-              <span v-if="!dialog.panelSetting.isCreate">更新</span>
-            </div>
-            <div class="flat-button cancel-button" @click="handlePanelSettingCloseClick">
-              <img src="../../assets/return_ffffff.svg" />
-              <span>取消</span>
-            </div>
-          </div>
+    <div class="title">
+      <div class="top">
+        <span>#100</span>
+        <div class="close-icon" @click="handlePanelSettingCloseClick">
+          <img src="../../assets/close_bbbbbb.svg" />
         </div>
       </div>
-    </md-dialog>
+      <div class="tab-box">
+        <div class="tab selected">
+          <span>詳細情報</span>
+        </div>
+        <div class="tab">
+          <div class="count">4</div>
+          <span>コメント</span>
+        </div>
+      </div>
+    </div>
+    <div class="form">
+      <input type="text" class="task-name" value="UI改善" />
+      <div class="data-group">
+        <div class="label">
+          <span class="label-title"><img src="../../assets/note_666666.svg" />説明</span>
+          <div class="edit-button">
+            <img src="../../assets/pen_666666.svg" />
+            <span>編集</span>
+          </div>
+        </div>
+        <!-- <div class="detail-init">説明を追加</div> -->
+        <!-- <div class="task-detail">ここに詳細を表示します。<br />ここに詳細を表示します。</div> -->
+        <textarea class="task-detail-textarea"></textarea>
+        <div class="section-button-box">
+          <input type="button" value="保存" class="save" />
+          <input type="button" value="取消" class="cancel" />
+        </div>
+      </div>
+      <div class="data-group">
+        <div class="label">
+          <span class="label-title"><img src="../../assets/timer_666666.svg" />期限</span>
+          <div class="edit-button">
+            <img src="../../assets/pen_666666.svg" />
+            <span>編集</span>
+          </div>
+        </div>
+        <!-- <div class="detail-init">期限を設定</div> -->
+        <!-- <div class="task-detail">2019-01-01</div> -->
+        <input type="text" placeholder="YYYY-MM-DD" class="task-period-input" />
+        <div class="section-button-box">
+          <input type="button" value="保存" class="save" />
+          <input type="button" value="取消" class="cancel" />
+        </div>
+      </div>
+      <div class="data-group">
+        <div class="label">
+          <span class="label-title"><img src="../../assets/check_666666.svg" />チェックリスト</span>
+          <div class="edit-button">
+            <img src="../../assets/pen_666666.svg" />
+            <span>編集</span>
+          </div>
+        </div>
+        <div class="check-list">
+          <div class="check-row">
+            <label class="label-checkbox">
+              <input type="checkbox" class="checkbox">
+              <input type="text" value="画面デザイン" />
+              <!-- <span>画面デザイン</span> -->
+            </label>
+            <div class="delete-icon">
+              <img src="../../assets/close_bbbbbb.svg" />
+            </div>
+          </div>
+          <div class="check-row">
+            <label class="label-checkbox">
+              <input type="checkbox" class="checkbox">
+              <!-- <span>画面デザイン</span> -->
+              <input type="text" value="画面デザイン" />
+            </label>
+            <div class="delete-icon">
+              <img src="../../assets/close_bbbbbb.svg" />
+            </div>
+          </div>
+        </div>
+        <div class="section-button-box">
+          <input type="button" value="保存" class="save" />
+          <input type="button" value="取消" class="cancel" />
+        </div>
+        <!-- <div class="detail-init">チェックリストを追加</div> -->
+      </div>
+      <div class="data-group">
+        <div class="label">
+          <span class="label-title"><img src="../../assets/user_666666.svg" />担当者</span>
+          <div class="edit-button">
+            <img src="../../assets/pen_666666.svg" />
+            <span>編集</span>
+          </div>
+        </div>
+        <div class="task-asign-view">
+          <!-- <div class="detail-init">担当者を追加</div> -->
+          <!-- <div class="member-icon">望月由登<span>×</span></div>
+          <div class="member-icon">望月由登<span>×</span></div> -->
+        </div>
+        <div class="task-asign">
+          <div class="member-select">
+            <div class="member selected">
+              <img src="../../assets/user_666666.png" />
+              <span>望月由登</span>
+            </div>
+            <div class="member">
+              <img src="../../assets/user_666666.png" />
+              <span>望月由登</span>
+            </div>
+          </div>
+          <div class="control">
+            <div class="button">＜ 追加</div>
+            <div class="button">除去 ＞</div>
+          </div>
+          <div class="member-select">
+            <div class="member">
+              <img src="../../assets/user_666666.png" />
+              <span>望月由登</span>
+            </div>
+            <div class="member selected">
+              <img src="../../assets/user_666666.png" />
+              <span>望月由登</span>
+            </div>
+          </div>
+        </div>
+        <div class="section-button-box">
+          <input type="button" value="保存" class="save" />
+          <input type="button" value="取消" class="cancel" />
+        </div>
+      </div>
+      <div class="data-group">
+        <div class="label">
+          <span class="label-title"><img src="../../assets/clip_666666.svg" />添付ファイル</span>
+        </div>
+        <div class="attachement-list">
+          <div class="attachement-file">
+            <img src="../../assets/web_666666.svg" class="attachement-icon" />
+            <a href="https://public.potaufeu.asahi.com/2927-p/picture/16045260/4c53c5ce49d1ca2e7ad3b6233a464f79.jpg"
+              target="_blank">https://public.potaufeu.asahi.com/2927-p/picture/16045260/4c53c5ce49d1ca2e7ad3b6233a464f79.jpg</a>
+            <img src="../../assets/close_bbbbbb.svg" class="close" />
+          </div>
+          <div class="attachement-file">
+            <img src="../../assets/file_666666.svg" class="attachement-icon" />
+            <a>sample.jpg</a>
+            <img src="../../assets/close_bbbbbb.svg" class="close" />
+          </div>
+        </div>
+        <div class="detail-init detail-init-half">URLで添付ファイルを追加</div>
+        <label class="attachement" for="attachement">
+          <span>ファイルを選択</span>
+          <input type="file" id="attachement" />
+        </label>
+        <input type="text" placeholder="https://xxx.xx.xx/" class="task-period-input" />
+        <div class="section-button-box">
+          <input type="button" value="追加" class="save" />
+          <input type="button" value="取消" class="cancel" />
+        </div>
+      </div>
+      <div class="button-box">
+        <div class="flat-button delete-button">
+          <img src="../../assets/cross_ffffff.svg" />
+          <span>削除</span>
+        </div>
+      </div>
+    </div>
+  </md-dialog>
 </div>
