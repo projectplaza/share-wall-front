@@ -180,10 +180,7 @@ const boardSelectApp = {
         isOpenDelete: false
       }
     },
-    themeColor,
-    draggableOptions: {
-      animation: 200
-    }
+    themeColor
   }),
 
   methods: {

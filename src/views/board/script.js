@@ -68,111 +68,14 @@ const boardSelectApp = {
   name: "board-select",
   data: () => ({
     display: {
+      menu: {
+        visible: false
+      },
+      description: {
+        visible: false
+      }
     },
     list: {
-      yourBoard: [
-        {
-          themeColor: 'blue',
-          title: '開発バックログ',
-          description: 'ここに説明を記載する',
-          private: false
-        },
-        {
-          themeColor: 'green',
-          title: '開発バックログ',
-          description: 'ここに説明を記載する',
-          private: true
-        },
-        {
-          themeColor: 'purple',
-          title: '開発バックログ',
-          description: 'ここに説明を記載する',
-          private: false
-        },
-        {
-          themeColor: 'darkBlue',
-          title: '開発バックログ',
-          description: 'ここに説明を記載する',
-          private: false
-        },
-        {
-          themeColor: 'yellow',
-          title: '開発バックログ',
-          description: 'ここに説明を記載する',
-          private: false
-        },
-        {
-          themeColor: 'orange',
-          title: '開発バックログ',
-          description: 'ここに説明を記載する',
-          private: false
-        },
-        {
-          themeColor: 'red',
-          title: '開発バックログ',
-          description: 'ここに説明を記載する',
-          private: false
-        },
-        {
-          themeColor: 'grey',
-          title: '開発バックログ',
-          description: 'ここに説明を記載する',
-          private: false
-        },
-        {
-          themeColor: 'blue',
-          title: '開発バックログ',
-          description: 'ここに説明を記載する',
-          private: false
-        }
-      ],
-      otherBoard: [
-        {
-          themeColor: 'blue',
-          title: '開発バックログ',
-          description: 'ここに説明を記載する'
-        },
-        {
-          themeColor: 'green',
-          title: '開発バックログ',
-          description: 'ここに説明を記載する'
-        },
-        {
-          themeColor: 'purple',
-          title: '開発バックログ',
-          description: 'ここに説明を記載する'
-        },
-        {
-          themeColor: 'darkBlue',
-          title: '開発バックログ',
-          description: 'ここに説明を記載する'
-        },
-        {
-          themeColor: 'yellow',
-          title: '開発バックログ',
-          description: 'ここに説明を記載する'
-        },
-        {
-          themeColor: 'orange',
-          title: '開発バックログ',
-          description: 'ここに説明を記載する'
-        },
-        {
-          themeColor: 'red',
-          title: '開発バックログ',
-          description: 'ここに説明を記載する'
-        },
-        {
-          themeColor: 'grey',
-          title: '開発バックログ',
-          description: 'ここに説明を記載する'
-        },
-        {
-          themeColor: 'blue',
-          title: '開発バックログ',
-          description: 'ここに説明を記載する'
-        }
-      ]
     },
     dialog: {
       setting: {
@@ -180,17 +83,40 @@ const boardSelectApp = {
         isCreate: true,
         themeColor: 'blue',
         isOpenDelete: false
+      },
+      panelSetting: {
+        visible: false,
+        isCreate: false
+      },
+      taskSetting: {
+        visible: true,
+        isCreate: false
       }
     },
-    themeColor,
-    draggableOptions: {
-      animation: 200
-    }
+    themeColor
   }),
 
   methods: {
     handleBoardClick: function () {
       this.dialog.setting.visible = true
+    },
+    handleMenuClick: function() {
+      handler.handleMenuClick(this)
+    },
+    handleInfoClick: function() {
+      handler.handleInfoClick(this)
+    },
+    handleHeaderSettingClick: function() {
+      handler.handleHeaderSettingClick(this)
+    },
+    handleBoardSettingCloseClick: function() {
+      handler.handleBoardSettingCloseClick(this)
+    },
+    handlePanelSettingCloseClick: function() {
+      handler.handlePanelSettingCloseClick(this)
+    },
+    showPanelSetting: function() {
+      handler.showPanelSetting(this)
     },
     // Vuex mutations
     ...mapMutations("common", ["showProgressBar", "hideProgressBar", 'changeCurrentTeam', 'changeCurrentProject'])
@@ -198,9 +124,10 @@ const boardSelectApp = {
 
   created: function () {
     vuexUtil.setTeamProject(this)
-    $(window).on('load resize', function () {
+    $(window).on('focus load resize webkitvisibilitychange', function () {
       handler.handleResizeWindow()
     })
+    handler.handleResizeWindow()
   },
 
   components: {

@@ -1,8 +1,10 @@
 <div class="board">
 
+  <div class="cover"></div>
+
   <div class="board-header">
     <div class="back-button-box">
-      <div class="flat-button">
+      <div class="flat-button" @click="handleMenuClick">
         <img src="../../assets/menu_ffffff.svg" />
       </div>
     </div>
@@ -10,16 +12,43 @@
       <span>開発バックログ</span>
     </div>
     <div class="button-box">
-      <div class="flat-button">
+      <div class="flat-button" @click="handleInfoClick">
         <img src="../../assets/info_ffffff.svg" />
       </div>
       <div class="flat-button">
-        <img src="../../assets/setting_ffffff.svg" />
+        <img src="../../assets/setting_ffffff.svg" @click="handleHeaderSettingClick" />
       </div>
     </div>
   </div>
 
-  <div class="board-description">
+  <div class="board-menu" :class="{'board-menu-hidden': !display.menu.visible}">
+    <div class="board-menu-inner">
+      <div class="menu-header">
+        <span class="name">あなたのボード</span>
+      </div>
+      <div class="item">
+        <img src="../../assets/lock_ffffff.svg" />
+        <span class="name">開発バックログ</span>
+      </div>
+      <div class="item">
+        <img src="../../assets/card_detail_ffffff.svg" />
+        <span class="name">企画</span>
+      </div>
+      <div class="menu-header">
+        <span class="name">その他のボード</span>
+      </div>
+      <div class="item">
+        <img src="../../assets/lock_ffffff.svg" />
+        <span class="name">開発バックログ</span>
+      </div>
+      <div class="item">
+        <img src="../../assets/card_detail_ffffff.svg" />
+        <span class="name">企画</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="board-description" :class="{'board-description-hidden': !display.description.visible}">
     <div class="description">ここに説明を表示します。</div>
   </div>
 
@@ -29,107 +58,65 @@
         <div class="panel-title">
           <div>新規</div>
           <div class="panel-option">
-            <img src="../../assets/option_666666.svg" />
+            <img src="../../assets/option_666666.svg" @click="showPanelSetting" />
           </div>
         </div>
         <div class="task-list">
           <div class="task">
-            <div class="id">#100</div>
-            <div class="name">UI改善</div>
+            <div class="thumbnail">
+              <img src="../../assets/test/test_screen.png" />
+            </div>
+            <div class="task-inner">
+              <div class="id">#100</div>
+              <div class="name">UI改善</div>
+              <div class="patch">
+                <div class="item">
+                  <img src="../../assets/clip_666666.svg" />
+                  <span>4</span>
+                </div>
+                <div class="item">
+                  <img src="../../assets/comment_666666.svg" />
+                  <span>4</span>
+                </div>
+                <div class="item">
+                  <img src="../../assets/timer_eb2f06.svg" />
+                  <span class="important">2019-04-30</span>
+                </div>
+                <div class="item">
+                  <img src="../../assets/check_666666.svg" />
+                  <span>4/7</span>
+                </div>
+              </div>
+              <div class="assignee">
+                <div class="user">
+                  <img src="../../assets/test/user-icon1.jpg" />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <div class="panel-add">＋ タスクを追加</div>
       </div>
       <div class="panel">
-          <div class="panel-title">
-            <div>新規</div>
-            <div class="panel-option">
-              <img src="../../assets/option_666666.svg" />
-            </div>
+        <div class="panel-title">
+          <div>新規</div>
+          <div class="panel-option">
+            <img src="../../assets/option_666666.svg" @click="showPanelSetting" />
           </div>
-          <div class="task-list">
-            <div class="task">
+        </div>
+        <div class="task-list">
+          <div class="task">
+            <div class="task-inner">
               <div class="id">#100</div>
               <div class="name">UI改善</div>
             </div>
           </div>
-          <div class="panel-add">＋ タスクを追加</div>
         </div>
-        <div class="panel">
-            <div class="panel-title">
-              <div>新規</div>
-              <div class="panel-option">
-                <img src="../../assets/option_666666.svg" />
-              </div>
-            </div>
-            <div class="task-list">
-              <div class="task">
-                <div class="id">#100</div>
-                <div class="name">UI改善</div>
-              </div>
-            </div>
-            <div class="panel-add">＋ タスクを追加</div>
-          </div>
-          <div class="panel">
-              <div class="panel-title">
-                <div>新規</div>
-                <div class="panel-option">
-                  <img src="../../assets/option_666666.svg" />
-                </div>
-              </div>
-              <div class="task-list">
-                <div class="task">
-                  <div class="id">#100</div>
-                  <div class="name">UI改善</div>
-                </div>
-              </div>
-              <div class="panel-add">＋ タスクを追加</div>
-            </div>
-            <div class="panel">
-                <div class="panel-title">
-                  <div>新規</div>
-                  <div class="panel-option">
-                    <img src="../../assets/option_666666.svg" />
-                  </div>
-                </div>
-                <div class="task-list">
-                  <div class="task">
-                    <div class="id">#100</div>
-                    <div class="name">UI改善</div>
-                  </div>
-                </div>
-                <div class="panel-add">＋ タスクを追加</div>
-              </div>
-              <div class="panel">
-                  <div class="panel-title">
-                    <div>新規</div>
-                    <div class="panel-option">
-                      <img src="../../assets/option_666666.svg" />
-                    </div>
-                  </div>
-                  <div class="task-list">
-                    <div class="task">
-                      <div class="id">#100</div>
-                      <div class="name">UI改善</div>
-                    </div>
-                  </div>
-                  <div class="panel-add">＋ タスクを追加</div>
-                </div>
-          <div class="panel">
-              <div class="panel-title">
-                <div>新規</div>
-                <div class="panel-option">
-                  <img src="../../assets/option_666666.svg" />
-                </div>
-              </div>
-              <div class="task-list">
-                <!-- <div class="task">
-                  <div class="id">#100</div>
-                  <div class="name">UI改善</div>
-                </div> -->
-              </div>
-              <div class="panel-add">＋ タスクを追加</div>
-            </div>
+        <div class="panel-add">＋ タスクを追加</div>
+      </div>
+      <div class="panel panel-add-panel">
+        <div class="panel-add" @click="showPanelSetting">＋ パネルを追加</div>
+      </div>
     </div>
   </div>
 
@@ -137,7 +124,7 @@
   <md-dialog :md-active.sync="dialog.setting.visible" class="setting-dialog">
     <div class="title">
       <span>Setting</span>
-      <div class="close-icon">
+      <div class="close-icon" @click="handleBoardSettingCloseClick">
         <img src="../../assets/close_bbbbbb.svg" />
       </div>
     </div>
@@ -219,7 +206,7 @@
         </div>
       </div>
       <div class="label">非公開</div>
-      <div class="private-check">
+      <div class="flat-radio">
         <input type="radio" name="private" value="公開" checked id="public" />
         <label for="public" class="radio">公開</label>
         <input type="radio" name="private" value="非公開" id="private" />
@@ -241,11 +228,97 @@
           <span v-if="dialog.setting.isCreate">作成</span>
           <span v-if="!dialog.setting.isCreate">更新</span>
         </div>
-        <div class="flat-button cancel-button">
+        <div class="flat-button cancel-button" @click="handleBoardSettingCloseClick">
           <img src="../../assets/return_ffffff.svg" />
           <span>取消</span>
         </div>
       </div>
     </div>
   </md-dialog>
+
+
+  <md-dialog :md-active.sync="dialog.panelSetting.visible" class="setting-dialog panel-setting-dialog">
+    <div class="title">
+      <span v-if="dialog.panelSetting.isCreate">パネル作成</span>
+      <span v-if="!dialog.panelSetting.isCreate">パネル設定</span>
+      <div class="close-icon" @click="handlePanelSettingCloseClick">
+        <img src="../../assets/close_bbbbbb.svg" />
+      </div>
+    </div>
+    <div class="form">
+      <div class="label">パネル名</div>
+      <input type="text" class="board-name" />
+      <div class="label">ステータス</div>
+      <div class="flat-radio">
+        <input type="radio" name="status" value="新規" id="new" />
+        <label for="new" class="radio">新規</label>
+        <input type="radio" name="status" value="進行中" checked id="active" />
+        <label for="active" class="radio">進行中</label>
+        <input type="radio" name="status" value="保留" id="hold" />
+        <label for="hold" class="radio">保留</label>
+        <input type="radio" name="status" value="完了" id="close" />
+        <label for="close" class="radio">完了</label>
+      </div>
+      <div class="button-box">
+        <div class="flat-button delete-button">
+          <img src="../../assets/cross_ffffff.svg" />
+          <span>削除</span>
+        </div>
+        <div class="left-button-box" v-if="!dialog.panelSetting.isCreate">
+          <div class="flat-button">
+            <img src="../../assets/save_ffffff.svg" />
+            <span v-if="dialog.panelSetting.isCreate">作成</span>
+            <span v-if="!dialog.panelSetting.isCreate">更新</span>
+          </div>
+          <div class="flat-button cancel-button" @click="handlePanelSettingCloseClick">
+            <img src="../../assets/return_ffffff.svg" />
+            <span>取消</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </md-dialog>
+
+
+  <md-dialog :md-active.sync="dialog.taskSetting.visible" class="task-setting-dialog">
+      <div class="title">
+        <div class="top">
+          <span>#100</span>
+          <div class="close-icon" @click="handlePanelSettingCloseClick">
+            <img src="../../assets/close_bbbbbb.svg" />
+          </div>
+        </div>
+        <div class="tab-box">
+            <div class="tab">
+              <span>詳細情報</span>
+            </div>
+            <div class="tab">
+                <span>コメント</span>
+              </div>
+          </div>
+      </div>
+      <div class="form">
+        <div class="label">タスク概要</div>
+        <input type="text" class="task-name" />
+        <div class="label">説明</div>
+        <textarea></textarea>
+        <div class="button-box">
+          <div class="flat-button delete-button">
+            <img src="../../assets/cross_ffffff.svg" />
+            <span>削除</span>
+          </div>
+          <div class="left-button-box" v-if="!dialog.panelSetting.isCreate">
+            <div class="flat-button">
+              <img src="../../assets/save_ffffff.svg" />
+              <span v-if="dialog.panelSetting.isCreate">作成</span>
+              <span v-if="!dialog.panelSetting.isCreate">更新</span>
+            </div>
+            <div class="flat-button cancel-button" @click="handlePanelSettingCloseClick">
+              <img src="../../assets/return_ffffff.svg" />
+              <span>取消</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </md-dialog>
 </div>
