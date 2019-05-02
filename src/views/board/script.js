@@ -137,11 +137,20 @@ const boardSelectApp = {
   },
 
   created: function () {
+    console.log('created')
     vuexUtil.setTeamProject(this)
     $(window).on('focus load resize webkitvisibilitychange', function () {
       handler.handleResizeWindow()
     })
-    handler.handleResizeWindow()
+    setTimeout(() => {
+      handler.handleResizeWindow()
+    }, 0)
+  },
+
+  watch: {
+    '$route': function() {
+      handler.handleResizeWindow()
+    }
   },
 
   components: {

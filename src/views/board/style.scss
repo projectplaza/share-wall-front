@@ -571,6 +571,74 @@
       }
     }
 
+    .attachement-list {
+      padding-top: 0px;
+      padding-bottom: 0px;
+      padding-left: 10px;
+      padding-right: 10px;
+
+      .attachement-file {
+        position: relative;
+        padding: 5px 0px;
+        border-bottom: 1px solid #dddddd;
+
+        .attachement-icon {
+          width: 14px;
+          margin-right: 10px;
+        }
+
+        a {
+          display: inline-block;
+          max-width: 480px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          vertical-align: middle;
+          cursor: pointer;
+        }
+
+        .close {
+          position: absolute;
+          top: 8px;
+          right: 5px;
+          width: 14px;
+          cursor: pointer;
+        }
+      }
+    }
+
+    .attachement {
+      display: block;
+      width: calc(100% - 10px);
+      margin: 10px 5px 10px 5px;
+      padding: 7px 15px;
+      font-weight: 700;
+      font-size: 12px;
+      border-radius: 4px;
+      text-align: center;
+      background-color: #eeeeee;
+      border: 1px solid #bbbbbb;
+      color: #666666;
+      transition: 0.2s;
+      cursor: pointer;
+      &:hover {
+        border: 1px solid #3498db;
+      }
+
+      img {
+        width: 12px;
+        margin-right: 5px;
+        vertical-align: middle;
+      }
+      span {
+        font-size: 12px;
+        vertical-align: middle;
+      }
+      input {
+        display: none;
+      }
+    }
+
     .button-box {
       position: relative;
       padding: 20px 0px 10px 0px;
@@ -649,7 +717,7 @@
 
 .task-setting-dialog {
   width: 600px;
-  height: auto;
+  height: 100%;
   background-color: #f9f9f9;
 
   .title {
@@ -845,7 +913,7 @@
       border-radius: 4px;
       text-align: center;
       background-color: #eeeeee;
-      border: 1px solid #eeeeee;
+      border: 1px solid #bbbbbb;
       color: #666666;
       transition: 0.2s;
       cursor: pointer;
@@ -1101,7 +1169,7 @@
       border-radius: 4px;
       text-align: center;
       background-color: #eeeeee;
-      border: 1px solid #eeeeee;
+      border: 1px solid #bbbbbb;
       color: #666666;
       transition: 0.2s;
       cursor: pointer;
