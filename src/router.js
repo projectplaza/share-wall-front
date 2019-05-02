@@ -12,6 +12,9 @@ export const ROUTE_NAME = {
   PROJECT_DASHBOARD: 'project-dashboard',
   BOARD_SELECT: 'board-select',
   BOARD: 'board',
+  BOARD_TASK: 'board-task',
+  DOCUMENT: 'document',
+  DOCUMENT_FILE: 'document-file',
   WALL_HOME: 'wall-home',
   WALL_BOARD: 'wall-board',
   WALL_TASK: 'wall-task',
@@ -46,7 +49,7 @@ export default new Router({
       component: () => import('./views/ProjectDashboard.vue')
     },
     {
-      path: BASE_URL + 't/:teamId/p/:projectId/board/-/select',
+      path: BASE_URL + 't/:teamId/p/:projectId/boardSelect',
       name: ROUTE_NAME.BOARD_SELECT,
       component: () => import('./views/BoardSelect.vue')
     },
@@ -55,6 +58,22 @@ export default new Router({
       name: ROUTE_NAME.BOARD,
       component: () => import('./views/Board.vue')
     },
+    {
+      path: BASE_URL + 't/:teamId/p/:projectId/board/:boardId/:taskId',
+      name: ROUTE_NAME.BOARD_TASK,
+      component: () => import('./views/Board.vue')
+    },
+    {
+      path: BASE_URL + 't/:teamId/p/:projectId/doc',
+      name: ROUTE_NAME.DOCUMENT,
+      component: () => import('./views/Document.vue')
+    },
+    {
+      path: BASE_URL + 't/:teamId/p/:projectId/doc/:documentId',
+      name: ROUTE_NAME.DOCUMENT_FILE,
+      component: () => import('./views/Document.vue')
+    },
+    
     {
       path: BASE_URL + 't/:teamId/p/:projectId/wall',
       name: ROUTE_NAME.WALL_HOME,
