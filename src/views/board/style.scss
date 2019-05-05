@@ -24,7 +24,7 @@
     vertical-align: middle;
     color: #ffffff;
     background-color: #d35400;
-    opacity: 0.8;
+    // opacity: 0.8;
 
     .back-button-box {
       display: inline-block;
@@ -85,6 +85,7 @@
     overflow: auto;
     z-index: 15;
     transition: 0.2s;
+    // opacity: 0.8;
 
     .board-menu-inner {
 
@@ -680,7 +681,7 @@
       .delete-button {
         display: inline-block;
         padding: 8px 20px;
-        background-color: #c0392b;
+        background-color: #bbbbbb;
         color: #ffffff;
         font-weight: 700;
         border-radius: 4px;
@@ -1219,7 +1220,7 @@
       .delete-button {
         display: inline-block;
         padding: 8px 20px;
-        background-color: #c0392b;
+        background-color: #bbbbbb;
         color: #ffffff;
         font-weight: 700;
         border-radius: 4px;
@@ -1236,7 +1237,7 @@
         }
 
         &:hover {
-          background-color: #e74c3c;
+          background-color: #888888;
         }
       }
 

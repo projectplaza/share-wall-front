@@ -1,3 +1,406 @@
 .document {
+  position: relative;
+
+  /* フォルダとファイルのメニュー */
+  .list {
+    position: fixed;
+    top: 40px;
+    left: 0px;
+    width: 220px;
+    height: calc(100% - 40px);
+    padding: 10px 10px;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 12px;
+    background-color: #16a085;
+    overflow: auto;
+
+    .control {
+      position: relative;
+      margin-bottom: 10px;
+
+      .action {
+        display: inline-block;
+        margin: 0px 6px 0px 0px;
+        font-size: 10px;
+        cursor: pointer;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      .folder-setting {
+        position: absolute;
+        top: 0px;
+        right: 4px;
+
+        .action {
+          margin: 0px 0px 0px 6px;
+        }
+      }
+    }
+
+    .folder-list {
+      user-select: none;
+
+      .folder {
+        position: relative;
+        margin-top: 5px;
+        padding: 3px 3px 3px 3px;
+        line-height: 20px;
+        transition: 0.2s;
+        cursor: pointer;
+        &:hover {
+          text-decoration: underline;
+        }
+
+        span {
+          display: inline-block;
+          width: 160px;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          vertical-align: middle;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+
+        &:hover .plus {
+          display: block;
+        }
+        &:hover .setting {
+          display: block;
+        }
+
+        .plus {
+          display: none;
+          position: absolute;
+          top: 3px;
+          right: 0px;
+          line-height: 20px;
+          font-size: 14px;
+        }
+      }
+
+      .folder-inner {
+        margin-bottom: 3px;
+
+        .file {
+          margin-left: 12px;
+          border-left: 1px solid #ffffff;
+          line-height: 20px;
+          font-weight: 700;
+          transition: 0.2s;
+          cursor: pointer;
+          &:hover {
+            text-decoration: underline;
+          }
+
+          .file-inner {
+            padding: 3px 6px 3px 6px;
+            margin-left: 5px;
+          }
+
+          span {
+            display: inline-block;
+            width: 180px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            vertical-align: middle;
   
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  /* 閲覧 */
+  .view {
+    margin-left: 220px;
+
+    .file {
+      position: fixed;
+      top: 40px;
+      left: 220px;
+      display: block;
+      width: calc(100% - 220px);
+      height: calc(100% - 40px);
+      padding: 40px 220px 40px 40px;
+      overflow: auto;
+
+      .title {
+        position: relative;
+        font-size: 24px;
+        color: #666666;
+        font-weight: 300;
+
+        .control {
+          position: absolute;
+          top: -6px;
+          right: 0px;
+
+          .icon {
+            display: inline-block;
+            position: relative;
+            padding: 8px;
+            border-radius: 4px;
+            transition: 0.2s;
+            cursor: pointer;
+            &:hover {
+              background-color: #dddddd;
+            }
+
+            img {
+              display: block;
+              width: 16px;
+            }
+
+            .option-menu {
+              position: absolute;
+              top: 34px;
+              left: 5px;
+              width: 90px;
+              background-color: #ffffff;
+              box-shadow: 2px 2px 2px rgba(0,0,0,0.1);
+              z-index: 10;
+
+              .item {
+                display: block;
+                width: 100%;
+                padding: 5px 15px;
+                transition: 0.2s;
+                &:hover {
+                  background-color: #dddddd;
+                }
+
+                img {
+                  display: inline-block;
+                  width: 14px;
+                  margin-right: 10px;
+                  vertical-align: middle;
+                }
+                span {
+                  display: inline-block;
+                  font-size: 14px;
+                  font-weight: 700;
+                  color: #888888;
+                  vertical-align: middle;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .doc-content {
+        margin-top: 30px;
+      }
+
+      .navi {
+        position: fixed;
+        top: 40px;
+        right: 0px;
+        width: 200px;
+        height: 100%;
+        padding: 90px 10px 20px 0px;
+  
+        .navi-inner {
+          padding: 10px 10px;
+          // border: 1px solid #dddddd;
+          font-size: 12px;
+          font-weight: 700;
+          border-radius: 4px;
+          // background-color: #ffffff;
+  
+          .title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #666666;
+            padding: 6px 0px;
+            margin: 0px;
+          }
+  
+          .link {
+            a {
+              display: block;
+              padding: 3px 0px;
+              cursor: pointer;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/* ダイアログ */
+.setting-dialog {
+  width: 600px;
+  height: calc(100% - 100px);
+  background-color: #f9f9f9;
+
+  .title {
+    position: stickey;
+    top: 0px;
+    padding: 10px 15px;
+    color: #666666;
+    background-color: #ffffff;
+    border-bottom: 1px solid #bbbbbb;
+    font-size: 16px;
+    font-weight: 700;
+
+    .close-icon {
+      display: inline-block;
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      padding: 5px;
+      border-radius: 4px;
+      vertical-align: middle;
+      transition: 0.2s;
+      cursor: pointer;
+
+      img {
+        display: block;
+        width: 15px;
+      }
+
+      &:hover {
+        background-color: #f5f5f5;
+      }
+    }
+  }
+
+  .form {
+    padding: 10px 20px 20px 20px;
+    overflow: auto;
+
+    .label {
+      padding: 5px 0px 5px 0px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #666666;
+    }
+
+    .button-box {
+      padding-top: 5px;
+      text-align: right;
+
+      .flat-button {
+        display: inline-block;
+        margin-left: 4px;
+        padding: 6px 18px;
+        font-weight: 700;
+        font-size: 12px;
+        border: 0px;
+        border-radius: 4px;
+        color: #ffffff;
+        transition: 0.2s;
+        cursor: pointer;
+
+        img {
+          width: 12px;
+          margin-right: 6px;
+          vertical-align: middle;
+        }
+        span {
+          display: inline-block;
+          vertical-align: middle;
+        }
+      }
+      .save {
+        background-color: #2980b9;
+      }
+      .cancel {
+        background-color: #95a5a6;
+      }
+    }
+  }
+}
+
+/* フォルダ全体設定 */
+.folder-all-setting {
+  height: auto;
+  .form {
+
+    .folder-list {
+      padding: 10px 0px 5px 0px;
+
+      .folder {
+        display: block;
+        position: relative;
+        margin-bottom: 4px;
+        padding: 4px 8px;
+        color: #666666;
+        font-weight: 700;
+        background-color: #eeeeee;
+        border: 1px solid #bbbbbb;
+        border-radius: 4px;
+        user-select: none;
+        cursor: move;
+
+        span {
+          display: inline-block;
+          width: 450px;
+        }
+
+        img {
+          width: 18px;
+          margin-right: 12px;
+          vertical-align: middle;
+        }
+
+        .small-button-box {
+          position: absolute;
+          top: 3px;
+          right: 0px;
+
+          img {
+            width: 12px;
+            cursor: pointer;
+          }
+        }
+      }
+      .folder-editable {
+        cursor: default;
+        background-color: #ffffff;
+        border: 1px solid #3498db;
+        span {
+          cursor: text;
+        }
+        input[type="text"] {
+          width: 450px;
+          padding: 0px;
+          border: 0px;
+          font-size: 14px;
+          color: #666666;
+          font-weight: 700;
+          background-color: #ffffff;
+        }
+      }
+    }
+    .add-button-box {
+      text-align: right;
+      margin-bottom: 10px;
+
+      input[type="button"] {
+        display: inline-block;
+        padding: 4px 8px;
+        font-weight: 700;
+        font-size: 12px;
+        border: 1px solid #666666;
+        border-radius: 4px;
+        color: #666666;
+        background-color: #ffffff;
+        transition: 0.2s;
+        cursor: pointer;
+      }
+    }
+  }
 }

@@ -9,6 +9,13 @@ const documentApp = {
   name: "document",
   data: () => ({
     display: {
+      editable: false,
+      opened: true,
+      view: {
+        optionMenu: {
+          visible: false
+        }
+      }
     },
     list: {
     },

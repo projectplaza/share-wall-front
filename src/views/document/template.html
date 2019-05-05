@@ -1,1 +1,163 @@
-<div class="document"></div>
+<div class="document">
+
+  <!-- フォルダとファイルのリスト -->
+  <div class="list">
+    <div class="control">
+      <div class="action" @click="display.opened = true">全て開く</div>
+      <div class="action" @click="display.opened = false">全て閉じる</div>
+      <div class="folder-setting">
+        <div class="action" @click="dialog.setting.visible = true">フォルダ設定</div>
+      </div>
+    </div>
+    <div class="folder-list">
+      <div class="folder" @click="display.opened = !display.opened">
+        <span>全体</span>
+        <div class="plus">＋</div>
+      </div>
+      <div class="folder-inner" v-if="display.opened">
+        <div class="file">
+          <div class="file-inner">
+            <span>コンセプト</span>
+          </div>
+        </div>
+        <div class="file">
+          <div class="file-inner">
+            <span>ルール</span>
+          </div>
+        </div>
+        <div class="file">
+          <div class="file-inner">
+            <span>その他</span>
+          </div>
+        </div>
+      </div>
+      <div class="folder">
+        <span>画面設計書</span>
+        <div class="plus">＋</div>
+      </div>
+      <div class="folder">
+        <span>API設計書</span>
+        <div class="plus">＋</div>
+      </div>
+      <div class="folder-inner" v-if="display.opened">
+        <div class="file">
+          <div class="file-inner">
+            <span>ドキュメント機能</span>
+          </div>
+        </div>
+        <div class="file">
+          <div class="file-inner">
+            <span>ボード機能</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 閲覧 -->
+  <div class="view" v-if="!display.editable">
+    <div class="file">
+      <div class="title">
+        <span>ドキュメント機能</span>
+        <div class="control">
+          <div class="icon">
+            <img src="../../assets/pen_666666.svg" />
+          </div>
+          <div class="icon" @click="display.view.optionMenu.visible = !display.view.optionMenu.visible">
+            <img src="../../assets/option_666666.svg" />
+            <div class="option-menu" v-if="display.view.optionMenu.visible">
+              <div class="item">
+                <img src="../../assets/duplicate_666666.svg" />
+                <span>複製</span>
+              </div>
+              <div class="item">
+                <img src="../../assets/cross_666666.svg" />
+                <span>削除</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="doc-content">
+        <h1>API仕様書</h1>
+        <h2 id="ドキュメント取得api">ドキュメント取得API</h2>
+        <h3>パラメタ</h3>
+        <p>ここにパラメタを記載します。<br />ここにパラメタを記載します。</p>
+        <p>ここにパラメタを記載します。</p>
+        <h2>ドキュメント取得API</h2>
+        <h3>パラメタ</h3>
+        <p>ここにパラメタを記載します。<br />ここにパラメタを記載します。</p>
+        <p>ここにパラメタを記載します。</p>
+        <h1 id="api仕様書">API仕様書</h1>
+        <h2>ドキュメント取得API</h2>
+        <h3>パラメタ</h3>
+        <p>ここにパラメタを記載します。<br />ここにパラメタを記載します。</p>
+        <p>ここにパラメタを記載します。</p>
+        <h2>ドキュメント取得API</h2>
+        <h3>パラメタ</h3>
+        <p>ここにパラメタを記載します。<br />ここにパラメタを記載します。</p>
+        <p>ここにパラメタを記載します。</p>
+      </div>
+      <div class="navi">
+        <div class="navi-inner">
+          <div class="title">
+            <div>目次</div>
+          </div>
+          <div class="link">
+            <a href="#api仕様書">API仕様書</a>
+            <a href="#ドキュメント取得api">ドキュメント取得API</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 作成編集 -->
+  <div class="form" v-if="display.opened">
+
+  </div>
+
+  <!-- フォルダ全体設定 -->
+  <md-dialog :md-active.sync="dialog.setting.visible" class="setting-dialog folder-all-setting">
+    <div class="title">
+      <span>フォルダ設定</span>
+      <div class="close-icon" @click="dialog.setting.visible = false">
+        <img src="../../assets/close_bbbbbb.svg" />
+      </div>
+    </div>
+    <div class="form">
+      <div class="folder-list">
+        <div class="folder">
+          <img src="../../assets/switch_666666.svg" />
+          <span>API設計書</span>
+          <div class="small-button-box">
+            <img src="../../assets/pen_666666.svg" />
+            <img src="../../assets/cross_666666.svg" />
+          </div>
+        </div>
+        <div class="folder folder-editable">
+          <img src="../../assets/switch_666666.svg" />
+          <input type="text" value="全体" />
+          <div class="small-button-box">
+            <img src="../../assets/save_666666.svg" />
+            <img src="../../assets/return_666666.svg" />
+          </div>
+        </div>
+      </div>
+      <div class="add-button-box">
+        <input type="button" value="＋ フォルダ追加" />
+      </div>
+      <div class="button-box">
+        <div class="flat-button save">
+          <img src="../../assets/save_ffffff.svg" />
+          <span>更新</span>
+        </div>
+        <div class="flat-button cancel" @click="dialog.setting.visible = false">
+          <img src="../../assets/return_ffffff.svg" />
+          <span>取消</span>
+        </div>
+      </div>
+    </div>
+  </md-dialog>
+
+</div>
