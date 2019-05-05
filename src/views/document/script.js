@@ -9,7 +9,7 @@ const documentApp = {
   name: "document",
   data: () => ({
     display: {
-      editable: false,
+      editable: true,
       opened: true,
       view: {
         optionMenu: {

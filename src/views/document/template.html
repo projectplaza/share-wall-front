@@ -113,8 +113,26 @@
   </div>
 
   <!-- 作成編集 -->
-  <div class="form" v-if="display.opened">
-
+  <div class="form" v-if="display.editable">
+    <div class="editor">
+      <div class="label">ドキュメント名</div>
+      <input type="text" class="file-name" placeholder="ドキュメントの名称を入力してください" />
+      <div class="label">本文</div>
+      <textarea class="doc-body" placeholder="ドキュメントの本文を入力してください"></textarea>
+      <div class="submit-button-box">
+        <input type="button" value="保存" class="flat-button save" />
+        <input type="button" value="取消" class="flat-button cancel" />
+        <div class="right-box">
+            <input type="button" value="プレビュー" class="flat-button spread" />
+        </div>
+      </div>
+    </div>
+    <div class="preview">
+      <div class="doc-content">
+        <h1>サンプル</h1>
+        <h1>サンプル</h1><h1>サンプル</h1><h1>サンプル</h1><h1>サンプル</h1><h1>サンプル</h1><h1>サンプル</h1><h1>サンプル</h1><h1>サンプル</h1><h1>サンプル</h1><h1>サンプル</h1><h1>サンプル</h1><h1>サンプル</h1><h1>サンプル</h1><h1>サンプル</h1><h1>サンプル</h1><h1>サンプル</h1><h1>サンプル</h1><h1>サンプル</h1><h1>サンプル</h1><h1>サンプル</h1><h1>サンプル</h1><h1>サンプル</h1><h1>サンプル</h1>
+      </div>
+    </div>
   </div>
 
   <!-- フォルダ全体設定 -->
