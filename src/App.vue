@@ -30,7 +30,7 @@ export default {
   data() {
     return {
       menus: [
-        { code: "0003", title: "ウォール", name: "wall-home", icon: "card_ffffff", isPjMenu: true },
+        { code: "0003", title: "ウォール", name: "wall-home", icon: "board_filled_ffffff", isPjMenu: true },
         { code: "0004", title: "document", name: "design-document-home", icon: "document_ffffff", isPjMenu: true },
       ]
     };
