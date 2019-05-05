@@ -6,13 +6,15 @@
       <div class="action" @click="display.opened = true">全て開く</div>
       <div class="action" @click="display.opened = false">全て閉じる</div>
       <div class="folder-setting">
-        <div class="action" @click="dialog.setting.visible = true">フォルダ設定</div>
+        <div class="action" @click="dialog.folderCreate.visible = true">新規作成</div>
+        <div class="action" @click="dialog.setting.visible = true">設定</div>
       </div>
     </div>
     <div class="folder-list">
-      <div class="folder" @click="display.opened = !display.opened">
-        <span>全体</span>
+      <div class="folder">
+        <span @click="display.opened = !display.opened">全体</span>
         <div class="plus">＋</div>
+        <img src="../../assets/setting_ffffff.svg" class="setting" @click="dialog.folderSetting.visible = true" />
       </div>
       <div class="folder-inner" v-if="display.opened">
         <div class="file">
@@ -123,14 +125,36 @@
         <input type="button" value="保存" class="flat-button save" />
         <input type="button" value="取消" class="flat-button cancel" />
         <div class="right-box">
-            <input type="button" value="プレビュー" class="flat-button spread" />
+          <input type="button" value="プレビュー" class="flat-button spread" />
         </div>
       </div>
     </div>
     <div class="preview">
       <div class="doc-content">
         <h1>サンプル</h1>
-        <h1>サンプル</h1><h1>サンプル</h1><h1>サンプル</h1><h1>サンプル</h1><h1>サンプル</h1><h1>サンプル</h1><h1>サンプル</h1><h1>サンプル</h1><h1>サンプル</h1><h1>サンプル</h1><h1>サンプル</h1><h1>サンプル</h1><h1>サンプル</h1><h1>サンプル</h1><h1>サンプル</h1><h1>サンプル</h1><h1>サンプル</h1><h1>サンプル</h1><h1>サンプル</h1><h1>サンプル</h1><h1>サンプル</h1><h1>サンプル</h1><h1>サンプル</h1>
+        <h1>サンプル</h1>
+        <h1>サンプル</h1>
+        <h1>サンプル</h1>
+        <h1>サンプル</h1>
+        <h1>サンプル</h1>
+        <h1>サンプル</h1>
+        <h1>サンプル</h1>
+        <h1>サンプル</h1>
+        <h1>サンプル</h1>
+        <h1>サンプル</h1>
+        <h1>サンプル</h1>
+        <h1>サンプル</h1>
+        <h1>サンプル</h1>
+        <h1>サンプル</h1>
+        <h1>サンプル</h1>
+        <h1>サンプル</h1>
+        <h1>サンプル</h1>
+        <h1>サンプル</h1>
+        <h1>サンプル</h1>
+        <h1>サンプル</h1>
+        <h1>サンプル</h1>
+        <h1>サンプル</h1>
+        <h1>サンプル</h1>
       </div>
     </div>
   </div>
@@ -138,7 +162,7 @@
   <!-- フォルダ全体設定 -->
   <md-dialog :md-active.sync="dialog.setting.visible" class="setting-dialog folder-all-setting">
     <div class="title">
-      <span>フォルダ設定</span>
+      <span>全体設定</span>
       <div class="close-icon" @click="dialog.setting.visible = false">
         <img src="../../assets/close_bbbbbb.svg" />
       </div>
@@ -148,22 +172,70 @@
         <div class="folder">
           <img src="../../assets/switch_666666.svg" />
           <span>API設計書</span>
-          <div class="small-button-box">
-            <img src="../../assets/pen_666666.svg" />
-            <img src="../../assets/cross_666666.svg" />
-          </div>
         </div>
-        <div class="folder folder-editable">
+        <div class="folder">
           <img src="../../assets/switch_666666.svg" />
-          <input type="text" value="全体" />
-          <div class="small-button-box">
-            <img src="../../assets/save_666666.svg" />
-            <img src="../../assets/return_666666.svg" />
-          </div>
+          <span>API設計書</span>
         </div>
       </div>
-      <div class="add-button-box">
-        <input type="button" value="＋ フォルダ追加" />
+      <div class="button-box">
+        <div class="flat-button save">
+          <img src="../../assets/save_ffffff.svg" />
+          <span>更新</span>
+        </div>
+        <div class="flat-button cancel" @click="dialog.setting.visible = false">
+          <img src="../../assets/return_ffffff.svg" />
+          <span>取消</span>
+        </div>
+      </div>
+    </div>
+  </md-dialog>
+
+  <!-- フォルダ作成 -->
+  <md-dialog :md-active.sync="dialog.folderCreate.visible" class="setting-dialog folder-create">
+    <div class="title">
+      <span>フォルダ作成</span>
+      <div class="close-icon" @click="dialog.setting.visible = false">
+        <img src="../../assets/close_bbbbbb.svg" />
+      </div>
+    </div>
+    <div class="form">
+      <div class="label">フォルダ名</div>
+      <input type="text" value="API設計書" />
+      <div class="button-box">
+        <div class="flat-button save">
+          <img src="../../assets/save_ffffff.svg" />
+          <span>作成</span>
+        </div>
+        <div class="flat-button cancel" @click="dialog.setting.visible = false">
+          <img src="../../assets/return_ffffff.svg" />
+          <span>取消</span>
+        </div>
+      </div>
+    </div>
+  </md-dialog>
+
+  <!-- フォルダ設定 -->
+  <md-dialog :md-active.sync="dialog.folderSetting.visible" class="setting-dialog folder-all-setting">
+    <div class="title">
+      <span>フォルダ設定</span>
+      <div class="close-icon" @click="dialog.setting.visible = false">
+        <img src="../../assets/close_bbbbbb.svg" />
+      </div>
+    </div>
+    <div class="form">
+      <div class="label">フォルダ名</div>
+      <input type="text" value="API設計書" />
+      <div class="label">ファイル並び替え</div>
+      <div class="folder-list">
+        <div class="folder">
+          <img src="../../assets/switch_666666.svg" />
+          <span>API設計書</span>
+        </div>
+        <div class="folder">
+          <img src="../../assets/switch_666666.svg" />
+          <span>API設計書</span>
+        </div>
       </div>
       <div class="button-box">
         <div class="flat-button save">

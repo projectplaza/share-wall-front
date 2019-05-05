@@ -22,6 +22,12 @@ const documentApp = {
     dialog: {
       setting: {
         visible: false
+      },
+      folderCreate: {
+        visible: true
+      },
+      folderSetting: {
+        visible: false
       }
     }
   }),

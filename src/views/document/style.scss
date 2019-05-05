@@ -78,7 +78,16 @@
           display: none;
           position: absolute;
           top: 3px;
+          right: 16px;
+          line-height: 20px;
+          font-size: 14px;
+        }
+        .setting {
+          display: none;
+          position: absolute;
+          top: 7px;
           right: 0px;
+          width: 12px;
           line-height: 20px;
           font-size: 14px;
         }
@@ -392,6 +401,19 @@
       color: #666666;
     }
 
+    input[type="text"] {
+      display: block;
+      width: 100%;
+      padding: 6px 8px;
+      margin-bottom: 10px;
+      font-size: 14px;
+      border: 1px solid #bbbbbb;
+      border-radius: 4px;
+      &:focus {
+        border: 1px solid #3498db;
+      }
+    }
+
     .button-box {
       padding-top: 5px;
       text-align: right;
@@ -428,13 +450,18 @@
   }
 }
 
+/* フォルダ作成 */
+.folder-create {
+  height: auto;
+}
+
 /* フォルダ全体設定 */
 .folder-all-setting {
   height: auto;
   .form {
 
     .folder-list {
-      padding: 10px 0px 5px 0px;
+      padding: 5px 0px 5px 0px;
 
       .folder {
         display: block;
