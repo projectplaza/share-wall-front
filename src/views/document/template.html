@@ -11,47 +11,17 @@
       </div>
     </div>
     <div class="folder-list">
-      <div class="folder">
-        <span @click="display.opened = !display.opened">全体</span>
+      <div class="folder" v-for="folder in list.folders">
+        <span>{{folder.folderName}}</span>
         <div class="plus">＋</div>
         <img src="../../assets/setting_ffffff.svg" class="setting" @click="dialog.folderSetting.visible = true" />
-      </div>
-      <div class="folder-inner" v-if="display.opened">
-        <div class="file">
-          <div class="file-inner">
-            <span>コンセプト</span>
+        <div class="folder-inner" v-if="folder.opened">
+            <div class="file" v-for="file in folder.files">
+              <div class="file-inner">
+                <span>{{file.fileName}}</span>
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="file">
-          <div class="file-inner">
-            <span>ルール</span>
-          </div>
-        </div>
-        <div class="file">
-          <div class="file-inner">
-            <span>その他</span>
-          </div>
-        </div>
-      </div>
-      <div class="folder">
-        <span>画面設計書</span>
-        <div class="plus">＋</div>
-      </div>
-      <div class="folder">
-        <span>API設計書</span>
-        <div class="plus">＋</div>
-      </div>
-      <div class="folder-inner" v-if="display.opened">
-        <div class="file">
-          <div class="file-inner">
-            <span>ドキュメント機能</span>
-          </div>
-        </div>
-        <div class="file">
-          <div class="file-inner">
-            <span>ボード機能</span>
-          </div>
-        </div>
       </div>
     </div>
   </div>
