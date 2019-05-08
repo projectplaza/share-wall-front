@@ -1,27 +1,30 @@
 <div class="document">
 
-  <!-- フォルダとファイルのリスト -->
+  <!-- フォルダ一覧のヘッダメニュー -->
   <div class="list">
     <div class="control">
-      <div class="action" @click="display.opened = true">全て開く</div>
-      <div class="action" @click="display.opened = false">全て閉じる</div>
+      <div class="action" @click="handleOpenAllClick">全て開く</div>
+      <div class="action" @click="handleCloseAllClick">全て閉じる</div>
       <div class="folder-setting">
-        <div class="action" @click="dialog.folderCreate.visible = true">新規作成</div>
-        <div class="action" @click="dialog.setting.visible = true">設定</div>
+        <div class="action" @click="handleFolderCreateClick">新規作成</div>
+        <div class="action" @click="handleSettingClick">設定</div>
       </div>
     </div>
+
+    <!-- フォルダとファイルの一覧 -->
     <div class="folder-list">
-      <div class="folder" v-for="folder in list.folders">
-        <span>{{folder.folderName}}</span>
+      <div class="folder" v-for="folder in folders">
+        <span @click="handleFolderNameClick(folder.folderId)">{{folder.folderName}}</span>
         <div class="plus">＋</div>
-        <img src="../../assets/setting_ffffff.svg" class="setting" @click="dialog.folderSetting.visible = true" />
+        <img src="../../assets/setting_ffffff.svg" class="setting"
+          @click="() => { handleFolderSettingClick(folder.folderId) }" />
         <div class="folder-inner" v-if="folder.opened">
-            <div class="file" v-for="file in folder.files">
-              <div class="file-inner">
-                <span>{{file.fileName}}</span>
-              </div>
+          <div class="file" v-for="file in folder.files">
+            <div class="file-inner">
+              <span :class="{ selected: file.selected }">{{file.fileName}}</span>
             </div>
           </div>
+        </div>
       </div>
     </div>
   </div>
@@ -133,27 +136,23 @@
   <md-dialog :md-active.sync="dialog.setting.visible" class="setting-dialog folder-all-setting">
     <div class="title">
       <span>全体設定</span>
-      <div class="close-icon" @click="dialog.setting.visible = false">
+      <div class="close-icon" @click="handleSettingCloseClick">
         <img src="../../assets/close_bbbbbb.svg" />
       </div>
     </div>
     <div class="form">
-      <div class="folder-list">
-        <div class="folder">
+      <draggable element="div" class="folder-list" v-model="dialog.setting.folders" :animation="100">
+        <div class="folder" v-for="folder in dialog.setting.folders">
           <img src="../../assets/switch_666666.svg" />
-          <span>API設計書</span>
+          <span>{{folder.folderName}}</span>
         </div>
-        <div class="folder">
-          <img src="../../assets/switch_666666.svg" />
-          <span>API設計書</span>
-        </div>
-      </div>
+      </draggable>
       <div class="button-box">
-        <div class="flat-button save">
+        <div class="flat-button save" @click="handleSettingSaveClick">
           <img src="../../assets/save_ffffff.svg" />
           <span>更新</span>
         </div>
-        <div class="flat-button cancel" @click="dialog.setting.visible = false">
+        <div class="flat-button cancel" @click="handleSettingCancelClick">
           <img src="../../assets/return_ffffff.svg" />
           <span>取消</span>
         </div>
@@ -165,19 +164,19 @@
   <md-dialog :md-active.sync="dialog.folderCreate.visible" class="setting-dialog folder-create">
     <div class="title">
       <span>フォルダ作成</span>
-      <div class="close-icon" @click="dialog.setting.visible = false">
+      <div class="close-icon" @click="handleFolderCreateCloseClick">
         <img src="../../assets/close_bbbbbb.svg" />
       </div>
     </div>
     <div class="form">
       <div class="label">フォルダ名</div>
-      <input type="text" value="API設計書" />
+      <input type="text" v-model="dialog.folderCreate.folderName" />
       <div class="button-box">
-        <div class="flat-button save">
+        <div class="flat-button save" @click="handleFolderCreateSaveClick">
           <img src="../../assets/save_ffffff.svg" />
           <span>作成</span>
         </div>
-        <div class="flat-button cancel" @click="dialog.setting.visible = false">
+        <div class="flat-button cancel" @click="handleFolderCreateCancelClick">
           <img src="../../assets/return_ffffff.svg" />
           <span>取消</span>
         </div>
@@ -189,30 +188,26 @@
   <md-dialog :md-active.sync="dialog.folderSetting.visible" class="setting-dialog folder-all-setting">
     <div class="title">
       <span>フォルダ設定</span>
-      <div class="close-icon" @click="dialog.setting.visible = false">
+      <div class="close-icon" @click="handleFolderSettingCloseClick">
         <img src="../../assets/close_bbbbbb.svg" />
       </div>
     </div>
     <div class="form">
       <div class="label">フォルダ名</div>
-      <input type="text" value="API設計書" />
+      <input type="text" v-model="dialog.folderSetting.folderName" />
       <div class="label">ファイル並び替え</div>
-      <div class="folder-list">
-        <div class="folder">
+      <draggable element="div" class="folder-list" v-model="dialog.folderSetting.files" :animation="100">
+        <div class="folder" v-for="file in dialog.folderSetting.files">
           <img src="../../assets/switch_666666.svg" />
-          <span>API設計書</span>
+          <span>{{ file.fileName }}</span>
         </div>
-        <div class="folder">
-          <img src="../../assets/switch_666666.svg" />
-          <span>API設計書</span>
-        </div>
-      </div>
+      </draggable>
       <div class="button-box">
-        <div class="flat-button save">
+        <div class="flat-button save" @click="handleFolderSettingSaveClick">
           <img src="../../assets/save_ffffff.svg" />
           <span>更新</span>
         </div>
-        <div class="flat-button cancel" @click="dialog.setting.visible = false">
+        <div class="flat-button cancel" @click="handleFolderSettingCancelClick">
           <img src="../../assets/return_ffffff.svg" />
           <span>取消</span>
         </div>
