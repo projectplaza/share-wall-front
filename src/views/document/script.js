@@ -151,7 +151,7 @@ const documentApp = {
         }
       })
     },
-    compiledMarkdown: function() {
+    compiledMarkdown: function () {
       if (this.display.view.content === null) {
         return ''
       }
@@ -163,6 +163,7 @@ const documentApp = {
     vuexUtil.setTeamProject(this)
     lifeCycleHandler.handleCreate(this)
 
+    // Marked.jsのオプションを設定
     marked.setOptions({
       // langPrefix: '',
       mangle: false,
@@ -176,18 +177,19 @@ const documentApp = {
       }
     })
 
+    // Marked.jsの目次を作成
     this.renderer = new marked.Renderer()
     let vm = this
     this.renderer.heading = function (text, level) {
       let escapedText = text.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, '')
       if (level < 4) {  // h4以降は無視
-        let anchor = vm.getAnchor(level)
+        let anchor = escapedText.toLowerCase()
         vm.list.toc.push({ level, anchor, escapedText })  // 目次オブジェクトに追加
         return '<h' + level + ' id="' + anchor + '">' + text + '</h' + level + '>'
       } else {
         return '<h' + level + '>' + text + '</h' + level + '>'
       }
-    }    
+    }
   },
 
   watch: {
@@ -203,7 +205,7 @@ const documentApp = {
     'dialog.folderSetting.visible': function (to) {
       folderSettingDialogHandler.handleFolderSettingVisibleChange(this, to)
     },
-    'compiledMarkdown': function() {
+    'compiledMarkdown': function () {
       documentViewHandler.handleCompiledMarkdownChange()
     }
   },
@@ -233,16 +235,6 @@ const documentApp = {
     handleFolderSettingCloseClick: function () { folderSettingDialogHandler.handleFolderSettingCloseClick(this) },
     handleFolderSettingSaveClick: function () { folderSettingDialogHandler.handleFolderSettingSaveClick(this) },
     handleFolderSettingCancelClick: function () { folderSettingDialogHandler.handleFolderSettingCancelClick(this) },
-
-    getAnchor: function(level) {
-      this.anchor[level - 1] += 1
-      for (var i = level; i < this.anchor.length; i++) {
-        this.anchor[i] = 0
-      }
-      return (
-        'index_' + this.anchor[0] + '-' + this.anchor[1] + '-' + this.anchor[2]
-      )
-    },
 
     // Vuex mutations
     ...mapMutations("common", ["showProgressBar", "hideProgressBar", 'changeCurrentTeam', 'changeCurrentProject'])
