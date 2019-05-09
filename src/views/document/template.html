@@ -20,9 +20,9 @@
           @click="() => { handleFolderSettingClick(folder.folderId) }" />
         <div class="folder-inner" v-if="folder.opened">
           <div class="file" v-for="file in folder.files">
-            <div class="file-inner">
-              <span :class="{ selected: file.selected }">{{file.fileName}}</span>
-            </div>
+            <router-link class="file-inner" :class="{ selected: file.selected }"
+              :to="{ name: 'document-file', params: { teamId: $store.state.common.header.team.current, projectId: $store.state.common.header.project.current, fileId: file.fileId }}">
+              {{file.fileName}}</router-link>
           </div>
         </div>
       </div>
@@ -53,34 +53,14 @@
           </div>
         </div>
       </div>
-      <div class="doc-content">
-        <h1>API仕様書</h1>
-        <h2 id="ドキュメント取得api">ドキュメント取得API</h2>
-        <h3>パラメタ</h3>
-        <p>ここにパラメタを記載します。<br />ここにパラメタを記載します。</p>
-        <p>ここにパラメタを記載します。</p>
-        <h2>ドキュメント取得API</h2>
-        <h3>パラメタ</h3>
-        <p>ここにパラメタを記載します。<br />ここにパラメタを記載します。</p>
-        <p>ここにパラメタを記載します。</p>
-        <h1 id="api仕様書">API仕様書</h1>
-        <h2>ドキュメント取得API</h2>
-        <h3>パラメタ</h3>
-        <p>ここにパラメタを記載します。<br />ここにパラメタを記載します。</p>
-        <p>ここにパラメタを記載します。</p>
-        <h2>ドキュメント取得API</h2>
-        <h3>パラメタ</h3>
-        <p>ここにパラメタを記載します。<br />ここにパラメタを記載します。</p>
-        <p>ここにパラメタを記載します。</p>
-      </div>
+      <div class="doc-content" v-html="compiledMarkdown"></div>
       <div class="navi">
         <div class="navi-inner">
           <div class="title">
             <div>目次</div>
           </div>
           <div class="link">
-            <a href="#api仕様書">API仕様書</a>
-            <a href="#ドキュメント取得api">ドキュメント取得API</a>
+            <a v-for="t in list.toc" :class="'level-'+t.level" :href="'#'+t.anchor">{{t.escapedText}}</a>
           </div>
         </div>
       </div>
@@ -103,32 +83,7 @@
       </div>
     </div>
     <div class="preview">
-      <div class="doc-content">
-        <h1>サンプル</h1>
-        <h1>サンプル</h1>
-        <h1>サンプル</h1>
-        <h1>サンプル</h1>
-        <h1>サンプル</h1>
-        <h1>サンプル</h1>
-        <h1>サンプル</h1>
-        <h1>サンプル</h1>
-        <h1>サンプル</h1>
-        <h1>サンプル</h1>
-        <h1>サンプル</h1>
-        <h1>サンプル</h1>
-        <h1>サンプル</h1>
-        <h1>サンプル</h1>
-        <h1>サンプル</h1>
-        <h1>サンプル</h1>
-        <h1>サンプル</h1>
-        <h1>サンプル</h1>
-        <h1>サンプル</h1>
-        <h1>サンプル</h1>
-        <h1>サンプル</h1>
-        <h1>サンプル</h1>
-        <h1>サンプル</h1>
-        <h1>サンプル</h1>
-      </div>
+      <div class="doc-content" v-html="compiledMarkdown"></div>
     </div>
   </div>
 
@@ -171,6 +126,8 @@
     <div class="form">
       <div class="label">フォルダ名</div>
       <input type="text" v-model="dialog.folderCreate.folderName" />
+      <div class="error-message" v-if="dialog.folderCreate.errorMessage !== ''">{{dialog.folderCreate.errorMessage}}
+      </div>
       <div class="button-box">
         <div class="flat-button save" @click="handleFolderCreateSaveClick">
           <img src="../../assets/save_ffffff.svg" />
@@ -195,6 +152,8 @@
     <div class="form">
       <div class="label">フォルダ名</div>
       <input type="text" v-model="dialog.folderSetting.folderName" />
+      <div class="error-message" v-if="dialog.folderSetting.errorMessage !== ''">{{dialog.folderSetting.errorMessage}}
+      </div>
       <div class="label">ファイル並び替え</div>
       <draggable element="div" class="folder-list" v-model="dialog.folderSetting.files" :animation="100">
         <div class="folder" v-for="file in dialog.folderSetting.files">

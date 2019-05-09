@@ -69,7 +69,7 @@ export default new Router({
       component: () => import('./views/Document.vue')
     },
     {
-      path: BASE_URL + 't/:teamId/p/:projectId/doc/:documentId',
+      path: BASE_URL + 't/:teamId/p/:projectId/doc/:fileId',
       name: ROUTE_NAME.DOCUMENT_FILE,
       component: () => import('./views/Document.vue')
     },

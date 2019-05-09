@@ -39,13 +39,19 @@ export default {
 </script>
 
 <style lang="scss">
+@font-face {
+  font-family: KTEGAKI;
+  src: url("./assets/font/KTEGAKI.ttf") format("truetype");
+}
+
 body {
   background-color: #efefef;
 }
 
 * {
   outline: none;
-  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", Hiragino Kaku Gothic ProN, "ヒラギノ角ゴ ProN W3", Arial, "メイリオ", Meiryo, sans-serif !important;
+  font-family: KTEGAKI;
+  // font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", Hiragino Kaku Gothic ProN, "ヒラギノ角ゴ ProN W3", Arial, "メイリオ", Meiryo, sans-serif !important;
 }
 img {
   user-select: none;

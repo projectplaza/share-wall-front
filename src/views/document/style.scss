@@ -48,9 +48,7 @@
         padding: 8px 3px 0px 3px;
         line-height: 20px;
         transition: 0.2s;
-        &:hover {
-          text-decoration: underline;
-        }
+
         & > span {
           padding: 2px 0px;
         }
@@ -106,29 +104,21 @@
           font-weight: 700;
           transition: 0.2s;
           cursor: pointer;
+        }
+
+        .file-inner {
+          display: block;
+          padding: 2px 8px 2px 8px;
+          margin-left: 5px;
+          color: #ffffff;
+
+          &.selected {
+            background-color: #1abc9c;
+            text-decoration: none !important;
+            cursor: default !important;
+          }
+
           &:hover {
-            text-decoration: underline;
-          }
-
-          .file-inner {
-            padding: 3px 6px 3px 6px;
-            margin-left: 5px;
-          }
-
-          span {
-            display: inline-block;
-            width: 180px;
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-            vertical-align: middle;
-  
-            &:hover {
-              text-decoration: underline;
-            }
-          }
-
-          .selected {
             text-decoration: underline;
           }
         }
@@ -248,6 +238,12 @@
               display: block;
               padding: 3px 0px;
               cursor: pointer;
+            }
+            .level-2 {
+              padding-left: 1em;
+            }
+            .level-3 {
+              padding-left: 2em;
             }
           }
         }
@@ -416,7 +412,7 @@
       display: block;
       width: 100%;
       padding: 6px 8px;
-      margin-bottom: 10px;
+      margin-bottom: 3px;
       font-size: 14px;
       border: 1px solid #bbbbbb;
       border-radius: 4px;
@@ -547,4 +543,11 @@
       }
     }
   }
+}
+
+.error-message {
+  padding: 0px 0px 3px 0px;
+  color: #e74c3c;
+  font-weight: 700;
+  font-size: 12px;
 }

@@ -1,3 +1,5 @@
+import $ from 'jquery'
+
 /**
  * フォルダ一覧メニューのイベントハンドラ
  */
@@ -75,6 +77,19 @@ export const folderListHandler = {
 }
 
 /**
+ * ドキュメント閲覧のイベントハンドラ
+ */
+export const documentViewHandler = {
+  /**
+   * コンパイル済みテキストが変更された際のイベントハンドラ
+   */
+  handleCompiledMarkdownChange() {
+    // アンカーにtarget=_blankを付与
+    setTargetBlankAttr()
+  }
+}
+
+/**
  * 設定ダイアログのイベントハンドラ
  */
 export const settingDialogHandler = {
@@ -144,11 +159,21 @@ export const folderCreateDialogHandler = {
    * @param {object} _this 
    */
   handleFolderCreateSaveClick(_this) {
+    // エラーメッセージを初期化
+    _this.dialog.folderCreate.errorMessage = ''
+
+    // エラーチェック：必須チェック
+    if (_this.dialog.folderCreate.folderName.length === 0) {
+      _this.dialog.folderCreate.errorMessage = 'フォルダ名を入力してください。'
+      return
+    }
+
     if (_this.dialog.folderCreate.folderName === '') return
     _this.list.folders.push({
       folderId: '', // TODO APIの結果を使用
       folderName: _this.dialog.folderCreate.folderName,
-      files: []
+      files: [],
+      errorMessage: ''
     })
 
     // TODO APIでフォルダを登録
@@ -195,6 +220,15 @@ export const folderSettingDialogHandler = {
    * @param {object} _this 
    */
   handleFolderSettingSaveClick(_this) {
+    // エラーメッセージを初期化
+    _this.dialog.folderSetting.errorMessage = ''
+
+    // エラーチェック：必須チェック
+    if (_this.dialog.folderSetting.folderName.length === 0) {
+      _this.dialog.folderSetting.errorMessage = 'フォルダ名を入力してください。'
+      return
+    }
+
     // 更新用のフォルダリストを作成
     const _folders = _this.list.folders.map(folder => {
       if (folder.folderId !== _this.dialog.folderSetting.folderId) return folder
@@ -234,7 +268,8 @@ export const folderSettingDialogHandler = {
         ..._this.dialog.folderSetting,
         folderId: '',
         folderName: '',
-        files: []
+        files: [],
+        errorMessage: ''
       })
     }
   }
@@ -251,6 +286,8 @@ export const lifeCycleHandler = {
   handleCreate(_this) {
     // フォルダの開閉状態の初期化を行う
     setInitialFolderOpenStatus(_this, _this.$route)
+    // アンカーにtarget=_blankを付与
+    setTargetBlankAttr()
   }
 }
 
@@ -268,7 +305,6 @@ export const routeHandler = {
   }
 }
 
-
 /**
  * 全てのフォルダの開閉状態を変更する
  * @param {array} folders フォルダ一覧
@@ -281,6 +317,15 @@ const changeFolderOpenStatus = (folders, opened) => {
       opened: opened
     }
   })
+}
+
+/**
+ * アンカーに別タブで開く属性を付与する
+ */
+const setTargetBlankAttr = () => {
+  window.setTimeout(() => {
+    $("a[href^='http']:not([href*='" + location.hostname + "'])").attr('target', '_blank')
+  }, 200)
 }
 
 /**
@@ -314,7 +359,7 @@ const closeFolderSettingDialog = _this => {
  */
 const setInitialFolderOpenStatus = (_this, route) => {
   // フォルダの開閉状態を初期化
-  const currentDocId = route.params.documentId
+  const currentDocId = route.params.fileId
   if (!currentDocId) return
 
   const _folders = _this.list.folders.map(folder => {
