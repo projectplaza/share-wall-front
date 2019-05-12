@@ -63,6 +63,27 @@ export const folderListHandler = {
   },
 
   /**
+   * ファイル作成ボタンのクリックイベントハンドラ
+   * @param {object} _this 
+   * @param {string} folderId フォルダID
+   */
+  handleFileCreateClick(_this, folderId) {
+    _this.$router.push({
+      name: ROUTE_NAME.DOCUMENT,
+      params: {
+        teamId: _this.$store.state.common.header.team.current,
+        projectId: _this.$store.state.common.header.project.current
+      }
+    })
+
+    _this.display.view.documentId = ''
+
+    _this.display.editable = true
+    _this.display.edit.isNew = true
+    _this.display.edit.folderId = folderId
+  },
+
+  /**
    * フォルダ設定アイコンのクリックイベントハンドラ
    * @param {object} _this 
    * @param {string} folderId フォルダID
@@ -90,6 +111,48 @@ export const documentViewHandler = {
     _this.display.edit.documentName = _this.display.view.documentName
     _this.display.edit.content = _this.display.view.content
     _this.display.editable = true
+  },
+
+  /**
+   * 複製ボタンのクリックイベントハンドラ
+   *  - ファイルを同フォルダにコピーする
+   * @param {object} _this 
+   */
+  handleDocumentDuplicateClick(_this) {
+    const documentId = _this.display.view.documentId
+    const documentName = _this.display.view.documentName
+    const content = _this.display.view.content
+
+    let currentFolder = null
+    _this.list.folders.some(folder => {
+      const targetFile = folder.files.find(file => file.fileId === documentId)
+      if (targetFile) currentFolder = folder
+    })
+
+    if (!currentFolder) return
+
+    // TODO APIでドキュメントを登録
+
+    const _folders = _this.list.folders
+    _folders.some(folder => {
+      if (folder.folderId === currentFolder.folderId) {
+        folder.files.push({
+          fileId: '1000', // TODO APIの結果を使用する
+          fileName: documentName
+        })
+      }
+    })
+
+    _this.$set(_this.list, 'folders', _folders)
+
+    _this.$router.push({
+      name: ROUTE_NAME.DOCUMENT_FILE,
+      params: {
+        teamId: _this.$store.state.common.header.team.current,
+        projectId: _this.$store.state.common.header.project.current,
+        fileId: '1000' // TODO APIの結果を使用する
+      }
+    })
   },
 
   /**
@@ -136,6 +199,47 @@ export const documentEditorHandler = {
   },
 
   /**
+   * ドキュメント作成時の作成ボタンのクリックイベントハンドラ
+   *  - ドキュメントの作成を行う
+   * @param {object} _this 
+   */
+  handleEditorNewCreateClick(_this) {
+    // TODO APIでドキュメント情報を登録
+
+    const _folders = _this.list.folders
+    _folders.some(folder => {
+      if (folder.folderId === _this.display.edit.folderId) {
+        folder.files.unshift({
+          fileId: '0', // TODO ドキュメントIDをAPIの登録結果から設定
+          fileName: _this.display.edit.documentName
+        })
+      }
+    })
+
+    _this.$router.push({
+      name: ROUTE_NAME.DOCUMENT_FILE,
+      params: {
+        teamId: _this.$store.state.common.header.team.current,
+        projectId: _this.$store.state.common.header.project.current,
+        fileId: '0' // TODO ドキュメントIDをAPIの登録結果から設定
+      }
+    })
+
+    _this.display.view.documentName = _this.display.edit.documentName
+    _this.display.view.content = _this.display.edit.content
+    _this.display.editable = false
+  },
+
+  /**
+   * ドキュメント作成時の取消ボタンのクリックイベントハンドラ
+   *  - ドキュメントの作成を中止し、ドキュメント画面へ遷移する
+   * @param {object} _this 
+   */
+  handleEditorNewCancelClick(_this) {
+    _this.display.editable = false
+  },
+
+  /**
    * プレビュー表示ボタンのクリックイベントハンドラ
    *  - スプレッドビューの状態をtrueに変更する
    * @param {object} _this 
@@ -170,6 +274,8 @@ export const documentEditorHandler = {
   handleDisplayEditableChange(_this, editable) {
     if (editable === true) return
     _this.$set(_this.display, 'edit', {
+      isNew: false,
+      folderId: '',
       documentId: '',
       documentName: '',
       content: '',
@@ -492,6 +598,8 @@ export const lifeCycleHandler = {
   handleCreate(_this) {
     // フォルダの開閉状態の初期化を行う
     setInitialFolderOpenStatus(_this, _this.$route)
+    // ファイルを表示する
+    setDocument(_this, _this.$route)
     // アンカーにtarget=_blankを付与
     setTargetBlankAttr()
   }
@@ -508,6 +616,8 @@ export const routeHandler = {
   handleRouteChange(_this, route) {
     // フォルダの開閉状態の初期化を行う
     setInitialFolderOpenStatus(_this, route)
+    // ファイルを表示する
+    setDocument(_this, route)
   }
 }
 
@@ -586,6 +696,28 @@ const setInitialFolderOpenStatus = (_this, route) => {
   })
 
   _this.$set(_this.list, 'folders', _folders)
+}
+
+/**
+ * ドキュメントを設定する
+ * @param {object} _this 
+ * @param {object} route VueRouterのルートオブジェクト
+ */
+const setDocument = (_this, route) => {
+  // フォルダの開閉状態を初期化
+  const currentDocId = route.params.fileId
+  if (!currentDocId) return
+
+  // TODO APIでドキュメント情報を取得
+
+  _this.$set(_this.display, 'view', {
+    documentId: currentDocId,
+    documentName: 'Sample', // TODO APIから取得した情報を表示
+    content: '# Sample', // TODO APIから取得した情報を表示
+    optionMenu: {
+      visible: false
+    }
+  })
 }
 
 /**

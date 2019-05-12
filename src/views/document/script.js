@@ -108,16 +108,18 @@ const documentApp = {
       editable: false,
       view: {
         documentId: '',
-        documentName: 'ドキュメント機能',
+        documentName: '',
         content: content,
         optionMenu: {
           visible: false
         }
       },
       edit: {
-        documentId: 'aa',
-        documentName: 'aa',
-        content: 'aaaa',
+        isNew: false,
+        folderId: '',
+        documentId: '',
+        documentName: '',
+        content: '',
         isSpread: false
       }
     },
@@ -251,13 +253,17 @@ const documentApp = {
     handleSettingClick: function () { folderListMenuHandler.handleSettingClick(this) },
 
     handleFolderNameClick: function (folderId) { folderListHandler.handleFolderNameClick(this, folderId) },
+    handleFileCreateClick: function(folderId) { folderListHandler.handleFileCreateClick(this, folderId) },
     handleFolderSettingClick: function (folderId) { folderListHandler.handleFolderSettingClick(this, folderId) },
 
     handleDocumentEditClick: function() { documentViewHandler.handleDocumentEditClick(this) },
+    handleDocumentDuplicateClick: function() { documentViewHandler.handleDocumentDuplicateClick(this) },
     handleDocumentDeleteClick: function() { documentViewHandler.handleDocumentDeleteClick(this) },
 
     handleEditorUpdateClick: function() { documentEditorHandler.handleEditorUpdateClick(this) },
     handleEditorCancelClick: function() { documentEditorHandler.handleEditorCancelClick(this) },
+    handleEditorNewCreateClick: function() { documentEditorHandler.handleEditorNewCreateClick(this) },
+    handleEditorNewCancelClick: function() { documentEditorHandler.handleEditorNewCancelClick(this) },
     handlePreviewOpenClick: function() { documentEditorHandler.handlePreviewOpenClick(this) },
     handlePreviewCloseClick: function() { documentEditorHandler.handlePreviewCloseClick(this) },
 
