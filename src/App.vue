@@ -50,7 +50,8 @@ body {
 
 * {
   outline: none;
-  font-family: KTEGAKI;
+  // font-family: KTEGAKI;
+  font-family: sans-serif;
   // font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", Hiragino Kaku Gothic ProN, "ヒラギノ角ゴ ProN W3", Arial, "メイリオ", Meiryo, sans-serif !important;
 }
 img {

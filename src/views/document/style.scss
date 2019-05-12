@@ -214,8 +214,9 @@
         top: 40px;
         right: 0px;
         width: 200px;
-        height: 100%;
+        height: calc(100% - 40px);
         padding: 90px 10px 20px 0px;
+        overflow: auto;
   
         .navi-inner {
           padding: 10px 10px;
@@ -237,6 +238,9 @@
             a {
               display: block;
               padding: 3px 0px;
+              overflow: hidden;
+              white-space: nowrap;
+              text-overflow: ellipsis;
               cursor: pointer;
             }
             .level-2 {
@@ -345,9 +349,12 @@
         }
       }
     }
+    .editor-full-screen {
+      width: 100% !important;
+    }
 
     .preview {
-      border-left: 1px solid #bbbbbb;
+      // border-left: 1px solid #bbbbbb;
       display: inline-block;
       vertical-align: top;
       width: 50%;
@@ -495,52 +502,52 @@
           vertical-align: middle;
           cursor: move;
         }
-
-        .small-button-box {
-          position: absolute;
-          top: 3px;
-          right: 0px;
-
-          img {
-            width: 12px;
-            cursor: pointer;
-          }
-        }
       }
-      .folder-editable {
-        cursor: default;
-        background-color: #ffffff;
-        border: 1px solid #3498db;
-        span {
-          cursor: text;
+    }
+  }
+}
+
+.folder-setting {
+
+  .form {
+    .button-box {
+      position: relative;
+      text-align: left;
+
+      .flat-button {
+        margin-right: 8px;
+        margin-left: 0px;
+      }
+      
+      .right-box {
+        position: absolute;
+        top: 5px;
+        right: 0px;
+
+        .flat-button {
+          margin-right: 0px;
+          margin-left: 8px;
         }
-        input[type="text"] {
-          width: 450px;
-          padding: 0px;
-          border: 0px;
-          font-size: 14px;
-          color: #666666;
-          font-weight: 700;
-          background-color: #ffffff;
+
+        .delete {
+          background-color: #e74c3c;
         }
       }
     }
-    .add-button-box {
-      text-align: right;
-      margin-bottom: 10px;
+  }
+}
 
-      input[type="button"] {
-        display: inline-block;
-        padding: 4px 8px;
-        font-weight: 700;
-        font-size: 12px;
-        border: 1px solid #666666;
-        border-radius: 4px;
-        color: #666666;
-        background-color: #ffffff;
-        transition: 0.2s;
-        cursor: pointer;
-      }
+.delete-confirm {
+  width: 400px;
+  height: auto;
+  
+  .button-box {
+    text-align: center !important;
+    margin-top: 15px !important;
+
+    .save {
+      margin-right: 20px;
+      background-color: #e74c3c !important;
     }
   }
 }

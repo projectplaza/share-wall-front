@@ -33,9 +33,9 @@
   <div class="view" v-if="!display.editable">
     <div class="file">
       <div class="title">
-        <span>ドキュメント機能</span>
+        <span>{{display.view.documentName}}</span>
         <div class="control">
-          <div class="icon">
+          <div class="icon" @click="handleDocumentEditClick">
             <img src="../../assets/pen_666666.svg" />
           </div>
           <div class="icon" @click="display.view.optionMenu.visible = !display.view.optionMenu.visible">
@@ -45,7 +45,7 @@
                 <img src="../../assets/duplicate_666666.svg" />
                 <span>複製</span>
               </div>
-              <div class="item">
+              <div class="item" @click="handleDocumentDeleteClick">
                 <img src="../../assets/cross_666666.svg" />
                 <span>削除</span>
               </div>
@@ -69,21 +69,24 @@
 
   <!-- 作成編集 -->
   <div class="form" v-if="display.editable">
-    <div class="editor">
+    <div class="editor" :class="{'editor-full-screen': !display.edit.isSpread}">
       <div class="label">ドキュメント名</div>
-      <input type="text" class="file-name" placeholder="ドキュメントの名称を入力してください" />
+      <input type="text" class="file-name" placeholder="ドキュメントの名称を入力してください" v-model="display.edit.documentName" />
       <div class="label">本文</div>
-      <textarea class="doc-body" placeholder="ドキュメントの本文を入力してください"></textarea>
+      <textarea class="doc-body" placeholder="ドキュメントの本文を入力してください" v-model="display.edit.content"></textarea>
       <div class="submit-button-box">
-        <input type="button" value="保存" class="flat-button save" />
-        <input type="button" value="取消" class="flat-button cancel" />
+        <input type="button" value="更新" class="flat-button save" @click="handleEditorUpdateClick" />
+        <input type="button" value="取消" class="flat-button cancel" @click="handleEditorCancelClick" />
         <div class="right-box">
-          <input type="button" value="プレビュー" class="flat-button spread" />
+          <input type="button" value="プレビューを表示" class="flat-button spread" v-if="!display.edit.isSpread"
+            @click="handlePreviewOpenClick" />
+          <input type="button" value="プレビューを非表示" class="flat-button spread" v-if="display.edit.isSpread"
+            @click="handlePreviewCloseClick" />
         </div>
       </div>
     </div>
-    <div class="preview">
-      <div class="doc-content" v-html="compiledMarkdown"></div>
+    <div class="preview" v-if="display.edit.isSpread">
+      <div class="doc-content" v-html="compiledEditorMarkdown"></div>
     </div>
   </div>
 
@@ -142,7 +145,7 @@
   </md-dialog>
 
   <!-- フォルダ設定 -->
-  <md-dialog :md-active.sync="dialog.folderSetting.visible" class="setting-dialog folder-all-setting">
+  <md-dialog :md-active.sync="dialog.folderSetting.visible" class="setting-dialog folder-all-setting folder-setting">
     <div class="title">
       <span>フォルダ設定</span>
       <div class="close-icon" @click="handleFolderSettingCloseClick">
@@ -167,6 +170,43 @@
           <span>更新</span>
         </div>
         <div class="flat-button cancel" @click="handleFolderSettingCancelClick">
+          <img src="../../assets/return_ffffff.svg" />
+          <span>取消</span>
+        </div>
+        <div class="right-box">
+          <div class="flat-button cancel" v-if="!dialog.folderSetting.deleteConfirm.visible" @click="handleFolderSettingDeleteClick">
+            <img src="../../assets/delete.png" />
+            <span>削除</span>
+          </div>
+          <div class="flat-button delete" v-if="dialog.folderSetting.deleteConfirm.visible" @click="handleFolderSettingDeleteSubmitClick">
+            <img src="../../assets/delete.png" />
+            <span>フォルダを削除</span>
+          </div>
+          <div class="flat-button cancel" v-if="dialog.folderSetting.deleteConfirm.visible" @click="handleFolderSettingDeleteCancelClick">
+            <img src="../../assets/return_ffffff.svg" />
+            <span>取消</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </md-dialog>
+
+  <!-- ファイル設定 -->
+  <md-dialog :md-active.sync="dialog.fileDeleteConfirm.visible" class="setting-dialog delete-confirm">
+    <div class="title">
+      <span>ファイル削除</span>
+      <div class="close-icon" @click="handleFileDeleteComfirmCloseClick">
+        <img src="../../assets/close_bbbbbb.svg" />
+      </div>
+    </div>
+    <div class="form">
+      <div class="label">【{{display.view.documentName}}】を削除してもよろしいですか？</div>
+      <div class="button-box">
+        <div class="flat-button save" @click="handleFileDeleteComfirmSubmitClick">
+          <img src="../../assets/delete.png" />
+          <span>削除</span>
+        </div>
+        <div class="flat-button cancel" @click="handleFileDeleteComfirmCancelClick">
           <img src="../../assets/return_ffffff.svg" />
           <span>取消</span>
         </div>

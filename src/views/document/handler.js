@@ -1,4 +1,5 @@
 import $ from 'jquery'
+import { ROUTE_NAME } from '../../router'
 
 /**
  * フォルダ一覧メニューのイベントハンドラ
@@ -81,11 +82,99 @@ export const folderListHandler = {
  */
 export const documentViewHandler = {
   /**
+   * 編集アイコンのクリックイベントハンドラ
+   *  - 編集画面を表示する
+   * @param {object} _this 
+   */
+  handleDocumentEditClick(_this) {
+    _this.display.edit.documentName = _this.display.view.documentName
+    _this.display.edit.content = _this.display.view.content
+    _this.display.editable = true
+  },
+
+  /**
+   * 削除アイコンのクリックイベントハンドラ
+   *  - 削除確認画面を表示する
+   * @param {object} _this 
+   */
+  handleDocumentDeleteClick(_this) {
+    _this.dialog.fileDeleteConfirm.visible = true
+  },
+
+  /**
    * コンパイル済みテキストが変更された際のイベントハンドラ
    */
   handleCompiledMarkdownChange() {
     // アンカーにtarget=_blankを付与
     setTargetBlankAttr()
+  }
+}
+
+/**
+ * ドキュメント編集のイベントハンドラ
+ */
+export const documentEditorHandler = {
+  /**
+   * ドキュメント更新ボタンのクリックイベントハンドラ
+   *  - ドキュメントの更新を行う
+   * @param {object} _this 
+   */
+  handleEditorUpdateClick(_this) {
+    _this.display.view.documentName = _this.display.edit.documentName
+    _this.display.view.content = _this.display.edit.content
+    _this.display.editable = false
+    // TODO APIでドキュメント情報を更新
+  },
+
+  /**
+   * ドキュメント取消ボタンのクリックイベントハンドラ
+   *  - ドキュメントの状態を閲覧に変更する
+   * @param {object} _this 
+   */
+  handleEditorCancelClick(_this) {
+    _this.display.editable = false
+  },
+
+  /**
+   * プレビュー表示ボタンのクリックイベントハンドラ
+   *  - スプレッドビューの状態をtrueに変更する
+   * @param {object} _this 
+   */
+  handlePreviewOpenClick(_this) {
+    _this.display.edit.isSpread = true
+  },
+
+  /**
+   * プレビュー非表示ボタンのクリックイベントハンドラ
+   *  - スプレッドビューの状態をfalseに変更する
+   * @param {object} _this 
+   */
+  handlePreviewCloseClick(_this) {
+    _this.display.edit.isSpread = false
+  },
+
+  /**
+   * コンパイル済みテキストが変更された際のイベントハンドラ
+   */
+  handleEditorCompiledMarkdownChange() {
+    // アンカーにtarget=_blankを付与
+    setTargetBlankAttr()
+  },
+
+  /**
+   * ドキュメントの状態の変更イベントハンドラ
+   *  - 編集フォームを初期化する
+   * @param {object} _this 
+   * @param {boolean} editable ドキュメントの状態
+   */
+  handleDisplayEditableChange(_this, editable) {
+    if (editable === true) return
+    _this.$set(_this.display, 'edit', {
+      documentId: '',
+      documentName: '',
+      content: '',
+      isSpread: false
+    })
   }
 }
 
@@ -256,6 +345,52 @@ export const folderSettingDialogHandler = {
   },
 
   /**
+   * フォルダ設定の削除ボタンのクリックイベントハンドラ
+   *  - フォルダ設定の削除確認を表示する
+   * @param {object} _this 
+   */
+  handleFolderSettingDeleteClick(_this) {
+    _this.dialog.folderSetting.deleteConfirm.visible = true
+  },
+
+  /**
+   * フォルダ設定の削除実行ボタンのクリックイベントハンドラ
+   *  - フォルダを削除する
+   * @param {object} _this 
+   */
+  handleFolderSettingDeleteSubmitClick(_this) {
+    const _folders = _this.list.folders
+    _folders.some((folder, i) => {
+      if (folder.folderId === _this.dialog.folderSetting.folderId) {
+        _folders.splice(i, 1)
+      }
+    })
+
+    _this.$set(_this.list, 'folders', _folders)
+
+    // TODO APIでフォルダを削除
+
+    closeFolderSettingDialog(_this)
+
+    _this.$router.push({
+      name: ROUTE_NAME.DOCUMENT,
+      params: {
+        teamId: _this.$store.state.common.header.team.current,
+        projectId: _this.$store.state.common.header.project.current
+      }
+    })
+  },
+
+  /**
+   * フォルダ設定の削除確認取消ボタンのクリックイベントハンドラ
+   *  - フォルダ設定の削除確認を非表示にする
+   * @param {object} _this 
+   */
+  handleFolderSettingDeleteCancelClick(_this) {
+    _this.dialog.folderSetting.deleteConfirm.visible = false
+  },
+
+  /**
    * フォルダ設定ダイアログの表示フラグ変更イベントハンドラ
    *  - フォルダ設定が閉じられた場合に状態を初期化する
    * @param {object} _this 
@@ -269,9 +404,80 @@ export const folderSettingDialogHandler = {
         folderId: '',
         folderName: '',
         files: [],
+        deleteConfirm: {
+          visible: false
+        },
         errorMessage: ''
       })
     }
+  }
+}
+
+/**
+ * ファイル削除確認ダイアログのイベントハンドラ
+ */
+export const fileDeleteConfirmDialogHandler = {
+  /**
+   * ファイル削除確認の閉じるボタンクリックイベントハンドラ
+   * @param {object} _this 
+   */
+  handleFileDeleteComfirmCloseClick(_this) {
+    closeFileDeleteComfirmDialog(_this)
+  },
+
+  /**
+   * ファイル削除確認の削除ボタンクリックイベントハンドラ
+   *  - フォルダをリストから削除する
+   * @param {object} _this 
+   */
+  handleFileDeleteComfirmSubmitClick(_this) {
+    const fileId = _this.display.view.documentId
+    const _folders = _this.list.folders
+    let folderId = null
+
+    _folders.some(folder => {
+      folder.files.some((file, i) => {
+        if (file.fileId === fileId) {
+          folder.files.splice(i, 1)
+          folderId = folder.folderId
+        }
+      })
+    })
+
+    _this.$set(_this.list, 'folders', _folders)
+
+    closeFileDeleteComfirmDialog(_this)
+
+    // TODO APIでファイルを削除
+
+    const targetFolder = _folders.find(folder => folder.folderId === folderId)
+    if (targetFolder && targetFolder.files.length !== 0) {
+      const targetFileId = targetFolder.files[0].fileId
+      _this.$router.push({
+        name: ROUTE_NAME.DOCUMENT_FILE,
+        params: {
+          teamId: _this.$store.state.common.header.team.current,
+          projectId: _this.$store.state.common.header.project.current,
+          fileId: targetFileId
+        }
+      })
+    } else {
+      _this.$router.push({
+        name: ROUTE_NAME.DOCUMENT,
+        params: {
+          teamId: _this.$store.state.common.header.team.current,
+          projectId: _this.$store.state.common.header.project.current
+        }
+      })
+    }
+  },
+
+  /**
+   * ファイル削除確認の取消ボタンクリックイベントハンドラ
+   * @param {object} _this 
+   */
+  handleFileDeleteComfirmCancelClick(_this) {
+    closeFileDeleteComfirmDialog(_this)
   }
 }
 
@@ -353,6 +559,14 @@ const closeFolderSettingDialog = _this => {
 }
 
 /**
+ * ファイル削除確認ダイアログを閉じる
+ * @param {object} _this 
+ */
+const closeFileDeleteComfirmDialog = _this => {
+  _this.dialog.fileDeleteConfirm.visible = false
+}
+
+/**
  * フォルダの開閉状態を初期化する
  * @param {object} _this 
  * @param {object} route VueRouterのルートオブジェクト
@@ -361,6 +575,8 @@ const setInitialFolderOpenStatus = (_this, route) => {
   // フォルダの開閉状態を初期化
   const currentDocId = route.params.fileId
   if (!currentDocId) return
+
+  _this.display.view.documentId = currentDocId
 
   const _folders = _this.list.folders.map(folder => {
     return {
@@ -380,7 +596,7 @@ const setInitialFolderOpenStatus = (_this, route) => {
 const isSelectedFolder = (folder, fileId) => {
   // ファイルIDが一致するファイルをリストから検索
   const target = folder.files.find(file => file.fileId === fileId)
-  
+
   // 一致するファイルが存在すればフォルダの状態を開いた状態に変更
   if (target) {
     return true

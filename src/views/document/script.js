@@ -8,15 +8,18 @@ import {
   folderListMenuHandler,
   folderListHandler,
   documentViewHandler,
+  documentEditorHandler,
   settingDialogHandler,
   folderCreateDialogHandler,
   folderSettingDialogHandler,
+  fileDeleteConfirmDialogHandler,
   lifeCycleHandler,
   routeHandler
 } from './handler'
 
 const content = `
-# 画面設計書
+画面設計書
+========
 ## UI設計書
 ### aaaあいう
 #### aaaaあいう
@@ -103,12 +106,19 @@ const documentApp = {
     },
     display: {
       editable: false,
-      opened: true,
       view: {
+        documentId: '',
+        documentName: 'ドキュメント機能',
         content: content,
         optionMenu: {
           visible: false
         }
+      },
+      edit: {
+        documentId: 'aa',
+        documentName: 'aa',
+        content: 'aaaa',
+        isSpread: false
       }
     },
     list: {
@@ -130,7 +140,13 @@ const documentApp = {
         folderId: '',
         folderName: '',
         files: [],
+        deleteConfirm: {
+          visible: false
+        },
         errorMessage: ''
+      },
+      fileDeleteConfirm: {
+        visible: false
       }
     },
     renderer: null,
@@ -152,10 +168,17 @@ const documentApp = {
       })
     },
     compiledMarkdown: function () {
+      this.$set(this.list, 'toc', [])
       if (this.display.view.content === null) {
         return ''
       }
       return marked(this.display.view.content, { renderer: this.renderer })
+    },
+    compiledEditorMarkdown: function() {
+      if (this.display.edit.content === null) {
+        return ''
+      }
+      return marked(this.display.edit.content)
     }
   },
 
@@ -179,12 +202,12 @@ const documentApp = {
 
     // Marked.jsの目次を作成
     this.renderer = new marked.Renderer()
-    let vm = this
+    let _this = this
     this.renderer.heading = function (text, level) {
       let escapedText = text.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, '')
       if (level < 4) {  // h4以降は無視
         let anchor = escapedText.toLowerCase()
-        vm.list.toc.push({ level, anchor, escapedText })  // 目次オブジェクトに追加
+        _this.list.toc.push({ level, anchor, escapedText })  // 目次オブジェクトに追加
         return '<h' + level + ' id="' + anchor + '">' + text + '</h' + level + '>'
       } else {
         return '<h' + level + '>' + text + '</h' + level + '>'
@@ -195,6 +218,9 @@ const documentApp = {
   watch: {
     '$route': function (to) {
       routeHandler.handleRouteChange(this, to)
+    },
+    'display.editable': function(to) {
+      documentEditorHandler.handleDisplayEditableChange(this, to)
     },
     'dialog.setting.visible': function (to) {
       settingDialogHandler.handleSettingVisibleChange(this, to)
@@ -207,6 +233,9 @@ const documentApp = {
     },
     'compiledMarkdown': function () {
       documentViewHandler.handleCompiledMarkdownChange()
+    },
+    'compiledEditorMarkdown': function() {
+      documentEditorHandler.handleEditorCompiledMarkdownChange()
     }
   },
 
@@ -224,6 +253,14 @@ const documentApp = {
     handleFolderNameClick: function (folderId) { folderListHandler.handleFolderNameClick(this, folderId) },
     handleFolderSettingClick: function (folderId) { folderListHandler.handleFolderSettingClick(this, folderId) },
 
+    handleDocumentEditClick: function() { documentViewHandler.handleDocumentEditClick(this) },
+    handleDocumentDeleteClick: function() { documentViewHandler.handleDocumentDeleteClick(this) },
+
+    handleEditorUpdateClick: function() { documentEditorHandler.handleEditorUpdateClick(this) },
+    handleEditorCancelClick: function() { documentEditorHandler.handleEditorCancelClick(this) },
+    handlePreviewOpenClick: function() { documentEditorHandler.handlePreviewOpenClick(this) },
+    handlePreviewCloseClick: function() { documentEditorHandler.handlePreviewCloseClick(this) },
+
     handleSettingCloseClick: function () { settingDialogHandler.handleSettingCloseClick(this) },
     handleSettingSaveClick: function () { settingDialogHandler.handleSettingSaveClick(this) },
     handleSettingCancelClick: function () { settingDialogHandler.handleSettingCancelClick(this) },
@@ -235,6 +272,13 @@ const documentApp = {
     handleFolderSettingCloseClick: function () { folderSettingDialogHandler.handleFolderSettingCloseClick(this) },
     handleFolderSettingSaveClick: function () { folderSettingDialogHandler.handleFolderSettingSaveClick(this) },
     handleFolderSettingCancelClick: function () { folderSettingDialogHandler.handleFolderSettingCancelClick(this) },
+    handleFolderSettingDeleteClick: function() { folderSettingDialogHandler.handleFolderSettingDeleteClick(this) },
+    handleFolderSettingDeleteSubmitClick: function() { folderSettingDialogHandler.handleFolderSettingDeleteSubmitClick(this) },
+    handleFolderSettingDeleteCancelClick: function() { folderSettingDialogHandler.handleFolderSettingDeleteCancelClick(this) },
+
+    handleFileDeleteComfirmCloseClick: function() { fileDeleteConfirmDialogHandler.handleFileDeleteComfirmCloseClick(this) },
+    handleFileDeleteComfirmSubmitClick: function() { fileDeleteConfirmDialogHandler.handleFileDeleteComfirmSubmitClick(this) },
+    handleFileDeleteComfirmCancelClick: function() { fileDeleteConfirmDialogHandler.handleFileDeleteComfirmCancelClick(this) },
 
     // Vuex mutations
     ...mapMutations("common", ["showProgressBar", "hideProgressBar", 'changeCurrentTeam', 'changeCurrentProject'])
